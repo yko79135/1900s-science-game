@@ -1,0 +1,123 @@
+.world-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--ocean);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.world-map__controls {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.world-map__controls .btn {
+  padding: 0.3em 0.65em;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.world-map__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+
+.world-map__svg:active {
+  cursor: grabbing;
+}
+
+.world-map__ocean {
+  fill: var(--ocean);
+}
+
+.world-map__graticule {
+  fill: none;
+  stroke: var(--graticule);
+  stroke-width: 0.5;
+}
+
+.world-map__land {
+  fill: var(--land);
+  stroke: var(--land-shade);
+  stroke-width: 0.6;
+}
+
+.world-map__route {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.world-map__canon-line {
+  fill: none;
+  stroke: var(--brass-bright);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 3;
+  opacity: 0.35;
+}
+
+.world-map__location-dot {
+  fill: var(--brass);
+  stroke: var(--ocean-deep);
+  stroke-width: 0.8;
+}
+
+.world-map__location.is-locked .world-map__location-dot {
+  fill: #5a5748;
+  opacity: 0.65;
+}
+
+.world-map__location.is-inactive-era .world-map__location-dot {
+  opacity: 0.3;
+}
+
+.world-map__location-halo {
+  fill: none;
+  stroke: var(--brass-bright);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.world-map__current-ring {
+  fill: none;
+  stroke: var(--focus-ring);
+  stroke-width: 1.4;
+}
+
+.world-map__label {
+  font-family: var(--font-serif);
+  font-size: 6.5px;
+  fill: var(--paper);
+  paint-order: stroke;
+  stroke: var(--ocean-deep);
+  stroke-width: 2px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.world-map__location {
+  cursor: pointer;
+}
+
+.world-map__location:focus-visible .world-map__location-dot {
+  stroke: var(--focus-ring);
+  stroke-width: 2;
+}
+
+.world-map__location.is-selected .world-map__location-dot {
+  fill: var(--focus-ring);
+}
+
+.world-map__token {
+  stroke: var(--ocean-deep);
+  stroke-width: 0.6;
+}
