@@ -3,6 +3,7 @@ import type { CharacterId, Location, PlayerState } from '../../types';
 import { LOCATIONS } from '../../data/content';
 import { evaluateTravel, getCharacter, isCanonicalDestination, isLocationActiveForYear } from '../../engine/rules';
 import { MAP_HEIGHT, MAP_WIDTH, curvedPath, graticulePath, landPath, project } from './geo';
+import { MAP_REGION_GROUPS, MAP_VIEWS, overviewMapViewForLocation, type MapRegionGroup, type MapView } from './mapViews';
 import './worldmap.css';
 
 export interface WorldMapProps {
@@ -15,31 +16,19 @@ export interface WorldMapProps {
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
 
-const MAP_VIEWS = [
-  { id: 'europe', label: 'Europe', regions: ['Europe'] },
-  { id: 'america', label: 'America', regions: ['United States'] },
-  { id: 'south-asia', label: 'South Asia', regions: ['South Asia'] },
-] as const;
-
-type MapView = (typeof MAP_VIEWS)[number];
-
-function viewForLocation(locationId: string): MapView {
-  const region = LOCATIONS[locationId].region;
-  return MAP_VIEWS.find((view) => view.regions.some((candidate) => candidate === region)) ?? MAP_VIEWS[0];
-}
-
 export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLocation }: WorldMapProps) {
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [activeViewId, setActiveViewId] = useState<MapView['id']>(() => viewForLocation(activePlayer.currentLocationId).id);
+  const [activeViewId, setActiveViewId] = useState(() => overviewMapViewForLocation(activePlayer.currentLocationId).id);
   const dragState = useRef<{ startX: number; startY: number; panX: number; panY: number } | null>(null);
 
   const activeCharacter = getCharacter(activePlayer.characterId);
 
   const locations = useMemo(() => Object.values(LOCATIONS), []);
   const activeView = MAP_VIEWS.find((view) => view.id === activeViewId) ?? MAP_VIEWS[0];
+  const activeRegion = MAP_REGION_GROUPS.find((region) => region.views.some((view) => view.id === activeView.id)) ?? MAP_REGION_GROUPS[0];
   const visibleLocations = useMemo(
-    () => locations.filter((location) => activeView.regions.some((region) => region === location.region)),
+    () => locations.filter((location) => activeView.locationIds.includes(location.id)),
     [locations, activeView],
   );
 
@@ -51,13 +40,17 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
     const maxX = Math.max(...xs);
     const minY = Math.min(...ys);
     const maxY = Math.max(...ys);
-    const contentWidth = Math.max(maxX - minX, 80);
-    const contentHeight = Math.max(maxY - minY, 80);
-    const paddingX = Math.max(contentWidth * 0.18, 35);
-    const paddingY = Math.max(contentHeight * 0.28, 35);
+    const singleLocation = points.length === 1;
+    const contentWidth = singleLocation ? 80 : Math.max(maxX - minX, 4);
+    const contentHeight = singleLocation ? 80 : Math.max(maxY - minY, 4);
+    const minimumPadding = singleLocation ? 35 : 4;
+    const paddingX = Math.max(contentWidth * 0.18, minimumPadding);
+    const paddingY = Math.max(contentHeight * 0.28, minimumPadding);
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
     return {
-      x: minX - paddingX,
-      y: minY - paddingY,
+      x: centerX - contentWidth / 2 - paddingX,
+      y: centerY - contentHeight / 2 - paddingY,
       width: contentWidth + paddingX * 2,
       height: contentHeight + paddingY * 2,
     };
@@ -106,28 +99,53 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
     resetView();
   }
 
+  function selectRegion(region: MapRegionGroup) {
+    selectView(region.views[0]);
+  }
+
   function isInActiveView(locationId: string) {
-    return activeView.regions.some((region) => region === LOCATIONS[locationId].region);
+    return activeView.locationIds.includes(locationId);
   }
 
   const viewCenterX = mapViewport.x + mapViewport.width / 2;
   const viewCenterY = mapViewport.y + mapViewport.height / 2;
+  const markerScale = Math.min(1, Math.max(mapViewport.width / MAP_WIDTH, mapViewport.height / MAP_HEIGHT));
 
   return (
     <div className="world-map" role="group" aria-label="Interactive world map game board">
-      <div className="world-map__tabs" role="tablist" aria-label="Map region">
-        {MAP_VIEWS.map((view) => (
-          <button
-            key={view.id}
-            type="button"
-            role="tab"
-            aria-selected={activeView.id === view.id}
-            className={`world-map__tab${activeView.id === view.id ? ' is-active' : ''}`}
-            onClick={() => selectView(view)}
-          >
-            {view.label}
-          </button>
-        ))}
+      <div className="world-map__navigation">
+        <div className="world-map__tabs" role="tablist" aria-label="Map region">
+          {MAP_REGION_GROUPS.map((region) => (
+            <button
+              key={region.id}
+              type="button"
+              role="tab"
+              aria-selected={activeRegion.id === region.id}
+              aria-controls="world-map-surface"
+              className={`world-map__tab${activeRegion.id === region.id ? ' is-active' : ''}`}
+              onClick={() => selectRegion(region)}
+            >
+              {region.label}
+            </button>
+          ))}
+        </div>
+        {activeRegion.views.length > 1 && (
+          <div className="world-map__tabs world-map__tabs--detail" role="tablist" aria-label={`${activeRegion.label} map area`}>
+            {activeRegion.views.map((view) => (
+              <button
+                key={view.id}
+                type="button"
+                role="tab"
+                aria-selected={activeView.id === view.id}
+                aria-controls="world-map-surface"
+                className={`world-map__tab world-map__tab--detail${activeView.id === view.id ? ' is-active' : ''}`}
+                onClick={() => selectView(view)}
+              >
+                {view.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="world-map__controls">
         <button type="button" className="btn" onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.5))} aria-label="Zoom in">
@@ -141,6 +159,7 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
         </button>
       </div>
       <svg
+        id="world-map-surface"
         viewBox={`${mapViewport.x} ${mapViewport.y} ${mapViewport.width} ${mapViewport.height}`}
         className="world-map__svg"
         onWheel={handleWheel}
@@ -199,6 +218,7 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
               selected={selectedLocationId === loc.id}
               isCurrent={activePlayer.currentLocationId === loc.id}
               occupants={players.filter((p) => p.currentLocationId === loc.id)}
+              markerScale={markerScale}
               onSelect={() => onSelectLocation(loc.id)}
             />
           ))}
@@ -214,6 +234,7 @@ function LocationMarker({
   selected,
   isCurrent,
   occupants,
+  markerScale,
   onSelect,
 }: {
   location: Location;
@@ -221,6 +242,7 @@ function LocationMarker({
   selected: boolean;
   isCurrent: boolean;
   occupants: PlayerState[];
+  markerScale: number;
   onSelect: () => void;
 }) {
   const [x, y] = project(location.coordinates.lon, location.coordinates.lat);
@@ -239,7 +261,7 @@ function LocationMarker({
   return (
     <g
       className={classNames}
-      transform={`translate(${x}, ${y})`}
+      transform={`translate(${x}, ${y}) scale(${markerScale})`}
       tabIndex={0}
       role="button"
       data-testid={`map-location-${location.id}`}
