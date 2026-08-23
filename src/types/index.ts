@@ -140,7 +140,7 @@ export interface ResearchProject {
   fundsCost: number;
 }
 
-export interface ContextCardEffect {
+export interface ContextCardEffect extends Record<string, number | undefined> {
   funds?: number;
   wellbeing?: number;
   health?: number;
@@ -337,9 +337,6 @@ export interface CompendiumDiscoveryState {
 
 export const SCHEMA_VERSION = 4;
 
-export type {
-  ActiveStoryView,
-} from '../engine/story';
 export type {
   NarrativeState,
   StoryAction,
