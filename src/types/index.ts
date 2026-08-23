@@ -1,6 +1,8 @@
 // Core domain types for "The Shape of a Century: Lives, Ideas, Consequences"
 // Kept independent of React so the engine and data files stay pure and testable.
 
+import type { NarrativeState } from './story';
+
 export type HistoricalClassification = 'Documented' | 'Plausible' | 'Speculative';
 
 export interface HistoricalSource {
@@ -311,6 +313,8 @@ export interface GameState {
   log: GameLogEntry[];
   gameLength: 'short' | 'full';
   tutorialActive: boolean;
+  /** Saved narrative layer. Optional only so pre-v4 saves can migrate safely. */
+  narrative?: NarrativeState;
   createdAt: number;
   updatedAt: number;
 }
@@ -331,4 +335,24 @@ export interface CompendiumDiscoveryState {
   discoveredIds: string[];
 }
 
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
+
+export type {
+  ActiveStoryView,
+} from '../engine/story';
+export type {
+  NarrativeState,
+  StoryAction,
+  StoryChronicleEntry,
+  StoryChoice,
+  StoryCondition,
+  StoryEffect,
+  StoryImageSpec,
+  StoryPage,
+  StoryRelationshipState,
+  StoryScene,
+  StorySceneKind,
+  StoryTrigger,
+  StoryTriggerEvent,
+  StoryVariant,
+} from './story';
