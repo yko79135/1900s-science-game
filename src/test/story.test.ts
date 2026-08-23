@@ -3,7 +3,9 @@ import { createGame } from '../engine/reducer';
 import {
   createEmptyNarrativeState,
   getActiveStoryView,
+  hasActiveStory,
   initializeStoryGame,
+  prepareResumedStoryGame,
   resolveStoryVariantId,
   storyAwareGameReducer,
 } from '../engine/story';
@@ -25,40 +27,50 @@ function storylessEinstein(): GameState {
 }
 
 describe('narrative campaign flow', () => {
-  it('starts a full Einstein game with the world prologue, then Formation opening', () => {
-    let game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
-    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-prologue-century');
-
-    game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
-    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-prologue-century');
-
-    game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
-    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-formation-opening');
+  it('starts a full Einstein game without queueing story pages', () => {
+    const game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
+    expect(hasActiveStory(game)).toBe(false);
+    expect(getActiveStoryView(game)).toBeNull();
+    expect(game.narrative?.pendingSceneIds).toEqual([]);
+    expect(game.players[0].seenContextCardIds).not.toContain('einstein-card-1905');
   });
 
-  it('defers chapter advancement until the closing story finishes', () => {
+  it('advances chapters directly without a closing story interruption', () => {
     let game: GameState = storylessEinstein();
     const beforeChapter = game.players[0].chapterIndex;
 
     game = storyAwareGameReducer(game, { type: 'END_CHAPTER' });
-    expect(game.players[0].chapterIndex).toBe(beforeChapter);
-    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-formation-closing');
-
-    game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
     expect(game.players[0].chapterIndex).toBe(beforeChapter + 1);
-    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-education-opening');
+    expect(getActiveStoryView(game)).toBeNull();
   });
 
-  it('uses deterministic fallback chapter stories for characters not authored yet', () => {
+  it('does not queue fallback pages for characters without authored stories', () => {
     const game = initializeStoryGame(createGame(['curie'], 7, 'full'));
-    const view = getActiveStoryView(game);
-    expect(view?.scene.id).toBe('fallback:curie:formation:opening');
-    expect(view?.page.narration).toMatch(/Marie Curie/);
+    expect(getActiveStoryView(game)).toBeNull();
+    expect(game.narrative?.pendingSceneIds).toEqual([]);
+  });
+
+  it('clears a pending story interruption when an existing save resumes', () => {
+    const base = createGame(['einstein'], 9, 'full');
+    const resumed = prepareResumedStoryGame({
+      ...base,
+      narrative: {
+        ...createEmptyNarrativeState(),
+        activeSceneId: 'einstein-prologue-century',
+        activeVariantId: 'default',
+        focusPlayerId: 'p1',
+        pendingSceneIds: ['einstein-formation-opening'],
+      },
+    });
+
+    expect(resumed.narrative?.activeSceneId).toBeUndefined();
+    expect(resumed.narrative?.pendingSceneIds).toEqual([]);
+    expect(hasActiveStory(resumed)).toBe(false);
   });
 });
 
 describe('Einstein state-aware story variants', () => {
-  it('queues the Bern Special Relativity breakthrough only after the project is completed', () => {
+  it('completes Special Relativity without queueing a story page', () => {
     let game: GameState = createGame(['einstein'], 1905, 'full');
     game = {
       ...game,
@@ -90,9 +102,7 @@ describe('Einstein state-aware story variants', () => {
     game = storyAwareGameReducer(game, { type: 'ATTEMPT_PROJECT', projectId: 'einstein-special-relativity' });
 
     expect(game.players[0].completedProjectIds).toContain('einstein-special-relativity');
-    const view = getActiveStoryView(game);
-    expect(view?.scene.id).toBe('einstein-special-relativity-breakthrough');
-    expect(view?.variant.id).toBe('bern-1905');
+    expect(getActiveStoryView(game)).toBeNull();
   });
 
   it('uses Canon Hilbert when Hilbert is not a human player', () => {
