@@ -2,6 +2,7 @@ import type { CompendiumDiscoveryState, GameState, SaveFile, SettingsState } fro
 import { SCHEMA_VERSION } from '../types';
 import { CHAPTERS_BY_CHARACTER } from '../data/content';
 import { ACTIONS_PER_TURN, chapterActionBudget } from './rules';
+import { createEmptyNarrativeState } from './story';
 
 const KEYS = {
   currentGame: 'shapeOfACentury.currentGame',
@@ -69,7 +70,19 @@ export function migrateSave(raw: unknown): GameState | null {
     };
   }
 
-  return game;
+  if (game.schemaVersion < 4) {
+    game = {
+      ...game,
+      schemaVersion: 4,
+      narrative: createEmptyNarrativeState(),
+    };
+  }
+
+  return {
+    ...game,
+    schemaVersion: SCHEMA_VERSION,
+    narrative: game.narrative ?? createEmptyNarrativeState(),
+  };
 }
 
 export function saveCurrentGame(game: GameState): void {
