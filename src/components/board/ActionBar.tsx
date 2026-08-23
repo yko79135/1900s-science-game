@@ -1,7 +1,7 @@
 import type { GameAction } from '../../engine/reducer';
 import { pendingContextCards } from '../../engine/reducer';
 import type { GameState, PlayerState } from '../../types';
-import { getCharacter } from '../../engine/rules';
+import { chapterActionBudget, currentChapter, getCharacter } from '../../engine/rules';
 
 export interface ActionBarProps {
   state: GameState;
@@ -11,6 +11,8 @@ export interface ActionBarProps {
 
 export function ActionBar({ state, player, dispatch }: ActionBarProps) {
   const character = getCharacter(player.characterId);
+  const chapter = currentChapter(player);
+  const totalTimeActions = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
   const blockedByCard = pendingContextCards(player).length > 0;
   const noTime = player.timeActionsRemaining < 1;
 
@@ -21,7 +23,7 @@ export function ActionBar({ state, player, dispatch }: ActionBarProps) {
     <footer className="action-bar" aria-label="Time actions and timeline">
       <div className="action-bar__timeline">
         <strong>{character.name}</strong>
-        <span>Time actions remaining: {player.timeActionsRemaining} / 4</span>
+        <span>Time actions remaining: {player.timeActionsRemaining} / {totalTimeActions} · 3 actions = 1 year</span>
       </div>
       <div className="action-bar__actions">
         <button className="btn" data-testid="action-study" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'study' })}>
