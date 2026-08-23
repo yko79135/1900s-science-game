@@ -1,6 +1,6 @@
-import type { CompendiumDiscoveryState, GameState, SaveFile, SettingsState } from '../types';
+import type { CompendiumDiscoveryState, GameState, InsightAcquisition, ResourceTokenType, SaveFile, SettingsState } from '../types';
 import { SCHEMA_VERSION } from '../types';
-import { CHAPTERS_BY_CHARACTER } from '../data/content';
+import { CHARACTERS, CHAPTERS_BY_CHARACTER, INSIGHTS, getProjectById } from '../data/content';
 import { ACTIONS_PER_TURN, chapterActionBudget } from './rules';
 import { createEmptyNarrativeState } from './story';
 
@@ -75,6 +75,57 @@ export function migrateSave(raw: unknown): GameState | null {
       ...game,
       schemaVersion: 4,
       narrative: createEmptyNarrativeState(),
+    };
+  }
+
+  if (game.schemaVersion < 5) {
+    game = {
+      ...game,
+      schemaVersion: 5,
+      players: game.players.map((player) => {
+        const character = CHARACTERS[player.characterId];
+        const existing = (player.insights ?? []) as InsightAcquisition[];
+        const byId = new Map(existing.map((item) => [item.insightId, item]));
+        for (const insightId of character.startingInsights ?? []) {
+          if (!byId.has(insightId)) {
+            byId.set(insightId, {
+              insightId,
+              sourceType: 'starting',
+              sourceId: character.id,
+              sourceCharacterId: character.id,
+              year: character.bornYear,
+            });
+          }
+        }
+        for (const projectId of player.completedProjectIds) {
+          const project = getProjectById(projectId);
+          for (const insightId of project?.requiredInsights ?? []) {
+            if (!byId.has(insightId)) {
+              byId.set(insightId, { insightId, sourceType: 'migration', sourceId: projectId, year: player.currentYear });
+            }
+          }
+          for (const insight of Object.values(INSIGHTS)) {
+            const grantsInsight = insight.acquisitionRoutes.some(
+              (route) => route.type === 'projectCompletion' && route.projectId === projectId,
+            );
+            if (grantsInsight && !byId.has(insight.id)) {
+              byId.set(insight.id, { insightId: insight.id, sourceType: 'projectCompletion', sourceId: projectId, year: player.currentYear });
+            }
+          }
+        }
+        const emptyProgress: Record<ResourceTokenType, number> = {
+          theory: 0,
+          proof: 0,
+          evidence: 0,
+          computation: 0,
+          engineering: 0,
+        };
+        return {
+          ...player,
+          insights: [...byId.values()],
+          studyProgress: { ...emptyProgress, ...(player.studyProgress ?? {}) },
+        };
+      }),
     };
   }
 

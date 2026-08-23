@@ -74,6 +74,10 @@ describe('Einstein state-aware story variants', () => {
           currentLocationId: 'bern',
           timeActionsRemaining: chapterActionBudget(1905, 1909),
           turnActionsRemaining: 4,
+          insights: [
+            ...game.players[0].insights,
+            { insightId: 'relativity-of-simultaneity', sourceType: 'location' as const, sourceId: 'bern', year: 1905 },
+          ],
           resources: {
             ...game.players[0].resources,
             tokens: { ...game.players[0].resources.tokens, theory: 3 },

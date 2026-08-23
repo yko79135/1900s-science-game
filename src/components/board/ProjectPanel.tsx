@@ -1,7 +1,7 @@
 import type { GameAction } from '../../engine/reducer';
-import type { GameState, PlayerState } from '../../types';
-import { PROJECTS_BY_CHARACTER } from '../../data/content';
-import { canAttemptProject, currentChapterId, getCharacter } from '../../engine/rules';
+import type { GameState, PlayerState, ResourceTokenType } from '../../types';
+import { CENTURY_KNOWLEDGE, INSIGHTS, PROJECTS_BY_CHARACTER } from '../../data/content';
+import { canAttemptProject, currentChapterId, getCharacter, hasInsight } from '../../engine/rules';
 
 export interface ProjectPanelProps {
   state: GameState;
@@ -32,17 +32,64 @@ export function ProjectPanel({ state, player, dispatch }: ProjectPanelProps) {
               <p className="project-card__field">{project.field}</p>
               <p>{project.description}</p>
               <p className="project-card__stats">
-                Base Legacy {project.baseLegacy} · Turn actions {project.timeCost} · Funds {project.fundsCost}
-                {Object.keys(project.requiredTokens).length > 0 && (
-                  <>
-                    {' '}
-                    · Requires{' '}
-                    {Object.entries(project.requiredTokens)
-                      .map(([k, v]) => `${v} ${k}`)
-                      .join(', ')}
-                  </>
-                )}
+                Discovery Legacy {project.baseLegacy} · Turn actions {project.timeCost} · Funds {project.fundsCost}
               </p>
+              <div className="project-card__requirements">
+                <h4>Requires</h4>
+                <ul>
+                  {(Object.entries(project.requiredTokens) as [ResourceTokenType, number][]).map(([token, amount]) => {
+                    const current = player.resources.tokens[token] ?? 0;
+                    const met = current >= amount;
+                    return (
+                      <li key={token} className={met ? 'is-met' : 'is-missing'}>
+                        <span aria-hidden="true">{met ? '✓' : '✗'}</span>{' '}
+                        {token[0].toUpperCase() + token.slice(1)} {current} / {amount}
+                      </li>
+                    );
+                  })}
+                  {project.requiredKnowledgeIds.map((knowledgeId) => {
+                    const boardEntry = state.knowledgeBoard[knowledgeId];
+                    const met = boardEntry?.publishedYear !== undefined && player.currentYear >= boardEntry.publishedYear;
+                    return (
+                      <li key={knowledgeId} className={met ? 'is-met' : 'is-missing'}>
+                        <span aria-hidden="true">{met ? '✓' : '✗'}</span> Century Knowledge:{' '}
+                        {CENTURY_KNOWLEDGE[knowledgeId]?.name ?? knowledgeId}
+                      </li>
+                    );
+                  })}
+                </ul>
+                <h4>Insights</h4>
+                {project.requiredInsights.length === 0 ? (
+                  <p className="project-card__no-insights">No authored Insight requirement yet.</p>
+                ) : (
+                  <ul className="project-card__insights">
+                    {project.requiredInsights.map((insightId) => {
+                      const insight = INSIGHTS[insightId];
+                      const met = hasInsight(player, insightId);
+                      return (
+                        <li key={insightId} className={met ? 'is-met' : 'is-missing'}>
+                          <details>
+                            <summary>
+                              <span aria-hidden="true">{met ? '✓' : '✗'}</span> {insight?.name ?? insightId}
+                            </summary>
+                            <p>{insight?.description ?? 'This Insight has not been authored yet.'}</p>
+                            {!met && insight && (
+                              <>
+                                <strong>Possible leads</strong>
+                                <ul>
+                                  {insight.leads.map((lead) => (
+                                    <li key={lead}>{lead}</li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                          </details>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
               {done ? (
                 <p className="project-card__done-label">Completed</p>
               ) : (

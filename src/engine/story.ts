@@ -222,6 +222,15 @@ function conditionMatches(state: GameState, player: PlayerState, condition: Stor
       return condition.projectIds.filter((id) => player.completedProjectIds.includes(id)).length >= condition.count;
     case 'resourceAtLeast':
       return resourceValue(player, condition.resource) >= condition.value;
+    case 'insightAcquired':
+      return player.insights.some((acquisition) => acquisition.insightId === condition.insightId);
+    case 'insightSourceIs':
+      return player.insights.some(
+        (acquisition) =>
+          acquisition.insightId === condition.insightId &&
+          acquisition.sourceType === condition.sourceType &&
+          (condition.sourceId === undefined || acquisition.sourceId === condition.sourceId),
+      );
     case 'narrativeFlag': {
       const actual = narrativeOf(state).flags[condition.flag];
       return condition.value === undefined ? Boolean(actual) : actual === condition.value;

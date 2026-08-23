@@ -36,12 +36,16 @@ export const CHARACTER_LIST: Character[] = ALL_CONTENT.map((c) => c.character);
 
 export const LIFE_CHAPTERS: LifeChapter[] = ALL_CONTENT.flatMap((c) => c.chapters);
 
-export const RESEARCH_PROJECTS: ResearchProject[] = ALL_CONTENT.flatMap((c) => c.projects);
+function normalizeProjects(content: CharacterContent): ResearchProject[] {
+  return content.projects.map((project) => ({ ...project, requiredInsights: project.requiredInsights ?? [] }));
+}
+
+export const RESEARCH_PROJECTS: ResearchProject[] = ALL_CONTENT.flatMap(normalizeProjects);
 
 export const CONTEXT_CARDS: ContextCard[] = ALL_CONTENT.flatMap((c) => c.contextCards);
 
 export const PROJECTS_BY_CHARACTER: Record<CharacterId, ResearchProject[]> = Object.fromEntries(
-  ALL_CONTENT.map((c) => [c.character.id, c.projects]),
+  ALL_CONTENT.map((c) => [c.character.id, normalizeProjects(c)]),
 ) as Record<CharacterId, ResearchProject[]>;
 
 export const CHAPTERS_BY_CHARACTER: Record<CharacterId, LifeChapter[]> = Object.fromEntries(

@@ -91,10 +91,14 @@ the fixed-size fallback artwork remains visible and gameplay continues.
   point while still advancing the calendar once. Turns rotate automatically
   when their points are spent, or a player can end a turn early. Each chapter
   includes one calendar action for every year in its inclusive range.
-- **Canon scoring is additive, not a gate.** Completing a project awards its
-  base Legacy regardless of place/date; a Canon bonus (+3 documented in
-  place and year, +1 near-canon or Plausible, +0 Speculative) is added on
-  top, keeping Canon to a modest share of the final score as specified.
+- **Discovery, not canon, creates Legacy.** Projects award their base Legacy
+  when their resources, permanent Insights, public-knowledge prerequisites,
+  Funds, and action costs are satisfied. A small early-discovery bonus may be
+  added, but historical place/date scoring is kept only as Canon Alignment.
+- **Canon gives a good route, not the only route.** Historical locations and
+  collaborators provide resource advantages or deterministic ways to acquire
+  Insights. Independent study, other projects, Century Knowledge, and human
+  collaborators can unlock the same scientific understanding.
 - **The Century Does Not Wait** is implemented as a deadline check against
   the shared Knowledge Board: if no player publishes an indispensable
   discovery by its historical deadline, it's marked as published by an NPC

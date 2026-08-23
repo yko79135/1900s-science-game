@@ -13,6 +13,36 @@ export interface HistoricalSource {
 
 export type ResourceTokenType = 'theory' | 'proof' | 'evidence' | 'computation' | 'engineering';
 
+export type InsightRoute =
+  | { type: 'location'; locationId: string }
+  | { type: 'collaborator'; collaboratorId: string }
+  | { type: 'characterEncounter'; characterId: CharacterId }
+  | { type: 'study'; token: ResourceTokenType; threshold: number }
+  | { type: 'projectCompletion'; projectId: string }
+  | { type: 'centuryKnowledge'; knowledgeId: string }
+  | { type: 'historicalEvent'; eventId: string };
+
+export interface InsightDefinition {
+  id: string;
+  name: string;
+  description: string;
+  /** Player-facing suggestions. These intentionally need not expose every exact route. */
+  leads: string[];
+  acquisitionRoutes: InsightRoute[];
+}
+
+export type InsightAcquisitionSourceType = InsightRoute['type'] | 'starting' | 'humanCollaboration' | 'migration';
+
+/** Permanent provenance that story variants can inspect later. */
+export interface InsightAcquisition {
+  insightId: string;
+  sourceType: InsightAcquisitionSourceType;
+  sourceId?: string;
+  sourcePlayerId?: string;
+  sourceCharacterId?: CharacterId;
+  year: number;
+}
+
 export type LifeChapterId =
   | 'formation'
   | 'education'
@@ -124,6 +154,7 @@ export interface ResearchProject {
   baseLegacy: number;
   earliestYear: number;
   requiredTokens: Partial<Record<ResourceTokenType, number>>;
+  requiredInsights: string[];
   locationIds: string[];
   requiresInstitutionId?: string;
   requiredKnowledgeIds: string[];
@@ -201,6 +232,8 @@ export interface Character {
   sourceIds: string[];
   ability: CharacterAbility;
   startingResources: StartingResources;
+  startingTokens?: Partial<Record<ResourceTokenType, number>>;
+  startingInsights?: string[];
   startingLocationId: string;
   canonicalRoute: CanonicalRouteStop[];
   collaboratorIds: string[];
@@ -275,6 +308,8 @@ export interface PlayerState {
   timeActionsRemaining: number;
   turnActionsRemaining: number;
   resources: PlayerResources;
+  insights: InsightAcquisition[];
+  studyProgress: Record<ResourceTokenType, number>;
   completedProjectIds: string[];
   seenContextCardIds: string[];
   legacyPoints: number;
@@ -335,7 +370,7 @@ export interface CompendiumDiscoveryState {
   discoveredIds: string[];
 }
 
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 
 export type {
   NarrativeState,

@@ -1,5 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { CHARACTER_LIST, CHAPTERS_BY_CHARACTER, PROJECTS_BY_CHARACTER, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getChapter } from '../data/content';
+import {
+  CENTURY_KNOWLEDGE,
+  CHARACTER_LIST,
+  CHAPTERS_BY_CHARACTER,
+  COLLABORATORS,
+  CONTEXT_CARDS_BY_CHARACTER,
+  HISTORICAL_EVENTS,
+  INSIGHTS,
+  LOCATIONS,
+  PROJECTS_BY_CHARACTER,
+  getChapter,
+  getProjectById,
+} from '../data/content';
 import { MAP_REGION_GROUPS, detailMapViewForLocation } from '../components/map/mapViews';
 import { LIFE_CHAPTER_ORDER } from '../types';
 import { ACTIONS_PER_TURN, chapterActionBudget, TIME_ACTIONS_PER_YEAR } from '../engine/rules';
@@ -63,6 +75,27 @@ describe('character roster', () => {
         }
         expect(LOCATIONS[project.canonLocationId], `missing canon location for ${project.id}`).toBeDefined();
         expect(project.sourceId).toBeTruthy();
+        for (const insightId of project.requiredInsights) {
+          expect(INSIGHTS[insightId], `missing Insight ${insightId} referenced by ${project.id}`).toBeDefined();
+        }
+      }
+    }
+  });
+
+  it('every Insight route references valid deterministic content', () => {
+    const characterIds = new Set(CHARACTER_LIST.map((character) => character.id));
+    const eventIds = new Set(HISTORICAL_EVENTS.map((event) => event.id));
+    for (const insight of Object.values(INSIGHTS)) {
+      expect(insight.acquisitionRoutes.length).toBeGreaterThan(0);
+      expect(insight.leads.length).toBeGreaterThan(0);
+      for (const route of insight.acquisitionRoutes) {
+        if (route.type === 'location') expect(LOCATIONS[route.locationId], `${insight.id}: ${route.locationId}`).toBeDefined();
+        if (route.type === 'collaborator') expect(COLLABORATORS[route.collaboratorId], `${insight.id}: ${route.collaboratorId}`).toBeDefined();
+        if (route.type === 'characterEncounter') expect(characterIds.has(route.characterId), `${insight.id}: ${route.characterId}`).toBe(true);
+        if (route.type === 'projectCompletion') expect(getProjectById(route.projectId), `${insight.id}: ${route.projectId}`).toBeDefined();
+        if (route.type === 'centuryKnowledge') expect(CENTURY_KNOWLEDGE[route.knowledgeId], `${insight.id}: ${route.knowledgeId}`).toBeDefined();
+        if (route.type === 'historicalEvent') expect(eventIds.has(route.eventId), `${insight.id}: ${route.eventId}`).toBe(true);
+        if (route.type === 'study') expect(route.threshold).toBeGreaterThan(0);
       }
     }
   });

@@ -11,11 +11,11 @@ const STEPS = [
   },
   {
     title: 'Research Projects',
-    body: 'Projects need the right location, chapter, research tokens, and sometimes a collaborator who is alive and present. Complete a project to earn Legacy.',
+    body: 'Projects need research resources, permanent Insights, prerequisite public knowledge, Funds, and time. Inspect a missing Insight for leads; historical routes are useful, not mandatory.',
   },
   {
-    title: 'Canon Scoring',
-    body: 'Completing a project in its documented place and year earns the full Canon bonus. Plausible alternatives still score — just less. Canon is a modest share of your final score, not the whole game.',
+    title: 'Discovery Builds Legacy',
+    body: 'Important discoveries award Legacy wherever you make them. Canon Alignment separately compares your place, year, and route with history, but it never adds Legacy or determines victory.',
   },
 ];
 

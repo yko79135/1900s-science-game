@@ -3,6 +3,8 @@ import type {
   CharacterId,
   ConsequenceLogEntry,
   GameState,
+  InsightAcquisition,
+  InsightRoute,
   Location,
   PlayerState,
   ResearchProject,
@@ -12,9 +14,9 @@ import { LIFE_CHAPTER_ORDER } from '../types';
 import {
   CHARACTERS,
   CHAPTERS_BY_CHARACTER,
-  COLLABORATORS,
   CENTURY_KNOWLEDGE,
   HISTORICAL_EVENTS,
+  INSIGHTS,
   LOCATIONS,
 } from '../data/content';
 
@@ -149,6 +151,90 @@ export function isKnowledgeAvailable(state: GameState, knowledgeId: string, forY
   return forYear >= entry.publishedYear;
 }
 
+// ---------------------------------------------------------------------------
+// Insights
+// ---------------------------------------------------------------------------
+
+export type InsightAcquisitionContext =
+  | { type: 'passive' }
+  | { type: 'location'; locationId: string }
+  | { type: 'collaborator'; collaboratorId: string }
+  | { type: 'characterEncounter'; characterId: CharacterId; sourcePlayerId?: string };
+
+export function hasInsight(player: PlayerState, insightId: string): boolean {
+  return player.insights.some((acquisition) => acquisition.insightId === insightId);
+}
+
+function routeMatches(
+  state: GameState,
+  player: PlayerState,
+  route: InsightRoute,
+  context: InsightAcquisitionContext,
+): boolean {
+  switch (route.type) {
+    case 'location':
+      return context.type === 'location' && context.locationId === route.locationId;
+    case 'collaborator':
+      return context.type === 'collaborator' && context.collaboratorId === route.collaboratorId;
+    case 'characterEncounter':
+      return context.type === 'characterEncounter' && context.characterId === route.characterId;
+    case 'study':
+      return (player.studyProgress[route.token] ?? 0) >= route.threshold;
+    case 'projectCompletion':
+      return player.completedProjectIds.includes(route.projectId);
+    case 'centuryKnowledge':
+      return isKnowledgeAvailable(state, route.knowledgeId, player.currentYear);
+    case 'historicalEvent':
+      return player.triggeredEventIds.includes(route.eventId);
+  }
+}
+
+function acquisitionFromRoute(
+  player: PlayerState,
+  route: InsightRoute,
+  context: InsightAcquisitionContext,
+  insightId: string,
+): InsightAcquisition {
+  const sourceId =
+    route.type === 'location'
+      ? route.locationId
+      : route.type === 'collaborator'
+        ? route.collaboratorId
+        : route.type === 'characterEncounter'
+          ? route.characterId
+          : route.type === 'study'
+            ? route.token
+            : route.type === 'projectCompletion'
+              ? route.projectId
+              : route.type === 'centuryKnowledge'
+                ? route.knowledgeId
+                : route.eventId;
+  return {
+    insightId,
+    sourceType: route.type,
+    sourceId,
+    sourcePlayerId: context.type === 'characterEncounter' ? context.sourcePlayerId : undefined,
+    sourceCharacterId: route.type === 'characterEncounter' ? route.characterId : undefined,
+    year: player.currentYear,
+  };
+}
+
+/** Pure, deterministic evaluation: definitions and route order are stable data. */
+export function findAvailableInsightAcquisitions(
+  state: GameState,
+  player: PlayerState,
+  context: InsightAcquisitionContext = { type: 'passive' },
+): InsightAcquisition[] {
+  const acquired = new Set(player.insights.map((item) => item.insightId));
+  const available: InsightAcquisition[] = [];
+  for (const insight of Object.values(INSIGHTS)) {
+    if (acquired.has(insight.id)) continue;
+    const route = insight.acquisitionRoutes.find((candidate) => routeMatches(state, player, candidate, context));
+    if (route) available.push(acquisitionFromRoute(player, route, context, insight.id));
+  }
+  return available;
+}
+
 /**
  * "The Century Does Not Wait": for any knowledge entry not yet published by a
  * player, once the observing year passes its historical deadline, an NPC
@@ -203,32 +289,15 @@ export function canAttemptProject(
   if (player.currentYear < project.earliestYear) {
     reasons.push(`Not possible before ${project.earliestYear}.`);
   }
-  if (!project.locationIds.includes(player.currentLocationId)) {
-    reasons.push(`Requires presence at: ${project.locationIds.map((id) => LOCATIONS[id]?.name ?? id).join(', ')}.`);
-  }
-  if (project.requiresInstitutionId) {
-    const location = LOCATIONS[player.currentLocationId];
-    const hasInstitution = location?.institutions.some((inst) => inst.id === project.requiresInstitutionId);
-    if (!hasInstitution) {
-      reasons.push('Requires access to a specific institution not present at this location.');
-    }
-  }
   for (const knowledgeId of project.requiredKnowledgeIds) {
     if (!isKnowledgeAvailable(state, knowledgeId, player.currentYear)) {
       const entry = CENTURY_KNOWLEDGE[knowledgeId];
       reasons.push(`Requires prior knowledge: ${entry?.name ?? knowledgeId} (not yet published).`);
     }
   }
-  for (const collaboratorId of project.requiredCollaboratorIds) {
-    const collaborator = COLLABORATORS[collaboratorId];
-    if (!collaborator) {
-      reasons.push(`Unknown collaborator: ${collaboratorId}.`);
-      continue;
-    }
-    if (player.currentYear < collaborator.activeStart || player.currentYear > collaborator.activeEnd) {
-      reasons.push(`${collaborator.name} is not available in ${player.currentYear}.`);
-    } else if (!collaborator.locationIds.includes(player.currentLocationId)) {
-      reasons.push(`${collaborator.name} is not present at this location.`);
+  for (const insightId of project.requiredInsights) {
+    if (!hasInsight(player, insightId)) {
+      reasons.push(`Requires Insight: ${INSIGHTS[insightId]?.name ?? insightId}.`);
     }
   }
   for (const [token, amount] of Object.entries(project.requiredTokens) as [ResourceTokenType, number][]) {
@@ -285,6 +354,8 @@ export function isBareConjecture(project: ResearchProject, character: Character)
 
 export interface ProjectCompletionResult {
   legacyAwarded: number;
+  baseLegacy: number;
+  earlyDiscoveryBonus: number;
   canonScore: CanonScore;
   consequences: ConsequenceLogEntry[];
 }
@@ -319,7 +390,8 @@ export function computeProjectCompletion(
     legacyAwarded = Math.floor(legacyAwarded / 2);
   }
 
-  legacyAwarded += canonScore;
+  const earlyDiscoveryBonus = player.currentYear < project.canonYearStart ? 2 : 0;
+  legacyAwarded += earlyDiscoveryBonus;
 
   const consequences: ConsequenceLogEntry[] = project.consequences.map((c) => ({
     ...c,
@@ -328,7 +400,7 @@ export function computeProjectCompletion(
     projectId: project.id,
   }));
 
-  return { legacyAwarded, canonScore, consequences };
+  return { legacyAwarded, baseLegacy: project.baseLegacy, earlyDiscoveryBonus, canonScore, consequences };
 }
 
 // ---------------------------------------------------------------------------
@@ -369,11 +441,17 @@ export interface FinalScoreSummary {
   benchmarkRatio: number;
 }
 
+export function computeCanonAlignment(player: PlayerState): number {
+  if (player.completedProjectIds.length === 0) return 0;
+  const maximum = player.completedProjectIds.length * 3;
+  return Math.round(Math.min(1, player.canonPoints / maximum) * 100);
+}
+
 export function computeFinalScore(player: PlayerState): FinalScoreSummary {
   const character = getCharacter(player.characterId);
   return {
     scientificLegacy: player.legacyPoints,
-    canonAlignment: player.canonPoints,
+    canonAlignment: computeCanonAlignment(player),
     totalLegacy: player.legacyPoints,
     consequenceTotals: summarizeConsequences(player),
     benchmark: character.legacyBenchmark,

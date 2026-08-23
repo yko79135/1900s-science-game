@@ -18,7 +18,7 @@ export function EndgameScreen({ state, onNewGame, onExit }: { state: GameState; 
               <p className="endgame-card__legacy">
                 Legacy: <strong>{summary.totalLegacy}</strong> / benchmark {summary.benchmark} ({Math.round(summary.benchmarkRatio * 100)}%)
               </p>
-              <p>Canon alignment: {summary.canonAlignment} points</p>
+              <p>Canon Alignment: {summary.canonAlignment}%</p>
               <p>
                 Completed {player.completedProjectIds.length} project{player.completedProjectIds.length === 1 ? '' : 's'}.
               </p>
