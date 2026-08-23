@@ -5,6 +5,22 @@ import { WorldMap } from '../components/map/WorldMap';
 import { createGame } from '../engine/reducer';
 
 describe('board controls', () => {
+  it('shows the active player’s current year prominently on the map', () => {
+    const player = createGame(['curie'], 1905).players[0];
+
+    render(
+      <WorldMap
+        players={[player]}
+        activePlayer={{ ...player, currentYear: 1898 }}
+        selectedLocationId={null}
+        onSelectLocation={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByRole('status', { name: 'Current year 1898' })).toBeVisible();
+    expect(screen.getByTestId('current-year-display')).toHaveTextContent('1898');
+  });
+
   it('requires confirmation before restarting the whole game', () => {
     const game = createGame(['curie'], 1905);
     const onRestartGame = vi.fn();

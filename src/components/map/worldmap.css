@@ -10,11 +10,43 @@
 
 .world-map__controls {
   position: absolute;
-  top: 0.6rem;
+  top: 5.1rem;
   right: 0.6rem;
   z-index: 2;
   display: flex;
   gap: 0.35rem;
+}
+
+.world-map__year {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 3;
+  display: flex;
+  min-width: 8.4rem;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.45rem 0.8rem 0.55rem;
+  color: var(--paper);
+  background: color-mix(in srgb, var(--ocean-deep) 92%, transparent);
+  border: 1px solid var(--brass-bright);
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 35%);
+  pointer-events: none;
+}
+
+.world-map__year-label {
+  color: var(--panel-text-dim);
+  font: 700 0.67rem/1 var(--font-body);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.world-map__year-value {
+  color: var(--brass-bright);
+  font: 700 clamp(2.25rem, 4vw, 3.2rem) / 0.95 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
 }
 
 .world-map__navigation {
