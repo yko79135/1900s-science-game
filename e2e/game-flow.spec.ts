@@ -38,6 +38,13 @@ test('a complete game can be played from character selection to final scoring', 
   await expect(page.getByText('Marie Curie', { exact: true }).first()).toBeVisible();
   await expect(page.getByText(/Formation/).first()).toBeVisible();
 
+  // Regional map tabs keep dense clusters readable without hiding other continents.
+  await expect(page.getByRole('tab', { name: 'Europe' })).toHaveAttribute('aria-selected', 'true');
+  await page.getByRole('tab', { name: 'America' }).click();
+  await expect(page.getByTestId('map-location-princeton')).toBeVisible();
+  await expect(page.getByTestId('map-location-paris')).toHaveCount(0);
+  await page.getByRole('tab', { name: 'Europe' }).click();
+
   // Perform actions: earn funds, then move on the map to Paris.
   await page.getByTestId('action-teach-or-earn').click();
   await page.getByTestId('map-location-paris').click();

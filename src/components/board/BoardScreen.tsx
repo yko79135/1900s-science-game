@@ -58,7 +58,13 @@ export function BoardScreen({ state, dispatch, onSave, onExitToTitle }: BoardScr
 
       <div className="board__main">
         <div className="board__map">
-          <WorldMap players={state.players} activePlayer={player} selectedLocationId={selectedLocationId} onSelectLocation={setSelectedLocationId} />
+          <WorldMap
+            key={`${player.id}-${player.currentLocationId}`}
+            players={state.players}
+            activePlayer={player}
+            selectedLocationId={selectedLocationId}
+            onSelectLocation={setSelectedLocationId}
+          />
         </div>
         <aside className="board__side">
           <CharacterPanel player={player} />
