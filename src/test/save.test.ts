@@ -22,6 +22,7 @@ describe('save/load serialization', () => {
     expect(loaded).not.toBeNull();
     expect(loaded?.seed).toBe(42);
     expect(loaded?.players.map((p) => p.characterId)).toEqual(['curie', 'einstein']);
+    expect(loaded?.narrative).toBeDefined();
   });
 
   it('returns null when no game is saved', () => {
@@ -35,6 +36,7 @@ describe('save/load serialization', () => {
     const imported = importSaveFromJson(json);
     expect(imported?.seed).toBe(99);
     expect(imported?.players[0].characterId).toBe('hilbert');
+    expect(imported?.narrative).toBeDefined();
   });
 
   it('rejects malformed JSON on import', () => {
@@ -47,18 +49,21 @@ describe('save/load serialization', () => {
     expect(migrateSave(raw)).toBeNull();
   });
 
-  it('migrates an older save to the one-action-per-year turn clock', () => {
+  it('migrates an older save to the narrative-aware schema', () => {
     const game = createGame(['noether'], 2);
     const legacyGame = {
       ...game,
       schemaVersion: 2,
+      narrative: undefined,
       players: [{ ...game.players[0], chapterIndex: 4, currentYear: 1924, timeActionsRemaining: 2, turnActionsRemaining: undefined }],
     };
     const migrated = migrateSave({ schemaVersion: 2, savedAt: Date.now(), game: legacyGame });
 
-    expect(migrated?.schemaVersion).toBe(3);
+    expect(migrated?.schemaVersion).toBe(4);
     expect(migrated?.players[0].currentYear).toBe(1924);
     expect(migrated?.players[0].timeActionsRemaining).toBe(chapterActionBudget(1924, 1933));
     expect(migrated?.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
+    expect(migrated?.narrative?.seenSceneIds).toEqual([]);
+    expect(migrated?.narrative?.chronicle).toEqual([]);
   });
 });
