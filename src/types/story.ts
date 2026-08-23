@@ -33,6 +33,15 @@ export interface StoryTrigger {
   priority?: number;
 }
 
+export type StoryResourceKey =
+  | 'funds'
+  | 'wellbeing'
+  | 'health'
+  | 'standing'
+  | 'network'
+  | 'exposure'
+  | ResourceTokenType;
+
 export type StoryCondition =
   | { all: StoryCondition[] }
   | { any: StoryCondition[] }
@@ -46,7 +55,7 @@ export type StoryCondition =
   | { type: 'projectCompleted'; projectId: string }
   | { type: 'projectNotCompleted'; projectId: string }
   | { type: 'completedProjectCountAtLeast'; projectIds: string[]; count: number }
-  | { type: 'resourceAtLeast'; resource: keyof ContextCardEffect | ResourceTokenType; value: number }
+  | { type: 'resourceAtLeast'; resource: StoryResourceKey; value: number }
   | { type: 'narrativeFlag'; flag: string; value?: boolean | string | number }
   | { type: 'choiceWas'; choiceKey: string; choiceId: string }
   | { type: 'otherCharacterIsHuman'; characterId: CharacterId }
