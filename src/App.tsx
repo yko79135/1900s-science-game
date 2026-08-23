@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CharacterId, GameState } from './types';
-import { gameReducer, createGame } from './engine/reducer';
+import { gameReducer, createGame, restartGame } from './engine/reducer';
 import {
   appendCompletedGame,
   clearCurrentGame,
@@ -97,6 +97,12 @@ export default function App() {
     if (game) saveCurrentGame(game);
   }
 
+  function handleRestartGame() {
+    setGame((current) => (current ? restartGame(current) : current));
+    setShowTutorial(false);
+    recordedCompletion.current = false;
+  }
+
   function dispatch(action: Parameters<typeof gameReducer>[1]) {
     setGame((current) => (current ? gameReducer(current, action) : current));
   }
@@ -119,7 +125,14 @@ export default function App() {
             }}
           />
         ) : (
-          <BoardScreen state={game} dispatch={dispatch} onSave={handleSave} onExitToTitle={handleExitToTitle} />
+          <BoardScreen
+            key={game.createdAt}
+            state={game}
+            dispatch={dispatch}
+            onSave={handleSave}
+            onRestartGame={handleRestartGame}
+            onExitToTitle={handleExitToTitle}
+          />
         )}
         {showTutorial && (
           <TutorialOverlay

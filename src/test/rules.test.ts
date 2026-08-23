@@ -13,7 +13,7 @@ import {
   yearForActionsSpent,
   yearWithinBothLifetimes,
 } from '../engine/rules';
-import { createGame, createPlayer, gameReducer } from '../engine/reducer';
+import { createGame, createPlayer, gameReducer, restartGame } from '../engine/reducer';
 import { getProjectById, LOCATIONS } from '../data/content';
 import type { GameState } from '../types';
 
@@ -66,6 +66,43 @@ describe('travel and living costs', () => {
     game = gameReducer(game, { type: 'END_CHAPTER' });
     const after = game.players[0].resources.funds;
     expect(after).toBe(Math.max(0, before - LOCATIONS.warsaw.livingCost));
+  });
+});
+
+describe('restarting a game', () => {
+  it('clears all progress while preserving the roster, seed, and game length', () => {
+    const game = createGame(['curie', 'noether'], 1905, 'full');
+    const progressed = {
+      ...game,
+      rngCursor: 9,
+      knowledgeBoard: {
+        specialRelativity: {
+          entryId: 'specialRelativity',
+          publishedYear: 1905,
+          npcFallbackTriggered: true,
+        },
+      },
+      players: game.players.map((player, index) => ({
+        ...player,
+        chapterIndex: 3,
+        currentYear: 1920 + index,
+        completedProjectIds: ['finished-project'],
+        legacyPoints: 20,
+      })),
+    };
+
+    const restarted = restartGame(progressed);
+
+    expect(restarted.seed).toBe(1905);
+    expect(restarted.gameLength).toBe('full');
+    expect(restarted.players.map((player) => player.characterId)).toEqual(['curie', 'noether']);
+    expect(restarted.rngCursor).toBe(0);
+    expect(restarted.knowledgeBoard).toEqual({});
+    for (const player of restarted.players) {
+      expect(player.chapterIndex).toBe(0);
+      expect(player.completedProjectIds).toEqual([]);
+      expect(player.legacyPoints).toBe(0);
+    }
   });
 });
 

@@ -94,6 +94,15 @@ export function createGame(characterIds: CharacterId[], seed: number, gameLength
   };
 }
 
+/** Starts the configured game over with the same roster, seed, and length. */
+export function restartGame(game: GameState): GameState {
+  return createGame(
+    game.players.map((player) => player.characterId),
+    game.seed,
+    game.gameLength,
+  );
+}
+
 function log(state: GameState, year: number, message: string): GameState {
   return { ...state, log: [...state.log, { id: freshId('log'), year, message }], updatedAt: Date.now() };
 }
