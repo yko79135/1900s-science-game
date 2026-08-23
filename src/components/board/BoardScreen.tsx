@@ -11,6 +11,7 @@ import { ContextCardOverlay } from './ContextCardOverlay';
 import { KnowledgeBoardPanel } from './KnowledgeBoardPanel';
 import { RulesModal } from '../screens/RulesModal';
 import { CompendiumScreen } from '../screens/CompendiumScreen';
+import { StoryChronicle } from '../story/StoryChronicle';
 
 export interface BoardScreenProps {
   state: GameState;
@@ -23,6 +24,7 @@ export interface BoardScreenProps {
 export function BoardScreen({ state, dispatch, onSave, onRestartGame, onExitToTitle }: BoardScreenProps) {
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
   const [showKnowledgeBoard, setShowKnowledgeBoard] = useState(false);
+  const [showChronicle, setShowChronicle] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showCompendium, setShowCompendium] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
@@ -40,6 +42,9 @@ export function BoardScreen({ state, dispatch, onSave, onRestartGame, onExitToTi
       <div className="board__topbar">
         <h1 className="board__title">The Shape of a Century</h1>
         <div className="board__topbar-actions">
+          <button className="btn" onClick={() => setShowChronicle(true)}>
+            Chronicle
+          </button>
           <button className="btn" onClick={() => setShowKnowledgeBoard(true)}>
             Knowledge Board
           </button>
@@ -84,6 +89,7 @@ export function BoardScreen({ state, dispatch, onSave, onRestartGame, onExitToTi
       <ActionBar state={state} player={player} dispatch={dispatch} />
 
       {cards.length > 0 && <ContextCardOverlay cards={cards} dispatch={dispatch} />}
+      {showChronicle && <StoryChronicle state={state} onClose={() => setShowChronicle(false)} />}
       {showKnowledgeBoard && <KnowledgeBoardPanel state={state} onClose={() => setShowKnowledgeBoard(false)} />}
       {showRules && <RulesModal onClose={() => setShowRules(false)} />}
       {showCompendium && (

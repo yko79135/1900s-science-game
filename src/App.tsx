@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CharacterId, GameState } from './types';
-import { gameReducer, createGame, restartGame } from './engine/reducer';
+import { createGame, restartGame } from './engine/reducer';
+import {
+  hasActiveStory,
+  initializeStoryGame,
+  prepareResumedStoryGame,
+  storyAwareGameReducer,
+  type StoryAwareAction,
+} from './engine/story';
 import {
   appendCompletedGame,
   clearCurrentGame,
@@ -17,13 +24,17 @@ import { RulesModal } from './components/screens/RulesModal';
 import { TutorialOverlay } from './components/screens/TutorialOverlay';
 import { EndgameScreen } from './components/screens/EndgameScreen';
 import { BoardScreen } from './components/board/BoardScreen';
+import { StoryScreen } from './components/story/StoryScreen';
 import './styles/screens.css';
 
 type UiScreen = 'title' | 'setup' | 'select';
 
 export default function App() {
   const [uiScreen, setUiScreen] = useState<UiScreen>('title');
-  const [game, setGame] = useState<GameState | null>(() => loadCurrentGame());
+  const [game, setGame] = useState<GameState | null>(() => {
+    const loaded = loadCurrentGame();
+    return loaded ? prepareResumedStoryGame(loaded) : null;
+  });
   const [setupConfig, setSetupConfig] = useState<SetupConfig | null>(null);
   const [settings, setSettings] = useState(() => loadSettings());
   const [showCompendium, setShowCompendium] = useState(false);
@@ -76,7 +87,7 @@ export default function App() {
 
   function handleCharacterSelectConfirm(characterIds: CharacterId[]) {
     if (!setupConfig) return;
-    const newGame = createGame(characterIds, setupConfig.seed, setupConfig.gameLength);
+    const newGame = initializeStoryGame(createGame(characterIds, setupConfig.seed, setupConfig.gameLength));
     setGame(newGame);
     setUiScreen('title');
     if (setupConfig.tutorial || !settings.tutorialCompleted) {
@@ -86,7 +97,7 @@ export default function App() {
 
   function handleResume() {
     const loaded = loadCurrentGame();
-    if (loaded) setGame(loaded);
+    if (loaded) setGame(prepareResumedStoryGame(loaded));
   }
 
   function handleExitToTitle() {
@@ -98,19 +109,21 @@ export default function App() {
   }
 
   function handleRestartGame() {
-    setGame((current) => (current ? restartGame(current) : current));
+    setGame((current) => (current ? initializeStoryGame(restartGame(current)) : current));
     setShowTutorial(false);
     recordedCompletion.current = false;
   }
 
-  function dispatch(action: Parameters<typeof gameReducer>[1]) {
-    setGame((current) => (current ? gameReducer(current, action) : current));
+  function dispatch(action: StoryAwareAction) {
+    setGame((current) => (current ? storyAwareGameReducer(current, action) : current));
   }
 
   if (game) {
     return (
       <>
-        {game.phase === 'endgame' ? (
+        {hasActiveStory(game) ? (
+          <StoryScreen state={game} dispatch={dispatch} />
+        ) : game.phase === 'endgame' ? (
           <EndgameScreen
             state={game}
             onNewGame={() => {
@@ -128,7 +141,7 @@ export default function App() {
           <BoardScreen
             key={game.createdAt}
             state={game}
-            dispatch={dispatch}
+            dispatch={(action) => dispatch(action)}
             onSave={handleSave}
             onRestartGame={handleRestartGame}
             onExitToTitle={handleExitToTitle}
