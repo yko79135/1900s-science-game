@@ -17,18 +17,33 @@
   gap: 0.35rem;
 }
 
-.world-map__tabs {
+.world-map__navigation {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
+  right: 9rem;
   z-index: 2;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.world-map__tabs {
+  display: flex;
+  flex-wrap: wrap;
   padding: 0.2rem;
   gap: 0.15rem;
   border: 1px solid var(--panel-border);
   border-radius: 5px;
   background: color-mix(in srgb, var(--ocean-deep) 88%, transparent);
   box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+  pointer-events: auto;
+}
+
+.world-map__tabs--detail {
+  background: color-mix(in srgb, var(--ocean-deep) 78%, transparent);
 }
 
 .world-map__tab {
@@ -49,6 +64,11 @@
 .world-map__tab.is-active {
   color: var(--ink);
   background: var(--brass-bright);
+}
+
+.world-map__tab--detail {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.76rem;
 }
 
 .world-map__tab:focus-visible {

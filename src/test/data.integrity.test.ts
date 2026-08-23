@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CHARACTER_LIST, CHAPTERS_BY_CHARACTER, PROJECTS_BY_CHARACTER, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getChapter } from '../data/content';
+import { MAP_REGION_GROUPS, detailMapViewForLocation } from '../components/map/mapViews';
 import { LIFE_CHAPTER_ORDER } from '../types';
 
 describe('character roster', () => {
@@ -94,5 +95,34 @@ describe('map locations', () => {
     expect(LOCATIONS.cambridgeUK.name).toContain('England');
     expect(LOCATIONS.cambridgeMA.name).toContain('Massachusetts');
     expect(LOCATIONS.cambridgeUK.coordinates).not.toEqual(LOCATIONS.cambridgeMA.coordinates);
+  });
+
+  it('puts every city in exactly one focused map view', () => {
+    const focusedLocationIds = MAP_REGION_GROUPS.flatMap((region) =>
+      region.views.filter((view) => !view.overview).flatMap((view) => view.locationIds),
+    );
+
+    expect(new Set(focusedLocationIds).size).toBe(focusedLocationIds.length);
+    expect([...focusedLocationIds].sort()).toEqual(Object.keys(LOCATIONS).sort());
+  });
+
+  it('keeps each regional overview aligned with its focused views', () => {
+    for (const region of MAP_REGION_GROUPS) {
+      const overview = region.views.find((view) => view.overview);
+      if (!overview) continue;
+
+      const focusedLocationIds = region.views
+        .filter((view) => !view.overview)
+        .flatMap((view) => view.locationIds)
+        .sort();
+      expect([...overview.locationIds].sort()).toEqual(focusedLocationIds);
+    }
+  });
+
+  it('routes crowded cities to focused regional tabs', () => {
+    expect(detailMapViewForLocation('london').id).toBe('england');
+    expect(detailMapViewForLocation('erlangen').id).toBe('central-europe');
+    expect(detailMapViewForLocation('princeton').id).toBe('northeast-us');
+    expect(detailMapViewForLocation('instituteWV').id).toBe('appalachia-virginia');
   });
 });
