@@ -11,8 +11,9 @@ import { chapterActionBudget } from '../engine/rules';
 import { buildStoryImagePrompt } from '../engine/storyImage';
 import { CHARACTERS } from '../data/content';
 import { storySceneById } from '../data/story';
+import type { GameState } from '../types';
 
-function storylessEinstein() {
+function storylessEinstein(): GameState {
   const base = createGame(['einstein'], 1905, 'full');
   return {
     ...base,
@@ -25,7 +26,7 @@ function storylessEinstein() {
 
 describe('narrative campaign flow', () => {
   it('starts a full Einstein game with the world prologue, then Formation opening', () => {
-    let game = initializeStoryGame(createGame(['einstein'], 42, 'full'));
+    let game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
     expect(getActiveStoryView(game)?.scene.id).toBe('einstein-prologue-century');
 
     game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
@@ -36,7 +37,7 @@ describe('narrative campaign flow', () => {
   });
 
   it('defers chapter advancement until the closing story finishes', () => {
-    let game = storylessEinstein();
+    let game: GameState = storylessEinstein();
     const beforeChapter = game.players[0].chapterIndex;
 
     game = storyAwareGameReducer(game, { type: 'END_CHAPTER' });
@@ -58,7 +59,7 @@ describe('narrative campaign flow', () => {
 
 describe('Einstein state-aware story variants', () => {
   it('queues the Bern Special Relativity breakthrough only after the project is completed', () => {
-    let game = createGame(['einstein'], 1905, 'full');
+    let game: GameState = createGame(['einstein'], 1905, 'full');
     game = {
       ...game,
       narrative: {
@@ -91,11 +92,12 @@ describe('Einstein state-aware story variants', () => {
   });
 
   it('uses Canon Hilbert when Hilbert is not a human player', () => {
-    const game = {
-      ...storylessEinstein(),
+    const base = storylessEinstein();
+    const game: GameState = {
+      ...base,
       players: [
         {
-          ...storylessEinstein().players[0],
+          ...base.players[0],
           chapterIndex: 3,
           currentYear: 1915,
           currentLocationId: 'berlin',
@@ -107,7 +109,7 @@ describe('Einstein state-aware story variants', () => {
 
   it('uses a human Hilbert actual location and never silently substitutes Canon Hilbert', () => {
     const base = createGame(['einstein', 'hilbert'], 1915, 'full');
-    const shared = {
+    const shared: GameState = {
       ...base,
       narrative: createEmptyNarrativeState(),
       players: [
@@ -118,7 +120,7 @@ describe('Einstein state-aware story variants', () => {
 
     expect(resolveStoryVariantId(shared, 'einstein-hilbert-1915', 'p1')).toBe('human-hilbert-elsewhere');
 
-    const together = {
+    const together: GameState = {
       ...shared,
       players: [shared.players[0], { ...shared.players[1], currentLocationId: 'gottingen' }],
     };
