@@ -3,17 +3,37 @@ import { feature } from 'topojson-client';
 import type { Topology, GeometryCollection } from 'topojson-specification';
 import type { FeatureCollection, Geometry } from 'geojson';
 import landTopology from '../../data/geo/land-110m.json';
+import { LOCATIONS } from '../../data/content/locations';
 
 export const MAP_WIDTH = 960;
 export const MAP_HEIGHT = 500;
+const MAP_PADDING = 36;
 
 const topology = landTopology as unknown as Topology;
 const landObject = topology.objects.land as GeometryCollection;
 
 export const landFeatures = feature(topology, landObject) as unknown as FeatureCollection<Geometry>;
 
+// Fit the map to the playable locations rather than the full globe. The game has
+// no destinations in the southern hemisphere, eastern Asia, or the Pacific, so
+// including those areas needlessly squeezed the location markers together.
+const locationBounds = {
+  type: 'MultiPoint' as const,
+  coordinates: Object.values(LOCATIONS).map(({ coordinates }) => [coordinates.lon, coordinates.lat]),
+};
+
 export const projection = geoNaturalEarth1()
-  .fitSize([MAP_WIDTH, MAP_HEIGHT], landFeatures as never);
+  .fitExtent(
+    [
+      [MAP_PADDING, MAP_PADDING],
+      [MAP_WIDTH - MAP_PADDING, MAP_HEIGHT - MAP_PADDING],
+    ],
+    locationBounds,
+  )
+  .clipExtent([
+    [0, 0],
+    [MAP_WIDTH, MAP_HEIGHT],
+  ]);
 
 export const pathGenerator = geoPath(projection);
 
