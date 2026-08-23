@@ -35,6 +35,9 @@ import {
 
 export type StoryAwareAction = GameAction | StoryAction;
 
+/** Temporary product switch: preserve authored narrative content without showing story pages. */
+export const STORY_PAGES_ENABLED = false;
+
 interface StoryEventContext {
   event: StoryTriggerEvent;
   projectId?: string;
@@ -87,12 +90,25 @@ function markEinsteinCardsHandled(state: GameState): GameState {
 
 /** Adds story-capable state to an existing save without forcing old campaigns back through the prologue. */
 export function ensureNarrativeState(state: GameState): GameState {
+  if (!STORY_PAGES_ENABLED) {
+    const narrative = state.narrative ?? createEmptyNarrativeState();
+    return withNarrative(state, {
+      ...narrative,
+      activeSceneId: undefined,
+      activeVariantId: undefined,
+      activePageIndex: 0,
+      focusPlayerId: undefined,
+      pendingSceneIds: [],
+      pendingTransition: undefined,
+    });
+  }
   const normalized = markEinsteinCardsHandled(state);
   return normalized.narrative ? normalized : withNarrative(normalized, createEmptyNarrativeState());
 }
 
-/** Initializes a fresh campaign with the world prologue (Einstein) and first chapter opening. */
+/** Initializes narrative state; story pages are queued only while the feature is enabled. */
 export function initializeStoryGame(state: GameState): GameState {
+  if (!STORY_PAGES_ENABLED) return withNarrative(state, createEmptyNarrativeState());
   let next = withNarrative(markEinsteinCardsHandled(state), createEmptyNarrativeState());
   const player = next.players[next.activePlayerIndex];
   if (!player) return next;
@@ -106,11 +122,12 @@ export function initializeStoryGame(state: GameState): GameState {
 
 /** On an old/resumed save, introduce only the current chapter opening rather than replaying childhood. */
 export function prepareResumedStoryGame(state: GameState): GameState {
+  if (!STORY_PAGES_ENABLED) return ensureNarrativeState(state);
   return ensureOpeningForActivePlayer(ensureNarrativeState(state));
 }
 
 export function hasActiveStory(state: GameState): boolean {
-  return Boolean(state.narrative?.activeSceneId);
+  return STORY_PAGES_ENABLED && Boolean(state.narrative?.activeSceneId);
 }
 
 export function getActiveStoryView(state: GameState): ActiveStoryView | null {
@@ -516,6 +533,9 @@ function queueEventStories(state: GameState, player: PlayerState, context: Story
 export function storyAwareGameReducer(inputState: GameState, action: StoryAwareAction): GameState {
   let state = ensureNarrativeState(inputState);
 
+  if (!STORY_PAGES_ENABLED) {
+    return isStoryAction(action) ? state : gameReducer(state, action);
+  }
   if (isStoryAction(action)) return handleStoryAction(state, action);
   if (hasActiveStory(state)) return state;
 
