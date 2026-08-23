@@ -132,15 +132,37 @@
   stroke-width: 1.4;
 }
 
+.world-map__location-hit-area {
+  fill: transparent;
+}
+
 .world-map__label {
-  font-family: var(--font-serif);
-  font-size: 6.5px;
-  fill: var(--paper);
-  paint-order: stroke;
-  stroke: var(--ocean-deep);
-  stroke-width: 2px;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease;
+}
+
+.world-map__label rect {
+  fill: var(--ocean-deep);
+  stroke: var(--brass-bright);
+  stroke-width: 0.45;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 45%));
+}
+
+.world-map__label text {
+  fill: var(--paper);
+  font-family: var(--font-body);
+  font-size: 6px;
+  font-weight: 700;
+}
+
+.world-map__location:hover .world-map__label,
+.world-map__location:focus-visible .world-map__label,
+.world-map__location.is-selected .world-map__label,
+.world-map__location.is-current .world-map__label {
+  opacity: 1;
+  visibility: visible;
 }
 
 .world-map__location {
