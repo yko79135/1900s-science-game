@@ -67,11 +67,11 @@ npm run lint      # oxlint
   only allowed to interact (via a shared collaborator or an ability like
   Bohr's Copenhagen invitation) when their lifespans and the specific
   collaborator's active window genuinely overlap.
-- **In-chapter time passes as Time actions are spent.** Every three Time
-  actions advance the calendar by one year, and each chapter includes three
-  actions for every year in its inclusive range. A project whose earliest
-  plausible date falls partway through a chapter therefore becomes reachable
-  without consuming the Time available during the chapter's final year.
+- **Each main action advances the calendar by one year.** Players receive four
+  action points per turn, and demanding projects can consume more than one
+  point while still advancing the calendar once. Turns rotate automatically
+  when their points are spent, or a player can end a turn early. Each chapter
+  includes one calendar action for every year in its inclusive range.
 - **Canon scoring is additive, not a gate.** Completing a project awards its
   base Legacy regardless of place/date; a Canon bonus (+3 documented in
   place and year, +1 near-canon or Plausible, +0 Speculative) is added on

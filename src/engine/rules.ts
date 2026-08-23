@@ -38,18 +38,18 @@ export function currentChapterId(player: PlayerState) {
   return LIFE_CHAPTER_ORDER[player.chapterIndex];
 }
 
-export const TIME_ACTIONS_PER_YEAR = 3;
+export const TIME_ACTIONS_PER_YEAR = 1;
+export const ACTIONS_PER_TURN = 4;
 
-/** Each year in a chapter, including its final year, has three Time actions. */
+/** Each year in a chapter, including its final year, has one calendar action. */
 export function chapterActionBudget(chapterYearStart: number, chapterYearEnd: number): number {
   const inclusiveYearCount = Math.max(1, chapterYearEnd - chapterYearStart + 1);
   return inclusiveYearCount * TIME_ACTIONS_PER_YEAR;
 }
 
 /**
- * Three spent Time actions advance the calendar by one year. The result is
- * clamped to the chapter's final year so that its last three actions can be
- * used on projects and other work dated to that year.
+ * Each spent calendar action advances the year once. The result is clamped to
+ * the chapter's final year.
  */
 export function yearForActionsSpent(chapterYearStart: number, chapterYearEnd: number, actionsSpent: number): number {
   const elapsedYears = Math.floor(Math.max(0, actionsSpent) / TIME_ACTIONS_PER_YEAR);
@@ -122,7 +122,10 @@ export function evaluateTravel(player: PlayerState, destinationId: string): Trav
     reasons.push(`Insufficient Funds for travel (needs ${fundsCost}, has ${player.resources.funds}).`);
   }
   if (player.timeActionsRemaining < RELOCATE_TIME_COST) {
-    reasons.push('No Time actions remaining this chapter.');
+    reasons.push('No years remaining in this chapter.');
+  }
+  if (player.turnActionsRemaining < RELOCATE_TIME_COST) {
+    reasons.push('No actions remaining this turn.');
   }
   return { allowed: reasons.length === 0, reasons, fundsCost, timeCost: RELOCATE_TIME_COST };
 }
@@ -187,6 +190,7 @@ export function canAttemptProject(
   state: GameState,
   player: PlayerState,
   project: ResearchProject,
+  turnActionCost = project.timeCost,
 ): ProjectEligibility {
   const reasons: string[] = [];
 
@@ -232,8 +236,11 @@ export function canAttemptProject(
       reasons.push(`Requires ${amount} ${token} (has ${player.resources.tokens[token] ?? 0}).`);
     }
   }
-  if (player.timeActionsRemaining < project.timeCost) {
-    reasons.push(`Requires ${project.timeCost} Time (has ${player.timeActionsRemaining}).`);
+  if (player.timeActionsRemaining < 1) {
+    reasons.push('No years remaining in this chapter.');
+  }
+  if (player.turnActionsRemaining < turnActionCost) {
+    reasons.push(`Requires ${turnActionCost} turn actions (has ${player.turnActionsRemaining}).`);
   }
   if (player.resources.funds < project.fundsCost) {
     reasons.push(`Requires ${project.fundsCost} Funds (has ${player.resources.funds}).`);

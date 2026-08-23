@@ -6,8 +6,8 @@ const STEPS = [
     body: 'Click or tab to a location to see why it matters, who is connected to it, and what it costs to travel there. Your character token shows where you are now.',
   },
   {
-    title: 'Three Time Actions per Year',
-    body: 'Every three Time actions advance the calendar by one year. Each Life Chapter includes three actions for every year it covers; spend them on research, work, travel, rest, advocacy, or building institutions, or end the chapter early to advance the story.',
+    title: 'One Action per Year',
+    body: 'Every main action advances your calendar by one year. Each player receives four action points per turn; demanding projects can use more than one point. Turns rotate automatically when the points are spent, or you can end a turn early.',
   },
   {
     title: 'Research Projects',

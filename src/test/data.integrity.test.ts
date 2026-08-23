@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CHARACTER_LIST, CHAPTERS_BY_CHARACTER, PROJECTS_BY_CHARACTER, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getChapter } from '../data/content';
 import { MAP_REGION_GROUPS, detailMapViewForLocation } from '../components/map/mapViews';
 import { LIFE_CHAPTER_ORDER } from '../types';
-import { chapterActionBudget, TIME_ACTIONS_PER_YEAR } from '../engine/rules';
+import { ACTIONS_PER_TURN, chapterActionBudget, TIME_ACTIONS_PER_YEAR } from '../engine/rules';
 
 describe('character roster', () => {
   it('has exactly twelve characters', () => {
@@ -81,9 +81,12 @@ describe('character roster', () => {
           timelineProblems.push(`${project.id}: earliest year ${project.earliestYear} is after ${chapter.label} ends in ${chapter.yearEnd}`);
           continue;
         }
+        if (project.timeCost > ACTIONS_PER_TURN) {
+          timelineProblems.push(`${project.id}: costs ${project.timeCost} turn actions but a turn only provides ${ACTIONS_PER_TURN}`);
+        }
 
         const actionsToEarliestYear = Math.max(0, project.earliestYear - chapter.yearStart) * TIME_ACTIONS_PER_YEAR;
-        if (actionsToEarliestYear + project.timeCost > chapterActionBudget(chapter.yearStart, chapter.yearEnd)) {
+        if (actionsToEarliestYear + 1 > chapterActionBudget(chapter.yearStart, chapter.yearEnd)) {
           timelineProblems.push(`${project.id}: not enough Time remains to attempt it in ${project.earliestYear}`);
         }
       }

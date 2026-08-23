@@ -106,7 +106,7 @@ export function LocationInfoPanel({ locationId, player, dispatch, onClose }: Loc
             disabled={!travel.allowed}
             onClick={() => dispatch({ type: 'TRAVEL', destinationId: locationId })}
           >
-            Travel here ({travel.fundsCost} Funds, {travel.timeCost} Time)
+            Travel here ({travel.fundsCost} Funds, {travel.timeCost} turn action)
           </button>
           {!travel.allowed && (
             <ul className="project-card__reasons">
