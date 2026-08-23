@@ -1,7 +1,7 @@
 import type { CharacterId, LifeChapterId } from '../../types';
 import type { StoryScene } from '../../types/story';
 import { CHAPTERS_BY_CHARACTER, CHARACTERS, LOCATIONS } from '../content';
-import { EINSTEIN_REPLACED_CONTEXT_CARDS, EINSTEIN_STORY_SCENES } from './einstein';
+import { EINSTEIN_STORY_SCENES } from './einstein';
 
 export { EINSTEIN_REPLACED_CONTEXT_CARDS, EINSTEIN_STORY_SCENES } from './einstein';
 
