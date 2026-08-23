@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { BoardScreen } from '../components/board/BoardScreen';
 import { WorldMap } from '../components/map/WorldMap';
@@ -17,6 +17,9 @@ describe('board controls', () => {
       />,
     );
 
+    const mapHud = screen.getByTestId('map-hud');
+    expect(within(mapHud).getByTestId('current-year-display')).toBeVisible();
+    expect(within(mapHud).getByTestId('jump-to-current-city-btn')).toBeVisible();
     expect(screen.getByRole('status', { name: 'Current year 1898' })).toBeVisible();
     expect(screen.getByTestId('current-year-display')).toHaveTextContent('1898');
   });

@@ -166,31 +166,33 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
           </div>
         )}
       </div>
-      <div className="world-map__year" role="status" aria-live="polite" aria-label={`Current year ${activePlayer.currentYear}`}>
-        <span className="world-map__year-label">Current year</span>
-        <strong className="world-map__year-value" data-testid="current-year-display">
-          {activePlayer.currentYear}
-        </strong>
-      </div>
-      <div className="world-map__controls">
-        <button type="button" className="btn" onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.5))} aria-label="Zoom in">
-          +
-        </button>
-        <button type="button" className="btn" onClick={() => setZoom((z) => Math.max(MIN_ZOOM, z - 0.5))} aria-label="Zoom out">
-          −
-        </button>
-        <button type="button" className="btn" onClick={resetView} aria-label="Reset map view">
-          Reset view
-        </button>
-        <button
-          type="button"
-          className="btn"
-          data-testid="jump-to-current-city-btn"
-          onClick={jumpToCurrentCity}
-          aria-label={`Jump to current city: ${LOCATIONS[activePlayer.currentLocationId]?.name ?? activePlayer.currentLocationId}`}
-        >
-          My City
-        </button>
+      <div className="world-map__hud" data-testid="map-hud">
+        <div className="world-map__year" role="status" aria-live="polite" aria-label={`Current year ${activePlayer.currentYear}`}>
+          <span className="world-map__year-label">Current year</span>
+          <strong className="world-map__year-value" data-testid="current-year-display">
+            {activePlayer.currentYear}
+          </strong>
+        </div>
+        <div className="world-map__controls">
+          <button type="button" className="btn" onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.5))} aria-label="Zoom in">
+            +
+          </button>
+          <button type="button" className="btn" onClick={() => setZoom((z) => Math.max(MIN_ZOOM, z - 0.5))} aria-label="Zoom out">
+            −
+          </button>
+          <button type="button" className="btn" onClick={resetView} aria-label="Reset map view">
+            Reset view
+          </button>
+          <button
+            type="button"
+            className="btn"
+            data-testid="jump-to-current-city-btn"
+            onClick={jumpToCurrentCity}
+            aria-label={`Jump to current city: ${LOCATIONS[activePlayer.currentLocationId]?.name ?? activePlayer.currentLocationId}`}
+          >
+            My City
+          </button>
+        </div>
       </div>
       <svg
         id="world-map-surface"

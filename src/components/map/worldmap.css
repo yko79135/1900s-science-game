@@ -8,20 +8,26 @@
   overflow: hidden;
 }
 
-.world-map__controls {
-  position: absolute;
-  top: 5.1rem;
-  right: 0.6rem;
-  z-index: 2;
-  display: flex;
-  gap: 0.35rem;
-}
-
-.world-map__year {
+.world-map__hud {
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
   z-index: 3;
+  display: flex;
+  max-width: calc(100% - 1.2rem);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+}
+
+.world-map__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.world-map__year {
   display: flex;
   min-width: 8.4rem;
   flex-direction: column;
