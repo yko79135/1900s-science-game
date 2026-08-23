@@ -1,9 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import type { GameState } from '../../types';
 import type { StoryAction } from '../../types/story';
 import { CHARACTERS } from '../../data/content';
 import { getActiveStoryView } from '../../engine/story';
-import { buildStoryImagePrompt, requestStoryImage } from '../../engine/storyImage';
+import {
+  removeCachedStoryImage,
+  requestStoryImage,
+  storyImageCacheKey,
+} from '../../engine/storyImage';
+import { buildStoryImagePrompt } from '../../engine/storyImagePrompt';
 import '../../styles/story.css';
 
 export interface StoryScreenProps {
@@ -15,13 +20,28 @@ export function StoryScreen({ state, dispatch }: StoryScreenProps) {
   const view = getActiveStoryView(state);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [imageStatus, setImageStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [retryRequest, setRetryRequest] = useState({ cacheKey: '', count: 0 });
 
   const character = view ? CHARACTERS[view.player.characterId] : null;
-  const prompt = useMemo(() => {
-    if (!view || !character) return '';
-    return buildStoryImagePrompt(view.variant.image, character);
-  }, [view?.scene.id, view?.variant.id, view?.player.currentYear, character?.id]);
+  const imageContext = view
+    ? { scene: view.scene, variant: view.variant, player: view.player, cacheKey: storyImageCacheKey(view.scene, view.variant, view.player) }
+    : null;
+  const visibleCharacters = view
+    ? (view.variant.image.characters ?? [view.player.characterId]).map((id) => CHARACTERS[id]).filter(Boolean)
+    : [];
+  const prompt = view
+    ? buildStoryImagePrompt(view.variant.image, visibleCharacters, { sceneYear: view.player.currentYear })
+    : '';
+  const cacheKey = imageContext?.cacheKey ?? '';
+  const loadCurrentImage = useEffectEvent((isCancelled: () => boolean, forceRefresh: boolean) => {
+    if (!imageContext) return;
+    void requestStoryImage(imageContext.scene, imageContext.variant, imageContext.player, { forceRefresh }).then((result) => {
+      if (isCancelled()) return;
+      setImageUrl(result?.url ?? null);
+      setImageStatus(result ? 'ready' : 'error');
+    });
+  });
 
   useEffect(() => {
     headingRef.current?.focus();
@@ -30,17 +50,16 @@ export function StoryScreen({ state, dispatch }: StoryScreenProps) {
   useEffect(() => {
     let cancelled = false;
     setImageUrl(null);
-    if (!view || !character) return () => undefined;
-    setImageLoading(true);
-    void requestStoryImage(view.scene, view.variant, view.player, character).then((result) => {
-      if (cancelled) return;
-      setImageUrl(result?.url ?? null);
-      setImageLoading(false);
-    });
+    if (!cacheKey) return () => undefined;
+    setImageStatus('loading');
+    loadCurrentImage(
+      () => cancelled,
+      retryRequest.cacheKey === cacheKey && retryRequest.count > 0,
+    );
     return () => {
       cancelled = true;
     };
-  }, [view?.scene.id, view?.variant.id, view?.player.currentYear, character?.id]);
+  }, [cacheKey, retryRequest]);
 
   if (!view || !character) return null;
 
@@ -54,17 +73,44 @@ export function StoryScreen({ state, dispatch }: StoryScreenProps) {
   return (
     <main className="story-screen" aria-live="polite">
       <section className="story-frame" aria-label={`${view.variant.title} story scene`}>
-        <div className="story-art" role="img" aria-label={view.variant.image.alt}>
+        <div className="story-art" role="img" aria-label={view.variant.image.alt} aria-busy={imageStatus === 'loading'}>
           {imageUrl ? (
-            <img className="story-art__image" src={imageUrl} alt={view.variant.image.alt} />
+            <img
+              className="story-art__image"
+              src={imageUrl}
+              alt={view.variant.image.alt}
+              onError={() => {
+                void removeCachedStoryImage(cacheKey);
+                setImageUrl(null);
+                setImageStatus('error');
+              }}
+            />
           ) : (
-            <div className="story-art__fallback" data-loading={imageLoading ? 'true' : 'false'}>
+            <div className="story-art__fallback" data-loading={imageStatus === 'loading' ? 'true' : 'false'}>
               <div className="story-art__year">{view.variant.yearLabel ?? view.player.currentYear}</div>
               <div className="story-art__monogram" aria-hidden="true">
                 {character.monogram}
               </div>
               <div className="story-art__setting">{view.variant.image.setting}</div>
-              <div className="story-art__mood">{imageLoading ? 'Preparing illustration…' : view.variant.image.mood}</div>
+              <div className="story-art__mood" role="status">
+                {imageStatus === 'loading'
+                  ? 'Painting this historical moment…'
+                  : imageStatus === 'error'
+                    ? 'Live illustration unavailable. The story continues with archival artwork.'
+                    : view.variant.image.mood}
+              </div>
+              {imageStatus === 'error' && (
+                <button
+                  type="button"
+                  className="story-art__retry"
+                  onClick={() => setRetryRequest((current) => ({
+                    cacheKey,
+                    count: current.cacheKey === cacheKey ? current.count + 1 : 1,
+                  }))}
+                >
+                  Retry illustration
+                </button>
+              )}
             </div>
           )}
         </div>

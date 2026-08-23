@@ -26,6 +26,25 @@ npm run e2e       # end-to-end playthrough (Playwright)
 npm run lint      # oxlint
 ```
 
+## Live story illustrations
+
+Major story scenes can request a historical illustration from the same-origin
+`POST /api/story-image` Vercel Function. The browser sends only the scene and
+variant identifiers plus bounded timeline context. The function resolves the
+authoritative `StoryImageSpec`, applies the campaign-wide PG-13 prompt rules,
+and calls `openai/gpt-image-2` through Vercel AI Gateway. It never accepts a
+browser-authored prompt.
+
+Vercel deployments use the automatically managed `VERCEL_OIDC_TOKEN` by
+default. If OIDC is not enabled for the project, configure
+`AI_GATEWAY_API_KEY` as a server-only Vercel environment variable. Never add a
+`VITE_`-prefixed gateway credential.
+
+Generated data URLs are kept outside game saves: an in-memory map prevents
+duplicate calls during a session and Cache Storage persists exact story
+contexts across refreshes. If generation, storage, or image decoding fails,
+the fixed-size fallback artwork remains visible and gameplay continues.
+
 ## Architecture
 
 - **`src/types/`** — all core domain types (`Character`, `Location`,
