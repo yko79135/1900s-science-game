@@ -246,6 +246,7 @@ function LocationMarker({
   onSelect: () => void;
 }) {
   const [x, y] = project(location.coordinates.lon, location.coordinates.lat);
+  const labelWidth = location.name.length * 4.9 + 14;
   const reachable = meta.travel.allowed;
   const classNames = [
     'world-map__location',
@@ -276,26 +277,20 @@ function LocationMarker({
       }}
     >
       <title>{location.name}</title>
-      <circle r={10} className="world-map__location-hit-area" />
-      {meta.canonical && <circle r={7.5} className="world-map__location-halo" />}
-      <circle r={4.2} className="world-map__location-dot" />
+      <circle r={14} className="world-map__location-hit-area" />
+      {meta.canonical && <circle r={10} className="world-map__location-halo" />}
+      <circle r={6} className="world-map__location-dot" />
       {occupants.map((p, i) => {
         const char = getCharacterColorSafe(p.characterId);
         const angle = (i / Math.max(occupants.length, 1)) * Math.PI * 2;
-        const ox = Math.cos(angle) * 8;
-        const oy = Math.sin(angle) * 8;
-        return <circle key={p.id} cx={ox} cy={oy} r={3.4} fill={char} className="world-map__token" />;
+        const ox = Math.cos(angle) * 10.5;
+        const oy = Math.sin(angle) * 10.5;
+        return <circle key={p.id} cx={ox} cy={oy} r={4.1} fill={char} className="world-map__token" />;
       })}
-      {isCurrent && <circle r={9} className="world-map__current-ring" />}
+      {isCurrent && <circle r={12} className="world-map__current-ring" />}
       <g className="world-map__label" aria-hidden="true">
-        <rect
-          x={-(location.name.length * 3.5 + 8) / 2}
-          y={-19}
-          width={location.name.length * 3.5 + 8}
-          height={11}
-          rx={2.5}
-        />
-        <text x={0} y={-11.5} textAnchor="middle">
+        <rect x={-labelWidth / 2} y={-30} width={labelWidth} height={17} rx={3} />
+        <text x={0} y={-18.2} textAnchor="middle">
           {location.name}
         </text>
       </g>
