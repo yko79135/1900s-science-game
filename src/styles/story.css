@@ -88,6 +88,24 @@
   font-style: italic;
 }
 
+.story-art__retry {
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(12, 15, 20, 0.72);
+  color: #f3ead9;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.story-art__retry:hover,
+.story-art__retry:focus-visible {
+  border-color: var(--brass-bright);
+  background: rgba(12, 15, 20, 0.92);
+}
+
 .story-copy {
   display: flex;
   flex-direction: column;
