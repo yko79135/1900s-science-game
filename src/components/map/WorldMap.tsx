@@ -230,6 +230,7 @@ function LocationMarker({
     meta.active ? 'is-active-era' : 'is-inactive-era',
     reachable ? 'is-reachable' : 'is-locked',
     selected ? 'is-selected' : '',
+    isCurrent ? 'is-current' : '',
     meta.canonical ? 'is-canonical' : '',
   ]
     .filter(Boolean)
@@ -253,6 +254,7 @@ function LocationMarker({
       }}
     >
       <title>{location.name}</title>
+      <circle r={10} className="world-map__location-hit-area" />
       {meta.canonical && <circle r={7.5} className="world-map__location-halo" />}
       <circle r={4.2} className="world-map__location-dot" />
       {occupants.map((p, i) => {
@@ -263,9 +265,18 @@ function LocationMarker({
         return <circle key={p.id} cx={ox} cy={oy} r={3.4} fill={char} className="world-map__token" />;
       })}
       {isCurrent && <circle r={9} className="world-map__current-ring" />}
-      <text x={6} y={-6} className="world-map__label">
-        {location.name}
-      </text>
+      <g className="world-map__label" aria-hidden="true">
+        <rect
+          x={-(location.name.length * 3.5 + 8) / 2}
+          y={-19}
+          width={location.name.length * 3.5 + 8}
+          height={11}
+          rx={2.5}
+        />
+        <text x={0} y={-11.5} textAnchor="middle">
+          {location.name}
+        </text>
+      </g>
     </g>
   );
 }
