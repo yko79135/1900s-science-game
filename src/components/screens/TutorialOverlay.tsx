@@ -6,8 +6,8 @@ const STEPS = [
     body: 'Click or tab to a location to see why it matters, who is connected to it, and what it costs to travel there. Your character token shows where you are now.',
   },
   {
-    title: 'Four Time Actions per Chapter',
-    body: 'Each Life Chapter gives you four Time actions. Spend them on research, work, travel, rest, advocacy, or building institutions — then end the chapter to advance the story.',
+    title: 'Three Time Actions per Year',
+    body: 'Every three Time actions advance the calendar by one year. Each Life Chapter includes three actions for every year it covers; spend them on research, work, travel, rest, advocacy, or building institutions, or end the chapter early to advance the story.',
   },
   {
     title: 'Research Projects',

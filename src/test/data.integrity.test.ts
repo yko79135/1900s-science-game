@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CHARACTER_LIST, CHAPTERS_BY_CHARACTER, PROJECTS_BY_CHARACTER, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getChapter } from '../data/content';
 import { MAP_REGION_GROUPS, detailMapViewForLocation } from '../components/map/mapViews';
 import { LIFE_CHAPTER_ORDER } from '../types';
+import { chapterActionBudget, TIME_ACTIONS_PER_YEAR } from '../engine/rules';
 
 describe('character roster', () => {
   it('has exactly twelve characters', () => {
@@ -64,6 +65,31 @@ describe('character roster', () => {
         expect(project.sourceId).toBeTruthy();
       }
     }
+  });
+
+  it('every project can be reached and attempted within its chapter timeline', () => {
+    const timelineProblems: string[] = [];
+
+    for (const character of CHARACTER_LIST) {
+      for (const project of PROJECTS_BY_CHARACTER[character.id]) {
+        const chapter = getChapter(character.id, project.chapterId);
+        if (!chapter) {
+          timelineProblems.push(`${project.id}: missing chapter ${project.chapterId}`);
+          continue;
+        }
+        if (project.earliestYear > chapter.yearEnd) {
+          timelineProblems.push(`${project.id}: earliest year ${project.earliestYear} is after ${chapter.label} ends in ${chapter.yearEnd}`);
+          continue;
+        }
+
+        const actionsToEarliestYear = Math.max(0, project.earliestYear - chapter.yearStart) * TIME_ACTIONS_PER_YEAR;
+        if (actionsToEarliestYear + project.timeCost > chapterActionBudget(chapter.yearStart, chapter.yearEnd)) {
+          timelineProblems.push(`${project.id}: not enough Time remains to attempt it in ${project.earliestYear}`);
+        }
+      }
+    }
+
+    expect(timelineProblems).toEqual([]);
   });
 });
 

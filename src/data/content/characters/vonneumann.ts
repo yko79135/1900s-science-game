@@ -116,7 +116,7 @@ export const vonNeumannContent: CharacterContent = {
     {
       id: 'vonneumann-quantum-foundations',
       characterId: 'vonneumann',
-      chapterId: 'entry',
+      chapterId: 'breakthrough',
       name: 'Mathematical Foundations of Quantum Mechanics',
       field: 'Mathematical Physics',
       description: 'Formalizing quantum mechanics rigorously in terms of operators on Hilbert space.',

@@ -1,11 +1,12 @@
 import type { PlayerState } from '../../types';
 import { LIFE_CHAPTER_LABELS } from '../../types';
 import { LOCATIONS } from '../../data/content';
-import { currentChapter, getCharacter } from '../../engine/rules';
+import { chapterActionBudget, currentChapter, getCharacter } from '../../engine/rules';
 
 export function CharacterPanel({ player }: { player: PlayerState }) {
   const character = getCharacter(player.characterId);
   const chapter = currentChapter(player);
+  const totalTimeActions = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
   const location = LOCATIONS[player.currentLocationId];
   const r = player.resources;
 
@@ -33,7 +34,7 @@ export function CharacterPanel({ player }: { player: PlayerState }) {
       </p>
 
       <dl className="resource-grid">
-        <ResourceStat label="Time" value={`${player.timeActionsRemaining} / 4`} />
+        <ResourceStat label="Time" value={`${player.timeActionsRemaining} / ${totalTimeActions}`} />
         <ResourceStat label="Funds" value={r.funds} />
         <ResourceStat label="Wellbeing" value={r.wellbeing} />
         <ResourceStat label="Health" value={r.health} />

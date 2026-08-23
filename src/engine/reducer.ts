@@ -15,6 +15,7 @@ import {
   currentChapterId,
   evaluateTravel,
   applyCenturyDeadlines,
+  chapterActionBudget,
   eventsForChapter,
   getCharacter,
   yearForActionsSpent,
@@ -58,7 +59,7 @@ export function createPlayer(characterId: CharacterId, playerId: string, gameLen
     currentLocationId: startLocationId,
     currentYear: startChapter.yearStart,
     chapterIndex,
-    timeActionsRemaining: 4,
+    timeActionsRemaining: chapterActionBudget(startChapter.yearStart, startChapter.yearEnd),
     resources,
     completedProjectIds: [],
     seenContextCardIds: [],
@@ -123,12 +124,13 @@ function clamp(n: number, min: number, max: number): number {
 /**
  * Advances a player's Time actions and in-chapter year together. Call this
  * whenever an action spends Time, so later-chapter projects whose earliest
- * plausible year falls after the chapter's start become reachable as the
- * chapter's four Time actions are spent.
+ * plausible year falls after the chapter's start become reachable after
+ * three Time actions are spent for each elapsed year.
  */
 function spendTime(player: PlayerState, cost: number): Pick<PlayerState, 'timeActionsRemaining' | 'currentYear'> {
   const chapter = currentChapter(player);
-  const actionsSpentBefore = 4 - player.timeActionsRemaining;
+  const chapterBudget = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
+  const actionsSpentBefore = chapterBudget - player.timeActionsRemaining;
   const actionsSpentAfter = actionsSpentBefore + cost;
   return {
     timeActionsRemaining: player.timeActionsRemaining - cost,
@@ -547,7 +549,7 @@ function endChapter(state: GameState, playerId: string): GameState {
       ...p,
       chapterIndex: p.chapterIndex + 1,
       currentYear: nextChapter.yearStart,
-      timeActionsRemaining: 4,
+      timeActionsRemaining: chapterActionBudget(nextChapter.yearStart, nextChapter.yearEnd),
       abilityUsedThisChapter: false,
       routeHistory: [...p.routeHistory, { locationId: p.currentLocationId, year: nextChapter.yearStart, chapterId: nextChapter.id }],
     }));

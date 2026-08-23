@@ -67,11 +67,11 @@ npm run lint      # oxlint
   only allowed to interact (via a shared collaborator or an ability like
   Bohr's Copenhagen invitation) when their lifespans and the specific
   collaborator's active window genuinely overlap.
-- **In-chapter time passes as Time actions are spent.** A chapter's year
-  range is spread evenly across its four Time actions, so a project whose
-  earliest plausible date falls partway through a chapter becomes reachable
-  as the chapter progresses, rather than being either instantly available or
-  permanently locked.
+- **In-chapter time passes as Time actions are spent.** Every three Time
+  actions advance the calendar by one year, and each chapter includes three
+  actions for every year in its inclusive range. A project whose earliest
+  plausible date falls partway through a chapter therefore becomes reachable
+  without consuming the Time available during the chapter's final year.
 - **Canon scoring is additive, not a gate.** Completing a project awards its
   base Legacy regardless of place/date; a Canon bonus (+3 documented in
   place and year, +1 near-canon or Plausible, +0 Speculative) is added on

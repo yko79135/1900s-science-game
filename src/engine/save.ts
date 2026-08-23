@@ -1,5 +1,7 @@
 import type { CompendiumDiscoveryState, GameState, SaveFile, SettingsState } from '../types';
 import { SCHEMA_VERSION } from '../types';
+import { CHAPTERS_BY_CHARACTER } from '../data/content';
+import { chapterActionBudget } from './rules';
 
 const KEYS = {
   currentGame: 'shapeOfACentury.currentGame',
@@ -18,16 +20,35 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 /**
- * Migrates a raw saved payload to the current schema. Since this is the
- * first shipped schema version, unknown/newer versions are rejected rather
- * than guessed at; future versions should add real migration steps here.
+ * Migrates a raw saved payload to the current schema. Unknown/newer versions
+ * are rejected rather than guessed at.
  */
 export function migrateSave(raw: unknown): GameState | null {
   if (!raw || typeof raw !== 'object') return null;
   const save = raw as Partial<SaveFile>;
   if (!save.game || typeof save.game.schemaVersion !== 'number') return null;
   if (save.game.schemaVersion > SCHEMA_VERSION) return null; // From a newer version we don't understand.
-  return save.game as GameState;
+  let game = save.game as GameState;
+
+  if (game.schemaVersion < 2) {
+    game = {
+      ...game,
+      schemaVersion: 2,
+      players: game.players.map((player) => {
+        const chapter = CHAPTERS_BY_CHARACTER[player.characterId]?.[player.chapterIndex];
+        if (!chapter || player.finished) return player;
+
+        const currentYear = Math.max(chapter.yearStart, Math.min(chapter.yearEnd, player.currentYear));
+        return {
+          ...player,
+          currentYear,
+          timeActionsRemaining: chapterActionBudget(currentYear, chapter.yearEnd),
+        };
+      }),
+    };
+  }
+
+  return game;
 }
 
 export function saveCurrentGame(game: GameState): void {

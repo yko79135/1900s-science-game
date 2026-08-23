@@ -38,15 +38,22 @@ export function currentChapterId(player: PlayerState) {
   return LIFE_CHAPTER_ORDER[player.chapterIndex];
 }
 
+export const TIME_ACTIONS_PER_YEAR = 3;
+
+/** Each year in a chapter, including its final year, has three Time actions. */
+export function chapterActionBudget(chapterYearStart: number, chapterYearEnd: number): number {
+  const inclusiveYearCount = Math.max(1, chapterYearEnd - chapterYearStart + 1);
+  return inclusiveYearCount * TIME_ACTIONS_PER_YEAR;
+}
+
 /**
- * A chapter's year range is spread evenly across its four Time actions, so
- * that a project whose earliest plausible year falls partway through a
- * chapter becomes reachable once enough of the chapter's actions are spent.
+ * Three spent Time actions advance the calendar by one year. The result is
+ * clamped to the chapter's final year so that its last three actions can be
+ * used on projects and other work dated to that year.
  */
 export function yearForActionsSpent(chapterYearStart: number, chapterYearEnd: number, actionsSpent: number): number {
-  const span = chapterYearEnd - chapterYearStart;
-  const fraction = Math.min(1, Math.max(0, actionsSpent / 4));
-  return Math.round(chapterYearStart + fraction * span);
+  const elapsedYears = Math.floor(Math.max(0, actionsSpent) / TIME_ACTIONS_PER_YEAR);
+  return Math.min(chapterYearEnd, chapterYearStart + elapsedYears);
 }
 
 export function currentChapter(player: PlayerState) {

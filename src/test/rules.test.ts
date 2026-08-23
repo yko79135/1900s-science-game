@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   applyCenturyDeadlines,
   canAttemptProject,
+  chapterActionBudget,
   charactersOverlap,
   computeCanonScore,
   computeFinalScore,
@@ -69,10 +70,17 @@ describe('travel and living costs', () => {
 });
 
 describe('in-chapter year progression', () => {
-  it('spreads a chapter’s years evenly across its four Time actions', () => {
+  it('advances one year for every three Time actions', () => {
     expect(yearForActionsSpent(1895, 1903, 0)).toBe(1895);
-    expect(yearForActionsSpent(1895, 1903, 2)).toBe(1899);
-    expect(yearForActionsSpent(1895, 1903, 4)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 2)).toBe(1895);
+    expect(yearForActionsSpent(1895, 1903, 3)).toBe(1896);
+    expect(yearForActionsSpent(1895, 1903, 24)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 27)).toBe(1903);
+  });
+
+  it('includes three usable Time actions in the final year', () => {
+    expect(chapterActionBudget(1895, 1903)).toBe(27);
+    expect(chapterActionBudget(1903, 1903)).toBe(3);
   });
 
   it('spending Time actions lets an otherwise too-early project become reachable within the same chapter', () => {
@@ -85,14 +93,18 @@ describe('in-chapter year progression', () => {
           currentLocationId: 'paris',
           chapterIndex: 2, // entry: 1895-1902
           currentYear: 1895,
+          timeActionsRemaining: chapterActionBudget(1895, 1902),
           resources: { ...game.players[0].resources, tokens: { ...game.players[0].resources.tokens, evidence: 2 } },
         },
       ],
     };
     const project = getProjectById('curie-radiation-measurement')!; // earliestYear 1896
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(false);
-    // Spend two Time actions (e.g. resting), advancing the in-chapter year.
+    // The project stays locked for two actions and unlocks on the third.
     game = gameReducer(game, { type: 'REST_AND_FAMILY' });
+    game = gameReducer(game, { type: 'REST_AND_FAMILY' });
+    expect(game.players[0].currentYear).toBe(1895);
+    expect(canAttemptProject(game, game.players[0], project).eligible).toBe(false);
     game = gameReducer(game, { type: 'REST_AND_FAMILY' });
     expect(game.players[0].currentYear).toBeGreaterThanOrEqual(1896);
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(true);
