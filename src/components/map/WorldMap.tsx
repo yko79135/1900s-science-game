@@ -15,14 +15,53 @@ export interface WorldMapProps {
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
 
+const MAP_VIEWS = [
+  { id: 'europe', label: 'Europe', regions: ['Europe'] },
+  { id: 'america', label: 'America', regions: ['United States'] },
+  { id: 'south-asia', label: 'South Asia', regions: ['South Asia'] },
+] as const;
+
+type MapView = (typeof MAP_VIEWS)[number];
+
+function viewForLocation(locationId: string): MapView {
+  const region = LOCATIONS[locationId].region;
+  return MAP_VIEWS.find((view) => view.regions.some((candidate) => candidate === region)) ?? MAP_VIEWS[0];
+}
+
 export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLocation }: WorldMapProps) {
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [activeViewId, setActiveViewId] = useState<MapView['id']>(() => viewForLocation(activePlayer.currentLocationId).id);
   const dragState = useRef<{ startX: number; startY: number; panX: number; panY: number } | null>(null);
 
   const activeCharacter = getCharacter(activePlayer.characterId);
 
   const locations = useMemo(() => Object.values(LOCATIONS), []);
+  const activeView = MAP_VIEWS.find((view) => view.id === activeViewId) ?? MAP_VIEWS[0];
+  const visibleLocations = useMemo(
+    () => locations.filter((location) => activeView.regions.some((region) => region === location.region)),
+    [locations, activeView],
+  );
+
+  const mapViewport = useMemo(() => {
+    const points = visibleLocations.map((location) => project(location.coordinates.lon, location.coordinates.lat));
+    const xs = points.map(([x]) => x);
+    const ys = points.map(([, y]) => y);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+    const contentWidth = Math.max(maxX - minX, 80);
+    const contentHeight = Math.max(maxY - minY, 80);
+    const paddingX = Math.max(contentWidth * 0.18, 35);
+    const paddingY = Math.max(contentHeight * 0.28, 35);
+    return {
+      x: minX - paddingX,
+      y: minY - paddingY,
+      width: contentWidth + paddingX * 2,
+      height: contentHeight + paddingY * 2,
+    };
+  }, [visibleLocations]);
 
   const locationMeta = useMemo(() => {
     return new Map(
@@ -62,8 +101,34 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
     setPan({ x: 0, y: 0 });
   }
 
+  function selectView(view: MapView) {
+    setActiveViewId(view.id);
+    resetView();
+  }
+
+  function isInActiveView(locationId: string) {
+    return activeView.regions.some((region) => region === LOCATIONS[locationId].region);
+  }
+
+  const viewCenterX = mapViewport.x + mapViewport.width / 2;
+  const viewCenterY = mapViewport.y + mapViewport.height / 2;
+
   return (
     <div className="world-map" role="group" aria-label="Interactive world map game board">
+      <div className="world-map__tabs" role="tablist" aria-label="Map region">
+        {MAP_VIEWS.map((view) => (
+          <button
+            key={view.id}
+            type="button"
+            role="tab"
+            aria-selected={activeView.id === view.id}
+            className={`world-map__tab${activeView.id === view.id ? ' is-active' : ''}`}
+            onClick={() => selectView(view)}
+          >
+            {view.label}
+          </button>
+        ))}
+      </div>
       <div className="world-map__controls">
         <button type="button" className="btn" onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.5))} aria-label="Zoom in">
           +
@@ -76,7 +141,7 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
         </button>
       </div>
       <svg
-        viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+        viewBox={`${mapViewport.x} ${mapViewport.y} ${mapViewport.width} ${mapViewport.height}`}
         className="world-map__svg"
         onWheel={handleWheel}
         onPointerDown={handlePointerDown}
@@ -84,10 +149,10 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
         role="img"
-        aria-label="World map showing historical scientific institutions and travel routes"
+        aria-label={`${activeView.label} map showing historical scientific institutions and travel routes`}
       >
         <rect x={0} y={0} width={MAP_WIDTH} height={MAP_HEIGHT} className="world-map__ocean" />
-        <g transform={`translate(${pan.x * zoom + (MAP_WIDTH * (1 - zoom)) / 2}, ${pan.y * zoom + (MAP_HEIGHT * (1 - zoom)) / 2}) scale(${zoom})`}>
+        <g transform={`translate(${pan.x * zoom + viewCenterX * (1 - zoom)}, ${pan.y * zoom + viewCenterY * (1 - zoom)}) scale(${zoom})`}>
           <path d={graticulePath} className="world-map__graticule" />
           <path d={landPath} className="world-map__land" />
 
@@ -98,6 +163,7 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
               <g key={`trail-${p.id}`} className="world-map__trail">
                 {p.routeHistory.slice(1).map((stop, i) => {
                   const prev = p.routeHistory[i];
+                  if (!isInActiveView(prev.locationId) || !isInActiveView(stop.locationId)) return null;
                   const [x1, y1] = project(LOCATIONS[prev.locationId].coordinates.lon, LOCATIONS[prev.locationId].coordinates.lat);
                   const [x2, y2] = project(LOCATIONS[stop.locationId].coordinates.lon, LOCATIONS[stop.locationId].coordinates.lat);
                   return (
@@ -118,13 +184,14 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
           <g className="world-map__canon-route">
             {activeCharacter.canonicalRoute.slice(1).map((stop: (typeof activeCharacter.canonicalRoute)[number], i: number) => {
               const prev = activeCharacter.canonicalRoute[i];
+              if (!isInActiveView(prev.locationId) || !isInActiveView(stop.locationId)) return null;
               const [x1, y1] = project(LOCATIONS[prev.locationId].coordinates.lon, LOCATIONS[prev.locationId].coordinates.lat);
               const [x2, y2] = project(LOCATIONS[stop.locationId].coordinates.lon, LOCATIONS[stop.locationId].coordinates.lat);
               return <path key={i} d={curvedPath(x1, y1, x2, y2)} className="world-map__canon-line" />;
             })}
           </g>
 
-          {locations.map((loc) => (
+          {visibleLocations.map((loc) => (
             <LocationMarker
               key={loc.id}
               location={loc}
