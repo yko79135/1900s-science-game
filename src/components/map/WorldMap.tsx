@@ -3,7 +3,7 @@ import type { CharacterId, Location, PlayerState } from '../../types';
 import { LOCATIONS } from '../../data/content';
 import { evaluateTravel, getCharacter, isCanonicalDestination, isLocationActiveForYear } from '../../engine/rules';
 import { MAP_HEIGHT, MAP_WIDTH, curvedPath, graticulePath, landPath, project } from './geo';
-import { MAP_REGION_GROUPS, MAP_VIEWS, overviewMapViewForLocation, type MapRegionGroup, type MapView } from './mapViews';
+import { detailMapViewForLocation, MAP_REGION_GROUPS, MAP_VIEWS, overviewMapViewForLocation, type MapRegionGroup, type MapView } from './mapViews';
 import './worldmap.css';
 
 export interface WorldMapProps {
@@ -15,6 +15,31 @@ export interface WorldMapProps {
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
+const CITY_FOCUS_ZOOM = 2.5;
+
+function viewportForLocations(locations: Location[]) {
+  const points = locations.map((location) => project(location.coordinates.lon, location.coordinates.lat));
+  const xs = points.map(([x]) => x);
+  const ys = points.map(([, y]) => y);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const singleLocation = points.length === 1;
+  const contentWidth = singleLocation ? 80 : Math.max(maxX - minX, 4);
+  const contentHeight = singleLocation ? 80 : Math.max(maxY - minY, 4);
+  const minimumPadding = singleLocation ? 35 : 4;
+  const paddingX = Math.max(contentWidth * 0.18, minimumPadding);
+  const paddingY = Math.max(contentHeight * 0.28, minimumPadding);
+  const centerX = (minX + maxX) / 2;
+  const centerY = (minY + maxY) / 2;
+  return {
+    x: centerX - contentWidth / 2 - paddingX,
+    y: centerY - contentHeight / 2 - paddingY,
+    width: contentWidth + paddingX * 2,
+    height: contentHeight + paddingY * 2,
+  };
+}
 
 export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLocation }: WorldMapProps) {
   const [zoom, setZoom] = useState(1);
@@ -32,29 +57,7 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
     [locations, activeView],
   );
 
-  const mapViewport = useMemo(() => {
-    const points = visibleLocations.map((location) => project(location.coordinates.lon, location.coordinates.lat));
-    const xs = points.map(([x]) => x);
-    const ys = points.map(([, y]) => y);
-    const minX = Math.min(...xs);
-    const maxX = Math.max(...xs);
-    const minY = Math.min(...ys);
-    const maxY = Math.max(...ys);
-    const singleLocation = points.length === 1;
-    const contentWidth = singleLocation ? 80 : Math.max(maxX - minX, 4);
-    const contentHeight = singleLocation ? 80 : Math.max(maxY - minY, 4);
-    const minimumPadding = singleLocation ? 35 : 4;
-    const paddingX = Math.max(contentWidth * 0.18, minimumPadding);
-    const paddingY = Math.max(contentHeight * 0.28, minimumPadding);
-    const centerX = (minX + maxX) / 2;
-    const centerY = (minY + maxY) / 2;
-    return {
-      x: centerX - contentWidth / 2 - paddingX,
-      y: centerY - contentHeight / 2 - paddingY,
-      width: contentWidth + paddingX * 2,
-      height: contentHeight + paddingY * 2,
-    };
-  }, [visibleLocations]);
+  const mapViewport = useMemo(() => viewportForLocations(visibleLocations), [visibleLocations]);
 
   const locationMeta = useMemo(() => {
     return new Map(
@@ -101,6 +104,22 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
 
   function selectRegion(region: MapRegionGroup) {
     selectView(region.views[0]);
+  }
+
+  function jumpToCurrentCity() {
+    const locationId = activePlayer.currentLocationId;
+    const location = LOCATIONS[locationId];
+    const targetView = detailMapViewForLocation(locationId);
+    const targetLocations = locations.filter((candidate) => targetView.locationIds.includes(candidate.id));
+    const targetViewport = viewportForLocations(targetLocations);
+    const targetCenterX = targetViewport.x + targetViewport.width / 2;
+    const targetCenterY = targetViewport.y + targetViewport.height / 2;
+    const [locationX, locationY] = project(location.coordinates.lon, location.coordinates.lat);
+
+    setActiveViewId(targetView.id);
+    setZoom(CITY_FOCUS_ZOOM);
+    setPan({ x: targetCenterX - locationX, y: targetCenterY - locationY });
+    onSelectLocation(locationId);
   }
 
   function isInActiveView(locationId: string) {
@@ -156,6 +175,15 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
         </button>
         <button type="button" className="btn" onClick={resetView} aria-label="Reset map view">
           Reset view
+        </button>
+        <button
+          type="button"
+          className="btn"
+          data-testid="jump-to-current-city-btn"
+          onClick={jumpToCurrentCity}
+          aria-label={`Jump to current city: ${LOCATIONS[activePlayer.currentLocationId]?.name ?? activePlayer.currentLocationId}`}
+        >
+          My City
         </button>
       </div>
       <svg
