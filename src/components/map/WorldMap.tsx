@@ -166,6 +166,12 @@ export function WorldMap({ players, activePlayer, selectedLocationId, onSelectLo
           </div>
         )}
       </div>
+      <div className="world-map__year" role="status" aria-live="polite" aria-label={`Current year ${activePlayer.currentYear}`}>
+        <span className="world-map__year-label">Current year</span>
+        <strong className="world-map__year-value" data-testid="current-year-display">
+          {activePlayer.currentYear}
+        </strong>
+      </div>
       <div className="world-map__controls">
         <button type="button" className="btn" onClick={() => setZoom((z) => Math.min(MAX_ZOOM, z + 0.5))} aria-label="Zoom in">
           +
