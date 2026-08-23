@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   applyCenturyDeadlines,
+  ACTIONS_PER_TURN,
   canAttemptProject,
   chapterActionBudget,
   charactersOverlap,
@@ -57,6 +58,7 @@ describe('travel and living costs', () => {
     const after = gameReducer(game, { type: 'TRAVEL', destinationId: 'paris' }).players[0];
     expect(after.resources.funds).toBe(before.resources.funds - LOCATIONS.paris.travelCost);
     expect(after.timeActionsRemaining).toBe(before.timeActionsRemaining - 1);
+    expect(after.turnActionsRemaining).toBe(before.turnActionsRemaining - 1);
     expect(after.currentLocationId).toBe('paris');
   });
 
@@ -107,17 +109,16 @@ describe('restarting a game', () => {
 });
 
 describe('in-chapter year progression', () => {
-  it('advances one year for every three Time actions', () => {
+  it('advances one year for every calendar action', () => {
     expect(yearForActionsSpent(1895, 1903, 0)).toBe(1895);
-    expect(yearForActionsSpent(1895, 1903, 2)).toBe(1895);
-    expect(yearForActionsSpent(1895, 1903, 3)).toBe(1896);
-    expect(yearForActionsSpent(1895, 1903, 24)).toBe(1903);
-    expect(yearForActionsSpent(1895, 1903, 27)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 1)).toBe(1896);
+    expect(yearForActionsSpent(1895, 1903, 8)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 9)).toBe(1903);
   });
 
-  it('includes three usable Time actions in the final year', () => {
-    expect(chapterActionBudget(1895, 1903)).toBe(27);
-    expect(chapterActionBudget(1903, 1903)).toBe(3);
+  it('includes one calendar action for every year in the chapter', () => {
+    expect(chapterActionBudget(1895, 1903)).toBe(9);
+    expect(chapterActionBudget(1903, 1903)).toBe(1);
   });
 
   it('spending Time actions lets an otherwise too-early project become reachable within the same chapter', () => {
@@ -137,14 +138,38 @@ describe('in-chapter year progression', () => {
     };
     const project = getProjectById('curie-radiation-measurement')!; // earliestYear 1896
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(false);
-    // The project stays locked for two actions and unlocks on the third.
+    // One action advances the calendar to the project's earliest year.
     game = gameReducer(game, { type: 'REST_AND_FAMILY' });
-    game = gameReducer(game, { type: 'REST_AND_FAMILY' });
-    expect(game.players[0].currentYear).toBe(1895);
-    expect(canAttemptProject(game, game.players[0], project).eligible).toBe(false);
-    game = gameReducer(game, { type: 'REST_AND_FAMILY' });
-    expect(game.players[0].currentYear).toBeGreaterThanOrEqual(1896);
+    expect(game.players[0].currentYear).toBe(1896);
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(true);
+  });
+});
+
+describe('player turns', () => {
+  it('rotates after four action points are spent and resets the outgoing player', () => {
+    let game = createGame(['curie', 'noether'], 12);
+    const curieStartYear = game.players[0].currentYear;
+
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.activePlayerIndex).toBe(0);
+    expect(game.players[0].turnActionsRemaining).toBe(1);
+
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.activePlayerIndex).toBe(1);
+    expect(game.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
+    expect(game.players[0].currentYear).toBe(curieStartYear + 4);
+  });
+
+  it('allows a player to end a turn early', () => {
+    let game = createGame(['curie', 'noether'], 13);
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.players[0].turnActionsRemaining).toBe(3);
+
+    game = gameReducer(game, { type: 'END_TURN' });
+    expect(game.activePlayerIndex).toBe(1);
+    expect(game.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
   });
 });
 
@@ -286,6 +311,7 @@ describe('reducer: attempting and completing a project', () => {
           currentLocationId: 'bern',
           chapterIndex: 2, // entry
           currentYear: 1905,
+          timeActionsRemaining: chapterActionBudget(1905, 1909),
           resources: { ...game.players[0].resources, tokens: { ...game.players[0].resources.tokens, theory: 3 } },
         },
       ],
@@ -293,6 +319,8 @@ describe('reducer: attempting and completing a project', () => {
     game = gameReducer(game, { type: 'ATTEMPT_PROJECT', projectId: 'einstein-special-relativity' });
     const player = game.players[0];
     expect(player.completedProjectIds).toContain('einstein-special-relativity');
+    expect(player.currentYear).toBe(1906);
+    expect(player.turnActionsRemaining).toBe(2);
     expect(player.legacyPoints).toBeGreaterThan(0);
     expect(player.resources.tokens.theory).toBe(0);
     expect(game.knowledgeBoard.specialRelativity?.publishedByCharacterId).toBe('einstein');

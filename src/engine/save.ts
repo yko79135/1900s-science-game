@@ -1,7 +1,7 @@
 import type { CompendiumDiscoveryState, GameState, SaveFile, SettingsState } from '../types';
 import { SCHEMA_VERSION } from '../types';
 import { CHAPTERS_BY_CHARACTER } from '../data/content';
-import { chapterActionBudget } from './rules';
+import { ACTIONS_PER_TURN, chapterActionBudget } from './rules';
 
 const KEYS = {
   currentGame: 'shapeOfACentury.currentGame',
@@ -43,6 +43,27 @@ export function migrateSave(raw: unknown): GameState | null {
           ...player,
           currentYear,
           timeActionsRemaining: chapterActionBudget(currentYear, chapter.yearEnd),
+        };
+      }),
+    };
+  }
+
+  if (game.schemaVersion < 3) {
+    game = {
+      ...game,
+      schemaVersion: 3,
+      players: game.players.map((player) => {
+        const chapter = CHAPTERS_BY_CHARACTER[player.characterId]?.[player.chapterIndex];
+        if (!chapter || player.finished) {
+          return { ...player, turnActionsRemaining: ACTIONS_PER_TURN };
+        }
+
+        const currentYear = Math.max(chapter.yearStart, Math.min(chapter.yearEnd, player.currentYear));
+        return {
+          ...player,
+          currentYear,
+          timeActionsRemaining: chapterActionBudget(currentYear, chapter.yearEnd),
+          turnActionsRemaining: ACTIONS_PER_TURN,
         };
       }),
     };

@@ -271,6 +271,7 @@ export interface PlayerState {
   currentYear: number;
   chapterIndex: number; // 0..5 into LIFE_CHAPTER_ORDER
   timeActionsRemaining: number;
+  turnActionsRemaining: number;
   resources: PlayerResources;
   completedProjectIds: string[];
   seenContextCardIds: string[];
@@ -330,4 +331,4 @@ export interface CompendiumDiscoveryState {
   discoveredIds: string[];
 }
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;

@@ -9,6 +9,7 @@ import { LIFE_CHAPTER_ORDER, SCHEMA_VERSION } from '../types';
 import { CHAPTERS_BY_CHARACTER, COLLABORATORS, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getProjectById } from '../data/content';
 import {
   canAttemptProject,
+  ACTIONS_PER_TURN,
   computeProjectCompletion,
   crossoverFundsDiscount,
   currentChapter,
@@ -60,6 +61,7 @@ export function createPlayer(characterId: CharacterId, playerId: string, gameLen
     currentYear: startChapter.yearStart,
     chapterIndex,
     timeActionsRemaining: chapterActionBudget(startChapter.yearStart, startChapter.yearEnd),
+    turnActionsRemaining: ACTIONS_PER_TURN,
     resources,
     completedProjectIds: [],
     seenContextCardIds: [],
@@ -131,20 +133,23 @@ function clamp(n: number, min: number, max: number): number {
 }
 
 /**
- * Advances a player's Time actions and in-chapter year together. Call this
- * whenever an action spends Time, so later-chapter projects whose earliest
- * plausible year falls after the chapter's start become reachable after
- * three Time actions are spent for each elapsed year.
+ * Advances a player's calendar by one year and spends the action's point cost
+ * from the current turn.
  */
-function spendTime(player: PlayerState, cost: number): Pick<PlayerState, 'timeActionsRemaining' | 'currentYear'> {
+function spendAction(player: PlayerState, turnCost: number): Pick<PlayerState, 'timeActionsRemaining' | 'turnActionsRemaining' | 'currentYear'> {
   const chapter = currentChapter(player);
   const chapterBudget = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
   const actionsSpentBefore = chapterBudget - player.timeActionsRemaining;
-  const actionsSpentAfter = actionsSpentBefore + cost;
+  const actionsSpentAfter = actionsSpentBefore + 1;
   return {
-    timeActionsRemaining: player.timeActionsRemaining - cost,
+    timeActionsRemaining: player.timeActionsRemaining - 1,
+    turnActionsRemaining: player.turnActionsRemaining - turnCost,
     currentYear: yearForActionsSpent(chapter.yearStart, chapter.yearEnd, actionsSpentAfter),
   };
+}
+
+function canSpendAction(player: PlayerState, turnCost: number): boolean {
+  return player.timeActionsRemaining >= 1 && player.turnActionsRemaining >= turnCost;
 }
 
 // ---------------------------------------------------------------------------
@@ -164,6 +169,7 @@ export type GameAction =
   | { type: 'CONVERT_TOKEN'; from: ResourceTokenType; to: ResourceTokenType }
   | { type: 'BOHR_INVITE'; targetPlayerId: string }
   | { type: 'ACK_CONTEXT_CARDS' }
+  | { type: 'END_TURN' }
   | { type: 'END_CHAPTER' };
 
 const TIME_COST_DEFAULT = 1;
@@ -174,7 +180,7 @@ function drawRandom(state: GameState, maxExclusive: number): { value: number; st
   return { value, state: { ...state, rngCursor: cursor } };
 }
 
-export function gameReducer(state: GameState, action: GameAction): GameState {
+function reduceGameAction(state: GameState, action: GameAction): GameState {
   const player = activePlayer(state);
   if (!player || player.finished) return state;
 
@@ -185,7 +191,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         return log(state, player.currentYear, `Cannot travel: ${evalResult.reasons.join(' ')}`);
       }
       const destination = LOCATIONS[action.destinationId];
-      const timing = spendTime(player, evalResult.timeCost);
+      const timing = spendAction(player, evalResult.timeCost);
       let next = updatePlayer(state, player.id, (p) => ({
         ...p,
         currentLocationId: action.destinationId,
@@ -201,11 +207,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const project = getProjectById(action.projectId);
       if (!project) return log(state, player.currentYear, 'Unknown project.');
       const character = getCharacter(player.characterId);
+      let timeCost = project.timeCost;
+      if (character.ability.id === 'conjecture-engine') {
+        const onlyTheory = Object.keys(project.requiredTokens).every((k) => k === 'theory');
+        if (onlyTheory) timeCost = Math.max(1, timeCost - 1);
+      }
 
       let effectivePlayer = player;
       let usedAbility = false;
 
-      const eligibility = canAttemptProject(state, effectivePlayer, project);
+      const eligibility = canAttemptProject(state, effectivePlayer, project, timeCost);
       if (!eligibility.eligible) {
         // Curie: Experimental Persistence — short by exactly one Evidence token.
         if (
@@ -227,22 +238,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ) {
           effectivePlayer = { ...effectivePlayer, currentLocationId: project.locationIds[0] };
           usedAbility = true;
+          timeCost += 1;
         } else {
           return log(state, player.currentYear, `Cannot attempt "${project.name}": ${eligibility.reasons.join(' ')}`);
         }
-        const recheck = canAttemptProject(state, effectivePlayer, project);
+        const recheck = canAttemptProject(state, effectivePlayer, project, timeCost);
         if (!recheck.eligible) {
           return log(state, player.currentYear, `Cannot attempt "${project.name}": ${recheck.reasons.join(' ')}`);
         }
-      }
-
-      let timeCost = project.timeCost;
-      if (character.ability.id === 'conjecture-engine') {
-        const onlyTheory = Object.keys(project.requiredTokens).every((k) => k === 'theory');
-        if (onlyTheory) timeCost = Math.max(1, timeCost - 1);
-      }
-      if (character.ability.id === 'thought-experiment' && usedAbility) {
-        timeCost += 1;
       }
 
       const fundsDiscount = crossoverFundsDiscount(state, project);
@@ -293,7 +296,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         }
       }
 
-      const projectTiming = spendTime(player, timeCost);
+      if (!canSpendAction(player, timeCost)) {
+        return log(state, player.currentYear, `Cannot attempt "${project.name}": requires ${timeCost} turn actions.`);
+      }
+      const projectTiming = spendAction(player, timeCost);
       next = updatePlayer(next, player.id, (p) => ({
         ...p,
         currentLocationId: effectivePlayer.currentLocationId,
@@ -317,7 +323,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'GENERATE_TOKEN': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
       const location = LOCATIONS[player.currentLocationId];
       const map: Record<typeof action.kind, ResourceTokenType> = {
         study: 'theory',
@@ -329,7 +335,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const tokenType = map[action.kind];
       const bonus = location?.researchBonuses[tokenType] ?? 0;
       const gained = 1 + bonus;
-      const genTiming = spendTime(player, TIME_COST_DEFAULT);
+      const genTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => ({
         ...p,
         ...genTiming,
@@ -338,13 +344,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'COLLABORATE': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
       const character = getCharacter(player.characterId);
       const localCollaborator = character.collaboratorIds
         .map((id) => COLLABORATORS[id])
         .find((c) => c && c.locationIds.includes(player.currentLocationId) && player.currentYear >= c.activeStart && player.currentYear <= c.activeEnd);
       const networkGain = character.ability.id === 'scientific-director' ? 2 : 1;
-      const collabTiming = spendTime(player, TIME_COST_DEFAULT);
+      const collabTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => {
         const tokens = { ...p.resources.tokens };
         if (localCollaborator) {
@@ -361,12 +367,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'TEACH_OR_EARN': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
       const location = LOCATIONS[player.currentLocationId];
       const employment = location?.employment[0];
       const fundsGain = employment?.fundsPerChapter ?? 2;
       const standingDelta = employment?.standingDelta ?? 0;
-      const teachTiming = spendTime(player, TIME_COST_DEFAULT);
+      const teachTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => ({
         ...p,
         ...teachTiming,
@@ -375,10 +381,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'SEEK_FUNDING': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
       const { value, state: withRng } = drawRandom(state, 4); // 0..3
       const fundsGain = value + 1; // 1..4, deterministic from seed
-      const fundingTiming = spendTime(player, TIME_COST_DEFAULT);
+      const fundingTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(withRng, player.id, (p) => ({
         ...p,
         ...fundingTiming,
@@ -387,8 +393,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'REST_AND_FAMILY': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
-      const restTiming = spendTime(player, TIME_COST_DEFAULT);
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
+      const restTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => ({
         ...p,
         ...restTiming,
@@ -401,8 +407,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'ADVOCACY': {
-      if (player.timeActionsRemaining < TIME_COST_DEFAULT) return state;
-      const advocacyTiming = spendTime(player, TIME_COST_DEFAULT);
+      if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
+      const advocacyTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => ({
         ...p,
         ...advocacyTiming,
@@ -413,9 +419,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'BUILD_INSTITUTION': {
       const character = getCharacter(player.characterId);
       const timeCost = character.ability.id === 'scientific-director' ? 3 : 2;
-      if (player.timeActionsRemaining < timeCost) return state;
+      if (!canSpendAction(player, timeCost)) return state;
       const exposureGain = character.ability.id === 'scientific-director' ? 1 : 0;
-      const buildTiming = spendTime(player, timeCost);
+      const buildTiming = spendAction(player, timeCost);
       return updatePlayer(state, player.id, (p) => ({
         ...p,
         ...buildTiming,
@@ -486,6 +492,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }));
     }
 
+    case 'END_TURN':
+      return state;
+
     case 'END_CHAPTER': {
       if (pendingContextCards(player).length > 0) return state;
       return endChapter(state, player.id);
@@ -494,6 +503,43 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     default:
       return state;
   }
+}
+
+function rotateTurn(state: GameState, outgoingPlayerId: string): GameState {
+  const outgoingIndex = state.players.findIndex((player) => player.id === outgoingPlayerId);
+  if (outgoingIndex < 0) return state;
+
+  const withReset = updatePlayer(state, outgoingPlayerId, (player) => ({
+    ...player,
+    turnActionsRemaining: ACTIONS_PER_TURN,
+  }));
+  let nextIndex = (outgoingIndex + 1) % withReset.players.length;
+  let guard = 0;
+  while (withReset.players[nextIndex].finished && guard < withReset.players.length) {
+    nextIndex = (nextIndex + 1) % withReset.players.length;
+    guard += 1;
+  }
+  return { ...withReset, activePlayerIndex: nextIndex, updatedAt: Date.now() };
+}
+
+export function gameReducer(state: GameState, action: GameAction): GameState {
+  const player = activePlayer(state);
+  if (!player || player.finished) return state;
+
+  if (action.type === 'END_TURN') {
+    if (pendingContextCards(player).length > 0) return state;
+    const ended = log(state, player.currentYear, `${getCharacter(player.characterId).name} ends their turn.`);
+    return rotateTurn(ended, player.id);
+  }
+
+  const next = reduceGameAction(state, action);
+  if (action.type === 'END_CHAPTER' || next.phase === 'endgame') return next;
+
+  const updatedPlayer = next.players.find((candidate) => candidate.id === player.id);
+  if (updatedPlayer && updatedPlayer.turnActionsRemaining <= 0) {
+    return rotateTurn(next, player.id);
+  }
+  return next;
 }
 
 function endChapter(state: GameState, playerId: string): GameState {
@@ -559,6 +605,7 @@ function endChapter(state: GameState, playerId: string): GameState {
       chapterIndex: p.chapterIndex + 1,
       currentYear: nextChapter.yearStart,
       timeActionsRemaining: chapterActionBudget(nextChapter.yearStart, nextChapter.yearEnd),
+      turnActionsRemaining: ACTIONS_PER_TURN,
       abilityUsedThisChapter: false,
       routeHistory: [...p.routeHistory, { locationId: p.currentLocationId, year: nextChapter.yearStart, chapterId: nextChapter.id }],
     }));

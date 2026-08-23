@@ -1,7 +1,7 @@
 import type { GameAction } from '../../engine/reducer';
 import { pendingContextCards } from '../../engine/reducer';
 import type { GameState, PlayerState } from '../../types';
-import { chapterActionBudget, currentChapter, getCharacter } from '../../engine/rules';
+import { ACTIONS_PER_TURN, chapterActionBudget, currentChapter, getCharacter } from '../../engine/rules';
 
 export interface ActionBarProps {
   state: GameState;
@@ -14,7 +14,8 @@ export function ActionBar({ state, player, dispatch }: ActionBarProps) {
   const chapter = currentChapter(player);
   const totalTimeActions = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
   const blockedByCard = pendingContextCards(player).length > 0;
-  const noTime = player.timeActionsRemaining < 1;
+  const noAction = player.timeActionsRemaining < 1 || player.turnActionsRemaining < 1;
+  const buildInstitutionCost = character.ability.id === 'scientific-director' ? 3 : 2;
 
   const showConvert = character.ability.id === 'structural-insight' || character.ability.id === 'universal-method';
   const showBohrInvite = character.ability.id === 'copenhagen-network' && player.completedProjectIds.includes('bohr-founding-institute');
@@ -23,40 +24,42 @@ export function ActionBar({ state, player, dispatch }: ActionBarProps) {
     <footer className="action-bar" aria-label="Time actions and timeline">
       <div className="action-bar__timeline">
         <strong>{character.name}</strong>
-        <span>Time actions remaining: {player.timeActionsRemaining} / {totalTimeActions} · 3 actions = 1 year</span>
+        <span>
+          Turn actions: {player.turnActionsRemaining} / {ACTIONS_PER_TURN} · Years left in chapter: {player.timeActionsRemaining} / {totalTimeActions} · 1 main action = 1 year
+        </span>
       </div>
       <div className="action-bar__actions">
-        <button className="btn" data-testid="action-study" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'study' })}>
+        <button className="btn" data-testid="action-study" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'study' })}>
           Study (+Theory)
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'research' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'research' })}>
           Research (+Proof)
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'calculate' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'calculate' })}>
           Calculate (+Computation)
         </button>
-        <button className="btn" data-testid="action-experiment-evidence" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'experimentEvidence' })}>
+        <button className="btn" data-testid="action-experiment-evidence" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'experimentEvidence' })}>
           Experiment (+Evidence)
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'experimentEngineering' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'GENERATE_TOKEN', kind: 'experimentEngineering' })}>
           Build Apparatus (+Engineering)
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'COLLABORATE' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'COLLABORATE' })}>
           Collaborate
         </button>
-        <button className="btn" data-testid="action-teach-or-earn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'TEACH_OR_EARN' })}>
+        <button className="btn" data-testid="action-teach-or-earn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'TEACH_OR_EARN' })}>
           Teach / Earn
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'SEEK_FUNDING' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'SEEK_FUNDING' })}>
           Seek Funding
         </button>
-        <button className="btn" data-testid="action-rest" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'REST_AND_FAMILY' })}>
+        <button className="btn" data-testid="action-rest" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'REST_AND_FAMILY' })}>
           Rest &amp; Family
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'ADVOCACY' })}>
+        <button className="btn" disabled={blockedByCard || noAction} onClick={() => dispatch({ type: 'ADVOCACY' })}>
           Public Service / Advocacy
         </button>
-        <button className="btn" disabled={blockedByCard || noTime} onClick={() => dispatch({ type: 'BUILD_INSTITUTION' })}>
+        <button className="btn" disabled={blockedByCard || player.timeActionsRemaining < 1 || player.turnActionsRemaining < buildInstitutionCost} onClick={() => dispatch({ type: 'BUILD_INSTITUTION' })}>
           Build an Institution
         </button>
         {showConvert && (
@@ -71,6 +74,14 @@ export function ActionBar({ state, player, dispatch }: ActionBarProps) {
         {showBohrInvite && (
           <BohrInviteControl state={state} player={player} dispatch={dispatch} disabled={blockedByCard} />
         )}
+        <button
+          className="btn action-bar__end-turn"
+          data-testid="end-turn-btn"
+          disabled={blockedByCard}
+          onClick={() => dispatch({ type: 'END_TURN' })}
+        >
+          End Turn
+        </button>
         <button
           className="btn btn-primary action-bar__end-chapter"
           data-testid="end-chapter-btn"

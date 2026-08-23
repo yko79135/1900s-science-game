@@ -46,6 +46,25 @@ describe('board controls', () => {
     expect(onRestartGame).toHaveBeenCalledOnce();
   });
 
+  it('shows the turn budget and lets the player end a turn early', () => {
+    const game = createGame(['curie'], 1905);
+    const dispatch = vi.fn();
+
+    render(
+      <BoardScreen
+        state={game}
+        dispatch={dispatch}
+        onSave={vi.fn()}
+        onRestartGame={vi.fn()}
+        onExitToTitle={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText(/Turn actions: 4 \/ 4/)).toBeVisible();
+    fireEvent.click(screen.getByTestId('end-turn-btn'));
+    expect(dispatch).toHaveBeenCalledWith({ type: 'END_TURN' });
+  });
+
   it('jumps to, selects, and centers the active player’s current city', () => {
     const player = createGame(['curie'], 1905).players[0];
     const onSelectLocation = vi.fn();

@@ -8,7 +8,7 @@ import {
   migrateSave,
   saveCurrentGame,
 } from '../engine/save';
-import { chapterActionBudget } from '../engine/rules';
+import { ACTIONS_PER_TURN, chapterActionBudget } from '../engine/rules';
 
 beforeEach(() => {
   localStorage.clear();
@@ -47,17 +47,18 @@ describe('save/load serialization', () => {
     expect(migrateSave(raw)).toBeNull();
   });
 
-  it('migrates a four-action save to the three-actions-per-year clock', () => {
+  it('migrates an older save to the one-action-per-year turn clock', () => {
     const game = createGame(['noether'], 2);
     const legacyGame = {
       ...game,
-      schemaVersion: 1,
-      players: [{ ...game.players[0], chapterIndex: 4, currentYear: 1924, timeActionsRemaining: 2 }],
+      schemaVersion: 2,
+      players: [{ ...game.players[0], chapterIndex: 4, currentYear: 1924, timeActionsRemaining: 2, turnActionsRemaining: undefined }],
     };
-    const migrated = migrateSave({ schemaVersion: 1, savedAt: Date.now(), game: legacyGame });
+    const migrated = migrateSave({ schemaVersion: 2, savedAt: Date.now(), game: legacyGame });
 
-    expect(migrated?.schemaVersion).toBe(2);
+    expect(migrated?.schemaVersion).toBe(3);
     expect(migrated?.players[0].currentYear).toBe(1924);
     expect(migrated?.players[0].timeActionsRemaining).toBe(chapterActionBudget(1924, 1933));
+    expect(migrated?.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
   });
 });

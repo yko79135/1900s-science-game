@@ -32,7 +32,7 @@ export function ProjectPanel({ state, player, dispatch }: ProjectPanelProps) {
               <p className="project-card__field">{project.field}</p>
               <p>{project.description}</p>
               <p className="project-card__stats">
-                Base Legacy {project.baseLegacy} · Time {project.timeCost} · Funds {project.fundsCost}
+                Base Legacy {project.baseLegacy} · Turn actions {project.timeCost} · Funds {project.fundsCost}
                 {Object.keys(project.requiredTokens).length > 0 && (
                   <>
                     {' '}
