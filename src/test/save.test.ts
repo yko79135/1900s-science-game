@@ -59,11 +59,38 @@ describe('save/load serialization', () => {
     };
     const migrated = migrateSave({ schemaVersion: 2, savedAt: Date.now(), game: legacyGame });
 
-    expect(migrated?.schemaVersion).toBe(4);
+    expect(migrated?.schemaVersion).toBe(5);
     expect(migrated?.players[0].currentYear).toBe(1924);
     expect(migrated?.players[0].timeActionsRemaining).toBe(chapterActionBudget(1924, 1933));
     expect(migrated?.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
     expect(migrated?.narrative?.seenSceneIds).toEqual([]);
     expect(migrated?.narrative?.chronicle).toEqual([]);
+    expect(migrated?.players[0].insights).toBeDefined();
+    expect(migrated?.players[0].studyProgress).toEqual({ theory: 0, proof: 0, evidence: 0, computation: 0, engineering: 0 });
+  });
+
+  it('preserves completed projects and Legacy while inferring their required Insights', () => {
+    const game = createGame(['einstein'], 5);
+    const legacyGame = {
+      ...game,
+      schemaVersion: 4,
+      players: [
+        {
+          ...game.players[0],
+          completedProjectIds: ['einstein-general-relativity'],
+          legacyPoints: 37,
+          insights: undefined,
+          studyProgress: undefined,
+        },
+      ],
+    };
+
+    const migrated = migrateSave({ schemaVersion: 4, savedAt: Date.now(), game: legacyGame });
+
+    expect(migrated?.players[0].completedProjectIds).toContain('einstein-general-relativity');
+    expect(migrated?.players[0].legacyPoints).toBe(37);
+    expect(migrated?.players[0].insights.map((item) => item.insightId)).toEqual(
+      expect.arrayContaining(['equivalence-principle', 'tensor-geometry']),
+    );
   });
 });

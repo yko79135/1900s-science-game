@@ -2,6 +2,7 @@ import type {
   CharacterId,
   ContextCardEffect,
   HistoricalClassification,
+  InsightAcquisitionSourceType,
   LifeChapterId,
   ResourceTokenType,
 } from './index';
@@ -56,6 +57,8 @@ export type StoryCondition =
   | { type: 'projectNotCompleted'; projectId: string }
   | { type: 'completedProjectCountAtLeast'; projectIds: string[]; count: number }
   | { type: 'resourceAtLeast'; resource: StoryResourceKey; value: number }
+  | { type: 'insightAcquired'; insightId: string }
+  | { type: 'insightSourceIs'; insightId: string; sourceType: InsightAcquisitionSourceType; sourceId?: string }
   | { type: 'narrativeFlag'; flag: string; value?: boolean | string | number }
   | { type: 'choiceWas'; choiceKey: string; choiceId: string }
   | { type: 'otherCharacterIsHuman'; characterId: CharacterId }

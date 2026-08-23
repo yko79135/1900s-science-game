@@ -17,6 +17,8 @@ export const hilbertContent: CharacterContent = {
         'Hilbert may place unsolved Problem Cards on the Century Knowledge Board. When a later researcher completes a project that engages one of his Problem Cards, both Hilbert and that researcher gain bonus Legacy.',
     },
     startingResources: { funds: 2, wellbeing: 5, health: 6, standing: 1, network: 3 },
+    startingTokens: { theory: 1, proof: 2 },
+    startingInsights: ['advanced-mathematics'],
     startingLocationId: 'konigsberg',
     canonicalRoute: [
       { locationId: 'konigsberg', year: 1862, note: 'Born in Königsberg.' },
@@ -124,6 +126,7 @@ export const hilbertContent: CharacterContent = {
       baseLegacy: 12,
       earliestYear: 1899,
       requiredTokens: { theory: 1, proof: 2 },
+      requiredInsights: ['axiomatic-method'],
       locationIds: ['gottingen'],
       requiresInstitutionId: 'gottingen-university',
       requiredKnowledgeIds: [],

@@ -1,12 +1,13 @@
 import type {
   CharacterId,
   GameState,
+  InsightAcquisition,
   PlayerResources,
   PlayerState,
   ResourceTokenType,
 } from '../types';
 import { LIFE_CHAPTER_ORDER, SCHEMA_VERSION } from '../types';
-import { CHAPTERS_BY_CHARACTER, COLLABORATORS, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, getProjectById } from '../data/content';
+import { CHAPTERS_BY_CHARACTER, COLLABORATORS, CONTEXT_CARDS_BY_CHARACTER, INSIGHTS, LOCATIONS, getProjectById } from '../data/content';
 import {
   canAttemptProject,
   ACTIONS_PER_TURN,
@@ -18,6 +19,7 @@ import {
   applyCenturyDeadlines,
   chapterActionBudget,
   eventsForChapter,
+  findAvailableInsightAcquisitions,
   getCharacter,
   yearForActionsSpent,
   yearWithinBothLifetimes,
@@ -49,7 +51,7 @@ export function createPlayer(characterId: CharacterId, playerId: string, gameLen
     standing: character.startingResources.standing,
     network: character.startingResources.network,
     exposure: 0,
-    tokens: emptyTokens(),
+    tokens: { ...emptyTokens(), ...character.startingTokens },
   };
   const chapterIndex = gameLength === 'short' ? SHORT_GAME_START_CHAPTER_INDEX : 0;
   const startChapter = CHAPTERS_BY_CHARACTER[characterId][chapterIndex];
@@ -63,6 +65,14 @@ export function createPlayer(characterId: CharacterId, playerId: string, gameLen
     timeActionsRemaining: chapterActionBudget(startChapter.yearStart, startChapter.yearEnd),
     turnActionsRemaining: ACTIONS_PER_TURN,
     resources,
+    insights: (character.startingInsights ?? []).map((insightId) => ({
+      insightId,
+      sourceType: 'starting',
+      sourceId: character.id,
+      sourceCharacterId: character.id,
+      year: startChapter.yearStart,
+    })),
+    studyProgress: emptyTokens(),
     completedProjectIds: [],
     seenContextCardIds: [],
     legacyPoints: 0,
@@ -115,6 +125,56 @@ function updatePlayer(state: GameState, playerId: string, updater: (p: PlayerSta
     players: state.players.map((p) => (p.id === playerId ? updater(p) : p)),
     updatedAt: Date.now(),
   };
+}
+
+function addInsightAcquisitions(state: GameState, playerId: string, acquisitions: InsightAcquisition[]): GameState {
+  if (acquisitions.length === 0) return state;
+  const player = state.players.find((candidate) => candidate.id === playerId);
+  if (!player) return state;
+  const existing = new Set(player.insights.map((item) => item.insightId));
+  const unique = acquisitions.filter((item) => !existing.has(item.insightId));
+  if (unique.length === 0) return state;
+  let next = updatePlayer(state, playerId, (current) => ({ ...current, insights: [...current.insights, ...unique] }));
+  for (const acquisition of unique) {
+    const name = INSIGHTS[acquisition.insightId]?.name ?? acquisition.insightId;
+    next = log(next, acquisition.year, `${getCharacter(player.characterId).name} gains the Insight "${name}" via ${acquisition.sourceType}.`);
+  }
+  return next;
+}
+
+function grantAvailableInsights(
+  state: GameState,
+  playerId: string,
+  context: Parameters<typeof findAvailableInsightAcquisitions>[2] = { type: 'passive' },
+): GameState {
+  const player = state.players.find((candidate) => candidate.id === playerId);
+  if (!player) return state;
+  return addInsightAcquisitions(state, playerId, findAvailableInsightAcquisitions(state, player, context));
+}
+
+function grantPassiveInsightsToAllPlayers(state: GameState): GameState {
+  return state.players.reduce((next, player) => grantAvailableInsights(next, player.id), state);
+}
+
+function grantHumanSharedInsight(state: GameState, learnerId: string, teacher: PlayerState): GameState {
+  const learner = state.players.find((candidate) => candidate.id === learnerId);
+  if (!learner) return state;
+  const owned = new Set(learner.insights.map((item) => item.insightId));
+  const insightId = teacher.insights
+    .map((item) => item.insightId)
+    .filter((id) => INSIGHTS[id] && !owned.has(id))
+    .sort()[0];
+  if (!insightId) return state;
+  return addInsightAcquisitions(state, learnerId, [
+    {
+      insightId,
+      sourceType: 'humanCollaboration',
+      sourceId: teacher.characterId,
+      sourcePlayerId: teacher.id,
+      sourceCharacterId: teacher.characterId,
+      year: learner.currentYear,
+    },
+  ]);
 }
 
 function activePlayer(state: GameState): PlayerState {
@@ -200,6 +260,7 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         routeHistory: [...p.routeHistory, { locationId: action.destinationId, year: timing.currentYear, chapterId: currentChapterId(p) }],
       }));
       next = log(next, player.currentYear, `${getCharacter(player.characterId).name} travels to ${destination.name}.`);
+      next = grantAvailableInsights(next, player.id, { type: 'location', locationId: action.destinationId });
       return next;
     }
 
@@ -230,15 +291,6 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
             resources: { ...effectivePlayer.resources, tokens: { ...effectivePlayer.resources.tokens, evidence: (effectivePlayer.resources.tokens.evidence ?? 0) + 1 } },
           };
           usedAbility = true;
-        } else if (
-          character.ability.id === 'thought-experiment' &&
-          !player.abilityUsedThisChapter &&
-          eligibility.reasons.length === 1 &&
-          !project.locationIds.includes(player.currentLocationId)
-        ) {
-          effectivePlayer = { ...effectivePlayer, currentLocationId: project.locationIds[0] };
-          usedAbility = true;
-          timeCost += 1;
         } else {
           return log(state, player.currentYear, `Cannot attempt "${project.name}": ${eligibility.reasons.join(' ')}`);
         }
@@ -272,7 +324,7 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
 
       let next: GameState = {
         ...state,
-        knowledgeBoard: project.grantsKnowledgeId
+        knowledgeBoard: project.grantsKnowledgeId && state.knowledgeBoard[project.grantsKnowledgeId]?.publishedYear === undefined
           ? {
               ...state.knowledgeBoard,
               [project.grantsKnowledgeId]: {
@@ -318,12 +370,15 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         johnsonVerifiedProjectIds: verifying ? [...p.johnsonVerifiedProjectIds, project.id] : p.johnsonVerifiedProjectIds,
       }));
 
-      next = log(next, effectivePlayer.currentYear, `${character.name} completes "${project.name}" (+${legacyAwarded} Legacy, Canon +${completion.canonScore}).`);
+      next = grantAvailableInsights(next, player.id, { type: 'passive' });
+      const earlyText = completion.earlyDiscoveryBonus > 0 ? `, including +${completion.earlyDiscoveryBonus} early-discovery bonus` : '';
+      next = log(next, effectivePlayer.currentYear, `${character.name} completes "${project.name}" (+${legacyAwarded} Legacy${earlyText}; Canon Alignment +${completion.canonScore}).`);
       return next;
     }
 
     case 'GENERATE_TOKEN': {
       if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
+      const character = getCharacter(player.characterId);
       const location = LOCATIONS[player.currentLocationId];
       const map: Record<typeof action.kind, ResourceTokenType> = {
         study: 'theory',
@@ -334,13 +389,18 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
       };
       const tokenType = map[action.kind];
       const bonus = location?.researchBonuses[tokenType] ?? 0;
-      const gained = 1 + bonus;
+      const usingThoughtExperiment = character.ability.id === 'thought-experiment' && action.kind === 'study' && !player.abilityUsedThisChapter;
+      const gained = 1 + bonus + (usingThoughtExperiment ? 1 : 0);
       const genTiming = spendAction(player, TIME_COST_DEFAULT);
-      return updatePlayer(state, player.id, (p) => ({
+      let next = updatePlayer(state, player.id, (p) => ({
         ...p,
         ...genTiming,
+        abilityUsedThisChapter: p.abilityUsedThisChapter || usingThoughtExperiment,
+        studyProgress: { ...p.studyProgress, [tokenType]: (p.studyProgress[tokenType] ?? 0) + 1 },
         resources: { ...p.resources, tokens: { ...p.resources.tokens, [tokenType]: (p.resources.tokens[tokenType] ?? 0) + gained } },
       }));
+      next = grantAvailableInsights(next, player.id);
+      return next;
     }
 
     case 'COLLABORATE': {
@@ -351,7 +411,7 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         .find((c) => c && c.locationIds.includes(player.currentLocationId) && player.currentYear >= c.activeStart && player.currentYear <= c.activeEnd);
       const networkGain = character.ability.id === 'scientific-director' ? 2 : 1;
       const collabTiming = spendAction(player, TIME_COST_DEFAULT);
-      return updatePlayer(state, player.id, (p) => {
+      let next = updatePlayer(state, player.id, (p) => {
         const tokens = { ...p.resources.tokens };
         if (localCollaborator) {
           for (const [t, amt] of Object.entries(localCollaborator.bonus) as [ResourceTokenType, number][]) {
@@ -364,6 +424,23 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
           resources: { ...p.resources, network: p.resources.network + networkGain, tokens },
         };
       });
+      if (localCollaborator) {
+        next = grantAvailableInsights(next, player.id, { type: 'collaborator', collaboratorId: localCollaborator.id });
+      }
+      const humanPeer = state.players
+        .filter((candidate) => candidate.id !== player.id)
+        .filter((candidate) => candidate.currentLocationId === player.currentLocationId)
+        .filter((candidate) => Math.abs(candidate.currentYear - player.currentYear) <= 1)
+        .sort((a, b) => a.id.localeCompare(b.id))[0];
+      if (humanPeer) {
+        next = grantHumanSharedInsight(next, player.id, humanPeer);
+        next = grantAvailableInsights(next, player.id, {
+          type: 'characterEncounter',
+          characterId: humanPeer.characterId,
+          sourcePlayerId: humanPeer.id,
+        });
+      }
+      return next;
     }
 
     case 'TEACH_OR_EARN': {
@@ -532,7 +609,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     return rotateTurn(ended, player.id);
   }
 
-  const next = reduceGameAction(state, action);
+  const next = grantPassiveInsightsToAllPlayers(reduceGameAction(state, action));
   if (action.type === 'END_CHAPTER' || next.phase === 'endgame') return next;
 
   const updatedPlayer = next.players.find((candidate) => candidate.id === player.id);
@@ -591,6 +668,7 @@ function endChapter(state: GameState, playerId: string): GameState {
   for (const id of newlyTriggered) {
     next = log(next, updatedPlayer.currentYear, `The Century Does Not Wait: "${id}" enters public knowledge through independent researchers.`);
   }
+  next = grantPassiveInsightsToAllPlayers(next);
 
   const chapters = CHAPTERS_BY_CHARACTER[player.characterId];
   const isLastChapter = player.chapterIndex >= LIFE_CHAPTER_ORDER.length - 1;

@@ -18,22 +18,29 @@ export function RulesModal({ onClose }: { onClose: () => void }) {
         </p>
         <h3>Research Projects</h3>
         <p>
-          Projects require being in the right place, at the right time, with the right research tokens (Theory, Proof,
-          Evidence, Computation, Engineering) and sometimes a named collaborator. Completing a project awards Legacy
-          points and a Canon score based on how closely it matches the documented historical record.
+          Projects require reusable research resources (Theory, Proof, Evidence, Computation, and Engineering), named
+          permanent Insights, any prerequisite Century Knowledge, Funds, and actions. Historical places, institutions,
+          and collaborators make useful resources or Insights easier to find, but they are not the only routes.
         </p>
-        <h3>Canon Scoring</h3>
+        <h3>Legacy and Canon Alignment</h3>
         <p>
-          +3 for completing a documented milestone in its historical place and time; +1 for a plausible near-canon
-          version; +0 for a plausible alternate path. Canon points make up a modest share of your final score — a
-          strong alternate life is still playable.
+          Important discoveries award their listed Legacy wherever they are made. An early discovery can add a small
+          bonus. Historical place, date, and classification contribute only to the separate Canon Alignment percentage,
+          which changes comparison and story context but never adds Legacy or decides the winner.
+        </p>
+        <h3>Insights</h3>
+        <p>
+          Insights are named pieces of understanding or technique that remain once learned. Inspect a missing Insight
+          on a project card for strategic leads. You might gain the same Insight through independent study, a place,
+          a collaborator, another player's teaching, an earlier project, or public Century Knowledge.
         </p>
         <h3>The Century Knowledge Board</h3>
         <p>
           Foundational discoveries are shared on the Century Knowledge Board once published, and only become usable to
           other characters once their own personal timeline has reached that point. If a discovery is historically
           indispensable and nobody publishes it in time, the Century does not wait — it happens anyway, through an
-          NPC researcher, so later history remains possible even if you chose a different path.
+          NPC researcher, so later history remains possible even if you chose a different path. NPC publication never
+          awards Legacy to a human player.
         </p>
         <h3>Consequences</h3>
         <p>

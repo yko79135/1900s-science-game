@@ -291,10 +291,10 @@ describe('consequence accumulation', () => {
 describe('final legacy scoring', () => {
   it('computes a ratio against the character legacy benchmark', () => {
     const player = createPlayer('curie', 'p1');
-    const scored = { ...player, legacyPoints: 50, canonPoints: 10 };
+    const scored = { ...player, legacyPoints: 50, canonPoints: 3, completedProjectIds: ['one', 'two'] };
     const summary = computeFinalScore(scored);
     expect(summary.totalLegacy).toBe(50);
-    expect(summary.canonAlignment).toBe(10);
+    expect(summary.canonAlignment).toBe(50);
     expect(summary.benchmark).toBe(getCharacter('curie').legacyBenchmark);
     expect(summary.benchmarkRatio).toBeCloseTo(50 / getCharacter('curie').legacyBenchmark);
   });
@@ -312,6 +312,10 @@ describe('reducer: attempting and completing a project', () => {
           chapterIndex: 2, // entry
           currentYear: 1905,
           timeActionsRemaining: chapterActionBudget(1905, 1909),
+          insights: [
+            ...game.players[0].insights,
+            { insightId: 'relativity-of-simultaneity', sourceType: 'study' as const, sourceId: 'theory', year: 1905 },
+          ],
           resources: { ...game.players[0].resources, tokens: { ...game.players[0].resources.tokens, theory: 3 } },
         },
       ],
