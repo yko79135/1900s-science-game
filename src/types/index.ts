@@ -1,6 +1,8 @@
 // Core domain types for "The Shape of a Century: Lives, Ideas, Consequences"
 // Kept independent of React so the engine and data files stay pure and testable.
 
+import type { NarrativeState } from './story';
+
 export type HistoricalClassification = 'Documented' | 'Plausible' | 'Speculative';
 
 export interface HistoricalSource {
@@ -10,6 +12,36 @@ export interface HistoricalSource {
 }
 
 export type ResourceTokenType = 'theory' | 'proof' | 'evidence' | 'computation' | 'engineering';
+
+export type InsightRoute =
+  | { type: 'location'; locationId: string }
+  | { type: 'collaborator'; collaboratorId: string }
+  | { type: 'characterEncounter'; characterId: CharacterId }
+  | { type: 'study'; token: ResourceTokenType; threshold: number }
+  | { type: 'projectCompletion'; projectId: string }
+  | { type: 'centuryKnowledge'; knowledgeId: string }
+  | { type: 'historicalEvent'; eventId: string };
+
+export interface InsightDefinition {
+  id: string;
+  name: string;
+  description: string;
+  /** Player-facing suggestions. These intentionally need not expose every exact route. */
+  leads: string[];
+  acquisitionRoutes: InsightRoute[];
+}
+
+export type InsightAcquisitionSourceType = InsightRoute['type'] | 'starting' | 'humanCollaboration' | 'migration';
+
+/** Permanent provenance that story variants can inspect later. */
+export interface InsightAcquisition {
+  insightId: string;
+  sourceType: InsightAcquisitionSourceType;
+  sourceId?: string;
+  sourcePlayerId?: string;
+  sourceCharacterId?: CharacterId;
+  year: number;
+}
 
 export type LifeChapterId =
   | 'formation'
@@ -122,6 +154,7 @@ export interface ResearchProject {
   baseLegacy: number;
   earliestYear: number;
   requiredTokens: Partial<Record<ResourceTokenType, number>>;
+  requiredInsights: string[];
   locationIds: string[];
   requiresInstitutionId?: string;
   requiredKnowledgeIds: string[];
@@ -138,7 +171,7 @@ export interface ResearchProject {
   fundsCost: number;
 }
 
-export interface ContextCardEffect {
+export interface ContextCardEffect extends Record<string, number | undefined> {
   funds?: number;
   wellbeing?: number;
   health?: number;
@@ -199,6 +232,8 @@ export interface Character {
   sourceIds: string[];
   ability: CharacterAbility;
   startingResources: StartingResources;
+  startingTokens?: Partial<Record<ResourceTokenType, number>>;
+  startingInsights?: string[];
   startingLocationId: string;
   canonicalRoute: CanonicalRouteStop[];
   collaboratorIds: string[];
@@ -271,7 +306,10 @@ export interface PlayerState {
   currentYear: number;
   chapterIndex: number; // 0..5 into LIFE_CHAPTER_ORDER
   timeActionsRemaining: number;
+  turnActionsRemaining: number;
   resources: PlayerResources;
+  insights: InsightAcquisition[];
+  studyProgress: Record<ResourceTokenType, number>;
   completedProjectIds: string[];
   seenContextCardIds: string[];
   legacyPoints: number;
@@ -310,6 +348,8 @@ export interface GameState {
   log: GameLogEntry[];
   gameLength: 'short' | 'full';
   tutorialActive: boolean;
+  /** Saved narrative layer. Optional only so pre-v4 saves can migrate safely. */
+  narrative?: NarrativeState;
   createdAt: number;
   updatedAt: number;
 }
@@ -330,4 +370,21 @@ export interface CompendiumDiscoveryState {
   discoveredIds: string[];
 }
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 5;
+
+export type {
+  NarrativeState,
+  StoryAction,
+  StoryChronicleEntry,
+  StoryChoice,
+  StoryCondition,
+  StoryEffect,
+  StoryImageSpec,
+  StoryPage,
+  StoryRelationshipState,
+  StoryScene,
+  StorySceneKind,
+  StoryTrigger,
+  StoryTriggerEvent,
+  StoryVariant,
+} from './story';

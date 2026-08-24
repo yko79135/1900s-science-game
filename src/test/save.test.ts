@@ -8,6 +8,7 @@ import {
   migrateSave,
   saveCurrentGame,
 } from '../engine/save';
+import { ACTIONS_PER_TURN, chapterActionBudget } from '../engine/rules';
 
 beforeEach(() => {
   localStorage.clear();
@@ -21,6 +22,7 @@ describe('save/load serialization', () => {
     expect(loaded).not.toBeNull();
     expect(loaded?.seed).toBe(42);
     expect(loaded?.players.map((p) => p.characterId)).toEqual(['curie', 'einstein']);
+    expect(loaded?.narrative).toBeDefined();
   });
 
   it('returns null when no game is saved', () => {
@@ -34,6 +36,7 @@ describe('save/load serialization', () => {
     const imported = importSaveFromJson(json);
     expect(imported?.seed).toBe(99);
     expect(imported?.players[0].characterId).toBe('hilbert');
+    expect(imported?.narrative).toBeDefined();
   });
 
   it('rejects malformed JSON on import', () => {
@@ -44,5 +47,50 @@ describe('save/load serialization', () => {
     const game = createGame(['bohr'], 1);
     const raw = { schemaVersion: 1, savedAt: Date.now(), game: { ...game, schemaVersion: 999 } };
     expect(migrateSave(raw)).toBeNull();
+  });
+
+  it('migrates an older save to the narrative-aware schema', () => {
+    const game = createGame(['noether'], 2);
+    const legacyGame = {
+      ...game,
+      schemaVersion: 2,
+      narrative: undefined,
+      players: [{ ...game.players[0], chapterIndex: 4, currentYear: 1924, timeActionsRemaining: 2, turnActionsRemaining: undefined }],
+    };
+    const migrated = migrateSave({ schemaVersion: 2, savedAt: Date.now(), game: legacyGame });
+
+    expect(migrated?.schemaVersion).toBe(5);
+    expect(migrated?.players[0].currentYear).toBe(1924);
+    expect(migrated?.players[0].timeActionsRemaining).toBe(chapterActionBudget(1924, 1933));
+    expect(migrated?.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
+    expect(migrated?.narrative?.seenSceneIds).toEqual([]);
+    expect(migrated?.narrative?.chronicle).toEqual([]);
+    expect(migrated?.players[0].insights).toBeDefined();
+    expect(migrated?.players[0].studyProgress).toEqual({ theory: 0, proof: 0, evidence: 0, computation: 0, engineering: 0 });
+  });
+
+  it('preserves completed projects and Legacy while inferring their required Insights', () => {
+    const game = createGame(['einstein'], 5);
+    const legacyGame = {
+      ...game,
+      schemaVersion: 4,
+      players: [
+        {
+          ...game.players[0],
+          completedProjectIds: ['einstein-general-relativity'],
+          legacyPoints: 37,
+          insights: undefined,
+          studyProgress: undefined,
+        },
+      ],
+    };
+
+    const migrated = migrateSave({ schemaVersion: 4, savedAt: Date.now(), game: legacyGame });
+
+    expect(migrated?.players[0].completedProjectIds).toContain('einstein-general-relativity');
+    expect(migrated?.players[0].legacyPoints).toBe(37);
+    expect(migrated?.players[0].insights.map((item) => item.insightId)).toEqual(
+      expect.arrayContaining(['equivalence-principle', 'tensor-geometry']),
+    );
   });
 });

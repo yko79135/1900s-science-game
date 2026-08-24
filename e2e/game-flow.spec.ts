@@ -38,6 +38,26 @@ test('a complete game can be played from character selection to final scoring', 
   await expect(page.getByText('Marie Curie', { exact: true }).first()).toBeVisible();
   await expect(page.getByText(/Formation/).first()).toBeVisible();
 
+  // Regional overview and detail tabs keep dense clusters individually clickable.
+  await expect(page.getByRole('tab', { name: 'Europe', exact: true })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+  await page.getByRole('tab', { name: 'United States' }).click();
+  await page.getByRole('tab', { name: 'Northeast & D.C.' }).click();
+  await expect(page.getByTestId('map-location-princeton')).toBeVisible();
+  await expect(page.getByTestId('map-location-paris')).toHaveCount(0);
+  await page.getByTestId('jump-to-current-city-btn').click();
+  await expect(page.getByRole('tab', { name: 'North & East' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByTestId('map-location-warsaw')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByText('You are here.')).toBeVisible();
+
+  // Restart requires explicit confirmation; cancel keeps the current game intact.
+  await page.getByTestId('restart-game-btn').click();
+  await expect(page.getByRole('alertdialog', { name: 'Confirm game restart' })).toBeVisible();
+  await page.getByRole('button', { name: 'Cancel' }).click();
+  await expect(page.getByText(/Formation/).first()).toBeVisible();
+
+  await page.getByRole('tab', { name: 'Central Europe' }).click();
+
   // Perform actions: earn funds, then move on the map to Paris.
   await page.getByTestId('action-teach-or-earn').click();
   await page.getByTestId('map-location-paris').click();

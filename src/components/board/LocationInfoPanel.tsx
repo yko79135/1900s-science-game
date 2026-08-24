@@ -86,7 +86,7 @@ export function LocationInfoPanel({ locationId, player, dispatch, onClose }: Loc
 
       {projectsHere.length > 0 && (
         <div>
-          <h3>Projects available here</h3>
+          <h3>Historically connected projects</h3>
           <ul>
             {projectsHere.map((p) => (
               <li key={p.id}>{p.name}</li>
@@ -106,7 +106,7 @@ export function LocationInfoPanel({ locationId, player, dispatch, onClose }: Loc
             disabled={!travel.allowed}
             onClick={() => dispatch({ type: 'TRAVEL', destinationId: locationId })}
           >
-            Travel here ({travel.fundsCost} Funds, {travel.timeCost} Time)
+            Travel here ({travel.fundsCost} Funds, {travel.timeCost} turn action)
           </button>
           {!travel.allowed && (
             <ul className="project-card__reasons">

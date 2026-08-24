@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   applyCenturyDeadlines,
+  ACTIONS_PER_TURN,
   canAttemptProject,
+  chapterActionBudget,
   charactersOverlap,
   computeCanonScore,
   computeFinalScore,
@@ -12,7 +14,7 @@ import {
   yearForActionsSpent,
   yearWithinBothLifetimes,
 } from '../engine/rules';
-import { createGame, createPlayer, gameReducer } from '../engine/reducer';
+import { createGame, createPlayer, gameReducer, restartGame } from '../engine/reducer';
 import { getProjectById, LOCATIONS } from '../data/content';
 import type { GameState } from '../types';
 
@@ -56,6 +58,7 @@ describe('travel and living costs', () => {
     const after = gameReducer(game, { type: 'TRAVEL', destinationId: 'paris' }).players[0];
     expect(after.resources.funds).toBe(before.resources.funds - LOCATIONS.paris.travelCost);
     expect(after.timeActionsRemaining).toBe(before.timeActionsRemaining - 1);
+    expect(after.turnActionsRemaining).toBe(before.turnActionsRemaining - 1);
     expect(after.currentLocationId).toBe('paris');
   });
 
@@ -68,11 +71,54 @@ describe('travel and living costs', () => {
   });
 });
 
+describe('restarting a game', () => {
+  it('clears all progress while preserving the roster, seed, and game length', () => {
+    const game = createGame(['curie', 'noether'], 1905, 'full');
+    const progressed = {
+      ...game,
+      rngCursor: 9,
+      knowledgeBoard: {
+        specialRelativity: {
+          entryId: 'specialRelativity',
+          publishedYear: 1905,
+          npcFallbackTriggered: true,
+        },
+      },
+      players: game.players.map((player, index) => ({
+        ...player,
+        chapterIndex: 3,
+        currentYear: 1920 + index,
+        completedProjectIds: ['finished-project'],
+        legacyPoints: 20,
+      })),
+    };
+
+    const restarted = restartGame(progressed);
+
+    expect(restarted.seed).toBe(1905);
+    expect(restarted.gameLength).toBe('full');
+    expect(restarted.players.map((player) => player.characterId)).toEqual(['curie', 'noether']);
+    expect(restarted.rngCursor).toBe(0);
+    expect(restarted.knowledgeBoard).toEqual({});
+    for (const player of restarted.players) {
+      expect(player.chapterIndex).toBe(0);
+      expect(player.completedProjectIds).toEqual([]);
+      expect(player.legacyPoints).toBe(0);
+    }
+  });
+});
+
 describe('in-chapter year progression', () => {
-  it('spreads a chapter’s years evenly across its four Time actions', () => {
+  it('advances one year for every calendar action', () => {
     expect(yearForActionsSpent(1895, 1903, 0)).toBe(1895);
-    expect(yearForActionsSpent(1895, 1903, 2)).toBe(1899);
-    expect(yearForActionsSpent(1895, 1903, 4)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 1)).toBe(1896);
+    expect(yearForActionsSpent(1895, 1903, 8)).toBe(1903);
+    expect(yearForActionsSpent(1895, 1903, 9)).toBe(1903);
+  });
+
+  it('includes one calendar action for every year in the chapter', () => {
+    expect(chapterActionBudget(1895, 1903)).toBe(9);
+    expect(chapterActionBudget(1903, 1903)).toBe(1);
   });
 
   it('spending Time actions lets an otherwise too-early project become reachable within the same chapter', () => {
@@ -85,17 +131,45 @@ describe('in-chapter year progression', () => {
           currentLocationId: 'paris',
           chapterIndex: 2, // entry: 1895-1902
           currentYear: 1895,
+          timeActionsRemaining: chapterActionBudget(1895, 1902),
           resources: { ...game.players[0].resources, tokens: { ...game.players[0].resources.tokens, evidence: 2 } },
         },
       ],
     };
     const project = getProjectById('curie-radiation-measurement')!; // earliestYear 1896
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(false);
-    // Spend two Time actions (e.g. resting), advancing the in-chapter year.
+    // One action advances the calendar to the project's earliest year.
     game = gameReducer(game, { type: 'REST_AND_FAMILY' });
-    game = gameReducer(game, { type: 'REST_AND_FAMILY' });
-    expect(game.players[0].currentYear).toBeGreaterThanOrEqual(1896);
+    expect(game.players[0].currentYear).toBe(1896);
     expect(canAttemptProject(game, game.players[0], project).eligible).toBe(true);
+  });
+});
+
+describe('player turns', () => {
+  it('rotates after four action points are spent and resets the outgoing player', () => {
+    let game = createGame(['curie', 'noether'], 12);
+    const curieStartYear = game.players[0].currentYear;
+
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.activePlayerIndex).toBe(0);
+    expect(game.players[0].turnActionsRemaining).toBe(1);
+
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.activePlayerIndex).toBe(1);
+    expect(game.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
+    expect(game.players[0].currentYear).toBe(curieStartYear + 4);
+  });
+
+  it('allows a player to end a turn early', () => {
+    let game = createGame(['curie', 'noether'], 13);
+    game = gameReducer(game, { type: 'GENERATE_TOKEN', kind: 'study' });
+    expect(game.players[0].turnActionsRemaining).toBe(3);
+
+    game = gameReducer(game, { type: 'END_TURN' });
+    expect(game.activePlayerIndex).toBe(1);
+    expect(game.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
   });
 });
 
@@ -217,10 +291,10 @@ describe('consequence accumulation', () => {
 describe('final legacy scoring', () => {
   it('computes a ratio against the character legacy benchmark', () => {
     const player = createPlayer('curie', 'p1');
-    const scored = { ...player, legacyPoints: 50, canonPoints: 10 };
+    const scored = { ...player, legacyPoints: 50, canonPoints: 3, completedProjectIds: ['one', 'two'] };
     const summary = computeFinalScore(scored);
     expect(summary.totalLegacy).toBe(50);
-    expect(summary.canonAlignment).toBe(10);
+    expect(summary.canonAlignment).toBe(50);
     expect(summary.benchmark).toBe(getCharacter('curie').legacyBenchmark);
     expect(summary.benchmarkRatio).toBeCloseTo(50 / getCharacter('curie').legacyBenchmark);
   });
@@ -237,6 +311,11 @@ describe('reducer: attempting and completing a project', () => {
           currentLocationId: 'bern',
           chapterIndex: 2, // entry
           currentYear: 1905,
+          timeActionsRemaining: chapterActionBudget(1905, 1909),
+          insights: [
+            ...game.players[0].insights,
+            { insightId: 'relativity-of-simultaneity', sourceType: 'study' as const, sourceId: 'theory', year: 1905 },
+          ],
           resources: { ...game.players[0].resources, tokens: { ...game.players[0].resources.tokens, theory: 3 } },
         },
       ],
@@ -244,6 +323,8 @@ describe('reducer: attempting and completing a project', () => {
     game = gameReducer(game, { type: 'ATTEMPT_PROJECT', projectId: 'einstein-special-relativity' });
     const player = game.players[0];
     expect(player.completedProjectIds).toContain('einstein-special-relativity');
+    expect(player.currentYear).toBe(1906);
+    expect(player.turnActionsRemaining).toBe(2);
     expect(player.legacyPoints).toBeGreaterThan(0);
     expect(player.resources.tokens.theory).toBe(0);
     expect(game.knowledgeBoard.specialRelativity?.publishedByCharacterId).toBe('einstein');

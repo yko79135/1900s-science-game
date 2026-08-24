@@ -1,0 +1,13 @@
+---
+description: Deliver every requested repository change through commit, push, and merge
+alwaysApply: true
+---
+
+# Commit and Merge Requested Changes
+
+- After implementing and verifying any user-requested repository change, commit it on a `codex/` feature branch.
+- Fetch the latest remote default branch before merging.
+- Push the feature branch, merge it into the current default branch, and push the merged default branch to GitHub.
+- Confirm the remote default branch contains the merge commit and report the result.
+- If GitHub integration triggers a deployment, verify its production status when deployment context is relevant.
+- Skip this workflow only when the user explicitly requests local-only or uncommitted work.

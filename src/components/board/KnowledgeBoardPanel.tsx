@@ -11,7 +11,7 @@ export function KnowledgeBoardPanel({ state, onClose }: { state: GameState; onCl
         <p>
           Foundational discoveries enter public knowledge here once published. If no one publishes an indispensable
           discovery by its historical deadline, the Century does not wait: an NPC researcher publishes it instead, and
-          downstream work remains possible — but the credit is lost.
+          downstream work remains possible. NPC fallbacks never award Legacy to a human player.
         </p>
         <ul className="knowledge-board__list">
           {entries.map((entry) => {
@@ -27,7 +27,7 @@ export function KnowledgeBoardPanel({ state, onClose }: { state: GameState; onCl
                 <p>{entry.description}</p>
                 <p className="knowledge-board__status">{status}</p>
                 <p className="knowledge-board__deadline">
-                  Canonically associated with {getCharacter(entry.canonicalCharacterId).name} · historical deadline {entry.deadlineYear}
+                  Historical comparison: {getCharacter(entry.canonicalCharacterId).name} · fallback deadline {entry.deadlineYear}
                 </p>
                 <p className="context-card__source">
                   Source:{' '}

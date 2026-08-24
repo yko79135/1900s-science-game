@@ -26,6 +26,25 @@ npm run e2e       # end-to-end playthrough (Playwright)
 npm run lint      # oxlint
 ```
 
+## Live story illustrations
+
+Major story scenes can request a historical illustration from the same-origin
+`POST /api/story-image` Vercel Function. The browser sends only the scene and
+variant identifiers plus bounded timeline context. The function resolves the
+authoritative `StoryImageSpec`, applies the campaign-wide PG-13 prompt rules,
+and calls `openai/gpt-image-2` through Vercel AI Gateway. It never accepts a
+browser-authored prompt.
+
+Vercel deployments use the automatically managed `VERCEL_OIDC_TOKEN` by
+default. If OIDC is not enabled for the project, configure
+`AI_GATEWAY_API_KEY` as a server-only Vercel environment variable. Never add a
+`VITE_`-prefixed gateway credential.
+
+Generated data URLs are kept outside game saves: an in-memory map prevents
+duplicate calls during a session and Cache Storage persists exact story
+contexts across refreshes. If generation, storage, or image decoding fails,
+the fixed-size fallback artwork remains visible and gameplay continues.
+
 ## Architecture
 
 - **`src/types/`** — all core domain types (`Character`, `Location`,
@@ -67,15 +86,19 @@ npm run lint      # oxlint
   only allowed to interact (via a shared collaborator or an ability like
   Bohr's Copenhagen invitation) when their lifespans and the specific
   collaborator's active window genuinely overlap.
-- **In-chapter time passes as Time actions are spent.** A chapter's year
-  range is spread evenly across its four Time actions, so a project whose
-  earliest plausible date falls partway through a chapter becomes reachable
-  as the chapter progresses, rather than being either instantly available or
-  permanently locked.
-- **Canon scoring is additive, not a gate.** Completing a project awards its
-  base Legacy regardless of place/date; a Canon bonus (+3 documented in
-  place and year, +1 near-canon or Plausible, +0 Speculative) is added on
-  top, keeping Canon to a modest share of the final score as specified.
+- **Each main action advances the calendar by one year.** Players receive four
+  action points per turn, and demanding projects can consume more than one
+  point while still advancing the calendar once. Turns rotate automatically
+  when their points are spent, or a player can end a turn early. Each chapter
+  includes one calendar action for every year in its inclusive range.
+- **Discovery, not canon, creates Legacy.** Projects award their base Legacy
+  when their resources, permanent Insights, public-knowledge prerequisites,
+  Funds, and action costs are satisfied. A small early-discovery bonus may be
+  added, but historical place/date scoring is kept only as Canon Alignment.
+- **Canon gives a good route, not the only route.** Historical locations and
+  collaborators provide resource advantages or deterministic ways to acquire
+  Insights. Independent study, other projects, Century Knowledge, and human
+  collaborators can unlock the same scientific understanding.
 - **The Century Does Not Wait** is implemented as a deadline check against
   the shared Knowledge Board: if no player publishes an indispensable
   discovery by its historical deadline, it's marked as published by an NPC

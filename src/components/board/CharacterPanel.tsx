@@ -1,11 +1,12 @@
 import type { PlayerState } from '../../types';
 import { LIFE_CHAPTER_LABELS } from '../../types';
-import { LOCATIONS } from '../../data/content';
-import { currentChapter, getCharacter } from '../../engine/rules';
+import { INSIGHTS, LOCATIONS } from '../../data/content';
+import { ACTIONS_PER_TURN, chapterActionBudget, computeCanonAlignment, currentChapter, getCharacter } from '../../engine/rules';
 
 export function CharacterPanel({ player }: { player: PlayerState }) {
   const character = getCharacter(player.characterId);
   const chapter = currentChapter(player);
+  const totalTimeActions = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
   const location = LOCATIONS[player.currentLocationId];
   const r = player.resources;
 
@@ -33,7 +34,8 @@ export function CharacterPanel({ player }: { player: PlayerState }) {
       </p>
 
       <dl className="resource-grid">
-        <ResourceStat label="Time" value={`${player.timeActionsRemaining} / 4`} />
+        <ResourceStat label="Years Left" value={`${player.timeActionsRemaining} / ${totalTimeActions}`} />
+        <ResourceStat label="Turn Actions" value={`${player.turnActionsRemaining} / ${ACTIONS_PER_TURN}`} />
         <ResourceStat label="Funds" value={r.funds} />
         <ResourceStat label="Wellbeing" value={r.wellbeing} />
         <ResourceStat label="Health" value={r.health} />
@@ -51,8 +53,26 @@ export function CharacterPanel({ player }: { player: PlayerState }) {
       </dl>
 
       <p className="character-panel__legacy">
-        Legacy so far: <strong>{player.legacyPoints}</strong> (Canon +{player.canonPoints}) — benchmark {character.legacyBenchmark}
+        Legacy so far: <strong>{player.legacyPoints}</strong> — benchmark {character.legacyBenchmark}
+        <br />
+        Canon Alignment: <strong>{computeCanonAlignment(player)}%</strong>
       </p>
+
+      <details className="character-panel__insights">
+        <summary>Insights ({player.insights.length})</summary>
+        {player.insights.length === 0 ? (
+          <p>No permanent Insights acquired yet.</p>
+        ) : (
+          <ul>
+            {player.insights.map((acquisition) => (
+              <li key={acquisition.insightId}>
+                <strong>{INSIGHTS[acquisition.insightId]?.name ?? acquisition.insightId}</strong>
+                <span> — {insightSourceLabel(acquisition.sourceType)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </details>
 
       <details className="character-panel__route">
         <summary>Route so far ({player.routeHistory.length} stops)</summary>
@@ -66,6 +86,22 @@ export function CharacterPanel({ player }: { player: PlayerState }) {
       </details>
     </section>
   );
+}
+
+function insightSourceLabel(sourceType: PlayerState['insights'][number]['sourceType']): string {
+  const labels: Record<typeof sourceType, string> = {
+    starting: 'starting perspective',
+    location: 'place and institution',
+    collaborator: 'collaborator',
+    characterEncounter: 'scientific encounter',
+    humanCollaboration: 'another player',
+    study: 'independent study',
+    projectCompletion: 'earlier project',
+    centuryKnowledge: 'Century Knowledge',
+    historicalEvent: 'historical event',
+    migration: 'earlier saved progress',
+  };
+  return labels[sourceType];
 }
 
 function ResourceStat({ label, value }: { label: string; value: number | string }) {

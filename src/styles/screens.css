@@ -340,6 +340,12 @@
   overflow-y: auto;
 }
 
+.character-panel__insights ul {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+}
+
 /* Project panel */
 .project-panel__list {
   list-style: none;
@@ -375,6 +381,47 @@
 .project-card__stats {
   font-size: 0.8rem;
   color: var(--ink-soft);
+}
+
+.project-card__requirements {
+  margin: 0.55rem 0;
+  border-block: 1px solid var(--paper-border);
+  padding: 0.45rem 0;
+}
+
+.project-card__requirements h4 {
+  margin: 0.25rem 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-card__requirements > ul,
+.project-card__insights {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  font-size: 0.82rem;
+}
+
+.project-card__requirements .is-met {
+  color: var(--success);
+}
+
+.project-card__requirements .is-missing {
+  color: var(--danger);
+}
+
+.project-card__insights details p,
+.project-card__insights details ul,
+.project-card__no-insights {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.project-card__insights details ul {
+  margin-top: 0.25rem;
+  padding-left: 1.2rem;
 }
 
 .project-card__reasons {
@@ -429,6 +476,8 @@
 .action-bar__timeline {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
   font-size: 0.9rem;
 }
 
@@ -438,7 +487,7 @@
   gap: 0.4rem;
 }
 
-.action-bar__end-chapter {
+.action-bar__end-turn {
   margin-left: auto;
 }
 

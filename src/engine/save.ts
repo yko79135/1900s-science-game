@@ -1,5 +1,8 @@
-import type { CompendiumDiscoveryState, GameState, SaveFile, SettingsState } from '../types';
+import type { CompendiumDiscoveryState, GameState, InsightAcquisition, ResourceTokenType, SaveFile, SettingsState } from '../types';
 import { SCHEMA_VERSION } from '../types';
+import { CHARACTERS, CHAPTERS_BY_CHARACTER, INSIGHTS, getProjectById } from '../data/content';
+import { ACTIONS_PER_TURN, chapterActionBudget } from './rules';
+import { createEmptyNarrativeState } from './story';
 
 const KEYS = {
   currentGame: 'shapeOfACentury.currentGame',
@@ -18,16 +21,119 @@ function safeParse<T>(raw: string | null): T | null {
 }
 
 /**
- * Migrates a raw saved payload to the current schema. Since this is the
- * first shipped schema version, unknown/newer versions are rejected rather
- * than guessed at; future versions should add real migration steps here.
+ * Migrates a raw saved payload to the current schema. Unknown/newer versions
+ * are rejected rather than guessed at.
  */
 export function migrateSave(raw: unknown): GameState | null {
   if (!raw || typeof raw !== 'object') return null;
   const save = raw as Partial<SaveFile>;
   if (!save.game || typeof save.game.schemaVersion !== 'number') return null;
   if (save.game.schemaVersion > SCHEMA_VERSION) return null; // From a newer version we don't understand.
-  return save.game as GameState;
+  let game = save.game as GameState;
+
+  if (game.schemaVersion < 2) {
+    game = {
+      ...game,
+      schemaVersion: 2,
+      players: game.players.map((player) => {
+        const chapter = CHAPTERS_BY_CHARACTER[player.characterId]?.[player.chapterIndex];
+        if (!chapter || player.finished) return player;
+
+        const currentYear = Math.max(chapter.yearStart, Math.min(chapter.yearEnd, player.currentYear));
+        return {
+          ...player,
+          currentYear,
+          timeActionsRemaining: chapterActionBudget(currentYear, chapter.yearEnd),
+        };
+      }),
+    };
+  }
+
+  if (game.schemaVersion < 3) {
+    game = {
+      ...game,
+      schemaVersion: 3,
+      players: game.players.map((player) => {
+        const chapter = CHAPTERS_BY_CHARACTER[player.characterId]?.[player.chapterIndex];
+        if (!chapter || player.finished) {
+          return { ...player, turnActionsRemaining: ACTIONS_PER_TURN };
+        }
+
+        const currentYear = Math.max(chapter.yearStart, Math.min(chapter.yearEnd, player.currentYear));
+        return {
+          ...player,
+          currentYear,
+          timeActionsRemaining: chapterActionBudget(currentYear, chapter.yearEnd),
+          turnActionsRemaining: ACTIONS_PER_TURN,
+        };
+      }),
+    };
+  }
+
+  if (game.schemaVersion < 4) {
+    game = {
+      ...game,
+      schemaVersion: 4,
+      narrative: createEmptyNarrativeState(),
+    };
+  }
+
+  if (game.schemaVersion < 5) {
+    game = {
+      ...game,
+      schemaVersion: 5,
+      players: game.players.map((player) => {
+        const character = CHARACTERS[player.characterId];
+        const existing = (player.insights ?? []) as InsightAcquisition[];
+        const byId = new Map(existing.map((item) => [item.insightId, item]));
+        for (const insightId of character.startingInsights ?? []) {
+          if (!byId.has(insightId)) {
+            byId.set(insightId, {
+              insightId,
+              sourceType: 'starting',
+              sourceId: character.id,
+              sourceCharacterId: character.id,
+              year: character.bornYear,
+            });
+          }
+        }
+        for (const projectId of player.completedProjectIds) {
+          const project = getProjectById(projectId);
+          for (const insightId of project?.requiredInsights ?? []) {
+            if (!byId.has(insightId)) {
+              byId.set(insightId, { insightId, sourceType: 'migration', sourceId: projectId, year: player.currentYear });
+            }
+          }
+          for (const insight of Object.values(INSIGHTS)) {
+            const grantsInsight = insight.acquisitionRoutes.some(
+              (route) => route.type === 'projectCompletion' && route.projectId === projectId,
+            );
+            if (grantsInsight && !byId.has(insight.id)) {
+              byId.set(insight.id, { insightId: insight.id, sourceType: 'projectCompletion', sourceId: projectId, year: player.currentYear });
+            }
+          }
+        }
+        const emptyProgress: Record<ResourceTokenType, number> = {
+          theory: 0,
+          proof: 0,
+          evidence: 0,
+          computation: 0,
+          engineering: 0,
+        };
+        return {
+          ...player,
+          insights: [...byId.values()],
+          studyProgress: { ...emptyProgress, ...(player.studyProgress ?? {}) },
+        };
+      }),
+    };
+  }
+
+  return {
+    ...game,
+    schemaVersion: SCHEMA_VERSION,
+    narrative: game.narrative ?? createEmptyNarrativeState(),
+  };
 }
 
 export function saveCurrentGame(game: GameState): void {

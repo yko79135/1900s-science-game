@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CharacterId, GameState } from './types';
-import { gameReducer, createGame } from './engine/reducer';
+import { createGame, restartGame } from './engine/reducer';
+import {
+  initializeStoryGame,
+  prepareResumedStoryGame,
+  storyAwareGameReducer,
+  type StoryAwareAction,
+} from './engine/story';
 import {
   appendCompletedGame,
   clearCurrentGame,
@@ -23,7 +29,10 @@ type UiScreen = 'title' | 'setup' | 'select';
 
 export default function App() {
   const [uiScreen, setUiScreen] = useState<UiScreen>('title');
-  const [game, setGame] = useState<GameState | null>(() => loadCurrentGame());
+  const [game, setGame] = useState<GameState | null>(() => {
+    const loaded = loadCurrentGame();
+    return loaded ? prepareResumedStoryGame(loaded) : null;
+  });
   const [setupConfig, setSetupConfig] = useState<SetupConfig | null>(null);
   const [settings, setSettings] = useState(() => loadSettings());
   const [showCompendium, setShowCompendium] = useState(false);
@@ -76,7 +85,7 @@ export default function App() {
 
   function handleCharacterSelectConfirm(characterIds: CharacterId[]) {
     if (!setupConfig) return;
-    const newGame = createGame(characterIds, setupConfig.seed, setupConfig.gameLength);
+    const newGame = initializeStoryGame(createGame(characterIds, setupConfig.seed, setupConfig.gameLength));
     setGame(newGame);
     setUiScreen('title');
     if (setupConfig.tutorial || !settings.tutorialCompleted) {
@@ -86,7 +95,7 @@ export default function App() {
 
   function handleResume() {
     const loaded = loadCurrentGame();
-    if (loaded) setGame(loaded);
+    if (loaded) setGame(prepareResumedStoryGame(loaded));
   }
 
   function handleExitToTitle() {
@@ -97,8 +106,14 @@ export default function App() {
     if (game) saveCurrentGame(game);
   }
 
-  function dispatch(action: Parameters<typeof gameReducer>[1]) {
-    setGame((current) => (current ? gameReducer(current, action) : current));
+  function handleRestartGame() {
+    setGame((current) => (current ? initializeStoryGame(restartGame(current)) : current));
+    setShowTutorial(false);
+    recordedCompletion.current = false;
+  }
+
+  function dispatch(action: StoryAwareAction) {
+    setGame((current) => (current ? storyAwareGameReducer(current, action) : current));
   }
 
   if (game) {
@@ -119,7 +134,14 @@ export default function App() {
             }}
           />
         ) : (
-          <BoardScreen state={game} dispatch={dispatch} onSave={handleSave} onExitToTitle={handleExitToTitle} />
+          <BoardScreen
+            key={game.createdAt}
+            state={game}
+            dispatch={(action) => dispatch(action)}
+            onSave={handleSave}
+            onRestartGame={handleRestartGame}
+            onExitToTitle={handleExitToTitle}
+          />
         )}
         {showTutorial && (
           <TutorialOverlay
