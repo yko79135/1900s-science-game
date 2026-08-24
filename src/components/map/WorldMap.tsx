@@ -158,12 +158,17 @@ function LocationMarker({
 }) {
   const [x, y] = project(location.coordinates.lon, location.coordinates.lat);
   const reachable = meta.travel.allowed;
+  // Keep the map from turning into a wall of overlapping city names: only
+  // label the places that matter right now. Everything else is still a
+  // clickable dot, and reveals its name on hover, keyboard focus, or tap.
+  const alwaysLabeled = isCurrent || selected || meta.canonical || occupants.length > 0;
   const classNames = [
     'world-map__location',
     meta.active ? 'is-active-era' : 'is-inactive-era',
     reachable ? 'is-reachable' : 'is-locked',
     selected ? 'is-selected' : '',
     meta.canonical ? 'is-canonical' : '',
+    alwaysLabeled ? 'is-labeled' : '',
   ]
     .filter(Boolean)
     .join(' ');

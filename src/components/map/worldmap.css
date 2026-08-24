@@ -101,13 +101,25 @@
   stroke: var(--ocean-deep);
   stroke-width: 2px;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+/* Keep the map from turning into a wall of overlapping city names: most
+   locations show only a dot, and reveal their label on hover, keyboard
+   focus, or when they're the current location, a canonical stop, selected,
+   or occupied by a player token (see the is-labeled class). */
+.world-map__location:hover .world-map__label,
+.world-map__location:focus-visible .world-map__label,
+.world-map__location.is-labeled .world-map__label {
+  opacity: 0.9;
 }
 
 .world-map__location {
   cursor: pointer;
 }
 
+.world-map__location:hover .world-map__location-dot,
 .world-map__location:focus-visible .world-map__location-dot {
   stroke: var(--focus-ring);
   stroke-width: 2;
