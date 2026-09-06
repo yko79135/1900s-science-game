@@ -1,5 +1,18 @@
 import { test, expect, type Page } from '@playwright/test';
 
+/** The map lives on top of the turn screen, and a story scene returns you to the year. */
+async function ensureMap(page: Page) {
+  if (await page.getByTestId('map-hud').isVisible().catch(() => false)) return;
+  const open = page.getByText('Look at the map');
+  if (await open.isVisible().catch(() => false)) await open.click();
+}
+
+/** Clicks a control that lives on the map view, reopening the map if a scene took us back to the year. */
+async function clickOnMap(page: Page, testId: string) {
+  await ensureMap(page);
+  await page.getByTestId(testId).click();
+}
+
 /** Reads through whatever story pages are showing, taking the first option at any choice. */
 async function readStory(page: Page) {
   for (let i = 0; i < 200; i++) {
@@ -57,6 +70,16 @@ test('a complete game can be played from character selection to final scoring', 
   await expect(page.getByRole('heading', { name: /./ }).first()).toBeVisible();
   await readStory(page);
 
+  // The turn screen is the default surface: one year, five numbers, and every
+  // action carrying the effect it will really have.
+  await expect(page.getByTestId('turn-study')).toBeVisible();
+  await expect(page.getByTestId('turn-study')).toContainText('Research');
+  await expect(page.getByRole('term').filter({ hasText: 'Wellbeing' })).toBeVisible();
+
+  // The map opens on top of it and hands control back.
+  await page.getByText('Look at the map').click();
+  await expect(page.getByTestId('map-hud')).toBeVisible();
+
   // Board loaded: Formation chapter, Warsaw.
   await expect(page.getByText('Marie Curie', { exact: true }).first()).toBeVisible();
   await expect(page.getByText(/Formation/).first()).toBeVisible();
@@ -79,10 +102,11 @@ test('a complete game can be played from character selection to final scoring', 
   await page.getByRole('button', { name: 'Cancel' }).click();
   await expect(page.getByText(/Formation/).first()).toBeVisible();
 
+  await ensureMap(page);
   await page.getByRole('tab', { name: 'Central Europe' }).click();
 
   // Perform actions: earn funds, then move on the map to Paris.
-  await page.getByTestId('action-teach-or-earn').click();
+  await clickOnMap(page, 'action-teach-or-earn');
   await readStory(page);
   await page.getByTestId('map-location-paris').click();
   await expect(page.getByTestId('travel-confirm-btn')).toBeVisible();
@@ -90,7 +114,7 @@ test('a complete game can be played from character selection to final scoring', 
   await readStory(page);
 
   // End Formation chapter: the closing scene plays, then the Education opening.
-  await page.getByTestId('end-chapter-btn').click();
+  await clickOnMap(page, 'end-chapter-btn');
   await readStory(page);
   const contextCardContinue = page.getByTestId('context-card-continue');
   if (await contextCardContinue.isVisible().catch(() => false)) {
@@ -100,33 +124,34 @@ test('a complete game can be played from character selection to final scoring', 
   await expect(page.getByText(/Education/).first()).toBeVisible();
 
   // End Education chapter -> Entry chapter, where Curie's first projects unlock.
-  await page.getByTestId('end-chapter-btn').click();
+  await clickOnMap(page, 'end-chapter-btn');
   await readStory(page);
   await expect(page.getByText(/Entry into the Profession/).first()).toBeVisible();
 
   // Earn Funds (Paris's Sorbonne post pays well), then build up Evidence tokens via Experiment.
-  await page.getByTestId('action-teach-or-earn').click();
+  await clickOnMap(page, 'action-teach-or-earn');
   await readStory(page);
-  const experimentBtn = page.getByTestId('action-experiment-evidence');
-  await experimentBtn.click();
+  await clickOnMap(page, 'action-experiment-evidence');
   await readStory(page);
-  await experimentBtn.click();
+  await clickOnMap(page, 'action-experiment-evidence');
   await readStory(page);
 
   // Complete the "Systematic Radiation Measurement" project once eligible.
+  await ensureMap(page);
   const attemptBtn = page.getByTestId('attempt-project-curie-radiation-measurement');
   await expect(attemptBtn).toBeVisible();
   // If still too early in the chapter, rest to advance the in-chapter year.
   const restBtn = page.getByTestId('action-rest');
   for (let i = 0; i < 3 && (await attemptBtn.isDisabled()); i++) {
     if (await restBtn.isEnabled()) {
-      await restBtn.click();
+      await clickOnMap(page, 'action-rest');
       await readStory(page);
     }
   }
   if (await attemptBtn.isEnabled()) {
-    await attemptBtn.click();
+    await clickOnMap(page, 'attempt-project-curie-radiation-measurement');
     await readStory(page);
+    await ensureMap(page);
     await expect(page.getByText('Completed').first()).toBeVisible();
   }
 
@@ -135,6 +160,7 @@ test('a complete game can be played from character selection to final scoring', 
   // Crisis chapter without any special handling required from the player.
   for (let i = 0; i < 10; i++) {
     await readStory(page);
+    await ensureMap(page);
     const endBtn = page.getByTestId('end-chapter-btn');
     if (!(await endBtn.isVisible().catch(() => false))) break;
     if (await endBtn.isDisabled()) {
@@ -144,7 +170,7 @@ test('a complete game can be played from character selection to final scoring', 
       }
     }
     if (await endBtn.isEnabled()) {
-      await endBtn.click();
+      await clickOnMap(page, 'end-chapter-btn');
       await readStory(page);
     }
     const cardBtn = page.getByTestId('context-card-continue');

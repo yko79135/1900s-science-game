@@ -4,6 +4,11 @@ import { BoardScreen } from '../components/board/BoardScreen';
 import { WorldMap } from '../components/map/WorldMap';
 import { createGame } from '../engine/reducer';
 
+/** The turn screen is the default surface now; the map opens on top of it. */
+function openMap() {
+  fireEvent.click(screen.getByText('Look at the map'));
+}
+
 describe('board controls', () => {
   it('shows the active player’s current year prominently on the map', () => {
     const player = createGame(['curie'], 1905).players[0];
@@ -38,6 +43,7 @@ describe('board controls', () => {
       />,
     );
 
+    openMap();
     fireEvent.click(screen.getByTestId('restart-game-btn'));
     expect(screen.getByRole('alertdialog', { name: 'Confirm game restart' })).toBeVisible();
     expect(onRestartGame).not.toHaveBeenCalled();
@@ -60,6 +66,7 @@ describe('board controls', () => {
       />,
     );
 
+    openMap();
     expect(screen.getByText(/Turn actions: 4 \/ 4/)).toBeVisible();
     fireEvent.click(screen.getByTestId('end-turn-btn'));
     expect(dispatch).toHaveBeenCalledWith({ type: 'END_TURN' });

@@ -12,6 +12,7 @@ import { KnowledgeBoardPanel } from './KnowledgeBoardPanel';
 import { RulesModal } from '../screens/RulesModal';
 import { CompendiumScreen } from '../screens/CompendiumScreen';
 import { StoryChronicle } from '../story/StoryChronicle';
+import { TurnScreen } from '../turn/TurnScreen';
 
 export interface BoardScreenProps {
   state: GameState;
@@ -28,6 +29,8 @@ export function BoardScreen({ state, dispatch, onSave, onRestartGame, onExitToTi
   const [showRules, setShowRules] = useState(false);
   const [showCompendium, setShowCompendium] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
+  // The turn screen is the default surface; the map opens on top of it.
+  const [showMap, setShowMap] = useState(false);
 
   const player = state.players[state.activePlayerIndex];
   const cards = pendingContextCards(player);
@@ -37,11 +40,29 @@ export function BoardScreen({ state, dispatch, onSave, onRestartGame, onExitToTi
     if (action.type === 'TRAVEL') setSelectedLocationId(null);
   }
 
+  if (!showMap) {
+    return (
+      <>
+        <TurnScreen
+          state={state}
+          dispatch={dispatch}
+          onOpenMap={() => setShowMap(true)}
+          onOpenChronicle={() => setShowChronicle(true)}
+        />
+        {cards.length > 0 && <ContextCardOverlay cards={cards} dispatch={dispatch} />}
+        {showChronicle && <StoryChronicle state={state} onClose={() => setShowChronicle(false)} />}
+      </>
+    );
+  }
+
   return (
     <div className="board">
       <div className="board__topbar">
         <h1 className="board__title">The Shape of a Century</h1>
         <div className="board__topbar-actions">
+          <button type="button" className="btn btn-primary" data-testid="back-to-turn-btn" onClick={() => setShowMap(false)}>
+            Back to the year
+          </button>
           <button className="btn" onClick={() => setShowChronicle(true)}>
             Chronicle
           </button>

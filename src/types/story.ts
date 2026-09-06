@@ -130,6 +130,25 @@ export interface StoryScene {
   replacesContextCardId?: string;
 }
 
+/**
+ * A single line that lands on the turn screen without interrupting it: a letter
+ * arrives, a colleague publishes, a room gets colder. Beats carry no pages and
+ * no choices — they are the texture between the authored scenes.
+ */
+export interface StoryBeat {
+  id: string;
+  characterId: CharacterId;
+  conditions?: StoryCondition[];
+  /** One sentence, present tense, in the character's own world. */
+  text: string;
+  /** Optional speaker for a beat that is a single spoken line. */
+  speaker?: string;
+  /** Higher beats are offered first among those that match. */
+  priority?: number;
+  /** Beats repeat only when this is false; most are once in a life. */
+  repeatable?: boolean;
+}
+
 export interface StoryRelationshipState {
   familiarity: number;
   respect: number;
@@ -168,6 +187,10 @@ export interface NarrativeState {
   chapterOpeningSeen: Record<string, boolean>;
   chapterClosingSeen: Record<string, boolean>;
   chronicle: StoryChronicleEntry[];
+  /** Beats already spent, so a life does not repeat its own small moments. */
+  seenBeatIds?: string[];
+  /** The beat currently showing on the turn screen. */
+  activeBeatId?: string;
   pendingTransition?: NarrativeTransition;
 }
 

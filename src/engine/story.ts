@@ -219,7 +219,8 @@ function resourceValue(player: PlayerState, resource: string): number {
   return resources[resource] ?? 0;
 }
 
-function conditionMatches(state: GameState, player: PlayerState, condition: StoryCondition): boolean {
+/** Exported so the beat layer can use exactly the same gating as authored scenes. */
+export function conditionMatches(state: GameState, player: PlayerState, condition: StoryCondition): boolean {
   if ('all' in condition) return condition.all.every((item) => conditionMatches(state, player, item));
   if ('any' in condition) return condition.any.some((item) => conditionMatches(state, player, item));
   if ('not' in condition) return !conditionMatches(state, player, condition.not);

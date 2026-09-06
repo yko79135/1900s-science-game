@@ -8,6 +8,7 @@ import {
   storyAwareGameReducer,
   type StoryAwareAction,
 } from './engine/story';
+import { advanceBeat } from './engine/beats';
 import {
   appendCompletedGame,
   clearCurrentGame,
@@ -115,7 +116,13 @@ export default function App() {
   }
 
   function dispatch(action: StoryAwareAction) {
-    setGame((current) => (current ? storyAwareGameReducer(current, action) : current));
+    setGame((current) => {
+      if (!current) return current;
+      const next = storyAwareGameReducer(current, action);
+      // A board action spends a year, and the year gets its line.
+      if (next === current || action.type.startsWith('STORY_')) return next;
+      return advanceBeat(next);
+    });
   }
 
   if (game) {

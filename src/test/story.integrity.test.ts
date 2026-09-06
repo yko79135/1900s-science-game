@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CHARACTERS, CONTEXT_CARDS_BY_CHARACTER, LOCATIONS, PROJECTS_BY_CHARACTER, SOURCES } from '../data/content';
 import { REPLACED_CONTEXT_CARDS_BY_CHARACTER, STORY_SCENES, authoredScenesForCharacter } from '../data/story';
+import { BEATS } from '../data/beats';
 import type { StoryCondition, StoryEffect, StoryScene } from '../types/story';
 import type { CharacterId } from '../types';
 import { LIFE_CHAPTER_ORDER } from '../types';
@@ -114,6 +115,28 @@ describe('story scene integrity', () => {
         for (const pattern of FORBIDDEN_IN_PROSE) {
           if (pattern.test(text)) offenders.push(`${where}: ${pattern} in “${text.slice(0, 80)}”`);
         }
+      }
+    }
+    expect(offenders, offenders.join('\n')).toEqual([]);
+  });
+
+  it('keeps the engine out of the beats too, and gates every one of them', () => {
+    const ids = BEATS.map((beat) => beat.id);
+    expect(new Set(ids).size, 'beat ids must be unique').toBe(ids.length);
+    const offenders: string[] = [];
+    for (const beat of BEATS) {
+      expect(CHARACTER_IDS.includes(beat.characterId), `${beat.id} character`).toBe(true);
+      // A beat with no conditions fires in the wrong decade.
+      expect((beat.conditions ?? []).length, `${beat.id} needs at least one condition`).toBeGreaterThan(0);
+      for (const condition of beat.conditions ?? []) {
+        walkConditions(condition, (leaf) => {
+          if ('locationId' in leaf) expect(LOCATION_IDS.has(leaf.locationId), `${beat.id} location ${leaf.locationId}`).toBe(true);
+          if ('projectId' in leaf) expect(ALL_PROJECT_IDS.has(leaf.projectId), `${beat.id} project ${leaf.projectId}`).toBe(true);
+          if ('characterId' in leaf) expect(CHARACTER_IDS.includes(leaf.characterId), `${beat.id} character ${leaf.characterId}`).toBe(true);
+        });
+      }
+      for (const pattern of FORBIDDEN_IN_PROSE) {
+        if (pattern.test(beat.text)) offenders.push(`${beat.id}: ${pattern}`);
       }
     }
     expect(offenders, offenders.join('\n')).toEqual([]);
