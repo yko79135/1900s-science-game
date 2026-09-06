@@ -1388,7 +1388,7 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
           {
             id: 'invitation',
             narration:
-              'A young English mathematician comes out from Cambridge in person to argue him onto a ship. The university finds money. The Port Trust finds leave. Everything that has refused to move for eleven years moves in a fortnight.',
+              'A young English mathematician comes out from Cambridge in person to argue him onto a ship. The university says it will find money. The Port Trust says it will find leave. Everything that has refused to move for eleven years moves in a fortnight, on paper.',
           },
           {
             id: 'fortnight',
@@ -1402,26 +1402,26 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
       {
         id: 'answered',
         conditions: [{ type: 'narrativeFlag', flag: 'ramanujan.thread.hardyReplied' }],
-        title: 'Somebody in England Knows His Name',
+        title: 'Answering Is Harder Than Asking',
         yearLabel: '1914',
         image: {
-          setting: 'a harbour office desk with an English letter propped against an inkwell',
+          setting: 'a harbour office desk at evening with a half-written reply and a stack of copied theorems',
           year: 1914,
           characters: ['ramanujan'],
           mood: 'a door unlocked and not yet opened',
-          details: ['an English letter propped upright', 'an inkwell', 'a shipping schedule', 'a ledger closed for the day', 'evening light off the water'],
-          alt: 'An English letter propped against an inkwell on a harbour office desk at evening.',
+          details: ['a half-written reply', 'a stack of freshly copied theorems', 'an inkwell', 'a ledger closed for the day', 'evening light off the water'],
+          alt: 'A half-written reply and a stack of copied theorems on a harbour office desk at evening.',
         },
         pages: [
           {
             id: 'known',
             narration:
-              'The letter stays propped against the inkwell for a month, where he can see it from the ledger. Somebody in England knows his name, and has asked for proofs, and has asked in the last line whether he would come.',
+              'He answers within the week and finds the answering harder than the asking ever was. What they want is proofs. What he has is more results, so he encloses more results, sixty of them, in a hand that gets smaller as the paper runs out.',
           },
           {
             id: 'gap',
             narration:
-              'Between the asking and the going there is a passage nobody has paid for, a leave nobody has granted, and a household that has not been told. He answers carefully and encloses more theorems, because enclosing theorems is the one part of it he knows how to do.',
+              'Then the waiting starts again, and this waiting is worse, because now there is somebody at the other end of it. Between a man being wanted in England and a man arriving in England lie a passage nobody has paid for, a leave nobody has granted, and a household that has not yet been told anything at all.',
           },
         ],
         historicalNote:
@@ -1561,7 +1561,7 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
           {
             id: 'choice',
             narration:
-              'He says it lightly and goes home and does not eat. The reader he waited eleven years for is on the far side of a closed ocean, and the question of what a result is worth without a demonstration is now his to settle alone.',
+              'He says it lightly and goes home and does not eat. The reader he waited eleven years for is on the far side of a closed ocean, and until the ocean opens again the question of what a result is worth without a demonstration is his to settle alone.',
             choices: [
               {
                 id: 'proofs',
@@ -1689,7 +1689,7 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
           {
             id: 'war',
             narration:
-              'Behind him the coast goes thin and disappears. Ahead is a country he has read about only in the front matter of textbooks. Four months after he lands, its young men begin walking out of the colleges in uniform and not coming back.',
+              'Behind him the coast goes thin and disappears. Ahead is a country he has read about only in the front matter of textbooks, and which is at war: its young men are walking out of the colleges in uniform and not coming back, and the rooms they leave behind are where he is going to work.',
           },
           {
             id: 'choice',
@@ -1825,10 +1825,10 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
         id: 'letters',
         conditions: [{ type: 'yearAtLeast', year: 1916 }],
         title: 'Cambridge by Post',
-        yearLabel: '1915',
+        yearLabel: '1916–1917',
         image: {
           setting: 'a desk with a fat envelope of pages going out to England',
-          year: 1915,
+          year: 1916,
           characters: ['ramanujan'],
           mood: 'friendship across an ocean',
           details: ['a fat outgoing envelope', 'copied pages', 'a stub of sealing wax', 'a shipping schedule', 'a fan turning'],
@@ -2521,7 +2521,7 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
           {
             id: 'output',
             narration:
-              'Three years of the best work he will ever do, and every page of it is in this room. The results are finished. They are correct. There is no journal within reach that would know which of its readers to send them to, so they are tied in cloth and set on top of the last lot.',
+              'Three years of the best work he will ever do, and every page of it is in this room. The results are finished. They are correct. Nobody has asked for them and there is nowhere to send them that would understand what it had been sent, so they are tied in cloth and set on top of the last lot.',
           },
           {
             id: 'cost',
@@ -2959,8 +2959,11 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'rested',
-        conditions: [{ type: 'choiceWas', choiceKey: 'ramanujan-crisis-opening:choice', choiceId: 'sanatorium' }],
+        id: 'rested-england',
+        conditions: [
+          { type: 'choiceWas', choiceKey: 'ramanujan-crisis-opening:choice', choiceId: 'sanatorium' },
+          { type: 'narrativeFlag', flag: 'ramanujan.thread.inEngland' },
+        ],
         title: 'The Cost of Lying Still',
         yearLabel: '1919',
         image: {
@@ -2985,6 +2988,34 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Ramanujan spent much of 1917–1919 in sanatoria and returned to India in 1919. His fluctuating strength is documented.',
+      },
+      {
+        id: 'rested',
+        conditions: [{ type: 'choiceWas', choiceKey: 'ramanujan-crisis-opening:choice', choiceId: 'sanatorium' }],
+        title: 'The Cost of Lying Still',
+        yearLabel: '1919',
+        image: {
+          setting: 'a shaded veranda with a shut notebook on a cane chair and a folded quilt',
+          year: 1919,
+          characters: ['ramanujan'],
+          mood: 'obedience that does not feel like healing',
+          details: ['a cane chair', 'a shut notebook', 'a folded quilt', 'a brass tumbler of water', 'hot light through a screen'],
+          alt: 'A shut notebook lying on a cane chair on a shaded veranda.',
+        },
+        pages: [
+          {
+            id: 'obey',
+            narration:
+              'He does as he is told for a year. He eats what is put in front of him, and lies still, and lets the results come and go unwritten, which is a particular kind of loss no doctor has a name for.',
+          },
+          {
+            id: 'weigh',
+            narration:
+              'He is a little stronger and a year older and the war is over. What is left of him is his to spend and there is less of it than there was, and he has never once in his life needed to be told what to spend it on.',
+          },
+        ],
+        historicalNote:
+          'Ramanujan spent much of 1917–1919 seriously ill under medical instruction. This variant follows a life in which that illness was met in India.',
       },
       {
         id: 'burned',
@@ -3547,7 +3578,7 @@ export const RAMANUJAN_STORY_SCENES: StoryScene[] = [
             id: 'last',
             speaker: 'RAMANUJAN',
             dialogue: 'An equation means nothing to me unless it expresses a thought of God.',
-            narration: 'A boy who could not pass a physiology examination. A goddess in a small town. Thirteen digits, read aloud in a cold room, and every one of them right.',
+            narration: 'A boy who could not pass a physiology examination. A goddess in a small town. A slate wiped clean with an elbow, night after night, and not one line in the notebooks that was wrong.',
           },
         ],
         historicalNote:

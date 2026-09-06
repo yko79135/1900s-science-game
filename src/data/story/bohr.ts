@@ -197,6 +197,103 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'bohr-personal-glassblowing',
+    characterId: 'bohr',
+    chapterId: 'formation',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 86 },
+    once: true,
+    variants: [
+      {
+        id: 'hands',
+        conditions: [
+          { type: 'yearAtLeast', year: 1894 },
+          { type: 'yearAtMost', year: 1902 },
+          { type: 'choiceWas', choiceKey: 'bohr-formation-opening:decide', choiceId: 'takeApart' },
+        ],
+        title: 'The Fourth Tube',
+        yearLabel: 'A School Holiday',
+        image: {
+          setting: 'a workshop bench at night with a gas flame, glass tubing and three failed attempts, 1890s',
+          year: 1898,
+          characters: ['bohr'],
+          mood: 'obstinate, absorbed, companionable',
+          details: ['a blue gas flame', 'three collapsed glass tubes', 'a scorched cloth', 'a jar of water for quenching', 'a boy’s jacket over a stool'],
+          alt: 'Three collapsed glass tubes beside a blue gas flame on a night workbench.',
+        },
+        pages: [
+          {
+            id: 'flame',
+            narration:
+              'Three tubes on the bench, all wrong, all wrong in different ways. The glass goes soft too fast at the shoulder and sags, and the sagging is not a mystery — it is a fact he has not yet learned to feel in his wrist.',
+          },
+          {
+            id: 'harald',
+            narration:
+              'Harald has been sitting on the stool for an hour with a book he has stopped reading, which is his way of keeping somebody company without admitting to it.',
+            speaker: 'HARALD',
+            dialogue: 'Three is enough, surely. You have proved that it is difficult.',
+          },
+          {
+            id: 'fourth',
+            narration:
+              'The fourth one comes out true. He holds it up to the flame and turns it, and does not say anything, and puts it in the rack — and then makes a fifth, because one true tube might have been luck.',
+          },
+        ],
+        effects: [
+          { type: 'resources', effects: { evidence: 1, wellbeing: 1 } },
+          { type: 'flag', flag: 'bohr.ownHands', value: true },
+        ],
+        historicalNote:
+          'Bohr learned practical craft early and blew his own glassware as a student. The particular evening is dramatized.',
+      },
+      {
+        id: 'talk',
+        conditions: [
+          { type: 'yearAtLeast', year: 1894 },
+          { type: 'yearAtMost', year: 1902 },
+        ],
+        title: 'Two Boys and One Sentence',
+        yearLabel: 'A School Holiday',
+        image: {
+          setting: 'a canal path at dusk, two schoolboys walking slowly with books under their arms, 1890s',
+          year: 1898,
+          characters: ['bohr'],
+          mood: 'circling, patient, warm',
+          details: ['a canal at dusk', 'two sets of school books', 'a gas lamp being lit', 'wet leaves', 'a bridge with an iron rail'],
+          alt: 'A canal path at dusk with a gas lamp being lit and wet leaves underfoot.',
+        },
+        pages: [
+          {
+            id: 'walk',
+            narration:
+              'They have walked the same half mile of canal four times because Niels has a sentence that is nearly right and will not let it go. Harald has the answer and has decided, at fourteen, that handing it over would be a kind of theft.',
+          },
+          {
+            id: 'brother',
+            narration:
+              'The lamplighter passes them twice. The second time he looks at the two of them over his shoulder, going the wrong way again, and says nothing.',
+            speaker: 'HARALD',
+            dialogue: 'Say it once more without the middle part. If it is still true without the middle part, then the middle part was you being frightened of it.',
+          },
+          {
+            id: 'true',
+            narration:
+              'He says it once more without the middle part. It is still true. It is also, he notices, three words shorter and considerably harder to look at, and that is the trade he is going to be making for the next sixty years.',
+          },
+        ],
+        effects: [
+          { type: 'resources', effects: { theory: 1, wellbeing: 1 } },
+          { type: 'flag', flag: 'bohr.saidAloud', value: true },
+        ],
+        historicalNote:
+          'Bohr habitually worked out his ideas by talking them through, most often with his brother Harald. The particular evening is dramatized.',
+      },
+    ],
+  },
+  {
     id: 'bohr-formation-closing',
     characterId: 'bohr',
     chapterId: 'formation',
@@ -223,7 +320,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           {
             id: 'bench',
             narration:
-              'He leaves the bench tidy, which is not his habit. On it is a piece of glass he blew himself, and it is not quite true, and he knows exactly which second of the working it went wrong.',
+              'He leaves the bench tidy, which is not his habit. In the rack is the best of the tubes he blew this year, very nearly true, and he can still name the second of the working where the last of it went wrong.',
           },
           {
             id: 'ahead',
@@ -326,6 +423,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'bohr.copenhagenStudent', value: true }],
         historicalNote:
           'Bohr won the Royal Danish Academy’s gold medal in 1907 for an investigation of the surface tension of water using vibrating jets, carrying out the experiments in his father’s laboratory. The deadline dilemma and dialogue are dramatized.',
       },
@@ -423,7 +521,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'copenhagen',
-        conditions: [{ type: 'locationIs', locationId: 'copenhagen' }],
+        conditions: [{ type: 'narrativeFlag', flag: 'bohr.copenhagenStudent' }],
         title: 'A Thesis Nobody Abroad Can Read',
         locationLabel: 'Copenhagen',
         yearLabel: '1911',
@@ -737,6 +835,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           { type: 'markContextCardSeen', cardId: 'bohr-card-1912-manchester' },
           { type: 'resources', effects: { network: 1, theory: 1 } },
           { type: 'flag', flag: 'bohr.rutherfordRoom', value: true },
+          { type: 'flag', flag: 'bohr.manchesterRoom', value: true },
         ],
         historicalNote:
           'Bohr joined Rutherford’s Manchester laboratory in 1912, where the nuclear atom inferred from alpha-particle scattering had no stable classical explanation. Rutherford’s manner is well attested; the wording is dramatized.',
@@ -832,6 +931,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
         effects: [
           { type: 'resources', effects: { standing: 1, network: 1 } },
           { type: 'flag', flag: 'bohr.backed', value: true },
+          { type: 'flag', flag: 'bohr.manchesterRoom', value: true },
         ],
         historicalNote:
           'Rutherford supported the publication of Bohr’s 1913 atomic papers while objecting to their length and to the arbitrariness of quantum jumps; their arguments over the manuscript are documented. Dialogue is dramatized.',
@@ -891,7 +991,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
         id: 'bench-first',
         conditions: [
           { type: 'choiceWas', choiceKey: 'bohr-entry-opening:decide', choiceId: 'cambridge' },
-          { type: 'locationIs', locationId: 'manchesterUK' },
+          { type: 'narrativeFlag', flag: 'bohr.manchesterRoom' },
         ],
         title: 'The Year He Spent Being Useful',
         locationLabel: 'Manchester',
@@ -921,7 +1021,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'manchester',
-        conditions: [{ type: 'locationIs', locationId: 'manchesterUK' }],
+        conditions: [{ type: 'narrativeFlag', flag: 'bohr.manchesterRoom' }],
         title: 'Something Forbidden, Something True',
         locationLabel: 'Manchester',
         yearLabel: '1913',
@@ -1201,7 +1301,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       {
         id: 'human-present',
         conditions: [
-          { type: 'yearAtLeast', year: 1918 },
+          { type: 'yearAtLeast', year: 1920 },
           { type: 'otherCharacterIsHuman', characterId: 'einstein' },
           {
             any: [
@@ -1250,7 +1350,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       {
         id: 'npc',
         conditions: [
-          { type: 'yearAtLeast', year: 1918 },
+          { type: 'yearAtLeast', year: 1920 },
           { type: 'otherCharacterIsNpc', characterId: 'einstein' },
         ],
         title: 'The Guest Who Will Not Concede',
@@ -1292,7 +1392,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'absent',
-        conditions: [{ type: 'yearAtLeast', year: 1918 }],
+        conditions: [{ type: 'yearAtLeast', year: 1920 }],
         title: 'An Argument With Nobody In It',
         yearLabel: 'Around 1920',
         image: {
@@ -1424,7 +1524,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Bridge He Refuses to Burn',
-        yearLabel: '1918–1920',
+        yearLabel: 'The Turn of the Decade',
         image: {
           setting: 'a blackboard divided between a classical wave and a quantum ladder of levels, around 1920',
           year: 1920,
@@ -1437,7 +1537,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           {
             id: 'problem',
             narration:
-              'The new physics keeps producing answers and no rules for producing them. Anybody can guess a quantum condition; nobody can say which guesses are permitted.',
+              'Seven years of the new physics have produced a great many answers and no rules for producing them. Anybody in Europe can guess a quantum condition; nobody can say which guesses are permitted, and the guessing has begun to outrun the thinking.',
           },
           {
             id: 'rule',
@@ -1607,39 +1707,42 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
       {
         id: 'unbuilt',
         conditions: [{ type: 'yearAtLeast', year: 1919 }],
-        title: 'The Letters He Cannot Answer',
-        yearLabel: 'Around 1921',
+        title: 'Four Names on the Subscription List',
+        yearLabel: '1919–1921',
         image: {
-          setting: 'a small university office with more letters than shelf space, early 1920s',
+          setting: 'a benefactor’s panelled office with a folded building plan and an untouched sherry, early 1920s',
           year: 1921,
           characters: ['bohr'],
-          mood: 'frustrated, crowded out',
-          details: ['a heap of unanswered letters', 'a single shared blackboard', 'a borrowed chair', 'a timetable of other men’s lectures', 'a narrow window'],
-          alt: 'A heap of unanswered letters filling a small shared university office.',
+          mood: 'polite, immovable, deflating',
+          details: ['a folded architect’s plan', 'a subscription list with four names', 'two glasses, one untouched', 'a mantel clock', 'a heavy panelled door'],
+          alt: 'A folded architect’s plan and a short subscription list on a polished desk beside two glasses.',
         },
         pages: [
           {
-            id: 'letters',
+            id: 'pitch',
             narration:
-              'The letters arrive anyway: from Munich, from Vienna, from Leiden, all asking the same thing in different grammars. May I come and work with you. He has one blackboard, and it belongs to the timetable.',
+              'He unfolds the plan on a polished desk and explains it the way he explains physics: slowly, doubling back, qualifying himself twice, and getting there. Big rooms. Too many blackboards. No nationality on the door.',
           },
           {
-            id: 'refusals',
+            id: 'no',
             narration:
-              'He writes back to each of them by hand, which takes his evenings, and each letter says the same true and useless thing — that there is no room, that he is sorry, that they should write again next year.',
+              'The man across the desk hears him out to the end, which is more than most, and then folds the plan back along its own creases and slides it across.',
+            speaker: 'A BENEFACTOR',
+            dialogue: 'You are asking me to pay for a building in which foreigners will argue. Bring me an instrument, Professor, or a patent, or a cure — and I will write the cheque before you sit down.',
           },
           {
-            id: 'want',
+            id: 'street',
             narration:
-              'Somewhere in the pile is a young German who thinks in matrices and an Austrian who is rude to wrong ideas. They will go elsewhere and be brilliant elsewhere, and the corridor where they would all have argued does not exist.',
+              'Out in the street he stands with the plan under his arm for a while, working out which part of the sentence he got wrong, because it will not have been the building. There are four names on the subscription list. Somewhere in that morning’s post is a young German who thinks in matrices, asking whether there is room.',
           },
         ],
         effects: [
           { type: 'markContextCardSeen', cardId: 'bohr-card-1921-institute' },
           { type: 'resources', effects: { network: 1, wellbeing: -1 } },
+          { type: 'flag', flag: 'bohr.moneyRefused', value: true },
         ],
         historicalNote:
-          'Young physicists across Europe sought places with Bohr in the early 1920s. This variant follows a course in which no institute existed to receive them. The scene is dramatized.',
+          'Bohr raised the money for his institute over several years from public and private sources. This variant follows a course in which the funding did not come together; the benefactor and the meeting are dramatized.',
       },
     ],
   },
@@ -1733,7 +1836,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           {
             id: 'plan',
             narration:
-              'The building plan is still in the drawer with the subscription list, four names long. He takes it out on Sundays, adds nothing to it, and puts it back.',
+              'So he answers them. Nine letters a week, in his own hand, arguing at long distance with men he has never met, and the argument is just as good as it would have been in a corridor and takes eleven days instead of eleven seconds.',
           },
         ],
         historicalNote:
@@ -1938,6 +2041,66 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           'Bohr’s institute and its associated fund helped dismissed scientists obtain posts and passage abroad through the 1930s. The card file, dialogue and the choice are dramatized.',
       },
       {
+        id: 'copenhagen',
+        conditions: [
+          { type: 'yearAtLeast', year: 1934 },
+          { type: 'yearAtMost', year: 1939 },
+          { type: 'locationIs', locationId: 'copenhagen' },
+        ],
+        title: 'The List on the Hall Table',
+        locationLabel: 'Copenhagen',
+        yearLabel: '1933–1938',
+        image: {
+          setting: 'a domestic hall table used as a filing system, letters and timetables stacked by country, mid-1930s',
+          year: 1936,
+          characters: ['bohr'],
+          mood: 'domestic, relentless, practical',
+          details: ['letters stacked by country on a hall table', 'a steamship timetable', 'a pencilled list gone soft at the folds', 'a spare room key', 'a coat on the newel post'],
+          alt: 'Letters stacked by country on a hall table beside a steamship timetable and a folded list.',
+        },
+        pages: [
+          {
+            id: 'hall',
+            narration:
+              'The hall table has become a filing system: letters in piles by country, a steamship timetable underneath, and a list in pencil that has gone soft at the folds from being unfolded so often.',
+          },
+          {
+            id: 'evenings',
+            narration:
+              'The evenings go on testimonials. He is no good at flattery, so he does the harder thing and is exact — languages, dependants, what the man can actually do at a blackboard on a Tuesday — because exactness is what a consulate believes.',
+            speaker: 'NIELS',
+            dialogue: 'I shall not say he is the finest theorist in Europe. He is not, and they would smell it. I shall say what he can do, and that we will pay his passage, and that there is a bed here until he is settled.',
+          },
+          {
+            id: 'decide',
+            narration:
+              'Margrethe has made the spare room up twice this month for men she has never met. Money that was put by for apparatus is going on passages, and there is a bottom to it that comes nearer every quarter.',
+            choices: [
+              {
+                id: 'spendItAll',
+                label: 'Spend it down to nothing; apparatus can wait',
+                effects: [
+                  { type: 'flag', flag: 'bohr.spentFund', value: true },
+                  { type: 'resources', effects: { funds: -1, network: 2, standing: 1 } },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
+                ],
+              },
+              {
+                id: 'keepAWorkingCore',
+                label: 'Hold back enough to keep the physics alive',
+                effects: [
+                  { type: 'flag', flag: 'bohr.keptCore', value: true },
+                  { type: 'resources', effects: { theory: 1, network: 1 } },
+                ],
+              },
+            ],
+          },
+        ],
+        effects: [{ type: 'markContextCardSeen', cardId: 'bohr-card-1933-refuge' }],
+        historicalNote:
+          'Bohr wrote a great many testimonials and placement letters for dismissed scientists through the 1930s and helped fund their passage. The hall table, the dialogue and the choice are dramatized.',
+      },
+      {
         id: 'anywhere',
         conditions: [
           { type: 'yearAtLeast', year: 1934 },
@@ -1957,14 +2120,14 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           {
             id: 'forwarded',
             narration:
-              'The letters are re-addressed twice and reach him regardless, because the people writing them have run out of other names to try. Wherever he is, he is a man whose signature might still be worth something to a consulate.',
+              'The letters are re-addressed twice, in three different hands, and reach him anyway. Whoever is writing them has run out of names to try, and his is a signature that might still be worth something to a consulate.',
           },
           {
             id: 'testimonials',
             narration:
-              'So he writes testimonials at borrowed desks, in the evenings, one after another. He is not good at flattery, so he does the harder thing and is exact about what each man can do.',
+              'So the evenings go on testimonials, written at a desk in a rented room with a window on somebody else’s street. He is no good at flattery, so he does the harder thing and is exact about what each man can do.',
             speaker: 'NIELS',
-            dialogue: 'I have no post to offer him and no building to put him in. I have a name and a pen, and I am told these are still worth a visa in some countries.',
+            dialogue: 'I have no post to offer him and nowhere to put him. I have a name and a pen, and I am told those are still worth a visa in one or two countries.',
           },
           {
             id: 'limit',
@@ -2108,30 +2271,57 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtLeast', year: 1936 },
           { type: 'yearAtMost', year: 1940 },
         ],
-        title: 'No Address to Invite Them To',
+        title: 'Somebody Else’s Laboratory, His Money',
         yearLabel: 'The Late Thirties',
         image: {
-          setting: 'a desk with an unfinished letter of invitation and a crossed-out address, late 1930s',
+          setting: 'a station buffet table at night with a ticket, an envelope of notes and a letter of introduction, late 1930s',
           year: 1937,
           characters: ['bohr'],
-          mood: 'frustrated, hemmed in',
-          details: ['an invitation with the address crossed out', 'a thin purse', 'a railway fare table', 'a list of names in pencil', 'a narrow window'],
-          alt: 'An unfinished invitation with its address crossed out, beside a railway fare table.',
+          mood: 'brisk, tender, conspiratorial',
+          details: ['a third-class ticket', 'an envelope of banknotes', 'a sealed letter of introduction', 'two cups of coffee', 'a departures clock'],
+          alt: 'A third-class ticket and a sealed letter of introduction on a station buffet table at night.',
         },
         pages: [
           {
-            id: 'address',
+            id: 'buffet',
             narration:
-              'He gets as far as the second line before stopping. Come and work with me, it says, and then it must say where, and there is no where — no corridor, no spare bed, no fund to draw a fare from.',
+              'They meet in a station buffet because it is the one room in the city where two men talking quietly is nobody’s business. On the table: a ticket, a sealed letter to a director in another country, and an envelope that is not discussed.',
           },
           {
-            id: 'instead',
+            id: 'refuse',
             narration:
-              'So he does what he can instead: names other men’s laboratories, writes to directors he barely knows, and sends people toward doors he cannot open himself.',
+              'The young man tries to refuse the envelope, twice, and gets nowhere, because he is arguing with somebody who has spent thirty years not being finished with a thing.',
+            speaker: 'NIELS',
+            dialogue: 'It is not a gift, it is a fare. And do not thank me for it — a physicist who cannot afford the journey is a conversation the rest of us never get to have, so you are doing me the favour.',
+          },
+          {
+            id: 'clock',
+            narration:
+              'The departures clock turns over. He walks home along the water working out who is next on the list and what the fare to Manchester costs this year, and he does not, on the whole, mind that the laboratory at the other end will be somebody else’s.',
+            choices: [
+              {
+                id: 'sendLetter',
+                label: 'Keep sending them on, and worry about the money after',
+                effects: [
+                  { type: 'flag', flag: 'bohr.openDoor', value: true },
+                  { type: 'resources', effects: { network: 2, funds: -1 } },
+                  { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
+                ],
+              },
+              {
+                id: 'raiseMoney',
+                label: 'Go and raise the money first, so this can go on longer',
+                effects: [
+                  { type: 'flag', flag: 'bohr.openDoor', value: true },
+                  { type: 'resources', effects: { funds: 1, network: 1, wellbeing: -1 } },
+                  { type: 'theme', theme: 'institutionVsIndependence', amount: 1 },
+                ],
+              },
+            ],
           },
         ],
         historicalNote:
-          'This variant follows a course in which Bohr had no institute of his own from which to invite and fund visiting physicists. The scene is dramatized.',
+          'Bohr placed displaced and impecunious physicists in other people’s laboratories and helped fund their travel through the 1930s. This variant follows a course in which he had no institute of his own; the station meeting is dramatized.',
       },
     ],
   },
@@ -2238,6 +2428,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           { type: 'markContextCardSeen', cardId: 'bohr-card-1940-occupation' },
           { type: 'resources', effects: { exposure: 2, wellbeing: -1 } },
           { type: 'flag', flag: 'bohr.occupied', value: true },
+          { type: 'flag', flag: 'bohr.underOccupation', value: true },
         ],
         historicalNote:
           'Germany occupied Denmark in April 1940. Bohr, whose mother came from a Jewish family, kept his institute working under occupation for three increasingly dangerous years. Dialogue is dramatized.',
@@ -2283,6 +2474,7 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           { type: 'markContextCardSeen', cardId: 'bohr-card-1940-occupation' },
           { type: 'resources', effects: { exposure: 2, wellbeing: -1 } },
           { type: 'flag', flag: 'bohr.occupied', value: true },
+          { type: 'flag', flag: 'bohr.underOccupation', value: true },
         ],
         historicalNote:
           'Germany occupied Denmark in April 1940. Bohr, whose mother came from a Jewish family, continued working at the institute under occupation for three increasingly dangerous years. Dialogue is dramatized.',
@@ -2578,6 +2770,52 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
           'Warned of imminent arrest in late September 1943, Bohr and his wife crossed by boat from occupied Denmark to Sweden, as thousands of Danish Jews did in the same weeks; he continued from there to Britain and the United States. The dialogue is dramatized and no more detail is given than the record supports.',
       },
       {
+        id: 'left-denmark',
+        conditions: [
+          { type: 'yearAtLeast', year: 1942 },
+          { type: 'yearAtMost', year: 1943 },
+          { type: 'narrativeFlag', flag: 'bohr.underOccupation' },
+          { not: { type: 'locationIs', locationId: 'copenhagen' } },
+        ],
+        title: 'The Door Locked as Though for a Weekend',
+        yearLabel: '1943',
+        image: {
+          setting: 'a shut-up apartment at dawn, papers burned in the stove, a single case in the hall, 1943',
+          year: 1943,
+          characters: ['bohr'],
+          mood: 'controlled, final, unsentimental',
+          details: ['a stove door standing open on ash', 'one small case in the hall', 'a key on a hall table', 'a blackboard wiped clean', 'grey light through half-drawn curtains'],
+          alt: 'A single small case in a hallway beside a key on a table and a stove door open on ash.',
+        },
+        pages: [
+          {
+            id: 'permit',
+            narration:
+              'It is not a boat and it is not a night crossing. It is a stamp on a permit, obtained through the sort of quiet arrangement one does not ask questions about, and a departure on an ordinary morning with an ordinary case.',
+          },
+          {
+            id: 'board',
+            narration:
+              'He wipes the blackboard himself, which nobody has ever seen him do, because whatever is on it should not be read by the next person through that door. Then he stands for a moment in a corridor that has gone very quiet.',
+            speaker: 'MARGRETHE',
+            dialogue: 'Lock it the way we lock it in August. If we make it look like leaving, somebody will notice that we have left.',
+          },
+          {
+            id: 'go',
+            narration:
+              'So the door is locked as though for a weekend, and the key goes on the hall table for a neighbour, and they walk out into a street where the trams are running. Behind them a country is beginning to move people across water at night, and he will spend the rest of the war being told about it second hand.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'bohr-card-1943-escape' },
+          { type: 'resources', effects: { funds: -1, wellbeing: -1, exposure: 1 } },
+          { type: 'flag', flag: 'bohr.escaped', value: true },
+          { type: 'flag', flag: 'bohr.gotOut', value: true },
+        ],
+        historicalNote:
+          'Bohr left occupied Denmark in 1943 ahead of arrest, in his case by boat to Sweden. This variant follows a course in which he got out by another road; the departure is dramatized and no more detail is given than the record supports.',
+      },
+      {
         id: 'already-away',
         conditions: [
           { type: 'yearAtLeast', year: 1942 },
@@ -2692,6 +2930,34 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Bohr reached neutral Sweden in 1943, worked there on behalf of refugees, and then travelled on to Britain. The scene is dramatized.',
+      },
+      {
+        id: 'got-out',
+        conditions: [{ type: 'narrativeFlag', flag: 'bohr.gotOut' }],
+        title: 'A Weekend That Does Not End',
+        yearLabel: '1943',
+        image: {
+          setting: 'a boarding-house room in a foreign city, one case still strapped shut, 1943',
+          year: 1943,
+          characters: ['bohr'],
+          mood: 'unlanded, alert, quietly furious',
+          details: ['a strapped case', 'a foreign newspaper', 'a coat still buttoned', 'an unfamiliar door key', 'a window on a street he cannot name'],
+          alt: 'A strapped case and a buttoned coat in a bare boarding-house room.',
+        },
+        pages: [
+          {
+            id: 'case',
+            narration:
+              'The case has not been unstrapped. He has been telling himself for a fortnight that this is a weekend, that the key is on a hall table a thousand miles away and a neighbour is watering something.',
+          },
+          {
+            id: 'news',
+            narration:
+              'The news comes through anyway, in a language he reads slowly: boats at night, a whole population moved across a narrow strait by fishermen. He was already gone by then. He is glad, and being glad is the part he cannot get comfortable with.',
+          },
+        ],
+        historicalNote:
+          'Bohr left occupied Denmark in 1943, in his case by boat; the mass rescue of Danish Jews across the Øresund took place in the same weeks. This variant follows a course in which he got out by another route. The scene is dramatized.',
       },
       {
         id: 'abroad',
@@ -3009,7 +3275,15 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'default',
+        id: 'on-the-hill',
+        conditions: [
+          {
+            any: [
+              { type: 'locationIs', locationId: 'losAlamos' },
+              { type: 'locationIs', locationId: 'washingtonDC' },
+            ],
+          },
+        ],
         title: 'The Old Man With Another Name',
         yearLabel: '1944–1945',
         image: {
@@ -3046,6 +3320,45 @@ export const BOHR_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Bohr consulted at Los Alamos under the cover name Nicholas Baker in 1944–45 and pressed Allied leaders, in person and in written memoranda, for postwar international openness and control; his meeting with Churchill went badly. Dialogue is dramatized.',
+      },
+      {
+        id: 'at-a-distance',
+        title: 'Consulted, and Kept at Arm’s Length',
+        yearLabel: '1944–1945',
+        image: {
+          setting: 'a plain office with a locked despatch box, a courier’s receipt book and a typed question sheet, 1944',
+          year: 1944,
+          characters: ['bohr'],
+          mood: 'contained, impatient, weighty',
+          details: ['a locked despatch box', 'a courier’s receipt book', 'a typed sheet of questions with the nouns removed', 'a blotter', 'a shaded lamp'],
+          alt: 'A locked despatch box and a courier’s receipt book beside a typed sheet of questions.',
+        },
+        pages: [
+          {
+            id: 'box',
+            narration:
+              'The questions arrive in a locked box and go back in the same box, and they have had the nouns taken out of them, so that the first job each time is to work out what is actually being asked. He is good at that. It is, in a sense, all he has ever done.',
+          },
+          {
+            id: 'answer',
+            narration:
+              'He answers them properly and at length, and everything he sends back is correct and none of it is the thing he wants to say. They have made a consultant of him and put four hundred miles between his mouth and the room.',
+            speaker: 'NIELS',
+            dialogue: 'They did not need me to tell them it would work. They needed somebody to say, while there is still time, what to do on the morning after it works — and that will not fit in a box with a lock on it.',
+          },
+          {
+            id: 'memo',
+            narration:
+              'So he writes it outside the box instead: memoranda, requests for an hour, a case put in person to a President and a Prime Minister. One of those meetings goes badly enough that he is watched for a while afterwards. He goes on writing memoranda.',
+          },
+        ],
+        effects: [
+          { type: 'relationship', characterId: 'oppenheimer', familiarity: 1, respect: 1 },
+          { type: 'resources', effects: { standing: 1, exposure: 2 } },
+          { type: 'flag', flag: 'bohr.advised', value: true },
+        ],
+        historicalNote:
+          'Bohr advised the Allied atomic programme and pressed Allied leaders for postwar openness and international control. This variant follows a course in which he consulted at a distance rather than on site. Dialogue is dramatized.',
       },
     ],
   },

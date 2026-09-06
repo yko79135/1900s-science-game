@@ -56,6 +56,12 @@ the fixed-size fallback artwork remains visible and gameplay continues.
   (`src/data/content/sources.ts`) and a `classification` of `Documented`,
   `Plausible`, or `Speculative`. One file per character under
   `characters/`. Nothing historical is hard-coded into UI components.
+- **`src/data/story/`** — one authored life per scientist: prologue, six
+  chapter openings and closings, a scene for every project and every
+  historical turning point, encounters with the rest of the roster, and an
+  epilogue, each with variants keyed to what the player actually did.
+  `STYLE.md` in that folder is the writing contract; `story.integrity` and
+  `story.playthrough` tests enforce it and play every life end to end.
 - **`src/data/geo/land-110m.json`** — bundled Natural Earth land geometry
   (via the `world-atlas` package), rendered locally with `d3-geo` /
   `topojson-client`. No map tiles are ever fetched from the network.

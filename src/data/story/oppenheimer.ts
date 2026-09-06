@@ -26,7 +26,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'default',
         title: 'An Apartment Above the River',
         locationLabel: 'New York',
-        yearLabel: '1904',
         image: {
           setting: 'a high floor apartment overlooking the Hudson in New York, 1904',
           year: 1904,
@@ -73,7 +72,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'default',
         title: 'A Boy Who Is Never Bored',
         locationLabel: 'New York',
-        yearLabel: '1913',
+        yearLabel: '1904–1922',
         image: {
           setting: 'a progressive New York schoolroom and a boy on a stone stair with a book',
           year: 1913,
@@ -91,7 +90,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'minerals',
             narration:
-              'In his coat pocket there is a labelled scrap of feldspar off a Manhattan excavation. He writes to the mineral men downtown in a careful adult hand, asking about crystal faces, and they write back as though to a colleague, because nothing in the handwriting tells them he is twelve.',
+              'In his coat pocket there is a labelled scrap of feldspar off a Manhattan excavation. He writes to the mineral men downtown in a careful adult hand, asking about crystal faces, and they write back as though to a colleague, because nothing in the handwriting tells them how old he is.',
           },
           {
             id: 'father',
@@ -157,8 +156,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'resourceAtLeast', resource: 'wellbeing', value: 5 },
         ],
         title: 'The Youngest Member',
-        locationLabel: 'New York',
-        yearLabel: '1916',
         image: {
           setting: 'a small lecture room of a New York collectors’ society at night',
           year: 1916,
@@ -183,7 +180,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'after',
             narration:
-              'The laugh that goes round the room is not unkind, and it stops when he keeps going. He talks for a quarter of an hour and the members forget to be charmed. Walking home along the park wall afterwards he discovers that he liked being looked at, which is a dangerous thing to find out at twelve.',
+              'The laugh that goes round the room is not unkind, and it stops when he keeps going. He talks for a quarter of an hour and the members forget to be charmed. Walking home along the park wall afterwards he discovers that he liked being looked at, which is a dangerous thing to find out at that age.',
           },
         ],
         effects: [
@@ -201,8 +198,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtMost', year: 1919 },
         ],
         title: 'A Cigar Box of Labelled Stones',
-        locationLabel: 'New York',
-        yearLabel: '1916',
         image: {
           setting: 'a boy’s bedroom desk with mineral specimens and correspondence, New York',
           year: 1916,
@@ -251,8 +246,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { not: { type: 'resourceAtLeast', resource: 'health', value: 6 } },
         ],
         title: 'Sent West to Get Well',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'a sickroom in New York and, beyond it, a railway carriage window on high desert country',
           year: 1922,
@@ -291,8 +284,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'restless',
         conditions: [{ type: 'yearAtLeast', year: 1920 }],
         title: 'A Summer of Long Rides',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'high dry country in the American southwest with a saddled horse and distant blue ranges',
           year: 1922,
@@ -338,8 +329,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'performer',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.boyhood', value: 'stage' }],
         title: 'The Trunk in the Hall',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'a New York entrance hall with a packed steamer trunk and a hat on a side table',
           year: 1922,
@@ -372,8 +361,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           },
         ],
         title: 'What Goes in the Trunk',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'a bedroom floor spread with books, mineral trays and packing paper, New York',
           year: 1922,
@@ -398,8 +385,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The End of Being a Boy',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'a New York window at dusk above the river with a corded trunk beside it',
           year: 1922,
@@ -440,7 +425,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'cambridgeUK' }],
         title: 'Hands That Will Not Learn',
         locationLabel: 'Cambridge, England',
-        yearLabel: '1925',
         image: {
           setting: 'a cold English physics laboratory bench with soldering equipment and thin metal films',
           year: 1925,
@@ -500,8 +484,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'Three Years in Two',
-        locationLabel: 'New York',
-        yearLabel: '1922',
         image: {
           setting: 'a university dining hall table with a single place set and a propped book',
           year: 1923,
@@ -566,6 +548,95 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'oppenheimer-education-lodgings',
+    characterId: 'oppenheimer',
+    chapterId: 'education',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 62 },
+    once: true,
+    variants: [
+      {
+        id: 'comfortable',
+        conditions: [
+          { type: 'yearAtLeast', year: 1923 },
+          { type: 'yearAtMost', year: 1926 },
+          { type: 'resourceAtLeast', resource: 'funds', value: 3 },
+        ],
+        title: 'The Cost of Being Interesting',
+        image: {
+          setting: 'a set of rented rooms with too many books, a good coat on a hook and a tray of untouched supper',
+          year: 1924,
+          characters: ['oppenheimer'],
+          mood: 'privilege that solves nothing',
+          details: ['a good coat on a hook', 'a tray of untouched supper', 'French poetry face-down', 'a gas fire', 'unanswered invitations on the mantel'],
+          alt: 'Rented rooms crowded with books, a good coat on a hook and an untouched supper tray.',
+        },
+        pages: [
+          {
+            id: 'rooms',
+            narration:
+              'The rooms are better than a student should have and the money for them arrives without being asked for. He fills them with books in four languages and buys a very good coat, and gives excellent dinners for people whose names he cannot afterwards remember.',
+          },
+          {
+            id: 'trick',
+            narration:
+              'The trick he has developed is to be the most interesting person in any room within eleven minutes. It works every time. It has never once produced a friend, and he has begun to notice the pattern and to have no idea what to do about it.',
+          },
+          {
+            id: 'line',
+            speaker: 'ROBERT',
+            dialogue: 'I can make them like me by Thursday. I have not worked out how to make one of them ask me anything on a Friday.',
+            narration: 'He says it to the gas fire, at two in the morning, with the invitations he has not answered stacked on the mantel above it.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'oppenheimer.solitude', value: true },
+          { type: 'resources', effects: { network: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Oppenheimer’s student years were financially comfortable and socially difficult; the loneliness of that period is documented in his own later accounts. The scene and dialogue are dramatized.',
+      },
+      {
+        id: 'thin',
+        conditions: [
+          { type: 'yearAtLeast', year: 1923 },
+          { type: 'yearAtMost', year: 1926 },
+        ],
+        title: 'Reading Instead of Eating',
+        image: {
+          setting: 'a cold single room with a shilling meter, a stack of library books and one blanket doubled over',
+          year: 1924,
+          characters: ['oppenheimer'],
+          mood: 'thin, driven, unadmitted',
+          details: ['a coin meter on the wall', 'library books stacked by the bed', 'one blanket doubled over', 'a cup used as a paperweight', 'frost inside the window'],
+          alt: 'A cold single room with a coin meter, a stack of library books and one doubled blanket.',
+        },
+        pages: [
+          {
+            id: 'meter',
+            narration:
+              'The meter takes a coin an hour and he has worked out that a coat and a blanket will get him to midnight without one. The books are borrowed, all of them, and have to go back on Fridays, so Thursday nights are long.',
+          },
+          {
+            id: 'line',
+            speaker: 'ROBERT',
+            dialogue: 'I am not hungry. I am reading. The two feel almost exactly the same from the inside and only one of them is anybody’s business.',
+            narration:
+              'He says it to a landlady who has asked, once, kindly, whether he is eating. He is thinner every term and quicker every term and has not connected the two.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'oppenheimer.solitude', value: true },
+          { type: 'resources', effects: { health: -1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Oppenheimer read voraciously outside his subject as a student and was chronically thin. This account follows a life without the family money that in fact supported him.',
+      },
+    ],
+  },
+  {
     id: 'oppenheimer-bench-to-blackboard',
     characterId: 'oppenheimer',
     chapterId: 'education',
@@ -577,6 +648,48 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
+        id: 'stayed',
+        conditions: [
+          { type: 'yearAtLeast', year: 1925 },
+          { type: 'choiceWas', choiceKey: 'oppenheimer-education-opening:bench', choiceId: 'endure' },
+        ],
+        title: 'Two More Years of Tin',
+        image: {
+          setting: 'a laboratory bench late at night with a re-made joint and a row of failed attempts beside it',
+          year: 1926,
+          characters: ['oppenheimer'],
+          mood: 'stubbornness without relief',
+          details: ['a row of failed joints laid out in order', 'a soldering iron cooling', 'burned fingertips', 'a stopped clock', 'a coat still buttoned'],
+          alt: 'A laboratory bench at night with a row of failed soldered joints laid out beside a cooling iron.',
+        },
+        pages: [
+          {
+            id: 'again',
+            narration:
+              'He said he would stay at the bench, and he stays. The failed joints are laid out along the back of the bench in the order he made them, eleven of them, like a sentence in a language he cannot read.',
+          },
+          {
+            id: 'cost',
+            narration:
+              'Nobody makes him do it. That is the part he will not explain afterwards: that he could have walked into the room down the corridor where the work is done on paper, at any hour, on any day of those two years, and did not.',
+          },
+          {
+            id: 'silent',
+            speaker: 'ROBERT',
+            dialogue: 'Once more, and properly this time. A man who cannot make a joint hold has no business telling anyone what matter is doing.',
+            narration:
+              'He says it to the bench, in the small hours, in a laboratory where every other lamp has been out for three hours. The concession never gets said aloud in all that time, and afterwards he is proud of that, and afterwards he is not.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'oppenheimer-card-1926' },
+          { type: 'flag', flag: 'oppenheimer.turnedToTheory', value: false },
+          { type: 'resources', effects: { wellbeing: -1, health: -1 } },
+        ],
+        historicalNote:
+          'Oppenheimer was documented as ill-suited to experimental work at the Cavendish and moved to theory at Göttingen. This account follows a life that refused to make that move, and stayed at the bench instead.',
+      },
+      {
         id: 'at-cambridge',
         conditions: [
           { type: 'yearAtLeast', year: 1925 },
@@ -585,7 +698,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'From the Bench to the Blackboard',
         locationLabel: 'Cambridge, England',
-        yearLabel: '1926',
         image: {
           setting: 'an English laboratory at night with an abandoned apparatus and a lit doorway',
           year: 1926,
@@ -630,7 +742,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'The Chalk Fits the Hand',
         locationLabel: 'Göttingen',
-        yearLabel: '1926',
         image: {
           setting: 'a German seminar room with a long blackboard and afternoon light',
           year: 1926,
@@ -669,7 +780,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'anywhere',
         conditions: [{ type: 'yearAtLeast', year: 1925 }],
         title: 'What the Hands Are For',
-        yearLabel: '1926',
         image: {
           setting: 'a desk at night with a half-finished piece of apparatus pushed aside and pages of equations',
           year: 1926,
@@ -721,7 +831,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'gottingen' }],
         title: 'Let Him Finish the Sentence',
         locationLabel: 'Göttingen',
-        yearLabel: '1927',
         image: {
           setting: 'a crowded German seminar room mid-argument, chairs turned inward',
           year: 1927,
@@ -759,7 +868,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'Reading Himself Into It',
-        yearLabel: '1927',
         image: {
           setting: 'a desk stacked with German journals and handwritten translations',
           year: 1927,
@@ -806,7 +914,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'gottingen' }],
         title: 'Let the Heavy Things Stand Still',
         locationLabel: 'Göttingen',
-        yearLabel: '1927',
         image: {
           setting: 'two chairs pulled to one desk in a German institute office, papers between them',
           year: 1927,
@@ -844,7 +951,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'A Separation, Worked Out Alone',
-        yearLabel: '1927',
         image: {
           setting: 'a single desk at night with a molecular diagram and discarded sheets on the floor',
           year: 1927,
@@ -887,10 +993,38 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
+        id: 'endured',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'oppenheimer.cavendish', value: 'endure' },
+          { type: 'projectNotCompleted', projectId: 'oppenheimer-born-oppenheimer' },
+          { type: 'projectNotCompleted', projectId: 'oppenheimer-gottingen-training' },
+        ],
+        title: 'The Cost of Staying',
+        image: {
+          setting: 'a laboratory bench at the end of a long day with tools set down in order',
+          year: 1927,
+          characters: ['oppenheimer'],
+          mood: 'grim endurance',
+          details: ['tools laid in order', 'burned fingertips', 'a stained apron on a hook', 'a rain-dark window', 'a stopped experiment'],
+          alt: 'A laboratory bench with tools laid down in order and a stained apron hanging on a hook.',
+        },
+        pages: [
+          {
+            id: 'stayed',
+            narration:
+              'He stayed. The hands never became good, but they became adequate, and adequacy cost him two years and a great deal that he does not have a word for. The apron hangs on the hook. He does not put it on again.',
+          },
+          {
+            id: 'reckoning',
+            narration:
+              'Somewhere in Germany the new mechanics has been argued out to a finish without him. He reads about it later, in print, the way one reads about a party one was invited to. He is very good now at a thing that did not need him.',
+          },
+        ],
+      },
+      {
         id: 'doctor',
         conditions: [{ type: 'projectCompleted', projectId: 'oppenheimer-born-oppenheimer' }],
         title: 'Herr Doktor',
-        yearLabel: '1927',
         image: {
           setting: 'a small European room with a new bound dissertation on a bare table',
           year: 1927,
@@ -916,7 +1050,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'trained',
         conditions: [{ type: 'projectCompleted', projectId: 'oppenheimer-gottingen-training' }],
         title: 'Equipped, and Not Yet Known',
-        yearLabel: '1927',
         image: {
           setting: 'a European railway platform in early morning with a case and a folder of notes',
           year: 1927,
@@ -939,35 +1072,8 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
       },
       {
-        id: 'endured',
-        conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.cavendish', value: 'endure' }],
-        title: 'The Cost of Staying',
-        yearLabel: '1927',
-        image: {
-          setting: 'a laboratory bench at the end of a long day with tools set down in order',
-          year: 1927,
-          characters: ['oppenheimer'],
-          mood: 'grim endurance',
-          details: ['tools laid in order', 'burned fingertips', 'a stained apron on a hook', 'a rain-dark window', 'a stopped experiment'],
-          alt: 'A laboratory bench with tools laid down in order and a stained apron hanging on a hook.',
-        },
-        pages: [
-          {
-            id: 'stayed',
-            narration:
-              'He stayed. The hands never became good, but they became adequate, and adequacy cost him two years and a great deal that he does not have a word for. The apron hangs on the hook. He does not put it on again.',
-          },
-          {
-            id: 'reckoning',
-            narration:
-              'Somewhere in Germany the new mechanics has been argued out to a finish without him. He reads about it later, in print, the way one reads about a party one was invited to. He is very good now at a thing that did not need him.',
-          },
-        ],
-      },
-      {
         id: 'default',
         title: 'The Years That Did Not Take',
-        yearLabel: '1927',
         image: {
           setting: 'a rented room with unopened journals stacked against the wall',
           year: 1927,
@@ -1010,7 +1116,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'berkeley' }],
         title: 'A Desert, and He Likes Deserts',
         locationLabel: 'Berkeley',
-        yearLabel: '1929',
         image: {
           setting: 'a bare university office above the bay with eucalyptus outside the window',
           year: 1929,
@@ -1023,7 +1128,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'arrival',
             narration:
-              'The office is empty, the shelf is empty, the blackboard has not been written on in a year. There is no theoretical physics on this coast to speak of. He looks at the blank wall and is not dismayed; he has been given a desert and he already knows he loves deserts.',
+              'The office is empty, the shelf is empty, the blackboard has not been written on in a year. There is no theoretical physics on this side of the ocean to speak of, and none at all on this coast. He looks at the blank wall and is not dismayed; he has been given a desert and he already knows he loves deserts.',
           },
           {
             id: 'students',
@@ -1043,7 +1148,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'A Post, and What to Do With It',
-        yearLabel: '1929',
         image: {
           setting: 'an unfamiliar lecture room being measured by eye before term begins',
           year: 1929,
@@ -1061,7 +1165,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'plan',
             narration:
-              'The plan is not modest. He does not want a chair; he wants a school — a dozen young men who think in his accent, and a subject that did not exist on this side of the ocean before he unpacked.',
+              'The plan is not modest. He does not want a chair; he wants a school — a dozen young men who think in his accent, and a subject that has no address anywhere he can point to on a map.',
           },
           {
             id: 'aloud',
@@ -1088,7 +1192,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'berkeley' }],
         title: 'The Caravan Goes South',
         locationLabel: 'Berkeley',
-        yearLabel: '1934',
         image: {
           setting: 'a line of dusty cars loaded with books and bedding on a coast road',
           year: 1934,
@@ -1126,7 +1229,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'A School Without a Campus',
-        yearLabel: '1934',
         image: {
           setting: 'a table in a rented room with four chairs and pages spread between them',
           year: 1934,
@@ -1178,7 +1280,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'The Letters From Göttingen',
         locationLabel: 'Berkeley',
-        yearLabel: '1933',
         image: {
           setting: 'a university office desk covered with European letters and a newspaper still folded',
           year: 1933,
@@ -1244,7 +1345,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'anywhere',
         conditions: [{ type: 'yearAtLeast', year: 1933 }],
         title: 'Names He Knows',
-        yearLabel: '1933',
         image: {
           setting: 'a desk anywhere in the world with a stack of forwarded letters and a typed list of names',
           year: 1933,
@@ -1324,10 +1424,9 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtLeast', year: 1930 },
           { type: 'narrativeFlag', flag: 'oppenheimer.desert' },
           { type: 'resourceAtLeast', resource: 'wellbeing', value: 5 },
+          { any: [{ type: 'locationIs', locationId: 'berkeley' }, { type: 'locationIs', locationId: 'pasadena' }] },
         ],
         title: 'Hot Dog',
-        locationLabel: 'the high country',
-        yearLabel: '1932',
         image: {
           setting: 'a small log cabin on a high mountain meadow at evening with two horses grazing',
           year: 1932,
@@ -1368,7 +1467,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { not: { type: 'resourceAtLeast', resource: 'wellbeing', value: 4 } },
         ],
         title: 'The Weeks That Do Not Come',
-        yearLabel: '1932',
         image: {
           setting: 'an office window with a curled photograph of mountain country pinned beside it',
           year: 1932,
@@ -1399,10 +1497,12 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           'Oppenheimer was a heavy smoker who worked to exhaustion; the neglected New Mexico summers are a dramatized consequence of a harder-pressed life.',
       },
       {
-        id: 'default',
-        conditions: [{ type: 'yearAtLeast', year: 1930 }],
+        id: 'week',
+        conditions: [
+          { type: 'yearAtLeast', year: 1930 },
+          { any: [{ type: 'locationIs', locationId: 'berkeley' }, { type: 'locationIs', locationId: 'pasadena' }] },
+        ],
         title: 'A Week Off the Road',
-        yearLabel: '1932',
         image: {
           setting: 'a borrowed cabin porch with a saddle over the rail and a book face-down',
           year: 1932,
@@ -1429,6 +1529,39 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'oppenheimer.ranch', value: true },
         ],
       },
+      {
+        id: 'far',
+        conditions: [{ type: 'yearAtLeast', year: 1930 }],
+        title: 'A Country He Only Describes',
+        image: {
+          setting: 'a lamplit room in a city far from the American southwest, with a curled photograph propped against a book',
+          year: 1932,
+          characters: ['oppenheimer'],
+          mood: 'homesickness for a place that is not home',
+          details: ['a curled photograph propped against a book', 'a folded map', 'a glass of something untouched', 'rain on a window', 'a saddle blanket used as a cushion'],
+          alt: 'A curled photograph of mountain country propped against a book in a lamplit room, rain on the window.',
+        },
+        pages: [
+          {
+            id: 'telling',
+            narration:
+              'He describes it at dinner tables: the thin air, the ranges going violet at eight in the evening, a horse that would not cross water. People assume he is exaggerating, because he exaggerates about most things, and this is the one subject on which he is being exact.',
+          },
+          {
+            id: 'distance',
+            speaker: 'ROBERT',
+            dialogue: 'There is a meadow at eight thousand feet with nothing on it. I have not seen it in years. It is the only property I have ever wanted.',
+            narration:
+              'The photograph has begun to curl at one corner from being propped up and taken down. He is a long way from it, and the distance is not measured in miles so much as in the number of things he has agreed to do instead.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'oppenheimer.ranch', value: false },
+          { type: 'resources', effects: { wellbeing: 1 } },
+        ],
+        historicalNote:
+          'Oppenheimer leased a cabin in the New Mexico high country in the early 1930s. This account follows a life spent too far from that country to take it up.',
+      },
     ],
   },
   {
@@ -1445,7 +1578,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'school',
         conditions: [{ type: 'projectCompleted', projectId: 'oppenheimer-berkeley-school' }],
         title: 'A Corridor Full of His Own Sentences',
-        yearLabel: '1936',
         image: {
           setting: 'a university corridor at evening with lit office doors along one side',
           year: 1936,
@@ -1471,7 +1603,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'public',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.politics', value: 'name' }],
         title: 'A Name on Several Letterheads',
-        yearLabel: '1936',
         image: {
           setting: 'a desk with committee stationery, a carbon copy and an unopened official envelope',
           year: 1936,
@@ -1498,7 +1629,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'Nine Years, and the Weather Changing',
-        yearLabel: '1936',
         image: {
           setting: 'an office window at dusk with a newspaper open on the sill',
           year: 1936,
@@ -1539,7 +1669,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'berkeley' }],
         title: 'Stars That Cannot Stop',
         locationLabel: 'Berkeley',
-        yearLabel: '1936',
         image: {
           setting: 'a blackboard covered with equations of stellar structure, two students standing back from it',
           year: 1937,
@@ -1572,7 +1701,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Late Thirties',
-        yearLabel: '1936',
         image: {
           setting: 'a working desk with astrophysical tables, a folded newspaper and an ashtray',
           year: 1937,
@@ -1620,7 +1748,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'A Week in January',
         locationLabel: 'Berkeley',
-        yearLabel: '1939',
         image: {
           setting: 'a blackboard with a rough sketch of a splitting nucleus and a crowd of coats at the door',
           year: 1939,
@@ -1681,7 +1808,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'anywhere',
         conditions: [{ type: 'yearAtLeast', year: 1939 }],
         title: 'News That Changes the Arithmetic',
-        yearLabel: '1939',
         image: {
           setting: 'a desk with a journal open at a short paper and an unlit cigarette',
           year: 1939,
@@ -1704,7 +1830,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'decide',
             narration:
-              'Letters will come, or they will not. Work is waiting on the desk either way. What he does with the next five years is being decided this month, whether or not he chooses to notice.',
+              'Letters will come, or they will not. The pages on the desk go on waiting, patient as furniture. What he does with the next five years is being decided in this month, and nobody is going to tell him that it has been.',
             choices: [
               {
                 id: 'paper',
@@ -1753,7 +1879,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'berkeley' }],
         title: 'The Star Closes the Door',
         locationLabel: 'Berkeley',
-        yearLabel: '1939',
         image: {
           setting: 'a blackboard at night showing a collapse solution, one lamp lit, a proof sheet on the desk',
           year: 1939,
@@ -1792,7 +1917,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'A Result Nobody Comes to See',
-        yearLabel: '1939',
         image: {
           setting: 'a plain room with a finished calculation pinned to the wall and no visitors',
           year: 1939,
@@ -1838,7 +1962,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'collapse',
         conditions: [{ type: 'projectCompleted', projectId: 'oppenheimer-gravitational-collapse' }],
         title: 'Two Kinds of Weight',
-        yearLabel: '1942',
         image: {
           setting: 'a desk with an offprint on collapse beside a sealed government envelope',
           year: 1942,
@@ -1863,7 +1986,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Decade Closes Its Hand',
-        yearLabel: '1942',
         image: {
           setting: 'an emptying department corridor with a noticeboard of leave-of-absence notes',
           year: 1942,
@@ -1881,7 +2003,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'summons',
             narration:
-              'The telephone rings in an office where the blackboard has not been wiped in a month. Whatever he has and has not finished, it is finished now. There is a train, and a room in a building with a guard on the door, and a question he is going to be asked.',
+              'The telephone rings in an office where the blackboard has not been wiped in a month, and it will not be wiped now. There is a train, and a room in a building with a guard on the door, and a question he is going to be asked in it.',
           },
         ],
       },
@@ -1903,7 +2025,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'already-in',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.1939', value: 'washington' }],
         title: 'The Room He Asked to Be In',
-        yearLabel: '1942',
         image: {
           setting: 'a summer study room with a long table, shuttered windows and a guard chair by the door',
           year: 1942,
@@ -1968,7 +2089,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Summer Study',
-        yearLabel: '1942',
         image: {
           setting: 'a shuttered room in high summer with a long table and a blackboard of estimates',
           year: 1942,
@@ -2049,9 +2169,9 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtLeast', year: 1942 },
           { type: 'yearAtMost', year: 1944 },
           { type: 'narrativeFlag', flag: 'oppenheimer.direction', value: 'seek' },
+          { any: [{ type: 'locationIs', locationId: 'losAlamos' }, { type: 'visitedLocation', locationId: 'losAlamos' }] },
         ],
         title: 'The Man Nobody Would Have Picked',
-        yearLabel: '1943',
         image: {
           setting: 'a railway carriage compartment with two facing seats and a briefcase between them',
           year: 1943,
@@ -2100,7 +2220,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'narrativeFlag', flag: 'oppenheimer.direction', value: 'refuse' },
         ],
         title: 'They Ask Anyway',
-        yearLabel: '1943',
         image: {
           setting: 'a plain office with an official visitor’s hat on the desk and a declined letter half written',
           year: 1943,
@@ -2125,22 +2244,24 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'after',
             narration:
-              'Whatever he answers in this room, the offer has been made in front of witnesses, and the file with his name on the tab has just acquired several new sheets.',
+              'He says no a second time, to a man who does not appear to have heard the first. The offer has been made in front of witnesses now, and the file with his name on the tab has acquired several new sheets, and the laboratory will open in the spring under somebody else.',
           },
         ],
         effects: [
           { type: 'markContextCardSeen', cardId: 'oppenheimer-card-1942-recruited' },
-          { type: 'flag', flag: 'oppenheimer.appointed', value: true },
+          { type: 'flag', flag: 'oppenheimer.appointed', value: false },
           { type: 'resources', effects: { standing: 1, exposure: 1 } },
         ],
         historicalNote:
           'Groves’ decision to appoint Oppenheimer over the objections of security staff is documented. A version in which Oppenheimer initially declined is dramatized.',
       },
       {
-        id: 'anywhere',
-        conditions: [{ type: 'yearAtLeast', year: 1942 }],
+        id: 'taken',
+        conditions: [
+          { type: 'yearAtLeast', year: 1942 },
+          { any: [{ type: 'locationIs', locationId: 'losAlamos' }, { type: 'visitedLocation', locationId: 'losAlamos' }] },
+        ],
         title: 'Recruited',
-        yearLabel: '1943',
         image: {
           setting: 'a desk with an unsigned appointment letter, a security questionnaire and a fountain pen',
           year: 1943,
@@ -2181,6 +2302,149 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         historicalNote:
           'Oppenheimer was appointed to direct the weapons laboratory in 1942–43 despite security objections, and he suggested the New Mexico mesa where it was built. The dialogue is dramatized wording.',
       },
+      {
+        id: 'unreached',
+        conditions: [{ type: 'yearAtLeast', year: 1942 }],
+        title: 'The Bet That Is Never Collected',
+        image: {
+          setting: 'a railway compartment with two facing seats, a locked briefcase and a folded map left behind on one of them',
+          year: 1943,
+          characters: ['oppenheimer'],
+          mood: 'an offer that outruns the man',
+          details: ['two facing seats', 'a locked briefcase', 'a folded map of high country', 'an unsigned form', 'farmland going past'],
+          alt: 'A railway compartment with facing seats, a locked briefcase and a folded map of high country.',
+        },
+        pages: [
+          {
+            id: 'compartment',
+            narration:
+              'They talk it out in a railway compartment, because that is where the general can get an hour without a telephone. The map that comes out of the briefcase is of country he has ridden across, and he can name the ridge on it before he is asked.',
+          },
+          {
+            id: 'objections',
+            narration:
+              'The objections are written down somewhere and they are all correct. No prize. No laboratory of his own. Friends and a wife and a brother with the wrong sort of history. Not one man on the committee wants him.',
+          },
+          {
+            id: 'groves',
+            speaker: 'GROVES',
+            dialogue: 'Everyone tells me you are a dilettante with poor associations. Everyone also tells me you are the only man who can hold the whole problem in one head. I am going to bet on the second thing.',
+            narration:
+              'The general reads the file to the end, closes it, and watches the farmland go past for a while. Then he says the thing that is supposed to decide the next three years.',
+          },
+          {
+            id: 'not-taken',
+            narration:
+              'It does not decide them. The form goes back into the briefcase unsigned; the site is surveyed and fenced and staffed on a schedule that will not wait for one man to settle his affairs, and by the spring the mesa has a director and it is not him.',
+          },
+          {
+            id: 'after',
+            speaker: 'ROBERT',
+            dialogue: 'He was right about me and he was late by about four months. I would rather he had been wrong.',
+            narration:
+              'He hears the second-hand version afterwards, the way one hears about a house one nearly bought. The work goes on nine hundred miles away and he is not told what any of it is for.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'oppenheimer-card-1942-recruited' },
+          { type: 'flag', flag: 'oppenheimer.appointed', value: false },
+          { type: 'resources', effects: { standing: 1, exposure: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Groves did select Oppenheimer to direct the weapons laboratory over the objections of security staff, and Oppenheimer did take up the post at Los Alamos. This account follows a life in which the appointment was offered and never taken up.',
+      },
+    ],
+  },
+  {
+    id: 'oppenheimer-wartime-work',
+    characterId: 'oppenheimer',
+    chapterId: 'crisis',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 84 },
+    once: true,
+    variants: [
+      {
+        id: 'on-the-mesa',
+        conditions: [
+          { type: 'yearAtLeast', year: 1943 },
+          { type: 'locationIs', locationId: 'losAlamos' },
+        ],
+        title: 'Badge Number Six',
+        locationLabel: 'Los Alamos',
+        image: {
+          setting: 'a muddy road between new wooden buildings with a queue at a gate and a water tower behind',
+          year: 1943,
+          characters: ['oppenheimer'],
+          mood: 'improvised town, enormous purpose',
+          details: ['duckboards over mud', 'a water tower', 'a queue at a gate hut', 'crates stencilled and stacked', 'washing on a line between huts'],
+          alt: 'A muddy road between new wooden buildings, duckboards laid over the mud and a water tower behind.',
+        },
+        pages: [
+          {
+            id: 'town',
+            narration:
+              'It is not a laboratory, it is a town that has been dropped on a mesa and told to hurry: duckboards over mud, one telephone line, a water supply that fails on Tuesdays, and eleven hundred people who are not allowed to tell their families where they live.',
+          },
+          {
+            id: 'walking',
+            narration:
+              'He walks it twice a day, hat on, coat open, and stops at benches. He asks the question that is one half-step past what the man at the bench has already worked out, and then he waits, exactly as he did in a corridor in California.',
+          },
+          {
+            id: 'line',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'He came past my desk at eleven at night and asked one question and left. I have been answering it for nine days.',
+            narration:
+              'They are twenty-six, most of them, and the best in the country, and they have been given a problem with a date on it. The town runs on that and on very bad coffee, and it runs.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'oppenheimer.mesaLife', value: true },
+          { type: 'resources', effects: { network: 2, health: -1 } },
+        ],
+        historicalNote:
+          'The wartime laboratory was a closed community built at speed on a New Mexico mesa, with severe shortages and a very young scientific staff. The dialogue is dramatized wording and the young physicist is unnamed.',
+      },
+      {
+        id: 'the-war-elsewhere',
+        conditions: [{ type: 'yearAtLeast', year: 1943 }],
+        title: 'A Department at Half Strength',
+        image: {
+          setting: 'a university corridor in wartime with half the office doors dark and a war-work notice pinned up',
+          year: 1943,
+          characters: ['oppenheimer'],
+          mood: 'useful work with the interesting part removed',
+          details: ['dark office doors', 'a war-work notice', 'a blackout blind', 'a stack of unmarked calculations', 'a rack of coats too small for the department'],
+          alt: 'A wartime university corridor with half the office doors dark and a notice pinned to a board.',
+        },
+        pages: [
+          {
+            id: 'thinned',
+            narration:
+              'The department is at half strength and the half that is left teaches everything. He takes the electrodynamics and the mechanics and, on Thursdays, a class of navy men who need to be able to do a certain kind of arithmetic by June.',
+          },
+          {
+            id: 'sealed',
+            narration:
+              'Sealed work comes through too: pages of a problem with the middle taken out, sent by people who will not say what the answer is for. He solves them, correctly and quickly, and posts them back into the silence.',
+          },
+          {
+            id: 'line',
+            speaker: 'ROBERT',
+            dialogue: 'I can tell you what these numbers are. I cannot tell you what they are about, because nobody has been rude enough to let me guess out loud.',
+            narration:
+              'He says it to the one colleague left who is old enough to find it funny. The blackout blind is down at four in the afternoon and the corridor outside is entirely dark.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'oppenheimer.mesaLife', value: false },
+          { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'American physics departments were stripped of staff and students by war work between 1942 and 1945, and compartmentalized calculations were routinely farmed out. The scene is a dramatized composite.',
+      },
     ],
   },
   {
@@ -2203,7 +2467,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'The Consultant Arrives',
         locationLabel: 'Los Alamos',
-        yearLabel: '1944',
         image: {
           setting: 'a mesa laboratory office with lens geometry chalked on a blackboard and two chairs pulled up',
           year: 1944,
@@ -2247,7 +2510,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'Arithmetic on an Industrial Scale',
         locationLabel: 'Los Alamos',
-        yearLabel: '1944',
         image: {
           setting: 'a computing room of desk machines and punched cards in a wartime laboratory',
           year: 1944,
@@ -2277,36 +2539,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         historicalNote:
           'Von Neumann’s consultation on implosion-lens computation and the use of punched-card machines at Los Alamos are documented. The dialogue is dramatized.',
       },
-      {
-        id: 'absent',
-        conditions: [{ type: 'yearAtLeast', year: 1943 }],
-        title: 'The Sum Nobody Can Finish',
-        yearLabel: '1944',
-        image: {
-          setting: 'a desk buried in half-finished computations with an unanswered telegram on top',
-          year: 1944,
-          characters: ['oppenheimer'],
-          mood: 'undermanned, grinding',
-          details: ['stacks of half-finished computation', 'an unanswered telegram', 'a broken pencil', 'an empty chair', 'a lamp on at four in the morning'],
-          alt: 'A desk buried under half-finished computations with an unanswered telegram lying on top.',
-        },
-        pages: [
-          {
-            id: 'stack',
-            narration:
-              'The arithmetic is not hard. There is simply an ocean of it, and no one within reach who can see the whole shape of the ocean at once. The telegram asking for the one man who could has not been answered in six weeks.',
-          },
-          {
-            id: 'cost',
-            speaker: 'ROBERT',
-            dialogue: 'We will do it the slow way, then. Everything we do the slow way is paid for in somebody’s months.',
-            narration: 'He looks at the stack for a while, and then at the calendar, and says it to the division head standing in the doorway with another armful.',
-          },
-        ],
-        effects: [{ type: 'flag', flag: 'oppenheimer.implosion', value: false }],
-        historicalNote:
-          'On the documented route the implosion computation drew on von Neumann’s consultation. A life in which that help never arrives is a dramatized departure.',
-      },
     ],
   },
   {
@@ -2329,7 +2561,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'The Old Man on the Mesa',
         locationLabel: 'Los Alamos',
-        yearLabel: '1944',
         image: {
           setting: 'a plain wooden laboratory office with two men’s coats on hooks and a window on pine forest',
           year: 1944,
@@ -2374,7 +2605,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'Is It Big Enough',
         locationLabel: 'Los Alamos',
-        yearLabel: '1944',
         image: {
           setting: 'a perimeter road at dusk between wooden buildings and a wire fence',
           year: 1944,
@@ -2420,7 +2650,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'absent',
         conditions: [{ type: 'yearAtLeast', year: 1943 }],
         title: 'A Letter From a Neutral Country',
-        yearLabel: '1944',
         image: {
           setting: 'a plain office with a much-forwarded letter and a wall map with pins',
           year: 1944,
@@ -2440,7 +2669,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
             speaker: 'ROBERT',
             dialogue: 'There is nobody here old enough to ask the right question. We are all forty and we are all certain.',
             narration:
-              'He puts the letter in the locked drawer with the others, on top of the ones before it, and locks the drawer, and says it to the room.',
+              'He puts the letter in the locked drawer with the others, turns the key, and goes back down the corridor to the meeting he is already late for, and says it on the way, to nobody.',
           },
         ],
         effects: [{ type: 'flag', flag: 'oppenheimer.bohrQuestion', value: false }],
@@ -2464,7 +2693,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'losAlamos' }],
         title: 'An Instrument Made of People',
         locationLabel: 'Los Alamos',
-        yearLabel: '1945',
         image: {
           setting: 'a crowded wooden colloquium hall with benches, a blackboard and a badge on every lapel',
           year: 1945,
@@ -2507,7 +2735,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'Directing From a Distance',
-        yearLabel: '1945',
         image: {
           setting: 'an office of telephones, cables and schedules far from the site being managed',
           year: 1945,
@@ -2562,7 +2789,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'Before Dawn, in the Rain',
         locationLabel: 'Los Alamos',
-        yearLabel: '1945',
         image: {
           setting: 'a desert observation shelter before dawn with instrument dials, cable and dark welding glass',
           year: 1945,
@@ -2637,10 +2863,84 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           'The first nuclear test took place in the New Mexico desert in July 1945 after weather delays; atomic bombs were used against Hiroshima and Nagasaki weeks later. The dialogue is dramatized wording, not a quotation.',
       },
       {
+        id: 'director-away',
+        conditions: [
+          { type: 'yearAtLeast', year: 1945 },
+          { type: 'narrativeFlag', flag: 'oppenheimer.appointed', value: true },
+        ],
+        title: 'Waiting by a Telephone',
+        image: {
+          setting: 'an office at four in the morning with a telephone, a desk lamp and the blinds still down',
+          year: 1945,
+          characters: ['oppenheimer'],
+          mood: 'unbearable stillness at a distance',
+          details: ['a telephone', 'a desk lamp', 'blinds still down', 'a cold cup', 'a folded weather report'],
+          alt: 'A desk at four in the morning with a telephone, a lit lamp and the blinds still down.',
+        },
+        pages: [
+          {
+            id: 'date',
+            narration:
+              'He knows the date and the window and the weather report by heart, and he is nine hundred miles from the shelter where the men he chose are lying face down in the sand. There is nothing left he can do to it. That is a condition he has no practice at.',
+          },
+          {
+            id: 'call',
+            narration:
+              'The telephone goes at half past five, and the voice on it uses the words they agreed on months ago, which sound ridiculous now and were designed to. He says thank you. He puts the receiver down and sits with his hand still on it.',
+          },
+          {
+            id: 'weeks',
+            speaker: 'ROBERT',
+            dialogue: 'It worked. Now every one of us has to live in the room we have just built, and so does everybody else.',
+            narration:
+              'Three weeks later the news comes over the wire from the other side of the world, twice. People he has never met congratulate him in the street. He says it to a colleague in a corridor, quietly, and the colleague does not know what to do with it.',
+          },
+          {
+            id: 'choose',
+            narration:
+              'The war ends. The work is finished and cannot be unfinished, and for the first time in three years he has a choice about what to do with his mouth.',
+            choices: [
+              {
+                id: 'speak',
+                label: 'Say out loud what has been made, to anyone who will sit still for it',
+                effects: [
+                  { type: 'flag', flag: 'oppenheimer.afterTrinity', value: 'speak' },
+                  { type: 'resources', effects: { standing: 1, exposure: 2 } },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
+                ],
+              },
+              {
+                id: 'silence',
+                label: 'Say nothing. The work speaks; let the soldiers speak for it',
+                effects: [
+                  { type: 'flag', flag: 'oppenheimer.afterTrinity', value: 'silence' },
+                  { type: 'resources', effects: { wellbeing: -2 } },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: -2 },
+                ],
+              },
+              {
+                id: 'petition',
+                label: 'Carry the scientists’ objections to the men who decide, and keep carrying them',
+                effects: [
+                  { type: 'flag', flag: 'oppenheimer.afterTrinity', value: 'petition' },
+                  { type: 'resources', effects: { network: 1, exposure: 2, wellbeing: -1 } },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 3 },
+                ],
+              },
+            ],
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'oppenheimer-card-1945-trinity' },
+          { type: 'resources', effects: { wellbeing: -2, standing: 1 } },
+        ],
+        historicalNote:
+          'Oppenheimer was present at the July 1945 test in the New Mexico desert. This account follows a director who was away from the site on the morning of the shot; the test, the weather delay and the August bombings are documented.',
+      },
+      {
         id: 'anywhere',
         conditions: [{ type: 'yearAtLeast', year: 1945 }],
         title: 'The News Arrives Anyway',
-        yearLabel: '1945',
         image: {
           setting: 'a room with a wireless set switched on and a newspaper special edition on the table',
           year: 1945,
@@ -2669,7 +2969,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'choose',
             narration:
-              'Whatever part he had or did not have in it, the age has started, and men who did not build it are already deciding what it means. There is still a choice about what he does with his mouth.',
+              'The age is nine days old and men who never saw the inside of the work are on the wireless already, explaining it to everybody. There is still a choice about what he does with his mouth.',
             choices: [
               {
                 id: 'speak',
@@ -2724,7 +3024,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'built',
         conditions: [{ type: 'projectCompleted', projectId: 'oppenheimer-los-alamos-direction' }],
         title: 'The Certificate and the Sentence',
-        yearLabel: '1945',
         image: {
           setting: 'a plain hall with folding chairs, a small platform and a rolled certificate on a table',
           year: 1945,
@@ -2759,7 +3058,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'refused',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.direction', value: 'refuse' }],
         title: 'The War Ends Without Him',
-        yearLabel: '1945',
         image: {
           setting: 'a university office with a wireless on and a class list on the desk',
           year: 1945,
@@ -2786,7 +3084,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Age Starts Without Asking',
-        yearLabel: '1945',
         image: {
           setting: 'a room with the blinds half down and a special edition newspaper left folded on a chair',
           year: 1945,
@@ -2799,7 +3096,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'edition',
             narration:
-              'The special edition has been folded on the chair for two days and he has read it twice and will not throw it away. Whatever he was doing in these years, this is the thing the years will be named after.',
+              'The special edition has been folded on the chair for two days. He has read it twice and will not throw it away, and it is the only object in the room that will still mean anything in fifty years.',
           },
           {
             id: 'ahead',
@@ -2826,7 +3123,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'speaking',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.afterTrinity', value: 'speak' }],
         title: 'The Most Famous Physicist in America',
-        yearLabel: '1946',
         image: {
           setting: 'a lecture platform with a jug of water, a microphone stand and a full hall beyond the lights',
           year: 1946,
@@ -2839,7 +3135,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'platform',
             narration:
-              'His face is in the magazines. He is asked to explain the age to luncheon clubs and Senate committees and, once, to a room of insurance men in Cleveland. He is extremely good at it, which is part of the trouble.',
+              'Within a year of the end his face is in the magazines, and he is asked to explain the age to luncheon clubs and Senate committees and, once, to a room of insurance men in Cleveland. He is extremely good at it, which is part of the trouble.',
           },
           {
             id: 'cost',
@@ -2860,7 +3156,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'quiet',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.afterTrinity', value: 'silence' }],
         title: 'A Man Who Will Not Comment',
-        yearLabel: '1946',
         image: {
           setting: 'a hallway with a telephone left off the hook and unanswered press cards on a tray',
           year: 1946,
@@ -2891,7 +3186,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'What the Age Requires',
-        yearLabel: '1946',
         image: {
           setting: 'a committee ante-room with a folded overcoat, a briefcase and an unread agenda',
           year: 1946,
@@ -2936,7 +3230,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'washingtonDC' }],
         title: 'A Proposal Nobody Wants',
         locationLabel: 'Washington, D.C.',
-        yearLabel: '1946',
         image: {
           setting: 'a government committee room with a long table, blotters and a bound report',
           year: 1946,
@@ -2977,7 +3270,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'Arguing From Outside the Room',
-        yearLabel: '1946',
         image: {
           setting: 'a study with carbon copies of a proposal and a stack of addressed envelopes',
           year: 1946,
@@ -3021,7 +3313,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'princeton' }],
         title: 'Tea at Three',
         locationLabel: 'Princeton',
-        yearLabel: '1948',
         image: {
           setting: 'a common room with tea things, deep chairs and a lawn beyond tall windows',
           year: 1948,
@@ -3039,7 +3330,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'ghosts',
             narration:
-              'The place is full of people who have nowhere else to be: a man who reasoned his way out of the certainty of arithmetic, another building a machine that will do arithmetic faster than anyone wants, and an old man in a sweater walking home across the lawn without a hat.',
+              'The place is full of people who have nowhere else to be: a man who reasoned his way out of the certainty of arithmetic, another building a machine that will do arithmetic faster than anyone wants, and an old man who crosses the lawn at the same hour every evening and will not be driven home.',
           },
           {
             id: 'line',
@@ -3058,7 +3349,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'A Directorship at Arm’s Length',
-        yearLabel: '1948',
         image: {
           setting: 'a desk of institutional correspondence, budgets and appointment files far from the institution',
           year: 1948,
@@ -3100,15 +3390,14 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'human-einstein-here',
         conditions: [
-          { type: 'yearAtLeast', year: 1947 },
-          { type: 'yearAtMost', year: 1955 },
+          { type: 'yearAtLeast', year: 1950 },
+          { type: 'yearAtMost', year: 1956 },
           { type: 'locationIs', locationId: 'princeton' },
           { type: 'otherCharacterIsHuman', characterId: 'einstein' },
           { type: 'otherCharacterAt', characterId: 'einstein', locationId: 'princeton', yearTolerance: 2 },
         ],
         title: 'Walking Home Along Mercer Street',
         locationLabel: 'Princeton',
-        yearLabel: '1953',
         image: {
           setting: 'a tree-lined suburban street in late afternoon with two men walking and a low picket fence',
           year: 1953,
@@ -3126,7 +3415,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'advice',
             speaker: 'EINSTEIN',
-            dialogue: 'They have given you the trouble, and now they want you to be grateful for the chance to answer it. Do not go. Let them try to explain you to themselves.',
+            dialogue: 'They make the trouble, and then they want you grateful for the chance to answer it. Do not go, when they ask. Let them try to explain you to themselves.',
             narration:
               'The old man has spent thirty years being unafraid of institutions, largely by never having needed one, and he offers it kindly and with no expectation whatever that it will be taken.',
           },
@@ -3146,14 +3435,13 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'npc-einstein-here',
         conditions: [
-          { type: 'yearAtLeast', year: 1947 },
-          { type: 'yearAtMost', year: 1955 },
+          { type: 'yearAtLeast', year: 1950 },
+          { type: 'yearAtMost', year: 1956 },
           { type: 'locationIs', locationId: 'princeton' },
           { type: 'otherCharacterIsNpc', characterId: 'einstein' },
         ],
         title: 'The Old Man in the Cardigan',
         locationLabel: 'Princeton',
-        yearLabel: '1953',
         image: {
           setting: 'an institute lawn at the end of the day with two figures at distance and long shadows',
           year: 1953,
@@ -3166,12 +3454,12 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'lawn',
             narration:
-              'He is the director and the old man is, technically, an employee, and neither of them has ever managed to make that arrangement feel real. They cross the lawn together most evenings. The younger one carries the briefcase for both of them.',
+              'They cross the lawn together most evenings, at the pace of the older man, and the younger one ends up carrying the briefcase for both of them. Whatever their titles are supposed to be on paper, neither of them has ever managed to make that arrangement feel real.',
           },
           {
             id: 'advice',
             speaker: 'EINSTEIN',
-            dialogue: 'You served your country well. If this is how it repays you, you owe it nothing further. Walk away and let them write whatever they like.',
+            dialogue: 'They are asking your colleagues about you now. If that is how a country repays service, you owe it nothing further. Walk away and let them write whatever they like.',
             narration:
               'They stop where the paths divide and the old man puts a hand on his sleeve to keep him there a moment longer.',
           },
@@ -3195,9 +3483,11 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'absent',
-        conditions: [{ type: 'yearAtLeast', year: 1947 }],
+        conditions: [
+          { type: 'yearAtLeast', year: 1950 },
+          { type: 'yearAtMost', year: 1956 },
+        ],
         title: 'Nobody to Tell Him to Walk Away',
-        yearLabel: '1953',
         image: {
           setting: 'a study at night with an unposted letter and a chair pulled out from the desk',
           year: 1953,
@@ -3210,7 +3500,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'letter',
             narration:
-              'He writes to one of the old men of the subject, three drafts, and posts none of them. The question in all three is the same and it is not a question about physics: how much of a man is left when a government withdraws its confidence in him.',
+              'Colleagues are being interviewed about him; he learns this from a friend who is embarrassed to be the one telling him. He writes to one of the old men of the subject, three drafts, and posts none of them. The question in all three is the same and it is not a question about physics: what a man is supposed to do while a government makes up its mind about him.',
           },
           {
             id: 'alone',
@@ -3243,7 +3533,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         ],
         title: 'A Room With Folding Chairs',
         locationLabel: 'Washington, D.C.',
-        yearLabel: '1954',
         image: {
           setting: 'a converted government office with folding chairs, a stenotype machine and a leather sofa',
           year: 1954,
@@ -3316,7 +3605,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'narrativeFlag', flag: 'oppenheimer.einsteinAdvice', value: true },
         ],
         title: 'The Advice He Does Not Take',
-        yearLabel: '1954',
         image: {
           setting: 'a study with a registered letter opened on the blotter and a train timetable beside it',
           year: 1954,
@@ -3335,6 +3623,13 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
             id: 'ignored',
             narration:
               'He has been told, by a man with every right to say it, to refuse the whole proceeding and let them explain themselves. He packs the overnight case instead. Some men cannot walk out of a room where they are being discussed.',
+          },
+          {
+            id: 'inside',
+            speaker: 'ROBERT',
+            dialogue: 'They are not accusing me of anything I did. They are accusing me of who I was willing to be seen with while I did it.',
+            narration:
+              'He reads the numbered paragraphs a fourth time at the kitchen table, with the case already strapped by the door, and finds the sentence that says what all twenty-four of them are actually for.',
           },
           {
             id: 'decide',
@@ -3378,7 +3673,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'anywhere',
         conditions: [{ type: 'yearAtLeast', year: 1953 }],
         title: 'The File Comes Due',
-        yearLabel: '1954',
         image: {
           setting: 'a hallway table with a registered envelope, a hat and a closed front door',
           year: 1954,
@@ -3461,7 +3755,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { not: { type: 'resourceAtLeast', resource: 'health', value: 5 } },
         ],
         title: 'The Cough at the Lectern',
-        yearLabel: '1962',
         image: {
           setting: 'an empty lecture hall after a talk with a glass of water and a scarf over a chair',
           year: 1962,
@@ -3480,7 +3773,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
             id: 'young',
             speaker: 'ROBERT',
             dialogue: 'They ask me about the desert. They never ask me about the stars, and the stars were the better piece of work.',
-            narration: 'The students are polite and have read about him in a way that has nothing to do with physics. He is fifty-eight and looks a decade past it.',
+            narration: 'The students are polite and have read about him in a way that has nothing to do with physics. He looks a decade older than he is, and has for some time.',
           },
         ],
         effects: [{ type: 'resources', effects: { health: -1, wellbeing: -1 } }],
@@ -3494,7 +3787,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           { type: 'resourceAtLeast', resource: 'health', value: 6 },
         ],
         title: 'Evenings on the Porch',
-        yearLabel: '1962',
         image: {
           setting: 'a wooden porch at evening with two chairs, a book face-down and a lamp inside the doorway',
           year: 1962,
@@ -3522,7 +3814,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'default',
         conditions: [{ type: 'yearAtLeast', year: 1959 }],
         title: 'Late Correspondence',
-        yearLabel: '1962',
         image: {
           setting: 'a desk of answered and unanswered letters with a photograph of mountain country propped behind',
           year: 1962,
@@ -3562,7 +3853,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'after-hearing',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.hearing' }],
         title: 'Consulted About Nothing',
-        yearLabel: '1963',
         image: {
           setting: 'an institute office with a blackboard half written and an award case unopened on the desk',
           year: 1963,
@@ -3575,12 +3865,12 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'medal',
             narration:
-              'Nine years after the folding chairs, a committee of the same government votes him a prize, and there is a room and a photographer and a short citation. Nobody anywhere uses the word apology. The case stays shut on his desk for a week before he opens it, alone, and shuts it again.',
+              'Years after the folding chairs, a committee of the same government votes him a prize, and there is a room and a photographer and a short citation. Nobody anywhere uses the word apology. The case stays shut on his desk for a week before he opens it, alone, and shuts it again.',
           },
           {
             id: 'what-remains',
             narration:
-              'He still has an office with a blackboard in it. He can still hold a hall for an hour. What was taken was never the clearance; it was the assumption that a man who says what he thinks may go on being trusted, and no medal has ever been minted that gives that back.',
+              'He still has an office with a blackboard in it, and people still write to ask him things. What was taken was never the clearance; it was the assumption that a man who says what he thinks may go on being trusted, and no medal has ever been minted that gives that back.',
           },
         ],
         historicalNote:
@@ -3596,7 +3886,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           },
         ],
         title: 'The Ledger at the End of the Desk',
-        yearLabel: '1965',
         image: {
           setting: 'a director’s office at the end of a working day, papers squared, blackboard wiped',
           year: 1965,
@@ -3621,7 +3910,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Quiet Part of the Century',
-        yearLabel: '1965',
         image: {
           setting: 'a study with the lamp off and the last light on a wall of books',
           year: 1965,
@@ -3660,7 +3948,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
         id: 'refused-the-laboratory',
         conditions: [{ type: 'narrativeFlag', flag: 'oppenheimer.direction', value: 'refuse' }],
         title: 'The Man Who Said No',
-        yearLabel: '1967',
         image: {
           setting: 'a lecture room with a blackboard of stellar equations and an empty front row',
           year: 1967,
@@ -3708,7 +3995,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           },
         ],
         title: 'What the Century Kept',
-        yearLabel: '1967',
         image: {
           setting: 'a high desert horizon at first light with a fence line running out of frame',
           year: 1967,
@@ -3755,7 +4041,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           },
         ],
         title: 'A Partial Account',
-        yearLabel: '1967',
         image: {
           setting: 'a desk with a notebook open at a half-finished page and a window on winter trees',
           year: 1967,
@@ -3781,7 +4066,6 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Boy on the Stairs',
-        yearLabel: '1967',
         image: {
           setting: 'a stone stair in winter light with a book left face-down on the step',
           year: 1967,
@@ -3794,7 +4078,7 @@ export const OPPENHEIMER_STORY_SCENES: StoryScene[] = [
           {
             id: 'return',
             narration:
-              'Whatever else the years did, they began on a stone stair with a book and a labelled scrap of feldspar and a boy who had worked out that being ahead is a kind of loneliness with good manners.',
+              'All of it began on a stone stair with a book and a labelled scrap of feldspar and a boy who had already worked out that being ahead is a kind of loneliness with good manners.',
           },
           {
             id: 'last',

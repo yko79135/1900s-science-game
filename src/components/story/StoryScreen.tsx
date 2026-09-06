@@ -188,7 +188,7 @@ export function StoryScreen({ state, dispatch }: StoryScreenProps) {
             </div>
             {!view.page.choices && (
               <button type="button" className="btn btn-primary" data-testid="story-continue" onClick={() => dispatch({ type: 'STORY_NEXT' })}>
-                {view.pageIndex === view.pageCount - 1 ? 'Continue to the story' : 'Continue'}
+                Continue
               </button>
             )}
           </footer>

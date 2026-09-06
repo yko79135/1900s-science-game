@@ -226,48 +226,48 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
       {
         id: 'thriving',
         conditions: [
-          { type: 'yearAtLeast', year: 1910 },
-          { type: 'yearAtMost', year: 1917 },
+          { type: 'yearAtLeast', year: 1919 },
+          { type: 'yearAtMost', year: 1921 },
           { type: 'resourceAtLeast', resource: 'wellbeing', value: 5 },
         ],
         title: 'Two Numbers and a Ceiling',
-        yearLabel: '1912',
+        yearLabel: '1920',
         image: {
-          setting: 'a warm parlour after a dinner party, the guests turned toward a child at the end of the room',
-          year: 1912,
+          setting: 'a dining room set for fewer guests than it was built for, the good silver still out',
+          year: 1920,
           characters: ['vonneumann'],
           mood: 'affectionate, showy, a little lonely',
-          details: ['a cleared dinner table', 'cigar smoke under a lamp', 'a slip of paper with long numbers', 'a plaster ceiling rose', 'a cut-glass decanter'],
-          alt: 'A cleared dinner table under lamplight with a slip of paper covered in long numbers.',
+          details: ['a long table laid for eight', 'cigar smoke under a lamp', 'a slip of paper with long numbers', 'a plaster ceiling rose', 'a cut-glass decanter half empty'],
+          alt: 'A long dining table laid for fewer guests than it seats, with a slip of paper covered in long numbers.',
         },
         pages: [
           {
             id: 'party',
             narration:
-              'An uncle writes two eight-figure numbers on a slip and asks for the quotient. The boy looks at the ceiling for a moment — the plaster rose, the hairline crack running out of it — and then says the answer, and the room applauds a child for doing something the room does not understand.',
+              'The house entertains again, for fewer people, with the good silver out. An uncle writes two eight-figure numbers on a slip — sums in the new currency, which means nothing next month — and asks for the quotient.',
           },
           {
             id: 'ceiling',
             narration:
-              'What he is doing while he looks at the ceiling is not arithmetic. It is deciding which of four ways to do the arithmetic will be quickest, and only then doing it. This is the part he would like to tell someone about, and there is nobody at the table to tell.',
+              'He looks at the plaster rose on the ceiling and the hairline crack running out of it, and then says the answer, and the room applauds a boy of sixteen for doing something the room does not understand. What he was doing up there was not arithmetic. It was choosing which of four ways to do the arithmetic would be shortest.',
             speaker: 'JANCSI',
             dialogue: 'It is not that I am fast. It is that most people begin before they have chosen the road.',
           },
         ],
         historicalNote:
-          'Von Neumann’s childhood mental arithmetic and memory feats are reported in every standard biography, including performances for family guests. The scene and dialogue are dramatized.',
+          'Von Neumann’s mental arithmetic and memory feats, including performances for family guests, are reported in every standard biography. Hungarian currency was unstable in the postwar years. The scene and dialogue are dramatized.',
       },
       {
         id: 'default',
         conditions: [
-          { type: 'yearAtLeast', year: 1910 },
-          { type: 'yearAtMost', year: 1917 },
+          { type: 'yearAtLeast', year: 1919 },
+          { type: 'yearAtMost', year: 1921 },
         ],
         title: 'Two Numbers and a Ceiling',
-        yearLabel: '1912',
+        yearLabel: '1920',
         image: {
           setting: 'a cold study late at night with a lamp and a slate of long division',
-          year: 1912,
+          year: 1920,
           characters: ['vonneumann'],
           mood: 'tired, obliging, private',
           details: ['a slate with long division', 'a lamp turned low', 'a shawl over a chair back', 'a shut door', 'a clock reading past midnight'],
@@ -277,18 +277,18 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           {
             id: 'asked',
             narration:
-              'They ask him to do the trick again for a guest who has heard about it, and he does it, because it is easier than explaining why he would rather not. Two eight-figure numbers, a quotient, applause, bed.',
+              'They ask him to do the trick again for a guest who has heard about it, and he does it, because it is easier than explaining why he would rather not. Two eight-figure numbers in a currency that will mean something else by spring, a quotient, applause, bed.',
           },
           {
             id: 'after',
             narration:
-              'Afterwards he sits with a slate and works the same division four different ways to see which is shortest. Nobody asks about that part. He is beginning to suspect that being admired and being understood are unrelated conditions.',
+              'Afterwards he sits with a slate in the cold and works the same division four ways to see which is shortest. Nobody asks about that part. At sixteen he has begun to suspect that being admired and being understood are unrelated conditions.',
             speaker: 'JANCSI',
             dialogue: 'The trick is choosing the road. Everyone claps for the walking.',
           },
         ],
         historicalNote:
-          'Von Neumann’s childhood mental arithmetic and memory feats are reported in every standard biography. The scene and dialogue are dramatized.',
+          'Von Neumann’s mental arithmetic feats are reported in every standard biography; Hungarian currency was unstable after the war. The scene and dialogue are dramatized.',
       },
     ],
   },
@@ -1081,32 +1081,125 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           'Von Neumann took the ETH chemical engineering diploma and the Budapest doctorate in 1926, then went to Göttingen on a fellowship to work near Hilbert.',
       },
       {
-        id: 'method-known',
-        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.method' }],
-        title: 'What the Arrangement Cost',
+        id: 'refused',
+        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.bargain', value: 'mathematics' }],
+        title: 'The Last of the Exercise Books',
         yearLabel: '1926',
         image: {
-          setting: 'an emptied student room with a stripped bed and one stack of notes left on the sill',
+          setting: 'a cheap room being given up, a bundle of marked exercise books tied for return',
           year: 1926,
           characters: ['vonneumann'],
-          mood: 'settled, faintly rueful',
-          details: ['a stripped bed', 'one stack of notes on a sill', 'a chair with a coat over it', 'a key on a bare table', 'grey light in a bare window'],
-          alt: 'A stripped bed in an emptied room with one stack of notes left on the windowsill.',
+          mood: 'lean, vindicated, impatient to be gone',
+          details: ['exercise books tied with string for return', 'a stripped bed', 'a coal scuttle turned upside down', 'a key on a bare table', 'a letter with a foreign stamp'],
+          alt: 'A bundle of marked exercise books tied with string beside a stripped bed and a key on a bare table.',
+        },
+        pages: [
+          {
+            id: 'books',
+            narration:
+              'The last bundle of exercise books is tied with string by the door, marked and to be returned, and the scuttle is turned upside down because there is no point buying coal for a week. Five years of other people’s sons, paid for in afternoons.',
+          },
+          {
+            id: 'onward',
+            narration:
+              'He never told his father what the tutoring paid or how thin some of the winters were, and he does not intend to start. There is a letter with a foreign stamp on the bare table offering a fellowship. He has read it four times, and this time he reads the salary line last, on purpose, like a man saving the good part.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann took the practical degree his father wanted; a student life funded by tutoring instead is a dramatized departure. He did leave for a Göttingen fellowship in 1926.',
+      },
+      {
+        id: 'method-all',
+        conditions: [
+          { not: { type: 'narrativeFlag', flag: 'vonneumann.bargain', value: 'mathematics' } },
+          { type: 'narrativeFlag', flag: 'vonneumann.method', value: 'allAtOnce' },
+        ],
+        title: 'What the Speed Cost',
+        yearLabel: '1926',
+        image: {
+          setting: 'an emptied student room with a stripped bed and a chair he has fallen asleep in',
+          year: 1926,
+          characters: ['vonneumann'],
+          mood: 'triumphant, hollowed out',
+          details: ['a stripped bed never slept in', 'a chair with a blanket over its arm', 'two finished stacks of notes', 'a key on a bare table', 'grey light in a bare window'],
+          alt: 'A stripped bed beside a chair with a blanket over its arm and two finished stacks of notes.',
         },
         pages: [
           {
             id: 'stripped',
             narration:
-              'The room is stripped and there is one stack of notes left on the sill, the stack he chose. Whichever way he ran the arrangement, something on the table got less of him than it deserved, and he knows precisely which.',
+              'The bed is stripped and was barely used; he has spent five years asleep in the chair with his coat on, and both stacks on the table are finished, and neither of them is worse than it should be. He was right. That is the part that frightens the people who watched.',
           },
           {
             id: 'onward',
             narration:
-              'He is twenty-two and has already learned the thing most people learn at forty: that a talent for doing several things at once is not the same as being allowed to. There is a letter about a fellowship in his coat. He has read it four times.',
+              'He is twenty-two and has just proved to himself that he can carry two lives at full speed without dropping either, which is the most dangerous thing he will ever learn. There is a letter about a fellowship in his coat. He has read it four times.',
           },
         ],
         historicalNote:
-          'Von Neumann completed his doctorate and diploma by 1926 and moved on to Göttingen. The reckoning is dramatized.',
+          'Von Neumann completed the doctorate and the diploma within months of each other in 1926 and moved on to Göttingen. The reckoning is dramatized.',
+      },
+      {
+        id: 'method-chemistry',
+        conditions: [
+          { not: { type: 'narrativeFlag', flag: 'vonneumann.bargain', value: 'mathematics' } },
+          { type: 'narrativeFlag', flag: 'vonneumann.method', value: 'chemistryFirst' },
+        ],
+        title: 'The Daylight Hours',
+        yearLabel: '1926',
+        image: {
+          setting: 'an emptied student room with a technical certificate propped on the sill and a thinner stack beside it',
+          year: 1926,
+          characters: ['vonneumann'],
+          mood: 'creditable, quietly grudging',
+          details: ['a certificate propped on a sill', 'a thin stack of notes beside it', 'a stripped bed', 'a key on a bare table', 'grey light in a bare window'],
+          alt: 'A certificate propped on a windowsill beside a thin stack of notes in an emptied room.',
+        },
+        pages: [
+          {
+            id: 'stripped',
+            narration:
+              'The certificate stands on the sill and it is a good one, earned in daylight, at a bench, by a man who was never once late. Beside it is the other stack, which is thinner than it would have been, and he can name the four papers that are not in it.',
+          },
+          {
+            id: 'onward',
+            narration:
+              'He is twenty-two and has kept every promise he made across his father’s desk, and he intends to stop making that particular kind of promise. There is a letter about a fellowship in his coat. He has read it four times.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann took the practical degree his father wanted alongside the mathematics. The ordering of his hours is dramatized.',
+      },
+      {
+        id: 'method-mathematics',
+        conditions: [
+          { not: { type: 'narrativeFlag', flag: 'vonneumann.bargain', value: 'mathematics' } },
+          { type: 'narrativeFlag', flag: 'vonneumann.method', value: 'mathematicsFirst' },
+        ],
+        title: 'The Minimum at the Bench',
+        yearLabel: '1926',
+        image: {
+          setting: 'an emptied student room with one large stack of notes on the sill and a folded pass-mark slip',
+          year: 1926,
+          characters: ['vonneumann'],
+          mood: 'unapologetic, cheerful, slightly guilty',
+          details: ['a large stack of notes on a sill', 'a folded slip with a bare pass mark', 'a stripped bed', 'a key on a bare table', 'grey light in a bare window'],
+          alt: 'A large stack of notes on a windowsill beside a folded slip recording a bare pass mark.',
+        },
+        pages: [
+          {
+            id: 'stripped',
+            narration:
+              'The stack on the sill is enormous and the folded slip beside it records the barest pass the faculty was willing to award. He has done exactly as much chemistry as the regulations required and not one titration more, and he is not sorry, and he has decided not to show his father the slip.',
+          },
+          {
+            id: 'onward',
+            narration:
+              'He is twenty-two and has learned that an institution will let you steal a great deal of time if you are careful to hand in everything on the day it is due. There is a letter about a fellowship in his coat. He has read it four times.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann was said to have treated the practical degree as an obligation rather than a vocation. The grading and the concealment are dramatized.',
       },
       {
         id: 'default',
@@ -1778,72 +1871,72 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
       {
         id: 'princeton',
         conditions: [{ type: 'locationIs', locationId: 'princeton' }],
-        title: 'A Post With No Duties',
+        title: 'One Term, Extended',
         locationLabel: 'Princeton',
         yearLabel: '1930–1944',
         image: {
-          setting: 'a new office with bare shelves and unopened crates, a window onto flat American lawn',
-          year: 1933,
+          setting: 'a borrowed university office with crates still roped shut and a window onto flat American lawn',
+          year: 1931,
           characters: ['vonneumann'],
-          mood: 'expansive, unmoored, delighted',
-          details: ['unopened packing crates', 'bare shelves', 'a blackboard still wrapped', 'a wide window onto lawn', 'a gramophone in its case'],
-          alt: 'Unopened packing crates and bare shelves in a new office with a wide window onto flat lawn.',
+          mood: 'provisional, curious, appetitive',
+          details: ['crates still roped shut', 'a borrowed desk', 'a lecture list with his name added in ink', 'a wide window onto lawn', 'a gramophone in its case'],
+          alt: 'Crates still roped shut in a borrowed office with a wide window onto flat lawn.',
         },
         pages: [
           {
             id: 'office',
             narration:
-              'The crates are still roped shut and the shelves are bare and the lawn outside is flat in a way no European lawn is flat. Nobody has given him a timetable. It takes him three days to understand that nobody is going to.',
+              'He came for one term and the crates are still roped shut in the corner, which is his way of not deciding. The lawn outside is flat in a manner no European lawn is flat. On the lecture list in the hall his name has been added in ink at the bottom, under the printed ones.',
           },
           {
             id: 'terms',
             narration:
-              'The terms are absurd and he checks them twice, in the way he checks a sum. No lectures. No committees he cannot leave. A salary that would embarrass a bank, and the only obligation is to be interesting.',
+              'There is a rumour in the corridors about money: a new institute being assembled a mile away, with an endowment, no students, and a shortlist. Nobody will say who is on the shortlist, which is how he knows the shortlist exists.',
             speaker: 'A COLLEAGUE',
-            dialogue: 'They have bought the best minds in the world and given them nothing to do. Half of us will go to pieces. The other half will do the century’s work.',
+            dialogue: 'They mean to buy the best minds in the world and give them nothing whatever to do. Half of them will go to pieces on it. The other half will do the century’s work.',
           },
           {
             id: 'appetite',
             narration:
-              'He unwraps the blackboard first and the gramophone second, and by the end of the week both are in use at the same time. Quantum mechanics is unfinished, economics has no mathematics worth the name, and there is a whole ocean between him and the newspapers from home.',
+              'He unropes one crate — the gramophone — and leaves the rest. Quantum mechanics is unfinished, economics has no mathematics worth the name, and there is a whole ocean between him and the newspapers from home, which he has begun to read standing up.',
           },
         ],
         historicalNote:
-          'Von Neumann joined Princeton in 1930 and became one of the first professors of the Institute for Advanced Study, a post with no teaching obligations. Dialogue is dramatized.',
+          'Von Neumann came to Princeton University in 1930 as a visiting lecturer and became a professor there before the Institute for Advanced Study, founded in 1930, appointed its first professors in 1933. Dialogue is dramatized.',
       },
       {
         id: 'default',
-        title: 'A Post With No Duties',
+        title: 'A Post With No Duties, Somewhere',
         yearLabel: '1930–1944',
         image: {
-          setting: 'a study with an empty appointment diary open on the desk and a blackboard newly hung',
-          year: 1933,
+          setting: 'a study with a prospectus for a new research institute open beside a blackboard',
+          year: 1931,
           characters: ['vonneumann'],
-          mood: 'expansive, unmoored, delighted',
-          details: ['an appointment diary with blank pages', 'a newly hung blackboard', 'a gramophone in its case', 'a stack of foreign newspapers', 'a coat still on its hanger'],
-          alt: 'An appointment diary open at blank pages on a desk beneath a newly hung blackboard.',
+          mood: 'provisional, curious, appetitive',
+          details: ['a prospectus for a new institute', 'a newly hung blackboard', 'a gramophone in its case', 'a stack of foreign newspapers', 'a coat still on its hanger'],
+          alt: 'A prospectus for a new research institute lying open beside a newly hung blackboard.',
         },
         pages: [
           {
             id: 'crates',
             narration:
-              'The diary on the desk is open at a week with nothing written in it, and the week after that is also empty, and so is the month. Nobody has given him a timetable. It takes him three days to understand that nobody is going to.',
+              'The prospectus is eight pages of very good paper and describes an institute that does not exist yet: an endowment, no students, no lectures, and a shortlist nobody will name. He reads it twice, the way he checks a sum.',
           },
           {
             id: 'terms',
             narration:
-              'It is the arrangement he would have designed for himself and did not dare ask for: no lectures, no committees he cannot walk out of, and the single obligation of being worth the money.',
+              'It is the arrangement he would have designed for himself and did not dare ask anyone for. He puts it in the drawer, on top, where he will see it every time he opens the drawer.',
             speaker: 'A COLLEAGUE',
-            dialogue: 'No duties at all. Half of us will go to pieces on it. The other half will do the century’s work. Which half are you?',
+            dialogue: 'No duties at all. Half of them will go to pieces on it. The other half will do the century’s work. Which half would you be?',
           },
           {
             id: 'appetite',
             narration:
-              'He sets up the gramophone under the blackboard and by the end of the week both are in use at once. Quantum mechanics is unfinished, economics has no mathematics worth the name, and the newspapers from home have started using a tone he recognises.',
+              'He sets up the gramophone under the blackboard and by the end of the week both are in use at once. Quantum mechanics is unfinished, economics has no mathematics worth the name, and the newspapers have started using a tone he recognises from when he was fifteen.',
           },
         ],
         historicalNote:
-          'Von Neumann held a research post free of teaching duties from the early 1930s and worked simultaneously across quantum theory, logic, and economics. Dialogue is dramatized.',
+          'The Institute for Advanced Study was founded in 1930 and appointed its first professors in 1933; von Neumann was among them. Dialogue is dramatized.',
       },
     ],
   },
@@ -1858,6 +1951,78 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     once: true,
     replacesContextCardId: 'vonneumann-card-1930-princeton',
     variants: [
+      {
+        id: 'europe',
+        conditions: [
+          { type: 'yearAtLeast', year: 1932 },
+          { type: 'yearAtMost', year: 1940 },
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+        ],
+        title: 'The Chair Across the Water',
+        yearLabel: '1933',
+        image: {
+          setting: 'a European study where an engraved American letter lies beside a passport and a departure schedule',
+          year: 1933,
+          characters: ['vonneumann'],
+          mood: 'weighed, watchful, unresolved',
+          details: ['an engraved letter with an American seal', 'a passport with a worn cover', 'a shipping company schedule', 'a newspaper folded to an inside page', 'a lamp turned low at midday'],
+          alt: 'An engraved letter with an American seal beside a worn passport and a shipping company schedule.',
+        },
+        pages: [
+          {
+            id: 'offer',
+            narration:
+              'The letter is engraved and offers a founding chair at an institute with an endowment, no students, and an ocean around it. It has been on the desk for eleven days beside his passport, which he has also not put away.',
+          },
+          {
+            id: 'papers',
+            narration:
+              'The newspaper is folded to an inside page because the inside pages are where it is happening: a faculty list here, a resignation there, a word he has not seen in print since he was fifteen. Göttingen is not being closed. It is being emptied, name by name.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'You have somewhere to go. Most of the people in this building do not. Whatever you decide about the chair, decide it early enough to be useful to them.',
+          },
+          {
+            id: 'choice',
+            narration:
+              'That is the real question and the chair is only the frame around it. He is a man with a passport, a name that still opens doors, and a finite quantity of both.',
+            choices: [
+              {
+                id: 'affidavits',
+                label: 'Spend the name on paperwork for anyone who asks',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.letters', value: 'affidavits' },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
+                  { type: 'resources', effects: { funds: -1, network: 2 } },
+                ],
+              },
+              {
+                id: 'posts',
+                label: 'Spend it finding them actual posts, slowly and properly',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.letters', value: 'posts' },
+                  { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
+                  { type: 'resources', effects: { standing: -1, network: 1 } },
+                ],
+              },
+              {
+                id: 'work',
+                label: 'Answer what you can and get back to the mathematics',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.letters', value: 'work' },
+                  { type: 'theme', theme: 'breadthVsDepth', amount: 2 },
+                  { type: 'resources', effects: { wellbeing: -1, theory: 1 } },
+                ],
+              },
+            ],
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'vonneumann-card-1930-princeton' },
+          { type: 'resources', effects: { standing: 2, network: 1 } },
+        ],
+        historicalNote:
+          'Von Neumann was appointed one of the first professors of the Institute for Advanced Study in 1933, alongside Einstein. Here the offer reaches him while he is still in Europe, in the year German faculties were being emptied of Jewish and politically suspect academics — a documented event. Whether he crosses, and when, is his own; the scene and dialogue are dramatized.',
+      },
       {
         id: 'princeton-exile',
         conditions: [
@@ -2249,15 +2414,15 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
       {
         id: 'comfortable',
         conditions: [
-          { type: 'yearAtLeast', year: 1935 },
+          { type: 'yearAtLeast', year: 1933 },
           { type: 'yearAtMost', year: 1943 },
           { type: 'resourceAtLeast', resource: 'funds', value: 4 },
         ],
         title: 'The Loudest House on the Street',
-        yearLabel: '1937',
+        yearLabel: '1934',
         image: {
           setting: 'a bright house on a suburban street on a Saturday night, coats piled on a banister',
-          year: 1937,
+          year: 1934,
           characters: ['vonneumann'],
           mood: 'gregarious, loud, oddly solitary',
           details: ['coats piled on a banister', 'a gramophone with the lid up', 'glasses crowding a sideboard', 'a study door ajar on a lit desk', 'a car parked badly at the kerb'],
@@ -2283,14 +2448,14 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         conditions: [
-          { type: 'yearAtLeast', year: 1935 },
+          { type: 'yearAtLeast', year: 1933 },
           { type: 'yearAtMost', year: 1943 },
         ],
         title: 'The Noise He Needs',
-        yearLabel: '1937',
+        yearLabel: '1934',
         image: {
           setting: 'a rented room with a gramophone playing loudly beside a desk of pages',
-          year: 1937,
+          year: 1934,
           characters: ['vonneumann'],
           mood: 'restless, companionable with nobody, working',
           details: ['a gramophone with the lid up', 'a desk of loose pages', 'a chair turned away from the window', 'a plate of food untouched', 'a wall shared with a neighbour'],
@@ -2305,9 +2470,9 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           {
             id: 'why',
             narration:
-              'In silence his attention goes off hunting other problems and comes back late and pleased with itself and useless. Noise pins it. He has never explained this to anybody who did not immediately think he was being clever about it.',
+              'In silence his attention goes off hunting other problems and comes back late and pleased with itself and useless. Noise pins it in the chair. He has never explained this to anybody who did not immediately think he was being clever about it.',
             speaker: 'JANCSI',
-            dialogue: 'It is not that I can work through the noise. It is that the noise is holding the rest of me still.',
+            dialogue: 'Quiet is where my attention goes looking for other work. Give me a brass band and I will finish the page.',
           },
         ],
         historicalNote:
@@ -2497,6 +2662,37 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           'By 1944 von Neumann was working simultaneously in operator theory, logic, economics, and applied mathematics for the war effort, travelling constantly on classified consultancy.',
       },
       {
+        id: 'letters-europe',
+        conditions: [
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+          { type: 'narrativeFlag', flag: 'vonneumann.letters' },
+        ],
+        title: 'The Ledger of Names',
+        yearLabel: '1944',
+        image: {
+          setting: 'a desk drawer pulled out on a bundle of carbon copies tied with string, shutters closed at midday',
+          year: 1944,
+          characters: ['vonneumann'],
+          mood: 'sober, accounting, closing in',
+          details: ['carbon copies tied with string', 'a pulled-out drawer', 'shutters closed at midday', 'an atlas open at central Europe', 'a passport lying on the blotter'],
+          alt: 'A bundle of carbon copies tied with string in a pulled-out drawer beside a passport on a blotter.',
+        },
+        pages: [
+          {
+            id: 'carbons',
+            narration:
+              'The carbons are tied with string in the bottom drawer: every letter he wrote for somebody trying to get out, with the date and the outcome pencilled in the corner where he knows the outcome.',
+          },
+          {
+            id: 'count',
+            narration:
+              'He is a man who counts, and he has counted these, and the number is smaller than the number of letters that came. His own passport is on the blotter with the drawer standing open, and it has been there for some weeks, and the shutters have been closed since March.',
+          },
+        ],
+        historicalNote:
+          'Established scientists wrote sponsorship letters for colleagues seeking to leave Europe through the 1930s. Von Neumann himself emigrated; a life still in Europe in 1944 is a dramatized departure, and the danger is left where the record leaves it.',
+      },
+      {
         id: 'letters',
         conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.letters' }],
         title: 'The Ledger of Names',
@@ -2565,6 +2761,70 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     trigger: { event: 'chapterOpening', priority: 90 },
     once: true,
     variants: [
+      {
+        id: 'europe',
+        conditions: [{ not: { type: 'visitedLocation', locationId: 'princeton' } }],
+        title: 'The War Comes to the Door',
+        yearLabel: '1943–1946',
+        image: {
+          setting: 'a shuttered apartment with a desk pushed against an inside wall and papers weighted down',
+          year: 1944,
+          characters: ['vonneumann'],
+          mood: 'contracted, watchful, unbroken',
+          details: ['shutters closed at midday', 'a desk pushed to an inside wall', 'papers weighted with a stone', 'a stamped identity document', 'a stopped street beyond the glass'],
+          alt: 'A desk pushed against an inside wall of a shuttered room, papers held down by a stone.',
+        },
+        pages: [
+          {
+            id: 'shutters',
+            narration:
+              'He has moved the desk to the inside wall, away from the window, which is a thing people in this street have begun doing without discussing why. The shutters stay closed at midday. The papers on the desk are held down with a stone because the glass is taped and the room is never quite still.',
+          },
+          {
+            id: 'document',
+            narration:
+              'There is a stamped document in the drawer that says what he is permitted to be, and it is a smaller thing than it said last year, and it will be smaller again. Nobody comes to ask him about mathematics any more. They come to ask whether he has heard anything.',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'You read four languages. Tell me honestly what the foreign papers are saying, and do not be kind about it.',
+          },
+          {
+            id: 'choice',
+            narration:
+              'He tells her honestly. Then he sits down at the desk against the inside wall, because there is one hour before the light goes, and he has to decide what a man does with an hour in a year like this.',
+            choices: [
+              {
+                id: 'necessary',
+                label: 'Take whatever work keeps you useful to whoever is in charge',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.conscience', value: 'necessary' },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
+                  { type: 'resources', effects: { standing: 1, exposure: 1 } },
+                ],
+              },
+              {
+                id: 'arithmetic',
+                label: 'Do mathematics; it is the one thing no ministry can requisition',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.conscience', value: 'arithmetic' },
+                  { type: 'theme', theme: 'breadthVsDepth', amount: 2 },
+                  { type: 'resources', effects: { wellbeing: 1, theory: 1 } },
+                ],
+              },
+              {
+                id: 'reluctant',
+                label: 'Keep an honest written account of what these years are',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.conscience', value: 'reluctant' },
+                  { type: 'theme', theme: 'dutyVsConscience', amount: 1 },
+                  { type: 'resources', effects: { wellbeing: -1, standing: 1 } },
+                ],
+              },
+            ],
+          },
+        ],
+        historicalNote:
+          'Von Neumann had left Europe well before the war; a life still in Hungary in 1944 is a dramatized departure. The restrictions, the closed shutters and the narrowing of what a document permitted are drawn from the general record of that year and are deliberately left unelaborated.',
+      },
       {
         id: 'losalamos',
         conditions: [{ type: 'locationIs', locationId: 'losAlamos' }],
@@ -2707,6 +2967,49 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     replacesContextCardId: 'vonneumann-card-1943-los-alamos',
     variants: [
       {
+        id: 'europe',
+        conditions: [
+          { type: 'yearAtLeast', year: 1944 },
+          { type: 'yearAtMost', year: 1946 },
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+        ],
+        title: 'The Request That Cannot Arrive',
+        yearLabel: '1944',
+        image: {
+          setting: 'a sorting office pigeonhole holding one foreign envelope stamped with a returned-mail mark',
+          year: 1944,
+          characters: ['vonneumann'],
+          mood: 'severed, imagined, quietly bitter',
+          details: ['a foreign envelope with a returned-mail mark', 'rows of pigeonholes', 'a rubber stamp on a chain', 'a wall notice of suspended services', 'dust in a shaft of light'],
+          alt: 'One foreign envelope with a returned-mail mark standing in a row of empty sorting-office pigeonholes.',
+        },
+        pages: [
+          {
+            id: 'severed',
+            narration:
+              'The post to the west stopped some time ago and nobody has said for how long. Somewhere across an ocean there is a laboratory with a problem in it that he could take apart in a fortnight, and there is no road between the two facts.',
+          },
+          {
+            id: 'guess',
+            narration:
+              'He knows roughly what they must be doing, because he read the same journals they did until the journals stopped coming, and because a man who is three moves ahead does not stop being three moves ahead merely because his opponent has left the room.',
+            speaker: 'JANCSI',
+            dialogue: 'They will need a wave that arrives everywhere at once. They will not solve it by hand in the time they have. And I am here, and I am reading a two-year-old paper about turbulence.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He works the problem anyway, on his own paper, for nobody, and gets a long way into it, and then puts the sheets in the drawer with the passport. It is the most useless good mathematics he will ever do, and he cannot stop doing it.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'vonneumann-card-1943-los-alamos' },
+          { type: 'resources', effects: { exposure: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Von Neumann in fact consulted at Los Alamos on implosion computation from 1943. A life cut off from that work in wartime Europe is a dramatized departure.',
+      },
+      {
         id: 'losalamos',
         conditions: [
           { type: 'yearAtLeast', year: 1944 },
@@ -2848,6 +3151,45 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     trigger: { event: 'afterAction', priority: 88 },
     once: true,
     variants: [
+      {
+        id: 'europe',
+        conditions: [
+          { type: 'yearAtLeast', year: 1944 },
+          { type: 'yearAtMost', year: 1946 },
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+        ],
+        title: 'A Letter Four Years Late',
+        image: {
+          setting: 'a table with an old envelope, its postmark years out of date, opened with a knife',
+          year: 1946,
+          characters: ['vonneumann'],
+          mood: 'belated, courteous, wounded',
+          details: ['an envelope with a postmark years out of date', 'a paper knife', 'a folded invitation card', 'a bare shelf where books used to be', 'a window with new glass in an old frame'],
+          alt: 'An old envelope with an out-of-date postmark lying open beside a paper knife and a folded card.',
+        },
+        pages: [
+          {
+            id: 'arrives',
+            narration:
+              'It comes with the first proper post and the postmark on it is four years old. Somebody had written to ask him to come and work on something that could not be described in a letter, and the letter went into a sack somewhere and stayed there while the thing was built without him.',
+          },
+          {
+            id: 'reads',
+            narration:
+              'The signature belongs to a man he has never met and whose reputation reached him even here. The invitation is warm, urgent, and addressed to an address that stopped being safe about a month after it was written.',
+            speaker: 'OPPENHEIMER',
+            dialogue: 'I am told there is nobody living who does this kind of arithmetic faster. Come. I cannot say what for, and I would rather not have to ask twice.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He reads it twice and then puts it in the drawer with the sheets he worked for nobody. He is not certain whether he is sorry, and he is extremely certain that he will never be able to tell anyone which.',
+          },
+        ],
+        effects: [{ type: 'relationship', characterId: 'oppenheimer', familiarity: 1, respect: 1, flag: 'mesa-1944' }],
+        historicalNote:
+          'Von Neumann was in fact recruited to Los Alamos in 1943 and consulted there throughout the war. A letter that never reached him is a dramatized departure; the dialogue is dramatized.',
+      },
       {
         id: 'npc-losalamos',
         conditions: [
@@ -3084,8 +3426,92 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           'The weapons developed at Los Alamos were used in August 1945. Von Neumann turned immediately afterward to the design of general-purpose computers.',
       },
       {
-        id: 'conscience',
-        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.conscience' }],
+        id: 'stayed',
+        conditions: [{ not: { type: 'visitedLocation', locationId: 'princeton' } }],
+        title: 'The Year the Post Started Again',
+        yearLabel: '1946',
+        image: {
+          setting: 'a street with a repaired shopfront and one bridge still down across the river beyond it',
+          year: 1946,
+          characters: ['vonneumann'],
+          mood: 'emerged, older, calculating again',
+          details: ['a repaired shopfront', 'a bridge down across a river', 'a foreign newspaper months out of date', 'a queue at a post office', 'a coat too large for its wearer'],
+          alt: 'A repaired shopfront on a street where one bridge is still down across the river beyond.',
+        },
+        pages: [
+          {
+            id: 'post',
+            narration:
+              'The post starts again and the newspapers arrive months out of date and full of a word he has to look at twice. Somebody built the thing. He had worked out the shape of the problem himself, on his own paper, for nobody, in a shuttered room.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He stands in the queue at the post office with the paper under his arm and does the only calculation available to him, which is what he would have done differently and how much sooner. Then he goes home and starts writing letters, because there are machines being built now and he intends to be in the conversation.',
+          },
+        ],
+        historicalNote:
+          'A life that spent the war in Europe rather than at Los Alamos is a dramatized departure from the record.',
+      },
+      {
+        id: 'conscience-necessary',
+        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'necessary' }],
+        title: 'The Sum He Did Instead',
+        yearLabel: '1946',
+        image: {
+          setting: 'a hotel room with a suitcase open on a stand and a single sheet of arithmetic on the bed',
+          year: 1946,
+          characters: ['vonneumann'],
+          mood: 'defended, exact, unsoftened',
+          details: ['an open suitcase on a stand', 'a single sheet of arithmetic', 'a train ticket used as a bookmark', 'a glass of water untouched', 'curtains half drawn on a grey afternoon'],
+          alt: 'A single sheet of arithmetic lying on a made bed beside an open suitcase on a stand.',
+        },
+        pages: [
+          {
+            id: 'sheet',
+            narration:
+              'There is one sheet on the bed and it is not the implosion. It is an estimate of the invasion that did not have to happen, in divisions and months and a figure at the bottom that he has underlined twice and shown to nobody.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He believes the figure. He has believed it since the first night and he has not revised it, and he is aware that a number you never revise is a thing you are holding rather than a thing you know. He folds the sheet into the case and starts thinking about the next machine.',
+          },
+        ],
+        historicalNote:
+          'The argument that the weapons shortened the war was made by many participants at the time and afterwards. The private estimate here is dramatized.',
+      },
+      {
+        id: 'conscience-arithmetic',
+        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'arithmetic' }],
+        title: 'Not His Department',
+        yearLabel: '1946',
+        image: {
+          setting: 'a hotel room with a suitcase open on a stand and a notebook of pure mathematics face down beside it',
+          year: 1946,
+          characters: ['vonneumann'],
+          mood: 'untroubled on the surface, faintly snagged',
+          details: ['an open suitcase on a stand', 'a notebook of pure mathematics face down', 'a train ticket used as a bookmark', 'an untouched glass of water', 'curtains half drawn on a grey afternoon'],
+          alt: 'A notebook of mathematics lying face down beside an open suitcase on a stand in a hotel room.',
+        },
+        pages: [
+          {
+            id: 'notebook',
+            narration:
+              'The notebook is face down on the bed and there is nothing in it but mathematics, which is what he said there would be. He kept his side of the arrangement: the arithmetic was his, and what was done with it belonged to men with rank.',
+          },
+          {
+            id: 'after',
+            narration:
+              'It has held for three years and it holds now, and he notices, packing, that a position which has to be held is not the same as a position which is simply true. He puts the notebook in the case. He does not open it on the train.',
+          },
+        ],
+        historicalNote:
+          'Participants in wartime weapons work reasoned about their responsibility in very different ways. This private reckoning is dramatized.',
+      },
+      {
+        id: 'conscience-reluctant',
+        conditions: [{ type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'reluctant' }],
         title: 'The Account He Keeps',
         yearLabel: '1946',
         image: {
@@ -3152,6 +3578,41 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     trigger: { event: 'chapterOpening', priority: 90 },
     once: true,
     variants: [
+      {
+        id: 'europe',
+        conditions: [{ not: { type: 'visitedLocation', locationId: 'princeton' } }],
+        title: 'An Application for Valves',
+        yearLabel: '1945–1957',
+        image: {
+          setting: 'a ministry anteroom with a typed requisition form and a bench along a green-painted wall',
+          year: 1947,
+          characters: ['vonneumann'],
+          mood: 'obstructed, undeterred, sardonic',
+          details: ['a typed requisition form in triplicate', 'a bench along a green-painted wall', 'a hand-drawn block diagram in a folder', 'a stamped pass', 'a radiator that does not work'],
+          alt: 'A typed requisition form in triplicate held on a folder above a bench along a green-painted wall.',
+        },
+        pages: [
+          {
+            id: 'form',
+            narration:
+              'The form is in triplicate and asks him to state the economic purpose of two thousand glass valves. He has filled in this form twice already, in two different tones, and is now trying a third: he has written that the machine will calculate artillery tables, which is true, and is the smallest true thing about it.',
+          },
+          {
+            id: 'wall',
+            narration:
+              'On the bench beside him the folder holds one page of block diagram: instructions and numbers living in the same memory, so that the thing can be told afterwards, by a stranger, to be a different machine. Nobody in this building has asked to see the page.',
+            speaker: 'A MINISTRY OFFICIAL',
+            dialogue: 'Professor, we have a national plan for steel and one for grain. There is no line in it for a machine that does not yet do anything.',
+          },
+          {
+            id: 'answer',
+            narration:
+              'He says that there was no line for the printing press either, and that he is happy to wait while somebody writes one. Then he sits back down on the bench, because he has nowhere else to be, and starts on the fourth version of the form.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann built his computer with American institutional money and industrial supply. A postwar central-European life attempting the same machine under a planned economy is a dramatized departure. Dialogue is dramatized.',
+      },
       {
         id: 'princeton',
         conditions: [{ type: 'locationIs', locationId: 'princeton' }],
@@ -3235,6 +3696,69 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     once: true,
     replacesContextCardId: 'vonneumann-card-1945-machine',
     variants: [
+      {
+        id: 'europe',
+        conditions: [
+          { type: 'yearAtLeast', year: 1946 },
+          { type: 'yearAtMost', year: 1952 },
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+        ],
+        title: 'The Machine Begins',
+        yearLabel: '1946',
+        image: {
+          setting: 'a cleared corner of a university basement with mismatched valves in a wooden crate and a diagram pinned to plaster',
+          year: 1947,
+          characters: ['vonneumann'],
+          mood: 'improvised, urgent, quietly political',
+          details: ['mismatched valves in a wooden crate', 'a block diagram pinned to bare plaster', 'a carbon copy on onionskin', 'a borrowed soldering iron', 'a bulb on a flex'],
+          alt: 'Mismatched glass valves in a wooden crate beneath a block diagram pinned to bare plaster.',
+        },
+        pages: [
+          {
+            id: 'basement',
+            narration:
+              'The valves are mismatched and came from three countries and two of them by routes he would rather not put in writing. The diagram is pinned to bare plaster under a bulb on a flex, and it is one page, and the page is the whole invention.',
+          },
+          {
+            id: 'design',
+            narration:
+              'Instructions and numbers in the same memory, made of the same stuff, so that the thing can be told to do something it was not built for, by somebody who has never met it. He has three young men and a basement, and abroad they have buildings.',
+            speaker: 'A YOUNG ASSISTANT',
+            dialogue: 'If we send the page out, the people with buildings will finish it first. If we do not send it, we will finish it in nineteen years.',
+          },
+          {
+            id: 'choice',
+            narration:
+              'There is a carbon on onionskin thin enough to go inside a journal offprint, and a list of eleven institutions in cities he can no longer travel to. The page will outlive the basement either way. What he decides is who gets to hold it.',
+            choices: [
+              {
+                id: 'publish',
+                label: 'Send the page out while you still can, and lose the priority',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.openDesign', value: 'publish' },
+                  { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
+                  { type: 'resources', effects: { network: 2, exposure: 1, standing: -1 } },
+                ],
+              },
+              {
+                id: 'hold',
+                label: 'Keep it in the basement and build the thing yourself',
+                effects: [
+                  { type: 'flag', flag: 'vonneumann.openDesign', value: 'hold' },
+                  { type: 'theme', theme: 'breadthVsDepth', amount: 2 },
+                  { type: 'resources', effects: { engineering: 1, network: -1 } },
+                ],
+              },
+            ],
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'vonneumann-card-1945-machine' },
+          { type: 'resources', effects: { network: 1 } },
+        ],
+        historicalNote:
+          'Von Neumann assembled an engineering team with institutional backing and published the design openly and unpatented. A basement version of the same page under postwar central-European conditions is a dramatized departure. Dialogue is dramatized.',
+      },
       {
         id: 'princeton',
         conditions: [
@@ -3635,12 +4159,52 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'conscience',
+        id: 'stayed',
         conditions: [
           { type: 'yearAtLeast', year: 1953 },
           { type: 'yearAtMost', year: 1957 },
           { type: 'locationIsNot', locationId: 'washingtonDC' },
-          { type: 'narrativeFlag', flag: 'vonneumann.conscience' },
+          { not: { type: 'visitedLocation', locationId: 'princeton' } },
+        ],
+        title: 'The Committee That Wants Him',
+        yearLabel: '1955',
+        image: {
+          setting: 'a committee room with a long table, a portrait high on the wall and a minute-taker at the end',
+          year: 1955,
+          characters: ['vonneumann'],
+          mood: 'wary, valued, cornered',
+          details: ['a long table with a cloth on it', 'a portrait high on a wall', 'a minute-taker with a pad', 'a carafe and two tumblers', 'a folder tied with tape'],
+          alt: 'A long cloth-covered committee table beneath a portrait high on the wall, a minute-taker at the far end.',
+        },
+        pages: [
+          {
+            id: 'room',
+            narration:
+              'They have made him a member of something, which in this country is a way of knowing where a man is on a given afternoon. There is a minute-taker at the end of the table and a portrait high on the wall, and the folder in front of him is tied with tape rather than stamped.',
+          },
+          {
+            id: 'why',
+            narration:
+              'What they want from him is the same thing every government has wanted from him: someone who can hold the arithmetic, the machinery and the men on the other side in one head and say the number out loud. What differs is what happens to a man who says the wrong one.',
+            speaker: 'A COMMITTEE CHAIRMAN',
+            dialogue: 'You are the only person in this room who understands both the arithmetic and the politics. That is why you are here, and it is also why you are watched.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He answers every question that afternoon and one that nobody asks, which is how long a standoff of this kind stays stable. The minute-taker writes down the answers to the questions and not the other one, and he notices exactly which pen stops.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann advised the United States government and served on the Atomic Energy Commission from 1955. A parallel career under a postwar central-European government is a dramatized departure. Dialogue is dramatized.',
+      },
+      {
+        id: 'necessary',
+        conditions: [
+          { type: 'yearAtLeast', year: 1953 },
+          { type: 'yearAtMost', year: 1957 },
+          { type: 'locationIsNot', locationId: 'washingtonDC' },
+          { type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'necessary' },
         ],
         title: 'A Seat at the Table',
         yearLabel: '1955',
@@ -3661,7 +4225,7 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           {
             id: 'why',
             narration:
-              'He took the appointment for the reason he gave himself on the first night of the war work, whatever that reason was, and he has not revised it since, and he is aware that not revising a thing for twelve years is not the same as being right about it.',
+              'He took the appointment on the same argument he took the first one: that the shortest way out of a war is a war that ends, and that the arithmetic of ending it should be done by someone who can do arithmetic. Twelve years on, the argument still fits, and he has begun to distrust how well it fits.',
             speaker: 'A COMMISSIONER',
             dialogue: 'You are the only man on this commission who understands both the arithmetic and the politics. That is why you are here. It is also, frankly, why you frighten people.',
           },
@@ -3673,6 +4237,86 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Von Neumann was appointed a commissioner of the Atomic Energy Commission in 1955 and was a leading government adviser on nuclear strategy in his last years. Dialogue is dramatized.',
+      },
+      {
+        id: 'arithmetic',
+        conditions: [
+          { type: 'yearAtLeast', year: 1953 },
+          { type: 'yearAtMost', year: 1957 },
+          { type: 'locationIsNot', locationId: 'washingtonDC' },
+          { type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'arithmetic' },
+        ],
+        title: 'The Department It Turns Out to Be',
+        yearLabel: '1955',
+        image: {
+          setting: 'a government committee room with a long polished table and a folder stamped on its cover',
+          year: 1955,
+          characters: ['vonneumann'],
+          mood: 'formal, exposed, alert',
+          details: ['a long polished table', 'a folder with a stamped cover', 'a water carafe and tumblers', 'a wall map with pins', 'a clock above a panelled door'],
+          alt: 'A long polished committee table with a stamped folder, a water carafe, and a pinned wall map behind it.',
+        },
+        pages: [
+          {
+            id: 'room',
+            narration:
+              'The room is panelled and the folder in front of his chair carries a stamp that means only five people in the building may read it. For twelve years he has said that what was done with his arithmetic was not his department. This afternoon he is the department.',
+          },
+          {
+            id: 'why',
+            narration:
+              'Nobody makes him say it. He simply notices, somewhere between the second and third item, that the man who decides is now in his chair, and that the position he held so comfortably was never a principle but a floor plan.',
+            speaker: 'A COMMISSIONER',
+            dialogue: 'You are the only man on this commission who understands both the arithmetic and the politics. That is why you are here. It is also, frankly, why you frighten people.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He answers every question that afternoon and one that nobody asks, which is how long a standoff of this kind stays stable. Nobody writes that answer down, and he finds that he wanted them to.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann moved from wartime consultancy to formal policy authority as an Atomic Energy Commissioner in 1955. Dialogue is dramatized.',
+      },
+      {
+        id: 'reluctant',
+        conditions: [
+          { type: 'yearAtLeast', year: 1953 },
+          { type: 'yearAtMost', year: 1957 },
+          { type: 'locationIsNot', locationId: 'washingtonDC' },
+          { type: 'narrativeFlag', flag: 'vonneumann.conscience', value: 'reluctant' },
+        ],
+        title: 'The Ledger Goes to Washington',
+        yearLabel: '1955',
+        image: {
+          setting: 'a government committee room with a long polished table and a plain notebook beside a stamped folder',
+          year: 1955,
+          characters: ['vonneumann'],
+          mood: 'formal, weighted, watchful',
+          details: ['a long polished table', 'a stamped folder beside a plain notebook', 'a water carafe and tumblers', 'a wall map with pins', 'a clock above a panelled door'],
+          alt: 'A plain notebook lying beside a stamped folder on a long polished committee table.',
+        },
+        pages: [
+          {
+            id: 'room',
+            narration:
+              'He brings the notebook into the room, which is against no rule because nobody imagined it. It sits beside the stamped folder and it is the only object on the table that no clerk has a copy of.',
+          },
+          {
+            id: 'why',
+            narration:
+              'He took the appointment for the reason he wrote down on the first night: that a man who keeps an honest account of what he has done is obliged to keep going where the doing is. It is a demanding sentence to have written in one’s own hand.',
+            speaker: 'A COMMISSIONER',
+            dialogue: 'You are the only man on this commission who understands both the arithmetic and the politics. That is why you are here. It is also, frankly, why you frighten people.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He answers every question that afternoon and one that nobody asks, which is how long a standoff of this kind stays stable. That evening he writes the answer in the notebook instead, where it will be read by nobody and denied by nobody.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann served as an Atomic Energy Commissioner from 1955. The private notebook is dramatized.',
       },
       {
         id: 'washington',
@@ -3814,7 +4458,7 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
           {
             id: 'desk',
             narration:
-              'Three unfinished things on one desk at one in the morning, and the lamp on, and the coat still over the chair from a journey he does not remember arriving from. He is fifty-two and works as though somebody has told him the closing time.',
+              'Three unfinished things on one desk at one in the morning, and the lamp on, and the coat still over the chair from an errand he does not remember coming back from. He is fifty-two and works as though somebody has told him the closing time.',
           },
           {
             id: 'why',
@@ -3839,6 +4483,34 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
     trigger: { event: 'chapterClosing', priority: 80 },
     once: true,
     variants: [
+      {
+        id: 'stayed',
+        conditions: [{ not: { type: 'visitedLocation', locationId: 'princeton' } }],
+        title: 'The Page Got Out',
+        yearLabel: '1957',
+        image: {
+          setting: 'a basement workroom with a part-built chassis and a foreign journal open at a familiar diagram',
+          year: 1957,
+          characters: ['vonneumann'],
+          mood: 'wry, outpaced, oddly satisfied',
+          details: ['a part-built chassis on trestles', 'a foreign journal open at a diagram', 'a bulb on a flex', 'a crate of mismatched valves', 'a tin of tea used for screws'],
+          alt: 'A part-built chassis on trestles beside a foreign journal lying open at a familiar block diagram.',
+        },
+        pages: [
+          {
+            id: 'journal',
+            narration:
+              'The journal is nine months old and came by a route with three people in it, and on page forty there is a photograph of a machine in a country he has never seen, and the block diagram beside it is his page with somebody else’s numbering on it.',
+          },
+          {
+            id: 'after',
+            narration:
+              'The chassis on his own trestles is two thirds finished and will probably stay that way. He looks at the photograph for a long time and finds, to his considerable annoyance, that the feeling is not envy. The idea did not need him. He had rather hoped it would.',
+          },
+        ],
+        historicalNote:
+          'The stored-program design spread quickly through published reports. A life that watched that happen from outside is a dramatized departure.',
+      },
       {
         id: 'machine',
         conditions: [{ type: 'projectCompleted', projectId: 'vonneumann-stored-program' }],
@@ -3983,6 +4655,36 @@ export const VONNEUMANN_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Von Neumann died in 1957, aged fifty-three. His stored-program architecture, operator formulation of quantum mechanics, founding of game theory, and work on automata each remain foundational.',
+      },
+      {
+        id: 'stayed',
+        conditions: [{ not: { type: 'visitedLocation', locationId: 'princeton' } }],
+        title: 'The Man Who Stayed',
+        yearLabel: '1957',
+        image: {
+          setting: 'a study with a shelf of offprints in several languages and one window onto a repaired street',
+          year: 1957,
+          characters: ['vonneumann'],
+          mood: 'unbowed, curtailed, clear',
+          details: ['offprints in several languages', 'a window onto a repaired street', 'a part-built chassis under a cloth', 'a plain notebook', 'a lamp turned low'],
+          alt: 'A shelf of offprints in several languages beside a window onto a repaired street.',
+        },
+        pages: [
+          {
+            id: 'shelf',
+            narration:
+              'The shelf holds everything he published, in four languages, most of it read late and abroad by people who could not write back. The chassis under the cloth in the corner never ran. The page pinned above it was right the first time and stayed right.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He was always going to be the fastest man in whatever room he was standing in. The century simply put him in smaller rooms than the ones he was built for, and he went on working at exactly the same speed in all of them.',
+            speaker: 'JANCSI',
+            dialogue: 'The road was always there. Some years they simply would not let me post the directions.',
+          },
+        ],
+        historicalNote:
+          'Von Neumann emigrated in the early 1930s and did his major later work in the United States. A life spent entirely in Europe is a dramatized departure.',
       },
       {
         id: 'machine',

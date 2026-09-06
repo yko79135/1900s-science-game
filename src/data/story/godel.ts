@@ -718,7 +718,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'vienna' }],
         title: 'Everything True Can Be Proved',
         locationLabel: 'Vienna',
-        yearLabel: '1929',
         image: {
           setting: 'a bound dissertation lying squared on a desk beside a candle-dark window, 1929',
           year: 1929,
@@ -756,7 +755,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'elsewhere',
         title: 'A Thin Manuscript in an Unfamiliar Room',
-        yearLabel: '1929',
         image: {
           setting: 'a plain lodging room with a manuscript stacked square on a table under a bare lamp, 1929',
           year: 1929,
@@ -1646,7 +1644,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         id: 'tested',
         conditions: [{ type: 'narrativeFlag', flag: 'godel.testsTheProgram' }],
         title: 'On Formally Undecidable Propositions',
-        yearLabel: '1931',
         image: {
           setting: 'a journal issue lying open at the first page of a long paper, a paper knife across it',
           year: 1931,
@@ -1690,7 +1687,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         id: 'aimed',
         conditions: [{ type: 'narrativeFlag', flag: 'godel.aimsAtConsistency' }],
         title: 'The Opposite of the Result He Set Out For',
-        yearLabel: '1931',
         image: {
           setting: 'a desk with an abandoned line of working on the left and a finished paper stacked on the right',
           year: 1931,
@@ -1733,7 +1729,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'True, and Out of Reach',
-        yearLabel: '1931',
         image: {
           setting: 'a completed manuscript tied with tape beside an addressed envelope, lamplight',
           year: 1931,
@@ -1784,7 +1779,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         id: 'advocate',
         conditions: [{ type: 'narrativeFlag', flag: 'godel.hasAnAdvocate' }],
         title: 'What the Programme Is Now For',
-        yearLabel: '1931–1932',
         image: {
           setting: 'a lecture room after a talk, a blackboard half wiped, one row of chairs still occupied',
           year: 1932,
@@ -1822,7 +1816,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'The Letter That Does Not Come',
-        yearLabel: '1931–1932',
         image: {
           setting: 'a hall table with a morning post of three envelopes, none in the expected hand',
           year: 1932,
@@ -2101,7 +2094,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'said',
             narration:
-              'Adele comes on the slow train every week with a basket, and does not ask him about mathematics, and does not tell him he looks well when he does not.',
+              'Adele comes up on the slow train on the days they allow it, and does not ask him about mathematics, and does not tell him he looks well when he does not.',
             speaker: 'ADELE',
             dialogue: 'The city will still be there. You are not obliged to be interesting this month, Kurtele. You are only obliged to come back.',
           },
@@ -2730,7 +2723,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
             narration:
               'On the ship across the Pacific he cannot eat and cannot sleep and stands at the rail for a long time in the dark. Adele finds him there with the collar of his coat up.',
             speaker: 'ADELE',
-            dialogue: 'Six weeks and we are done. I have counted them too, you know. Come below, Kurtele, and I will taste it first, as always.',
+            dialogue: 'Six weeks and we are done. I have counted them too, you know. Come below, Kurtele, before the cold gets into you.',
           },
           {
             id: 'arrive',
@@ -2847,6 +2840,108 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Gödel and Adele left Vienna in January 1940 by the eastward route. This variant describes those months with the departure never made.',
+      },
+    ],
+  },
+
+  {
+    id: 'godel-late-crossing',
+    characterId: 'godel',
+    kind: 'relocation',
+    classification: 'Documented',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 94 },
+    once: true,
+    variants: [
+      {
+        id: 'route-followed',
+        conditions: [
+          { type: 'yearAtLeast', year: 1941 },
+          { type: 'yearAtMost', year: 1955 },
+          { type: 'locationIs', locationId: 'princeton' },
+          { type: 'narrativeFlag', flag: 'godel.routePlanned' },
+        ],
+        title: 'Every Door on the Line, Open at Once',
+        locationLabel: 'Princeton',
+        yearLabel: '1941',
+        image: {
+          setting: 'a sheaf of transit permits fanned on a carriage seat with a frosted window behind',
+          year: 1941,
+          characters: ['godel'],
+          mood: 'exacting, held-breath, moving at last',
+          details: ['a fan of transit permits', 'a frosted carriage window', 'a pocket watch face up on a knee', 'two suitcases in a rack', 'snow beyond the glass'],
+          alt: 'A fan of transit permits laid on a carriage seat beside a frosted window.',
+        },
+        pages: [
+          {
+            id: 'open',
+            narration:
+              'The timetable he built on the table, step by justified step, turns out to have one property he could not prove in advance: this month, every office along it is open at the same time. He does not wait to see whether that holds for a second month.',
+          },
+          {
+            id: 'east',
+            narration:
+              'East, because west is closed. The railway through birch and snow, eleven days of stations whose names he cannot read, a samovar at the end of the carriage and the same six phrases doing all the work. He notes each border crossing with the time to the minute, and the notes are the only thing that helps.',
+          },
+          {
+            id: 'said',
+            narration:
+              'A ship after that, and a continent by train. Adele has watched him build the route for two years and has never once asked him when he intends to walk it.',
+            speaker: 'ADELE',
+            dialogue: 'You checked every step of it, Kurtele, exactly as you said you would. And here we are, and the checking was not wasted. Now sleep.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.emigrated', value: true },
+          { type: 'resources', effects: { funds: -1, health: -1, wellbeing: 1 } },
+        ],
+        historicalNote:
+          'Gödel and Adele left Vienna in January 1940 by the eastward route — the Trans-Siberian Railway, a Pacific crossing and a train across the United States — on transit permits that had to align exactly. This scene places that journey after a longer period of preparation.',
+      },
+      {
+        id: 'drawer-reopened',
+        conditions: [
+          { type: 'yearAtLeast', year: 1941 },
+          { type: 'yearAtMost', year: 1955 },
+          { type: 'locationIs', locationId: 'princeton' },
+          { type: 'narrativeFlag', flag: 'godel.stayed' },
+        ],
+        title: 'The Pencil Line, Followed at Last',
+        locationLabel: 'Princeton',
+        yearLabel: '1941',
+        image: {
+          setting: 'a ship’s rail at night with a folded route of transit permits held against the wind',
+          year: 1941,
+          characters: ['godel'],
+          mood: 'overdue, cold, holding on',
+          details: ['a folded sheaf of transit permits', 'a ship’s rail wet with spray', 'two suitcases below deck', 'a station clock remembered', 'birch and snow through a carriage window'],
+          alt: 'A folded sheaf of transit permits held at a ship’s rail at night.',
+        },
+        pages: [
+          {
+            id: 'open',
+            narration:
+              'The drawer is opened again on an ordinary Tuesday and the timetable comes out along its old creases, and the pencil line is still where he left it, running the wrong way round the world. He does not announce the decision. He simply begins buying the permits in the order the line requires.',
+          },
+          {
+            id: 'east',
+            narration:
+              'East, then, because west is closed: the railway through birch and snow, eleven days of stations whose names he cannot read, a samovar at the end of the carriage and the same six phrases doing all the work. He notes every border crossing with the time to the minute, which is the only thing that helps.',
+          },
+          {
+            id: 'said',
+            narration:
+              'A ship after that, and a continent by train, and Adele beside him for the whole of it. She has waited two years for him to finish deciding and she does not say so once.',
+            speaker: 'ADELE',
+            dialogue: 'No. Not one word from me, Kurtele. You got us here, in your own time, in your own way, and that is the end of the subject for ever.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.emigrated', value: true },
+          { type: 'resources', effects: { funds: -1, health: -1, wellbeing: 1 } },
+        ],
+        historicalNote:
+          'Gödel and Adele left Vienna in January 1940 by the eastward route — the Trans-Siberian Railway, a Pacific crossing and a train across the United States. This scene places that journey later, after years of deferral.',
       },
     ],
   },
@@ -3156,7 +3251,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         conditions: [{ type: 'locationIs', locationId: 'princeton' }],
         title: 'Only the Sets You Are Forced to Build',
         locationLabel: 'Princeton',
-        yearLabel: '1938–1940',
         image: {
           setting: 'a lecture room blackboard carrying a single ascending sequence of stages',
           year: 1940,
@@ -3194,7 +3288,6 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         title: 'A Universe Made Only of What Is Forced',
-        yearLabel: '1938–1940',
         image: {
           setting: 'a private desk with a long ascending column of stages written out by hand',
           year: 1939,
@@ -3386,17 +3479,31 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         historicalNote:
           'The daily walks between Gödel and Einstein at the Institute for Advanced Study, and the philosophical disagreements they contained, are documented. Dialogue is dramatized.',
       },
+    ],
+  },
+
+  {
+    id: 'godel-personal-interlocutor',
+    characterId: 'godel',
+    chapterId: 'legacy',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 77 },
+    once: true,
+    variants: [
       {
-        id: 'absent',
+        id: 'alone',
         conditions: [
-          { type: 'yearAtLeast', year: 1942 },
-          { type: 'yearAtMost', year: 1952 },
+          { type: 'yearAtLeast', year: 1941 },
+          { type: 'yearAtMost', year: 1945 },
+          { type: 'projectNotCompleted', projectId: 'godel-einstein-conversations' },
         ],
         title: 'The Chair Across the Table Stays Empty',
-        yearLabel: '1942–1950',
+        yearLabel: '1941',
         image: {
           setting: 'a table set for one with a second chair pushed in, a journal folded open beside the plate',
-          year: 1946,
+          year: 1941,
           characters: ['godel'],
           mood: 'self-contained, lonely, functioning',
           details: ['a table set for one', 'a second chair pushed in', 'a journal folded open', 'a pot of tea', 'net curtains'],
@@ -3418,7 +3525,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'after',
             narration:
-              'She is right and he knows the shape of the deficiency exactly, the way he knows the shape of a missing step in a proof. Knowing the shape of it does not fill it. He goes back to the desk, where the objections are at least his own.',
+              'She is right, and he knows the shape of the deficiency exactly, the way he knows the shape of a missing step in a proof. Knowing the shape of a gap has never once filled it. He goes back to the desk, where at least the objections are his own, and leaves the second place laid.',
           },
         ],
         effects: [
@@ -3426,7 +3533,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           { type: 'resources', effects: { wellbeing: -1, standing: 1 } },
         ],
         historicalNote:
-          'Gödel had very few close intellectual companions; the friendship with Einstein was exceptional in his life. This variant describes the same years without it. Dialogue is dramatized.',
+          'Gödel had very few close intellectual companions; the friendship with Einstein was exceptional in his life. This scene describes the years before it. Dialogue is dramatized.',
       },
     ],
   },
@@ -3785,6 +3892,192 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
   },
 
   {
+    id: 'godel-hearing-aftermath',
+    characterId: 'godel',
+    kind: 'historicalEvent',
+    classification: 'Documented',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 88 },
+    once: true,
+    variants: [
+      {
+        id: 'told-court',
+        conditions: [
+          { type: 'yearAtLeast', year: 1949 },
+          { type: 'yearAtMost', year: 1958 },
+          { type: 'choiceWas', choiceKey: 'godel-citizenship:hearing', choiceId: 'raise' },
+          { type: 'visitedLocation', locationId: 'princeton' },
+        ],
+        title: 'Two Sentences In',
+        yearLabel: '1948',
+        image: {
+          setting: 'a courthouse corridor after a hearing, three men walking out and one certificate in a folder',
+          year: 1948,
+          characters: ['godel'],
+          mood: 'relieved, absurd, affectionate',
+          details: ['a certificate in a card folder', 'a corridor of dark wood', 'three hats being put back on', 'a swing door', 'winter light on a step'],
+          alt: 'A certificate in a card folder carried out along a dark wooden courthouse corridor.',
+        },
+        pages: [
+          {
+            id: 'said-it',
+            narration:
+              'He begins at the beginning, because there is no other place to begin: the first step is lawful, and the second follows from it, and by the third the judge has stopped smiling and is looking hard at the two men on the bench.',
+            speaker: 'THE JUDGE',
+            dialogue: 'Mr Gödel. I am going to rule that you have answered my question, and that we shall not be hearing the remainder of it today.',
+          },
+          {
+            id: 'out',
+            narration:
+              'And that is the whole of it. He is a citizen by four o’clock. Nobody takes the folded list from his pocket and nobody asks for it, and the republic goes on containing, so far as he can establish, exactly the flaw he found in it.',
+          },
+          {
+            id: 'car',
+            narration:
+              'In the car afterwards neither friend can decide whether to be furious with him or to laugh, and settles, in the end, on both. He looks out of the window at the elms and thinks that he was asked a plain question and gave the true answer, and that he would do it again, and that this is apparently not how the thing is done.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.citizen', value: true },
+          { type: 'resources', effects: { standing: 1, network: 1 } },
+        ],
+        historicalNote:
+          'Gödel became a United States citizen after the 1948 hearing; accounts agree that his friends feared he would raise his constitutional objection and differ on how far he got. Dialogue is dramatized.',
+      },
+      {
+        id: 'held-court',
+        conditions: [
+          { type: 'yearAtLeast', year: 1949 },
+          { type: 'yearAtMost', year: 1958 },
+          { type: 'choiceWas', choiceKey: 'godel-citizenship:hearing', choiceId: 'hold' },
+          { type: 'visitedLocation', locationId: 'princeton' },
+        ],
+        title: 'The List Stays in the Pocket',
+        yearLabel: '1948',
+        image: {
+          setting: 'a folded pencilled list on a hall table beside a new certificate still in its envelope',
+          year: 1948,
+          characters: ['godel'],
+          mood: 'wry, unsatisfied, kept',
+          details: ['a folded pencilled list', 'a certificate in its envelope', 'a hall table', 'a hat set down', 'evening light through a fanlight'],
+          alt: 'A folded pencilled list lying beside a certificate still in its envelope on a hall table.',
+        },
+        pages: [
+          {
+            id: 'steered',
+            narration:
+              'Somebody says something about the weather and somebody else agrees enthusiastically, and the moment is taken away from him with the smoothness of two men who have been rehearsing it in a car for forty minutes. He answers the questions he is asked. He is a citizen by four o’clock.',
+          },
+          {
+            id: 'said',
+            narration:
+              'On the step outside, one of them finally exhales, and makes the mistake of congratulating himself out loud.',
+            speaker: 'MORGENSTERN',
+            dialogue: 'You see? Nothing happened. That is what a good day looks like, Kurt — a day on which nothing whatever happens.',
+          },
+          {
+            id: 'kept',
+            narration:
+              'The list stays in his inside pocket and then in the drawer with the other things nobody asked for. He was asked a plain question and he did not give the true answer, and thirty years later he will still occasionally take the page out and check the steps, and they will still hold.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.citizen', value: true },
+          { type: 'resources', effects: { network: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Gödel was granted citizenship after the 1948 hearing, at which Einstein and Morgenstern were present partly to keep his constitutional objection out of the room. Dialogue is dramatized.',
+      },
+      {
+        id: 'told-letter',
+        conditions: [
+          { type: 'yearAtLeast', year: 1949 },
+          { type: 'yearAtMost', year: 1958 },
+          { type: 'choiceWas', choiceKey: 'godel-citizenship:hearing', choiceId: 'raise' },
+        ],
+        title: 'An Answer to a Letter Nobody Had to Send',
+        yearLabel: '1949',
+        image: {
+          setting: 'a short typed reply on foreign letterhead lying on top of a much longer handwritten original',
+          year: 1949,
+          characters: ['godel'],
+          mood: 'dry, unsurprised, faintly pleased',
+          details: ['a short typed reply', 'a long handwritten original beneath it', 'a foreign letterhead', 'a paper knife', 'a lamp with a green shade'],
+          alt: 'A short typed reply resting on top of a much longer handwritten letter.',
+        },
+        pages: [
+          {
+            id: 'sent',
+            narration:
+              'Eleven pages go into the envelope, numbered, with the steps set out so that a lawyer could follow them and a schoolboy could check them, and the envelope goes across the ocean to a professor he has never met.',
+          },
+          {
+            id: 'said',
+            narration:
+              'The reply, four months later, is three paragraphs long and entirely courteous, and he reads it twice before he understands that it is a way of saying no.',
+            speaker: 'A CORRESPONDENT',
+            dialogue: 'A most ingenious construction, and I am grateful for it. But a constitution is not a formal system, Herr Professor, and nobody here would thank us for treating it as one.',
+          },
+          {
+            id: 'after',
+            narration:
+              'He puts both letters in the drawer together, the long one and the short one. It is not a formal system. He knows it is not a formal system. It is nevertheless a set of rules, and rules permit what they permit, and one day somebody will follow the steps he numbered without ever having read them.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.saidItAnyway', value: true },
+          { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+        ],
+        historicalNote:
+          'Gödel’s constitutional objection is documented from the citizenship episode; this variant imagines it pressed from abroad, where he had no standing to raise it. Dialogue is dramatized.',
+      },
+      {
+        id: 'held-letter',
+        conditions: [
+          { type: 'yearAtLeast', year: 1949 },
+          { type: 'yearAtMost', year: 1958 },
+          { type: 'choiceWas', choiceKey: 'godel-citizenship:hearing', choiceId: 'hold' },
+        ],
+        title: 'Filed with the Other Things Nobody Asked For',
+        yearLabel: '1949',
+        image: {
+          setting: 'a drawer of numbered pages tied in bundles, one bundle newer than the rest',
+          year: 1949,
+          characters: ['godel'],
+          mood: 'quiet, unspent, exact',
+          details: ['bundles of numbered pages', 'one newer bundle on top', 'a tape and a knot', 'a drawer half open', 'a shuttered window'],
+          alt: 'Bundles of numbered pages in a drawer, one newer bundle resting on top of the rest.',
+        },
+        pages: [
+          {
+            id: 'filed',
+            narration:
+              'He ties the pages with tape and puts them in the drawer with the other things nobody asked for: a note on the design of a courthouse he has never seen, a correction to a translation, four pages on why a certain census question cannot be answered truthfully.',
+          },
+          {
+            id: 'said',
+            narration:
+              'Adele, who has heard the whole argument twice at the table, has one question about it and asks it while drying a plate.',
+            speaker: 'ADELE',
+            dialogue: 'And if you are right, Kurtele? In forty years, when nobody has the page — does being right in a drawer help anybody at all?',
+          },
+          {
+            id: 'after',
+            narration:
+              'He does not have an answer for her that evening. He has one years later, and it is not comforting: the steps hold whether or not the page is read, because that is what steps do, and the drawer changes nothing about the building.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.filedItAway', value: true },
+          { type: 'resources', effects: { wellbeing: -1, standing: 1 } },
+        ],
+        historicalNote:
+          'Gödel kept extensive unpublished notes on questions outside mathematics, including the constitutional objection he raised while seeking citizenship. This variant imagines it never sent. Dialogue is dramatized.',
+      },
+    ],
+  },
+
+  {
     id: 'godel-project-rotating',
     characterId: 'godel',
     kind: 'breakthrough',
@@ -3795,9 +4088,11 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
     variants: [
       {
         id: 'came-for-physics',
-        conditions: [{ type: 'narrativeFlag', flag: 'godel.cameForPhysics' }],
+        conditions: [
+          { type: 'narrativeFlag', flag: 'godel.cameForPhysics' },
+          { type: 'narrativeFlag', flag: 'godel.walksWithEinstein' },
+        ],
         title: 'The Subject He Came For, Twenty-Five Years Late',
-        yearLabel: '1949',
         image: {
           setting: 'a desk with a page of field equations and a birthday volume in proof beside it',
           year: 1949,
@@ -3839,9 +4134,52 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           'In 1949 Gödel found exact solutions of Einstein’s field equations describing a rotating universe containing closed timelike curves, and contributed them to the volume marking Einstein’s seventieth birthday. Dialogue is dramatized.',
       },
       {
+        id: 'came-for-physics-post',
+        conditions: [{ type: 'narrativeFlag', flag: 'godel.cameForPhysics' }],
+        title: 'The Subject He Came For, Sent By Post',
+        image: {
+          setting: 'a wrapped package of manuscript addressed abroad, a compass-drawn closed curve on the sheet beneath',
+          year: 1949,
+          characters: ['godel'],
+          mood: 'delighted, mischievous, distant',
+          details: ['a wrapped package addressed abroad', 'a compass-drawn closed curve', 'field equations in a small hand', 'string and sealing wax', 'a lamp at an odd hour'],
+          alt: 'A wrapped package of manuscript addressed abroad, a compass-drawn closed curve on the sheet beneath it.',
+        },
+        pages: [
+          {
+            id: 'return',
+            narration:
+              'He went to the city at eighteen to read physics because physics was where the world was kept, and then spent a quarter of a century inside arithmetic instead. Now, for an old man’s seventieth birthday, he goes back to it — and does not write an appreciation. He writes a universe.',
+          },
+          {
+            id: 'rotating',
+            narration:
+              'A universe that turns. Take the field equations at their word, set the whole of matter rotating, and they permit a solution in which a path may be drawn that curves round and returns to its own past. Not a paradox smuggled in from outside. A solution. Allowed by the equations, in their own language.',
+          },
+          {
+            id: 'said',
+            narration:
+              'It goes into a package with string and sealing wax and crosses the ocean, and the reply comes back by return, in a hand he could pick out of a thousand.',
+            speaker: 'EINSTEIN',
+            dialogue: 'You have sent me, for my birthday, a proof that my own theory permits a man to visit his own past. — Gödel. Gödel. This is either the finest present I have ever had or the worst.',
+          },
+          {
+            id: 'point',
+            narration:
+              'The point is not the journey; nobody could make it and he says so on the first page. The point is the same one he made at twenty-five, in another language. A system of rules can permit something its author never intended and would deny if asked, and it will permit it whether or not anyone approves.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'godel.rotating', value: true },
+          { type: 'relationship', characterId: 'einstein', familiarity: 1, respect: 2 },
+          { type: 'resources', effects: { standing: 2, wellbeing: 1 } },
+        ],
+        historicalNote:
+          'In 1949 Gödel found exact solutions of Einstein’s field equations describing a rotating universe containing closed timelike curves, and contributed them to the volume marking Einstein’s seventieth birthday. Dialogue is dramatized.',
+      },
+      {
         id: 'default',
         title: 'A Universe That Turns',
-        yearLabel: '1949',
         image: {
           setting: 'a blackboard with a single rotating solution sketched and a compass-drawn closed curve',
           year: 1949,
@@ -3965,7 +4303,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'said',
             narration:
-              'Adele asks him, weeks later, what it is that he misses about a man he saw perhaps four times in his life.',
+              'Adele asks him, weeks later, what it is that he misses about a man he met perhaps twice in his life.',
             speaker: 'GÖDEL',
             dialogue: 'Being contradicted. There is nobody left who will tell me I am wrong and then go on writing to me anyway.',
           },
@@ -4042,12 +4380,12 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
         title: 'The Young Man Brings the Other Half',
         yearLabel: '1964',
         image: {
-          setting: 'a front porch in autumn with a briefcase set down and two cups on a low table',
+          setting: 'a window seat in a quiet house in autumn with a briefcase set down and two cups on a low table',
           year: 1964,
           characters: ['godel'],
           mood: 'generous, unexpected, complete',
-          details: ['a briefcase set down on boards', 'two cups on a low table', 'a manuscript in a folder', 'autumn leaves on a step', 'a screen door'],
-          alt: 'A briefcase set down on a porch beside two cups and a folder of manuscript.',
+          details: ['a briefcase set down by a chair', 'two cups on a low table', 'a manuscript in a folder', 'autumn leaves against a pane', 'a curtain held back'],
+          alt: 'A briefcase set down beside two cups and a folder of manuscript at a window seat.',
         },
         pages: [
           {
@@ -4058,7 +4396,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'reads',
             narration:
-              'He reads it on the porch while the visitor sits there not drinking his tea. The method is entirely new and entirely correct and he can see, four pages in, that it will open a whole discipline. He is not a generous man about mathematics. He is about to be.',
+              'He reads it at the window while the visitor sits there not drinking his tea. The method is entirely new and entirely correct and he can see, four pages in, that it will open a whole discipline. He is not a generous man about mathematics. He is about to be.',
           },
           {
             id: 'said',
@@ -4342,13 +4680,12 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'princeton',
         conditions: [
-          { type: 'yearAtLeast', year: 1951 },
-          { type: 'yearAtMost', year: 1960 },
+          { type: 'yearAtLeast', year: 1953 },
+          { type: 'yearAtMost', year: 1962 },
           { type: 'locationIs', locationId: 'princeton' },
         ],
         title: 'Thirteen Years a Member',
         locationLabel: 'Princeton',
-        yearLabel: '1953',
         image: {
           setting: 'a letter of appointment on institute paper lying beside a nameplate still in its wrapping',
           year: 1953,
@@ -4386,11 +4723,10 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       {
         id: 'default',
         conditions: [
-          { type: 'yearAtLeast', year: 1951 },
-          { type: 'yearAtMost', year: 1960 },
+          { type: 'yearAtLeast', year: 1953 },
+          { type: 'yearAtMost', year: 1962 },
         ],
         title: 'The Title That Takes Thirteen Years',
-        yearLabel: '1953',
         image: {
           setting: 'an official envelope opened on a desk with a short letter and a form to countersign',
           year: 1953,
@@ -4528,7 +4864,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'winter',
             narration:
-              'In the last winter the trays go back to the kitchen as they came, and the circle of what he will accept without checking has drawn in until there is very little inside it. He sits at the window in his overcoat with the columns finished for the day, and the courtyard tree is bare, and it is January, and it is quiet.',
+              'In the last winter she is in hospital for months and there is nobody in the flat to take the first mouthful, and the trays go back to the kitchen as they came. He sits at the window in his overcoat with the columns finished for the day, and the courtyard tree is bare, and it is January, and it is quiet.',
           },
         ],
         historicalNote:
@@ -4605,6 +4941,84 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
+        id: 'spoke-out-walked',
+        conditions: [
+          { type: 'projectCompleted', projectId: 'godel-incompleteness' },
+          { type: 'narrativeFlag', flag: 'godel.raisedTheFlaw' },
+          { type: 'narrativeFlag', flag: 'godel.walksWithEinstein' },
+        ],
+        title: 'The Man Who Answered the Question He Was Asked',
+        yearLabel: 'after',
+        image: {
+          setting: 'a modern lecture theatre with one line of symbols on a screen and a full room of young faces',
+          year: 1990,
+          characters: ['godel'],
+          mood: 'continuing, undiminished, plain',
+          details: ['one line of symbols on a screen', 'rows of young listeners', 'a lectern with a glass of water', 'notebooks open', 'high windows'],
+          alt: 'A single line of symbols displayed above a lectern in a full modern lecture theatre.',
+        },
+        pages: [
+          {
+            id: 'habit',
+            narration:
+              'He never learned the trick of leaving a true thing unsaid because the room was not the right room. It cost him friendships, positions, a certain amount of peace, and it is the reason his name is attached to a limit rather than to a triumph.',
+          },
+          {
+            id: 'taught',
+            narration:
+              'The limit is taught everywhere now, to nineteen-year-olds, in an hour, before lunch. Every machine anyone has ever built runs up against it. Every formal system anyone proposes is measured by it first and admired second.',
+          },
+          {
+            id: 'voice',
+            narration:
+              'What he would say about it, if asked, he already said, at a hedge, on an ordinary afternoon, to the only man who ever argued with him properly.',
+            speaker: 'GÖDEL',
+            dialogue: 'I did not take anything away. The truths were always more than the proofs. I only wrote down which was which.',
+          },
+        ],
+        historicalNote:
+          'Gödel’s incompleteness theorems are foundational to modern logic and computer science. The closing line is dramatized, not a quotation.',
+      },
+      {
+        id: 'spoke-out-post',
+        conditions: [
+          { type: 'projectCompleted', projectId: 'godel-incompleteness' },
+          { type: 'narrativeFlag', flag: 'godel.raisedTheFlaw' },
+          { type: 'narrativeFlag', flag: 'godel.einsteinFriendship' },
+        ],
+        title: 'The Man Who Answered the Question He Was Asked',
+        yearLabel: 'after',
+        image: {
+          setting: 'a card box of letters on a shelf above a desk in a modern office, one line of symbols chalked behind it',
+          year: 1990,
+          characters: ['godel'],
+          mood: 'continuing, undiminished, plain',
+          details: ['a card box of letters', 'one line of symbols chalked on a board', 'a dated bundle of pages', 'an archive label', 'high windows'],
+          alt: 'A card box of letters on a shelf beneath a single line of symbols chalked on a board.',
+        },
+        pages: [
+          {
+            id: 'habit',
+            narration:
+              'He never learned the trick of leaving a true thing unsaid because the room was not the right room. It cost him friendships, positions, a certain amount of peace, and it is the reason his name is attached to a limit rather than to a triumph.',
+          },
+          {
+            id: 'taught',
+            narration:
+              'The limit is taught everywhere now, to nineteen-year-olds, in an hour, before lunch. Every machine anyone has ever built runs up against it. Every formal system anyone proposes is measured by it first and admired second.',
+          },
+          {
+            id: 'voice',
+            narration:
+              'What he would say about it, if asked, he already wrote, on a Thursday, six pages at a time, to the only man who ever contradicted him.',
+            speaker: 'GÖDEL',
+            dialogue: 'I did not take anything away. The truths were always more than the proofs. I only wrote down which was which.',
+          },
+        ],
+        historicalNote:
+          'Gödel’s incompleteness theorems are foundational to modern logic and computer science. The closing line is dramatized, not a quotation.',
+      },
+      {
         id: 'spoke-out',
         conditions: [
           { type: 'projectCompleted', projectId: 'godel-incompleteness' },
@@ -4634,7 +5048,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
           {
             id: 'voice',
             narration:
-              'What he would say about it, if asked, he already said, at a hedge, on an ordinary afternoon, to the only man who ever argued with him properly.',
+              'What he would say about it, if asked, he already wrote out, numbered, on a page that is still in the drawer where he left it.',
             speaker: 'GÖDEL',
             dialogue: 'I did not take anything away. The truths were always more than the proofs. I only wrote down which was which.',
           },
@@ -4762,7 +5176,7 @@ export const GODEL_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'default',
-        title: 'The Drawer, and the Key',
+        title: 'What He Leaves Behind Him',
         yearLabel: 'after',
         image: {
           setting: 'a closed writing drawer with a small brass key in the lock and dust along the desk edge',

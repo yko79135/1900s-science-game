@@ -216,7 +216,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           {
             id: 'proof',
             narration:
-              'He works out a result about a series before the class has been shown the method, and is marked down because the working is not the working in the book. He reads the correction twice, decides it is about handwriting, and goes on.',
+              'He works out the sum of a series before the class has been shown the method, and is marked down, because the working is not the working in the book. The answer is right. He checks it twice, which is the only opinion he trusts, and goes on.',
           },
         ],
         effects: [{ type: 'resources', effects: { theory: 1 } }],
@@ -722,7 +722,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           {
             id: 'alone',
             narration:
-              'He works at it on the table where he eats, with the fire unlit because coal costs money, and he gets to the same place the room full of men will get to: that you cannot answer it until you have said what a method is. And that nobody has.',
+              'He works at it standing up at a windowsill, in gloves, because coal costs money and the room has been cold since October. And he gets to the same place the room full of men will get to: that you cannot answer the question until you have said what a method is. And that nobody has.',
           },
         ],
         effects: [
@@ -1091,6 +1091,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
               'In the basement there is a machine shop with a lathe in it, and he gets permission to use it in the evenings. He is winding relays for a cipher machine of his own, in America, in 1937, because he has read the newspapers and can add.',
           },
         ],
+        effects: [{ type: 'flag', flag: 'turing.princetonYears', value: true }],
         historicalNote:
           'Turing worked at Princeton from 1936 to 1938 under Alonzo Church, and built part of an electromechanical cipher machine in the university machine shop, already anticipating war. Dialogue is dramatized.',
       },
@@ -1180,6 +1181,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         ],
         effects: [
           { type: 'markContextCardSeen', cardId: 'turing-card-1938-princeton' },
+          { type: 'flag', flag: 'turing.princetonYears', value: true },
           { type: 'relationship', characterId: 'vonneumann', familiarity: 1, respect: 1, flag: 'princeton-logic' },
           { type: 'resources', effects: { network: 1, theory: 1 } },
         ],
@@ -1293,6 +1295,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'turing.princetonYears', value: true }],
         historicalNote:
           'Von Neumann, who had read Turing’s 1936 paper, offered him a research assistantship at Princeton in 1938; Turing declined and returned to England. Dialogue is dramatized.',
       },
@@ -1355,6 +1358,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'turing.princetonYears', value: true }],
         historicalNote:
           'Von Neumann knew and admired Turing’s computability work and offered him a Princeton assistantship in 1938. Turing returned to England. Dialogue is dramatized.',
       },
@@ -1471,7 +1475,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
       {
         id: 'home',
         conditions: [
-          { type: 'locationIs', locationId: 'princeton' },
+          { type: 'narrativeFlag', flag: 'turing.princetonYears' },
           { type: 'choiceWas', choiceKey: 'turing-vonneumann-princeton:decide', choiceId: 'home' },
         ],
         title: 'Eight Days East',
@@ -1501,7 +1505,10 @@ export const TURING_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'abroad',
-        conditions: [{ type: 'choiceWas', choiceKey: 'turing-vonneumann-princeton:decide', choiceId: 'stay' }],
+        conditions: [
+          { type: 'narrativeFlag', flag: 'turing.princetonYears' },
+          { type: 'choiceWas', choiceKey: 'turing-vonneumann-princeton:decide', choiceId: 'stay' },
+        ],
         title: 'A Long Way From the Weather',
         yearLabel: '1938',
         image: {
@@ -1526,6 +1533,34 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'A divergent close for a life that accepted the Princeton offer instead of returning to England before the war.',
+      },
+      {
+        id: 'accepted-never-sailed',
+        conditions: [{ type: 'choiceWas', choiceKey: 'turing-vonneumann-princeton:decide', choiceId: 'stay' }],
+        title: 'The Passage He Does Not Book',
+        yearLabel: '1938',
+        image: {
+          setting: 'a hall table with a written acceptance, an unposted envelope and a sailing list',
+          year: 1938,
+          characters: ['turing'],
+          mood: 'a decision quietly overtaken',
+          details: ['a written acceptance', 'an unstamped envelope', 'a folded sailing list', 'a hat on a peg', 'late light on a hallway floor'],
+          alt: 'A written acceptance and an unstamped envelope lying beside a folded sailing list on a hall table.',
+        },
+        pages: [
+          {
+            id: 'accept',
+            narration:
+              'He writes the acceptance in one draft, because it is the right answer and he can see that it is, and props it against the clock to be posted in the morning. It is still there in the afternoon. It is still there in July.',
+          },
+          {
+            id: 'overtaken',
+            narration:
+              'What happens instead is that the summer goes, and a quiet man from a department comes about ciphers, and by the time anybody asks him again about the ocean there are no sailings for men of military age. He meant to go. Meaning to go is not a country.',
+          },
+        ],
+        historicalNote:
+          'A divergent close for a life that accepted the American offer and was overtaken by the approach of war before taking it up.',
       },
       {
         id: 'default',
@@ -1855,7 +1890,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtMost', year: 1944 },
         ],
         title: 'Nobody to Hand It To',
-        yearLabel: 'c. 1940',
+        yearLabel: '1940–1942',
         image: {
           setting: 'a desk with a large wiring diagram, one mug, and no second chair',
           year: 1940,
@@ -1894,6 +1929,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
       {
         id: 'close',
         conditions: [
+          { type: 'locationIs', locationId: 'bletchleyPark' },
           { type: 'resourceAtLeast', resource: 'wellbeing', value: 5 },
           { type: 'yearAtLeast', year: 1941 },
           { type: 'yearAtMost', year: 1944 },
@@ -1935,8 +1971,9 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           'Turing became engaged to a fellow Bletchley cryptanalyst in 1941, told her that he was homosexual, and ended the engagement himself; they remained on good terms. Dialogue is dramatized.',
       },
       {
-        id: 'default',
+        id: 'inside-the-fence',
         conditions: [
+          { type: 'locationIs', locationId: 'bletchleyPark' },
           { type: 'yearAtLeast', year: 1941 },
           { type: 'yearAtMost', year: 1944 },
         ],
@@ -1966,6 +2003,40 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         historicalNote:
           'Homosexual acts between men were criminal offences in Britain throughout Turing’s life, requiring lifelong concealment.',
       },
+      {
+        id: 'elsewhere',
+        conditions: [
+          { type: 'yearAtLeast', year: 1941 },
+          { type: 'yearAtMost', year: 1944 },
+        ],
+        title: 'Careful, and Getting Better At It',
+        yearLabel: 'c. 1941',
+        image: {
+          setting: 'a lodging-house landing at night with one door shut and a shaded stair light',
+          year: 1941,
+          characters: ['turing'],
+          mood: 'watchful, private, weary',
+          details: ['a shut door on a landing', 'a shaded stair light', 'a coat still buttoned', 'a folded newspaper', 'a latchkey'],
+          alt: 'A shut door on a lodging-house landing beneath a shaded stair light.',
+        },
+        pages: [
+          {
+            id: 'landing',
+            narration:
+              'He comes in late, on a landing where a floorboard gives him away at the third step, and has learned which step it is. There is a law about what he is, and it is a criminal law, and every friendship he has had since school has had to be walked round it.',
+          },
+          {
+            id: 'cost',
+            narration:
+              'There are two people in England he can be entirely truthful with, both of them a train journey away and neither of them safe to put in a letter. He goes to see them when he can and talks about mathematics for the first hour out of habit. It does not make him unhappy so much as extremely tired, in a way he never mentions to anybody.',
+            speaker: 'ALAN',
+            dialogue: 'I am perfectly good at secrets. I should simply like to be keeping only the one they are paying me for.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { wellbeing: -1 } }],
+        historicalNote:
+          'Homosexual acts between men were criminal offences in Britain throughout Turing’s life, requiring lifelong concealment. Dialogue is dramatized. This variant follows a life whose wartime work was done away from Bletchley Park.',
+      },
     ],
   },
   {
@@ -1975,7 +2046,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
     kind: 'personal',
     classification: 'Documented',
     sourceIds,
-    trigger: { event: 'afterAction', priority: 86 },
+    trigger: { event: 'afterAction', priority: 90 },
     once: true,
     variants: [
       {
@@ -2039,7 +2110,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           {
             id: 'mask',
             narration:
-              'He cycles to work in a gas mask, not because of gas but because of pollen, and the sentries have stopped remarking on it. His bicycle chain comes off at a fixed number of turns, so he counts the turns and lifts it back on before it happens.',
+              'He cycles to work in a gas mask, not because of gas but because of pollen, and the men on the gate have stopped remarking on it after the first fortnight. His bicycle chain comes off at a fixed number of turns, so he counts the turns and lifts it back on before it happens.',
           },
           {
             id: 'why',
@@ -2141,7 +2212,8 @@ export const TURING_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'default',
+        id: 'bletchley',
+        conditions: [{ type: 'locationIs', locationId: 'bletchleyPark' }],
         title: 'Weight of Evidence',
         yearLabel: '1941',
         image: {
@@ -2166,11 +2238,45 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           {
             id: 'use',
             narration:
-              'What it buys is the thing they never have enough of: it cuts the machine runs down to what the night can hold. Twenty years later mathematicians will reinvent most of it in the open and give it other names.',
+              'What it buys is the thing they never have enough of: it cuts the searching down to what one night can hold. Twenty years later mathematicians will reinvent most of it in the open and give it other names.',
           },
         ],
         historicalNote:
           'Banburismus was Turing’s sequential statistical method for narrowing naval Enigma rotor settings, using log-odds scoring related to later Bayesian sequential analysis. It was classified and unpublished.',
+      },
+      {
+        id: 'elsewhere',
+        title: 'Arithmetic for a War He Is Not Shown',
+        yearLabel: '1941',
+        image: {
+          setting: 'a lodging table with hand-ruled scoring columns and a locked despatch box',
+          year: 1941,
+          characters: ['turing'],
+          mood: 'invented alone, used at arm’s length',
+          details: ['hand-ruled scoring columns', 'a locked despatch box', 'a stub of pencil', 'a blackout blind', 'a cold lamp'],
+          alt: 'Hand-ruled scoring columns on a lodging table beside a locked despatch box.',
+        },
+        pages: [
+          {
+            id: 'columns',
+            narration:
+              'The material comes in a locked box and goes back in one, and nobody tells him what any of it means or what was done with the last lot. He rules his own sheets and works out how to score a coincidence: not whether a guess is right, but how much more likely it has just become.',
+          },
+          {
+            id: 'adding',
+            narration:
+              'The trick is that such numbers can be added. A hundred hints, each of them nearly worthless, come to a conclusion you would stake a fleet on, and the arithmetic tells you exactly when to stop looking and act.',
+            speaker: 'ALAN',
+            dialogue: 'I am not asking whether it is true. I am asking how much I now believe it, and by how much the next sheet will change that.',
+          },
+          {
+            id: 'silence',
+            narration:
+              'He sends it in and hears nothing back, twice. Twenty years later mathematicians will build the same arithmetic in the open and give it other names, and he will not be in a position to mention that he had it in a lodging house in 1941.',
+          },
+        ],
+        historicalNote:
+          'Banburismus was Turing’s sequential statistical method, developed for naval Enigma and classified for decades; related sequential and Bayesian methods were published independently later. This variant follows a life that developed the method away from Bletchley Park.',
       },
     ],
   },
@@ -2346,6 +2452,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'turing.nplCommittees', value: true }],
         historicalNote:
           'Turing joined the National Physical Laboratory in 1945 and produced a detailed design for the Automatic Computing Engine in early 1946. Construction was delayed by the laboratory’s limited electronics capacity; he later took a sabbatical year at Cambridge. Dialogue is dramatized.',
       },
@@ -2464,6 +2571,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         effects: [
           { type: 'markContextCardSeen', cardId: 'turing-card-1946-ace' },
           { type: 'flag', flag: 'turing.aceDelayed', value: true },
+          { type: 'flag', flag: 'turing.nplCommittees', value: true },
           { type: 'resources', effects: { wellbeing: -1 } },
         ],
         historicalNote:
@@ -2668,7 +2776,7 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           {
             id: 'report',
             narration:
-              'What he writes is unlike anything else of its decade — networks of simple units, trained rather than wired, unorganised at birth and organised by experience. The establishment files it as an internal report and does not publish it. It will be read properly in about forty years.',
+              'What he writes is unlike anything else of its decade — networks of simple units, trained rather than wired, unorganised at birth and organised by experience. It is typed, filed, initialled by two people and not published. It will be read properly in about forty years.',
           },
         ],
         historicalNote:
@@ -2703,7 +2811,8 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           'Turing left the NPL in 1948 for the University of Manchester at Max Newman’s invitation, where a working stored-program machine already existed.',
       },
       {
-        id: 'default',
+        id: 'committees',
+        conditions: [{ type: 'narrativeFlag', flag: 'turing.nplCommittees' }],
         title: 'Three Years, No Machine',
         yearLabel: '1948',
         image: {
@@ -2728,6 +2837,33 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Delays at the NPL led Turing to leave for Manchester in 1948, where a working machine already existed.',
+      },
+      {
+        id: 'silence',
+        title: 'Nobody Asked Him For It',
+        yearLabel: '1948',
+        image: {
+          setting: 'a quiet room with a finished design under a paperweight and an unopened post rack',
+          year: 1948,
+          characters: ['turing'],
+          mood: 'unasked-for, patient, corroding',
+          details: ['a finished design under a paperweight', 'an empty post rack', 'a wireless switched off', 'running shoes drying by a grate', 'a calendar three months behind'],
+          alt: 'A finished design held down by a paperweight beside an empty post rack.',
+        },
+        pages: [
+          {
+            id: 'quiet',
+            narration:
+              'Three years, and the worst of it is not the arguing. It is that there is no arguing. Nobody writes to disagree with the design, nobody calls him in to defend it, and no committee anywhere in England has put it on an agenda in order to turn it down. It is simply not a thing that is happening.',
+          },
+          {
+            id: 'north',
+            narration:
+              'Then a letter from the north, from the topologist who once asked him to define the word mechanical. There is a laboratory up there with four engineers and a machine that is already switched on, and nobody who knows what to tell it. Being wanted turns out to be the whole of the argument.',
+          },
+        ],
+        historicalNote:
+          'A divergent close for a life whose postwar computer design was never taken up by an institution. Turing left for Manchester in 1948 at Max Newman’s invitation.',
       },
     ],
   },
@@ -2938,23 +3074,30 @@ export const TURING_STORY_SCENES: StoryScene[] = [
         title: 'A Test Instead of an Argument',
         yearLabel: '1950',
         image: {
-          setting: 'a plain desk with a typescript titled as a question and a pot of tea gone cold',
+          setting: 'a table stacked with opened letters, one propped against a teapot, a reply half written',
           year: 1950,
           characters: ['turing'],
-          mood: 'mischievous, rigorous, alone',
-          details: ['a typescript with a question for a title', 'a cold pot of tea', 'a stack of philosophy offprints', 'a fountain pen', 'a wireless'],
-          alt: 'A typescript with a question for its title lying beside a cold pot of tea.',
+          mood: 'mischievous, patient, arguing with the whole country',
+          details: ['a heap of opened letters', 'a reply half written', 'a teapot with a cosy', 'a slit envelope', 'a school photograph face down'],
+          alt: 'A heap of opened letters with a half-written reply propped against a teapot.',
         },
         pages: [
           {
-            id: 'trap',
+            id: 'letters',
             narration:
-              'The word think is a trap and he refuses to walk into it. Instead: a judge, two closed doors, typed answers, and no clue but the conversation. Not a definition — a procedure, which anybody can carry out and nobody can argue with afterwards.',
+              'The post has been like this for a month: a bishop, two schoolmasters, a professor of moral philosophy and a man from Bootle, and every one of them furious, and not one of them furious about the same thing. He answers all of them, in order, longhand.',
           },
           {
-            id: 'answer',
+            id: 'reply',
             narration:
-              'Half the letters he gets in reply are furious and the other half have missed the point. He answers them all, patiently, because the objections are interesting and because he has been arguing this one since a boy died at his school and left him with the question.',
+              'The one he is on now says that a machine cannot think because thinking requires a soul. He does not find that a stupid objection. He finds it a testable one, if you will only agree to test it, which is the entire point of the two closed doors and the typed answers and the judge who may ask anything he likes.',
+            speaker: 'ALAN',
+            dialogue: 'You may keep the soul, sir. I only ask that if you cannot tell which door it is behind, you allow that the question was never a question about doors.',
+          },
+          {
+            id: 'why',
+            narration:
+              'He puts the reply in the pile to be posted and sits for a while with his tea going cold. He has been arguing this one since he was seventeen, when a boy at his school died and left him holding the question, and he has never once been able to leave it alone.',
           },
         ],
         effects: [
@@ -3253,20 +3396,27 @@ export const TURING_STORY_SCENES: StoryScene[] = [
           setting: 'a kitchen table covered in graph paper, seed heads and hand-computed columns',
           year: 1952,
           characters: ['turing'],
-          mood: 'homely, obsessive, original',
+          mood: 'homely, obsessive, delighted',
           details: ['seed heads on graph paper', 'columns of hand computation', 'a jam jar of water', 'a school ruler', 'a pencil sharpened to nothing'],
           alt: 'Seed heads laid on graph paper beside long hand-computed columns of figures.',
         },
         pages: [
           {
-            id: 'even',
+            id: 'table',
             narration:
-              'He does it by hand at the kitchen table, columns of it, because the question will not leave him alone: how does anything become different from anything else, if it all starts the same?',
+              'The kitchen table has been unavailable for meals since March. There are seed heads on it in rows, a jam jar of water holding the ruler down, and eleven pages of columns worked by hand because there is no machine within reach and the question will not wait for one.',
+          },
+          {
+            id: 'question',
+            narration:
+              'The question is a child’s. An embryo begins as a ball of cells with nothing at all to tell one part of it from another — so where does the first stripe come from? Where does anything come from, if everything starts the same? He puts it to a visitor over the seed heads and the visitor thinks he is joking.',
+            speaker: 'ALAN',
+            dialogue: 'Nothing decides where the spots go. Two substances, one slow and one quick, and the evenness simply cannot hold — and that is a far better answer than design, because you can check it.',
           },
           {
             id: 'break',
             narration:
-              'Two substances, one slow and self-encouraging, one fast and suppressing. Start them perfectly even. The evenness will not hold — it cannot hold — and what breaks out of it is a pattern with a spacing you can predict before you look.',
+              'The columns say he is right. Perfect evenness is unstable; the smallest disturbance runs away with it; and what comes out is a pattern with a spacing the arithmetic fixes before you have looked at a single animal.',
           },
         ],
         effects: [

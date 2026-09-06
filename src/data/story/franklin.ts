@@ -147,6 +147,96 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'franklin-personal-school-lab',
+    characterId: 'franklin',
+    chapterId: 'formation',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 70 },
+    once: true,
+    variants: [
+      {
+        id: 'declared',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'franklin.chosenScience' },
+          { type: 'yearAtLeast', year: 1934 },
+        ],
+        title: 'The Argument Over the Coffee Cups',
+        yearLabel: '1935–1937',
+        image: {
+          setting: 'a dining room after dinner with a school report and a folded newspaper on the cloth, mid-1930s',
+          year: 1936,
+          characters: ['franklin'],
+          mood: 'tense, affectionate, immovable',
+          details: ['a school report on the cloth', 'a folded newspaper', 'two coffee cups', 'gasolier over the table', 'a chair pushed back'],
+          alt: 'A school report and a folded newspaper on a dining table with two coffee cups beside them.',
+        },
+        pages: [
+          {
+            id: 'report',
+            narration:
+              'The report is on the cloth between the coffee cups, and it is a very good report, which is precisely why the argument is happening. Nobody in this house objects to her being clever. They object to the use she proposes to put it to.',
+          },
+          {
+            id: 'row',
+            narration:
+              'She does not raise her voice, because raising it would concede the point about temperament. She sets out the case in order, with the reason for the order, and does not accept a single answer that begins with what people will think.',
+            speaker: 'HER FATHER',
+            dialogue: 'A laboratory will take your whole life and give you nothing back that anybody can see.',
+          },
+          {
+            id: 'reply',
+            narration:
+              'She says that is the arrangement she is offering it. Then she clears her own place, goes upstairs, and works through a chapter of physical chemistry that is not on any syllabus she is being examined in, because it is the only reply available at fifteen that will still be true at thirty.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'franklin.declaredEarly', value: true },
+          { type: 'resources', effects: { wellbeing: -1, standing: 1 } },
+        ],
+        historicalNote:
+          'Franklin decided on a scientific career in her teens against her father’s preference for public service, and the disagreement is reported in standard biographies. The scene and its dialogue are dramatized.',
+      },
+      {
+        id: 'bench',
+        conditions: [{ type: 'yearAtLeast', year: 1934 }],
+        title: 'Six Weighings of the Same Thing',
+        yearLabel: '1934–1937',
+        image: {
+          setting: 'a school chemistry laboratory after hours, a balance case open under a single lamp, mid-1930s',
+          year: 1935,
+          characters: ['franklin'],
+          mood: 'absorbed, obstinate, quiet',
+          details: ['glass balance case', 'brass weights in a velvet tray', 'a crucible cooling', 'ruled results book', 'the last lamp on'],
+          alt: 'An open glass balance case with brass weights in a velvet tray under a single lamp.',
+        },
+        pages: [
+          {
+            id: 'balance',
+            narration:
+              'The others left at four. She weighs the crucible a sixth time, because the fifth disagreed with the fourth in the third decimal and one of the two is a lie. The velvet tray of brass weights is warm where her hand has been resting on the case.',
+          },
+          {
+            id: 'mistress',
+            narration:
+              'The mistress in charge of the laboratory comes back for her umbrella, sees the lamp, and stands in the doorway rather than in the room, which is the correct instinct.',
+            speaker: 'THE SCIENCE MISTRESS',
+            dialogue: 'Four figures is what the examiners want, Rosalind. The fifth is for you.',
+          },
+          {
+            id: 'answer',
+            narration:
+              'That, it turns out, is the whole distinction, and she has just been handed it at fifteen by a woman she will not think to thank for twenty years. She writes the sixth figure down anyway, and beside it the reason the fifth was wrong.',
+          },
+        ],
+        effects: [{ type: 'flag', flag: 'franklin.declaredEarly', value: true }],
+        historicalNote:
+          'St Paul’s Girls’ School taught physics and chemistry to a standard few girls’ schools then matched. The scene is a dramatized composite; the science mistress is not a named individual.',
+      },
+    ],
+  },
+  {
     id: 'franklin-formation-closing',
     characterId: 'franklin',
     chapterId: 'formation',
@@ -505,6 +595,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
         id: 'human-turing',
         conditions: [
           { type: 'otherCharacterIsHuman', characterId: 'turing' },
+          { type: 'locationIs', locationId: 'cambridgeUK' },
           { type: 'otherCharacterAt', characterId: 'turing', locationId: 'cambridgeUK' },
           { type: 'yearAtLeast', year: 1939 },
           { type: 'yearAtMost', year: 1945 },
@@ -632,7 +723,6 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           { type: 'yearAtMost', year: 1945 },
         ],
         title: 'The Post at the End of the Street',
-        locationLabel: 'London',
         yearLabel: '1941–1944',
         image: {
           setting: 'a sandbagged warden’s post at the end of a dark London street, wartime',
@@ -777,7 +867,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.methodFirst', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { wellbeing: 1 } },
+                  { type: 'resources', effects: { wellbeing: 1, funds: 2 } },
                 ],
               },
               {
@@ -786,14 +876,14 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.resultsFirst', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: -2 },
-                  { type: 'resources', effects: { standing: 1 } },
+                  { type: 'resources', effects: { standing: 1, funds: 2 } },
                 ],
               },
             ],
           },
         ],
         historicalNote:
-          'From 1947 Franklin worked at the Laboratoire Central des Services Chimiques de l’État in Paris under Jacques Mering, learning X-ray diffraction analysis of imperfectly crystalline carbons. Friends and colleagues recorded that these were among her happiest years. Dialogue is dramatized.',
+          'From 1947 Franklin worked at the Laboratoire Central des Services Chimiques de l’État in Paris under Jacques Mering, learning X-ray diffraction analysis of imperfectly crystalline carbons, on a salaried state appointment. Friends and colleagues recorded that these were among her happiest years. Dialogue is dramatized.',
       },
       {
         id: 'default',
@@ -816,7 +906,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'here',
             narration:
-              'Wherever she ends up standing, the apparatus is the same in principle and worse in practice: a tube that runs hot, a camera that has to be aligned by somebody patient, and a stack of plates that will tell the truth only if every one of a hundred small things was done properly.',
+              'The apparatus in front of her is the same in principle and worse in practice: a tube that runs hot, a camera that has to be aligned by somebody patient, and a stack of plates that will tell the truth only if every one of a hundred small things was done properly. She has been counting the hundred small things since she was fifteen.',
             speaker: 'A COLLEAGUE',
             dialogue: 'Everyone here wants the pattern. Nobody here wants to spend two years learning to trust it.',
           },
@@ -831,7 +921,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.methodFirst', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { wellbeing: 1 } },
+                  { type: 'resources', effects: { wellbeing: 1, funds: 2 } },
                 ],
               },
               {
@@ -840,7 +930,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.resultsFirst', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: -2 },
-                  { type: 'resources', effects: { standing: 1 } },
+                  { type: 'resources', effects: { standing: 1, funds: 2 } },
                 ],
               },
             ],
@@ -903,6 +993,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           { type: 'markContextCardSeen', cardId: 'franklin-card-1947-paris' },
           { type: 'resources', effects: { network: 1 } },
           { type: 'flag', flag: 'franklin.learnedMethod', value: true },
+          { type: 'flag', flag: 'franklin.parisWorked', value: true },
         ],
         historicalNote:
           'At the Laboratoire Central des Services Chimiques de l’État, Franklin mastered X-ray diffraction analysis of amorphous carbons under Jacques Mering — the technique she later turned on DNA fibres. Dialogue is dramatized.',
@@ -994,7 +1085,10 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
               'She will carry this room around with her for the rest of her working life and measure every other laboratory against it, usually unfavourably, and never entirely explain to English colleagues why she seems to be arguing with them so much.',
           },
         ],
-        effects: [{ type: 'flag', flag: 'franklin.parisRoom', value: true }],
+        effects: [
+          { type: 'flag', flag: 'franklin.parisRoom', value: true },
+          { type: 'flag', flag: 'franklin.parisWorked', value: true },
+        ],
         historicalNote:
           'Colleagues recorded the open, argumentative style of the Paris laboratory and Franklin’s ease in it; her later English colleagues often read the same directness differently. Dialogue is dramatized.',
       },
@@ -1150,7 +1244,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'leaving-paris',
-        conditions: [{ type: 'locationIs', locationId: 'paris' }],
+        conditions: [{ type: 'narrativeFlag', flag: 'franklin.parisWorked' }],
         title: 'Leaving the Only Laboratory That Suited Her',
         locationLabel: 'Paris',
         yearLabel: '1950',
@@ -1266,7 +1360,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.holdForCertainty', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { standing: -1 } },
+                  { type: 'resources', effects: { standing: -1, funds: 2 } },
                 ],
               },
               {
@@ -1275,12 +1369,13 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.publishSoon', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: -2 },
-                  { type: 'resources', effects: { standing: 1, exposure: 1 } },
+                  { type: 'resources', effects: { standing: 1, exposure: 1, funds: 2 } },
                 ],
               },
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'franklin.kingsPost', value: true }],
         historicalNote:
           'Franklin joined King’s College London in January 1951 on a fellowship, with a new fine-focus tube and micro-camera. Her humidity control established that DNA fibres take two distinct forms, A and B. The ambiguity about her role relative to Maurice Wilkins is documented and was never properly resolved by the laboratory’s director. Dialogue is dramatized.',
       },
@@ -1327,7 +1422,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.holdForCertainty', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { standing: -1 } },
+                  { type: 'resources', effects: { standing: -1, funds: 2 } },
                 ],
               },
               {
@@ -1336,12 +1431,13 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.publishSoon', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: -2 },
-                  { type: 'resources', effects: { standing: 1, exposure: 1 } },
+                  { type: 'resources', effects: { standing: 1, exposure: 1, funds: 2 } },
                 ],
               },
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'franklin.kingsPost', value: true }],
         historicalNote:
           'Franklin joined King’s College London in January 1951 to apply X-ray diffraction to DNA fibres, and her humidity control established the A and B forms. The ambiguity about her role relative to Maurice Wilkins is documented. Dialogue is dramatized.',
       },
@@ -1366,14 +1462,14 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'distance',
             narration:
-              'She writes it in a letter, politely, twice, and gets a courteous reply that does not address the point. The right laboratory is three hours and one appointment away and she is not in it.',
+              'She writes it in a letter, politely, twice, and gets a courteous reply that does not address the point. Then a third letter, less politely, with a table in it. That one is not answered at all.',
             speaker: 'A COLLEAGUE',
             dialogue: 'They will get there without you, you know. Badly, and first.',
           },
           {
             id: 'hold',
             narration:
-              'Whatever room she is standing in, the question is the same one. There is a measurement she could make and a measurement she could publish, and they are not yet the same measurement.',
+              'She has a fibre, a borrowed set and no mandate, and the calendar is not on her side. There is a measurement she could make and a measurement she could publish, and they are not yet the same measurement.',
             choices: [
               {
                 id: 'hold',
@@ -1381,7 +1477,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.holdForCertainty', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { standing: -1 } },
+                  { type: 'resources', effects: { standing: -1, funds: 2 } },
                 ],
               },
               {
@@ -1390,7 +1486,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.publishSoon', value: true },
                   { type: 'theme', theme: 'certaintyVsSpeed', amount: -2 },
-                  { type: 'resources', effects: { standing: 1, exposure: 1 } },
+                  { type: 'resources', effects: { standing: 1, exposure: 1, funds: 2 } },
                 ],
               },
             ],
@@ -1471,6 +1567,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
         effects: [
           { type: 'markContextCardSeen', cardId: 'franklin-card-1951-kings' },
           { type: 'resources', effects: { network: -1, wellbeing: -1 } },
+          { type: 'flag', flag: 'franklin.kingsPost', value: true },
         ],
         historicalNote:
           'Franklin was recruited to King’s College London to lead X-ray work on DNA, while Maurice Wilkins, already working on the problem, understood that she would be assisting him. The laboratory’s director never resolved the ambiguity in writing, and the resulting friction lasted the whole of her time there. Dialogue is dramatized.',
@@ -1548,9 +1645,10 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
     replacesContextCardId: 'franklin-card-1952-photo51',
     variants: [
       {
-        id: 'taken',
+        id: 'taken-kings',
         conditions: [
           { type: 'projectCompleted', projectId: 'franklin-photograph-51' },
+          { type: 'locationIs', locationId: 'london' },
           { type: 'yearAtLeast', year: 1952 },
         ],
         title: 'A Hundred Hours',
@@ -1597,8 +1695,52 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           'In May 1952 Franklin and her research student Raymond Gosling obtained the celebrated B-form diffraction photograph, known as Photograph 51, from a hundred-hour exposure under controlled humidity. Franklin set it aside to concentrate on the more difficult A form. Dialogue is dramatized.',
       },
       {
-        id: 'not-yet',
-        conditions: [{ type: 'yearAtLeast', year: 1952 }],
+        id: 'taken-alone',
+        conditions: [
+          { type: 'projectCompleted', projectId: 'franklin-photograph-51' },
+          { type: 'yearAtLeast', year: 1952 },
+        ],
+        title: 'A Hundred Hours, and Nobody in the Corridor',
+        yearLabel: '1952',
+        image: {
+          setting: 'a darkroom under a red safelight with one plate held up to the light and no one else present',
+          year: 1952,
+          characters: ['franklin'],
+          mood: 'hushed, solitary, exact',
+          details: ['red safelight', 'a plate held up dripping', 'exposure log with a hundred hours in it', 'tongs on a wet bench', 'a bolted door'],
+          alt: 'A single photographic plate held up dripping under a red darkroom safelight.',
+        },
+        pages: [
+          {
+            id: 'exposure',
+            narration:
+              'The specimen tilted, the fibre drawn to a hair, the air around it held wet with a salt solution and a hydrogen line, and then the exposure: not minutes, not hours. A hundred hours, while the building empties and fills and empties again and the log gets another line each morning.',
+          },
+          {
+            id: 'plate',
+            narration:
+              'It comes out of the fixer and she holds it under the safelight and says nothing for a long time, because there is nobody in the room to say it to. A cross. A clean X of spots striding away from the centre, the layer lines countable, and the fourth one missing exactly as it should be if two chains run in opposite directions half a turn apart.',
+          },
+          {
+            id: 'answer',
+            narration:
+              'She dries it, sleeves it, dates the sleeve, and goes back to the other form, which is messier and harder and not yet understood — because a photograph is not a structure, and she will not say a thing is true because it is beautiful.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'franklin-card-1952-photo51' },
+          { type: 'resources', effects: { standing: 1 } },
+          { type: 'flag', flag: 'franklin.tookPhoto51', value: true },
+        ],
+        historicalNote:
+          'The documented photograph was taken at King’s College London in May 1952 by Franklin with her research student Raymond Gosling. This variant follows a life in which the same exposure was made somewhere else, and alone.',
+      },
+      {
+        id: 'not-yet-kings',
+        conditions: [
+          { type: 'locationIs', locationId: 'london' },
+          { type: 'yearAtLeast', year: 1952 },
+        ],
         title: 'The Exposure That Would Not Come Clean',
         yearLabel: '1952',
         image: {
@@ -1629,6 +1771,43 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'The documented route produced Photograph 51 in May 1952 from a hundred-hour exposure. This variant follows a life in which the decisive exposure has not yet come out. Dialogue is dramatized.',
+      },
+      {
+        id: 'not-yet',
+        conditions: [{ type: 'yearAtLeast', year: 1952 }],
+        title: 'The Exposure That Would Not Come Clean',
+        yearLabel: '1952',
+        image: {
+          setting: 'a darkroom bench with several imperfect plates laid out and one discarded, early 1950s',
+          year: 1952,
+          characters: ['franklin'],
+          mood: 'stubborn, unsatisfied, patient',
+          details: ['plates laid in a row', 'a smeared pattern', 'exposure log with crossings-out', 'red safelight', 'a discarded specimen frame'],
+          alt: 'Several photographic plates laid in a row under a safelight, one of them smeared.',
+        },
+        pages: [
+          {
+            id: 'row',
+            narration:
+              'Six plates in a row under the safelight and not one of them will do. The fibre sags, or the humidity drifts overnight, or the specimen dries at hour sixty and the whole pattern reverts to the other form halfway through its own exposure.',
+          },
+          {
+            id: 'again',
+            narration:
+              'Anyone else would publish the third one with an apology in the caption. She writes the failure up in the log with the reason beside it, resets the salt solution, and starts the clock again. The picture that will settle the argument is in there. It simply has not been earned yet.',
+          },
+          {
+            id: 'alone',
+            narration:
+              'There is no student at her elbow to be told any of this, which saves a conversation. She sets the clock, writes the date on the sleeve of a plate that does not exist yet, and puts the kettle on.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'franklin-card-1952-photo51' },
+          { type: 'resources', effects: { standing: 1 } },
+        ],
+        historicalNote:
+          'A divergent version of the documented hundred-hour exposure, for a life working without the King’s College laboratory or a research student.',
       },
     ],
   },
@@ -1748,7 +1927,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
     variants: [
       {
         id: 'packing',
-        conditions: [{ type: 'locationIs', locationId: 'london' }],
+        conditions: [{ type: 'narrativeFlag', flag: 'franklin.kingsPost' }],
         title: 'Boxes Labelled in a Small Hand',
         locationLabel: 'London',
         yearLabel: '1953',
@@ -1781,6 +1960,42 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'By early 1953 Franklin had arranged to move to Birkbeck College, and was asked to leave the nucleic acid work behind at King’s. The Cambridge model-building effort resumed in that period. Dialogue is dramatized.',
+      },
+      {
+        id: 'arriving',
+        conditions: [{ type: 'locationIs', locationId: 'london' }],
+        title: 'Arriving in the Middle of Somebody Else’s Year',
+        locationLabel: 'London',
+        yearLabel: '1953',
+        image: {
+          setting: 'a London college corridor seen by somebody who has just put a case down in it, 1953',
+          year: 1953,
+          characters: ['franklin'],
+          mood: 'displaced, alert, late',
+          details: ['a case set down on stone', 'a corridor noticeboard', 'unfamiliar pigeonholes', 'a wet coat still buttoned', 'a radiator ticking'],
+          alt: 'A travelling case set down on a stone corridor floor beside a noticeboard.',
+        },
+        pages: [
+          {
+            id: 'arrive',
+            narration:
+              'She puts the case down in a corridor she has never stood in before and reads the noticeboard the way she reads everything, from the bottom up. There is no drawer in this building with her name on it, no fibre in it spun by her hand, nothing here at all to leave behind when she goes.',
+          },
+          {
+            id: 'ahead',
+            narration:
+              'The fight in this building is two years old and she has walked in on the last act of it. Nobody has to decide whose apparatus is whose, because none of it has ever been hers.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'You have missed the whole of it, and I would not congratulate you if I were you. There is nothing left in here to miss.',
+          },
+          {
+            id: 'models',
+            narration:
+              'Cambridge is building models again. The talk in this corridor has a quality she recognises from a distance and cannot place from inside: not excitement. Care.',
+          },
+        ],
+        historicalNote:
+          'A divergent opening for a life that reached London only in 1953. On the documented route Franklin had been at King’s since January 1951 and was leaving it that spring.',
       },
       {
         id: 'default',
@@ -2170,7 +2385,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'issue',
             narration:
-              'Three papers, one after another, in the same April issue. Theirs, his, and hers with her student’s name beside it, carrying the photograph and the measurements and a sentence saying the evidence is in general agreement with the model proposed. She writes that sentence herself and does not flinch at it.',
+              'Three papers, one after another, in the same April issue. Theirs, his, and hers with her student’s name beside it, carrying her measurements and the plates she took them off and a sentence saying the evidence is in general agreement with the model proposed. She writes that sentence herself and does not flinch at it.',
           },
           {
             id: 'move',
@@ -2231,7 +2446,9 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'ahead',
             narration:
-              'What she has instead is a method, a camera, a student who would follow her anywhere, and a new substance to point them at. She is thirty-two. She would rather spend the next five years photographing something than talking about the last two.',
+              'What she has instead is a method, a camera, a student who would follow her anywhere, and a new substance to point them at. She is thirty-two, and somebody on the pavement asks her, kindly, whether she is not going to say anything at all about it.',
+            speaker: 'ROSALIND',
+            dialogue: 'I would rather spend the next five years photographing something than the next twenty explaining the last two.',
           },
         ],
         historicalNote:
@@ -2346,7 +2563,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.buildGroup', value: true },
                   { type: 'theme', theme: 'recognitionVsWork', amount: -1 },
-                  { type: 'resources', effects: { network: 2 } },
+                  { type: 'resources', effects: { network: 2, funds: 2 } },
                 ],
               },
               {
@@ -2355,7 +2572,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.ownHands', value: true },
                   { type: 'theme', theme: 'recognitionVsWork', amount: 1 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, funds: 2 } },
                 ],
               },
             ],
@@ -2400,7 +2617,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.buildGroup', value: true },
                   { type: 'theme', theme: 'recognitionVsWork', amount: -1 },
-                  { type: 'resources', effects: { network: 2 } },
+                  { type: 'resources', effects: { network: 2, funds: 2 } },
                 ],
               },
               {
@@ -2409,7 +2626,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'franklin.ownHands', value: true },
                   { type: 'theme', theme: 'recognitionVsWork', amount: 1 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, funds: 2 } },
                 ],
               },
             ],
@@ -2431,9 +2648,10 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'group',
+        id: 'group-paris',
         conditions: [
           { type: 'narrativeFlag', flag: 'franklin.buildGroup' },
+          { type: 'narrativeFlag', flag: 'franklin.parisWorked' },
           { type: 'yearAtLeast', year: 1955 },
         ],
         title: 'Somebody Who Argues Back Properly',
@@ -2468,6 +2686,45 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
         effects: [{ type: 'flag', flag: 'franklin.klugPartnership', value: true }],
         historicalNote:
           'Aaron Klug joined Franklin’s Birkbeck laboratory in 1954; their collaboration on virus structure was close and productive, and he continued the work after her death, receiving the Nobel Prize in Chemistry in 1982. Dialogue is dramatized.',
+      },
+      {
+        id: 'group',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'franklin.buildGroup' },
+          { type: 'yearAtLeast', year: 1955 },
+        ],
+        title: 'The Argument She Had Been Having by Post',
+        yearLabel: '1955–1957',
+        image: {
+          setting: 'two people bent over a diffraction plate on a lit box in an attic laboratory, mid-1950s',
+          year: 1956,
+          characters: ['franklin'],
+          mood: 'collegial, quick, warm',
+          details: ['illuminated viewing box', 'two pencils', 'a Fourier map on tracing paper', 'tea in jam jars', 'a sloping attic ceiling'],
+          alt: 'Two pencils and a tracing-paper map laid over a diffraction plate on an illuminated box.',
+        },
+        pages: [
+          {
+            id: 'arrival',
+            narration:
+              'He arrives with no virus experience and an unreasonable appetite for other people’s problems, and within a fortnight he is contradicting her about the radius of the nucleic acid. For twenty years the only person who argued with her properly did it in the margins of a returned print, three weeks late. This one does it across a bench, at once, out loud.',
+          },
+          {
+            id: 'method',
+            narration:
+              'She teaches him what she taught herself: hold the humidity, log every failure with its reason, and never say a thing is true because the picture of it is beautiful. He teaches her to be less afraid of a calculation she has not done with her own hands.',
+            speaker: 'KLUG',
+            dialogue: 'Your objection is right and your reason for it is wrong. Shall I show you, or would you rather find it?',
+          },
+          {
+            id: 'answer',
+            narration:
+              'She would rather find it. She finds it in about forty minutes, tells him so with something close to delight, and puts his name on the paper without being asked.',
+          },
+        ],
+        effects: [{ type: 'flag', flag: 'franklin.klugPartnership', value: true }],
+        historicalNote:
+          'Aaron Klug joined Franklin’s Birkbeck laboratory in 1954 and became her closest scientific collaborator, continuing the work after her death. This variant follows a life that never had the Paris laboratory to compare him with. Dialogue is dramatized.',
       },
       {
         id: 'colleague',
@@ -2554,30 +2811,38 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
       {
         id: 'pressing-on',
         conditions: [{ type: 'yearAtLeast', year: 1956 }],
-        title: 'The Grant Application for Three More Years',
+        title: 'For a Stranger Who Must Carry It On Without Her',
         yearLabel: '1956–1958',
         image: {
-          setting: 'a desk at night with a grant application, a model drawing and a train timetable, 1957',
+          setting: 'a desk at night with a grant application, a model drawing and a hospital appointment card, 1957',
           year: 1957,
           characters: ['franklin'],
-          mood: 'determined, unsentimental, forward',
-          details: ['grant application in typescript', 'scale drawing of a model', 'timetable', 'a coat over a chair', 'a lamp left burning'],
-          alt: 'A typed grant application and a scale drawing of a model on a desk under a lamp at night.',
+          mood: 'grave, determined, unsentimental',
+          details: ['grant application in typescript', 'scale drawing of a model', 'an appointment card face-down', 'a coat over a chair', 'a lamp left burning'],
+          alt: 'A typed grant application and a scale drawing of a model on a desk beside a face-down appointment card.',
         },
         pages: [
           {
+            id: 'fact',
+            narration:
+              'It starts on a lecture tour, and she puts it down to travel, and then to food, and then she stops putting it down to anything. There is a hospital in London and a word said to her there, once, plainly, and she takes it the way she takes any result that has been obtained properly: she does not argue with it, and she does not repeat it.',
+          },
+          {
             id: 'plans',
             narration:
-              'Three years of work laid out on one sheet: the viruses to be done, in order, with the reason for the order. She writes plans the way she writes methods, for a stranger who must be able to carry them out without her.',
+              'What she does that autumn is write out three years of work on one sheet — the viruses to be done, in order, with the reason for the order — and she writes it the way she writes a method, for a stranger who must be able to carry it out without her. She means the sentence exactly as it reads.',
+            speaker: 'KLUG',
+            dialogue: 'You have written this as though you will not be here to argue about it.',
           },
           {
             id: 'model',
             narration:
-              'And a drawing beside it, to scale, of a model of the virus six feet high, for an exhibition in Brussels. She is not a woman given to monuments and she has thought about the plexiglass for a fortnight.',
+              'She does not answer that, and puts a drawing beside it instead: a model of the virus six feet high, to scale, for an exhibition in Brussels next spring. She is not a woman given to monuments. She has thought about the plexiglass for a fortnight.',
           },
         ],
+        effects: [{ type: 'flag', flag: 'franklin.ill', value: true }],
         historicalNote:
-          'In her last years Franklin planned an extended programme of virus research and designed a large model of the tobacco mosaic virus for the 1958 Brussels World’s Fair.',
+          'Franklin was diagnosed with ovarian cancer in 1956, continued to lead her group through surgery and treatment, planned an extended programme of virus research, and designed a large model of the tobacco mosaic virus for the 1958 Brussels World’s Fair. Dialogue is dramatized.',
       },
     ],
   },
@@ -2649,7 +2914,9 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'forward',
             narration:
-              'A young member of the group asks what she considers her best piece of work. She says the one she is doing, which he takes for modesty and which is nothing of the kind.',
+              'A young member of the group works up the nerve to ask what she considers her best piece of work. She does not look up from the plate.',
+            speaker: 'ROSALIND',
+            dialogue: 'The one on the bench. It is the only one I can still do anything about.',
           },
         ],
         historicalNote:
@@ -2750,7 +3017,9 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'short',
             narration:
-              'It is a short life and she does not treat it as one. There is no valedictory in the handwriting. There is a next experiment, and the humidity at which to run it.',
+              'It is a short life and she does not treat it as one. There is no valedictory in the handwriting. There is a next experiment, and the humidity at which to run it. Somebody reads the last line out in the room a fortnight later and has to stop halfway.',
+            speaker: 'KLUG',
+            dialogue: 'Ninety-two per cent. She has even told us what the weather in the room is to be.',
           },
         ],
         historicalNote:
@@ -2804,7 +3073,10 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
               'She writes it up in five papers in three years, in two languages, with the methods set out step by numbered step so that a stranger could repeat every one of them, and does not once say the word important.',
           },
         ],
-        effects: [{ type: 'flag', flag: 'franklin.carbonWork', value: true }],
+        effects: [
+          { type: 'flag', flag: 'franklin.carbonWork', value: true },
+          { type: 'flag', flag: 'franklin.parisWorked', value: true },
+        ],
         historicalNote:
           'Franklin’s Paris work established the distinction between graphitising and non-graphitising carbons and characterised their pore structure; the papers remain cited in materials science. Dialogue is dramatized.',
       },
@@ -2875,7 +3147,10 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
             dialogue: 'Anyone can take a photograph. You have learned when not to believe one. Go somewhere they need that.',
           },
         ],
-        effects: [{ type: 'flag', flag: 'franklin.instrumentMastery', value: true }],
+        effects: [
+          { type: 'flag', flag: 'franklin.instrumentMastery', value: true },
+          { type: 'flag', flag: 'franklin.parisWorked', value: true },
+        ],
         historicalNote:
           'Under Jacques Mering, Franklin became an exceptionally skilled diffractionist, particularly of poorly crystalline materials — the expertise she brought to biological fibres in 1951. Dialogue is dramatized.',
       },
@@ -3170,7 +3445,7 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
             id: 'handon',
             narration:
               'She spends more of her time now teaching people to distrust their own plates than taking her own, which she would have thought a demotion ten years ago and does not now.',
-            speaker: 'KLUG',
+            speaker: 'A MEMBER OF HER GROUP',
             dialogue: 'You have made yourself unnecessary in about four rooms.',
           },
           {
@@ -3263,6 +3538,128 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           'Franklin’s insistence on evidence before publication is documented, as is the fact that the DNA structure was published by others using her unpublished data. She died in 1958; the Nobel Prize for the structure was awarded in 1962 and is not given posthumously.',
       },
       {
+        id: 'group-paris',
+        conditions: [
+          { type: 'choiceWas', choiceKey: 'franklin-legacy-opening:group', choiceId: 'buildGroup' },
+          { type: 'narrativeFlag', flag: 'franklin.parisWorked' },
+        ],
+        title: 'What She Handed On',
+        yearLabel: 'after',
+        image: {
+          setting: 'an attic laboratory with the work continuing, one empty chair at the bench',
+          year: 1959,
+          characters: [],
+          mood: 'continuing, warm, absent',
+          details: ['one empty chair', 'a running X-ray set', 'notebooks in a stack', 'a kettle on', 'sloped attic ceiling'],
+          alt: 'An attic laboratory in use with one empty chair at the bench.',
+        },
+        pages: [
+          {
+            id: 'chair',
+            narration:
+              'The set is still running upstairs. Somebody has taken over the humidity log and is keeping it exactly as she kept it, because that is how they were taught and because none of them can think of a better way.',
+          },
+          {
+            id: 'onward',
+            narration:
+              'The group goes on for decades and does work she would have wanted to argue about at lunch, loudly, over bread, in the manner of the one laboratory that ever entirely suited her.',
+          },
+          {
+            id: 'named',
+            narration:
+              'They name what they learned after the person who taught it, every time, in print, for the rest of their lives. It is not a prize. It is better documented than one.',
+            speaker: 'KLUG',
+            dialogue: 'She would have taken this apart in about forty minutes. I have spent thirty years trying to be the person who does that for somebody else.',
+          },
+        ],
+        historicalNote:
+          'Aaron Klug and others in Franklin’s Birkbeck group continued her virus research after her death in 1958; Klug received the Nobel Prize in Chemistry in 1982 and repeatedly credited her. Dialogue is dramatized.',
+      },
+      {
+        id: 'group',
+        conditions: [{ type: 'choiceWas', choiceKey: 'franklin-legacy-opening:group', choiceId: 'buildGroup' }],
+        title: 'The Laboratory She Had to Build',
+        yearLabel: 'after',
+        image: {
+          setting: 'an attic laboratory with the work continuing, one empty chair at the bench',
+          year: 1959,
+          characters: [],
+          mood: 'continuing, warm, absent',
+          details: ['one empty chair', 'a running X-ray set', 'notebooks in a stack', 'a kettle on', 'sloped attic ceiling'],
+          alt: 'An attic laboratory in use with one empty chair at the bench.',
+        },
+        pages: [
+          {
+            id: 'chair',
+            narration:
+              'The set is still running upstairs. Somebody has taken over the humidity log and is keeping it exactly as she kept it, because that is how they were taught and because none of them can think of a better way.',
+          },
+          {
+            id: 'onward',
+            narration:
+              'She never found the room she wanted — the one where four people shout at one photograph over bread and nobody goes home wounded. She was obliged, in the end, to build it, from a leaking attic and three salaries, and she did.',
+          },
+          {
+            id: 'named',
+            narration:
+              'They name what they learned after the person who taught it, every time, in print, for the rest of their lives. It is not a prize. It is better documented than one.',
+            speaker: 'KLUG',
+            dialogue: 'She would have taken this apart in about forty minutes. I have spent thirty years trying to be the person who does that for somebody else.',
+          },
+        ],
+        historicalNote:
+          'Franklin’s Birkbeck group continued her virus research after her death in 1958. This variant follows a life that never had the Paris laboratory and had to make its own. Dialogue is dramatized.',
+      },
+      {
+        id: 'other-life',
+        conditions: [
+          { type: 'choiceWas', choiceKey: 'franklin-formation-opening:decide', choiceId: 'duty' },
+          {
+            not: {
+              type: 'completedProjectCountAtLeast',
+              projectIds: [
+                'franklin-coal-carbon',
+                'franklin-xray-technique',
+                'franklin-dna-ab-forms',
+                'franklin-photograph-51',
+                'franklin-tobacco-mosaic-virus',
+                'franklin-rna-virology',
+              ],
+              count: 2,
+            },
+          },
+        ],
+        title: 'The Other Useful Life',
+        yearLabel: 'after',
+        image: {
+          setting: 'a committee room table with lists, a teacup and a closed chemistry textbook at the end',
+          year: 1958,
+          characters: [],
+          mood: 'reflective, honourable, wistful',
+          details: ['lists of names', 'a teacup', 'a closed textbook', 'stacked chairs', 'evening light through high windows'],
+          alt: 'A committee room table with lists of names, a teacup and a closed textbook at the far end.',
+        },
+        pages: [
+          {
+            id: 'good',
+            narration:
+              'A great deal of good was done, and it was done by somebody who was needed, and the names on those lists belonged to people who are alive because of the work. Her father was not wrong about any of that.',
+          },
+          {
+            id: 'cost',
+            narration:
+              'The textbook stayed on the end of the table. Certain photographs were never taken, by anyone, for years, and nobody knew to miss them.',
+          },
+          {
+            id: 'last',
+            narration:
+              'She never said she regretted it. She was not a woman who said such things aloud. She did keep the textbook.',
+          },
+        ],
+        historicalNote:
+          'A divergent close for a life in which Franklin gave her years to public service rather than research. Her family’s refugee resettlement work and her father’s preference for that path are documented; the outcome here is invented.',
+      },
+      {
         id: 'broad-life',
         conditions: [
           {
@@ -3309,72 +3706,6 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           'Franklin published significant work on coal and carbon microstructure, DNA fibre diffraction, and virus structure in a career of roughly sixteen working years. Her carbon papers are still cited in materials science.',
       },
       {
-        id: 'group',
-        conditions: [{ type: 'choiceWas', choiceKey: 'franklin-legacy-opening:group', choiceId: 'buildGroup' }],
-        title: 'What She Handed On',
-        yearLabel: 'after',
-        image: {
-          setting: 'an attic laboratory with the work continuing, one empty chair at the bench',
-          year: 1959,
-          characters: [],
-          mood: 'continuing, warm, absent',
-          details: ['one empty chair', 'a running X-ray set', 'notebooks in a stack', 'a kettle on', 'sloped attic ceiling'],
-          alt: 'An attic laboratory in use with one empty chair at the bench.',
-        },
-        pages: [
-          {
-            id: 'chair',
-            narration:
-              'The set is still running upstairs. Somebody has taken over the humidity log and is keeping it exactly as she kept it, because that is how they were taught and because none of them can think of a better way.',
-          },
-          {
-            id: 'onward',
-            narration:
-              'The group goes on for decades and does work she would have wanted to argue about at lunch, loudly, over bread, in the manner of the only laboratory that ever entirely suited her.',
-          },
-          {
-            id: 'named',
-            narration:
-              'They name what they learned after the person who taught it, every time, in print, for the rest of their lives. It is not a prize. It is better documented than one.',
-          },
-        ],
-        historicalNote:
-          'Aaron Klug and others in Franklin’s Birkbeck group continued her virus research after her death in 1958; Klug received the Nobel Prize in Chemistry in 1982 and repeatedly credited her.',
-      },
-      {
-        id: 'other-life',
-        conditions: [{ type: 'choiceWas', choiceKey: 'franklin-formation-opening:decide', choiceId: 'duty' }],
-        title: 'The Other Useful Life',
-        yearLabel: 'after',
-        image: {
-          setting: 'a committee room table with lists, a teacup and a closed chemistry textbook at the end',
-          year: 1958,
-          characters: [],
-          mood: 'reflective, honourable, wistful',
-          details: ['lists of names', 'a teacup', 'a closed textbook', 'stacked chairs', 'evening light through high windows'],
-          alt: 'A committee room table with lists of names, a teacup and a closed textbook at the far end.',
-        },
-        pages: [
-          {
-            id: 'good',
-            narration:
-              'A great deal of good was done, and it was done by somebody who was needed, and the names on those lists belonged to people who are alive because of the work. Her father was not wrong about any of that.',
-          },
-          {
-            id: 'cost',
-            narration:
-              'The textbook stayed on the end of the table. Certain photographs were never taken, by anyone, for years, and nobody knew to miss them.',
-          },
-          {
-            id: 'last',
-            narration:
-              'She never said she regretted it. She was not a woman who said such things aloud. She did keep the textbook.',
-          },
-        ],
-        historicalNote:
-          'A divergent close for a life in which Franklin gave her years to public service rather than research. Her family’s refugee resettlement work and her father’s preference for that path are documented; the outcome here is invented.',
-      },
-      {
         id: 'default',
         title: 'Small Handwriting, No Slope',
         yearLabel: 'after',
@@ -3395,7 +3726,9 @@ export const FRANKLIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'last',
             narration:
-              'Show me how you know it, she would say, and wait — not who told you. How you know it.',
+              'The people who trained under her all say the same thing about her, and all of them say it in the same words, because they are her words and she used them on every one of them.',
+            speaker: 'A MEMBER OF HER GROUP',
+            dialogue: 'Show me how you know it. Not who told you — how you know it.',
           },
         ],
         historicalNote:

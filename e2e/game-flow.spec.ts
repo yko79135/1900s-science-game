@@ -1,4 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+/** Reads through whatever story pages are showing, taking the first option at any choice. */
+async function readStory(page: Page) {
+  for (let i = 0; i < 200; i++) {
+    const storyPage = page.getByTestId('story-page');
+    if (!(await storyPage.isVisible().catch(() => false))) return;
+    const choice = page.locator('.story-choice').first();
+    if (await choice.isVisible().catch(() => false)) {
+      await choice.click();
+      continue;
+    }
+    await page.getByTestId('story-continue').click();
+  }
+}
 
 /**
  * Full playthrough smoke test: title → character select → move on the map →
@@ -12,6 +26,10 @@ test('a complete game can be played from character selection to final scoring', 
     if (msg.type() === 'error') consoleErrors.push(msg.text());
   });
   page.on('pageerror', (err) => consoleErrors.push(String(err)));
+
+  // The live-illustration function only exists on the deployed host; answer it locally
+  // the way a run without a gateway key would, so the archival artwork fallback is used.
+  await page.route('**/api/story-image', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
 
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'The Shape of a Century' })).toBeVisible();
@@ -33,6 +51,11 @@ test('a complete game can be played from character selection to final scoring', 
       await tutorialNext.click();
     }
   }
+
+  // The life opens on its prologue and first chapter scene.
+  await expect(page.getByTestId('story-page')).toBeVisible();
+  await expect(page.getByRole('heading', { name: /./ }).first()).toBeVisible();
+  await readStory(page);
 
   // Board loaded: Formation chapter, Warsaw.
   await expect(page.getByText('Marie Curie', { exact: true }).first()).toBeVisible();
@@ -60,27 +83,35 @@ test('a complete game can be played from character selection to final scoring', 
 
   // Perform actions: earn funds, then move on the map to Paris.
   await page.getByTestId('action-teach-or-earn').click();
+  await readStory(page);
   await page.getByTestId('map-location-paris').click();
   await expect(page.getByTestId('travel-confirm-btn')).toBeVisible();
   await page.getByTestId('travel-confirm-btn').click();
+  await readStory(page);
 
-  // End Formation chapter -> Education chapter reveals a Context Card.
+  // End Formation chapter: the closing scene plays, then the Education opening.
   await page.getByTestId('end-chapter-btn').click();
+  await readStory(page);
   const contextCardContinue = page.getByTestId('context-card-continue');
   if (await contextCardContinue.isVisible().catch(() => false)) {
     await contextCardContinue.click();
   }
+  await readStory(page);
   await expect(page.getByText(/Education/).first()).toBeVisible();
 
   // End Education chapter -> Entry chapter, where Curie's first projects unlock.
   await page.getByTestId('end-chapter-btn').click();
+  await readStory(page);
   await expect(page.getByText(/Entry into the Profession/).first()).toBeVisible();
 
   // Earn Funds (Paris's Sorbonne post pays well), then build up Evidence tokens via Experiment.
   await page.getByTestId('action-teach-or-earn').click();
+  await readStory(page);
   const experimentBtn = page.getByTestId('action-experiment-evidence');
   await experimentBtn.click();
+  await readStory(page);
   await experimentBtn.click();
+  await readStory(page);
 
   // Complete the "Systematic Radiation Measurement" project once eligible.
   const attemptBtn = page.getByTestId('attempt-project-curie-radiation-measurement');
@@ -88,10 +119,14 @@ test('a complete game can be played from character selection to final scoring', 
   // If still too early in the chapter, rest to advance the in-chapter year.
   const restBtn = page.getByTestId('action-rest');
   for (let i = 0; i < 3 && (await attemptBtn.isDisabled()); i++) {
-    if (await restBtn.isEnabled()) await restBtn.click();
+    if (await restBtn.isEnabled()) {
+      await restBtn.click();
+      await readStory(page);
+    }
   }
   if (await attemptBtn.isEnabled()) {
     await attemptBtn.click();
+    await readStory(page);
     await expect(page.getByText('Completed').first()).toBeVisible();
   }
 
@@ -99,6 +134,7 @@ test('a complete game can be played from character selection to final scoring', 
   // historical event (World War I) fires automatically during Curie's
   // Crisis chapter without any special handling required from the player.
   for (let i = 0; i < 10; i++) {
+    await readStory(page);
     const endBtn = page.getByTestId('end-chapter-btn');
     if (!(await endBtn.isVisible().catch(() => false))) break;
     if (await endBtn.isDisabled()) {
@@ -109,6 +145,7 @@ test('a complete game can be played from character selection to final scoring', 
     }
     if (await endBtn.isEnabled()) {
       await endBtn.click();
+      await readStory(page);
     }
     const cardBtn = page.getByTestId('context-card-continue');
     if (await cardBtn.isVisible().catch(() => false)) {

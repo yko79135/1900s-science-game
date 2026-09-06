@@ -52,7 +52,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
             speaker: 'HIS MOTHER',
             dialogue: 'Seven. Eleven. Thirteen. They do not arrive when you call them, David. That is the whole interest of them.',
             narration:
-              'She keeps a star chart and a list of primes in the same drawer, and she is the only person in this house who speaks to the boy as though he might one day be worth telling something.',
+              'His mother keeps a star chart and a list of primes in the same drawer, and she is the only person in this house who speaks to the boy as though he might one day be worth telling something.',
           },
         ],
         historicalNote:
@@ -907,6 +907,96 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'hilbert-relocation-gottingen',
+    characterId: 'hilbert',
+    chapterId: 'entry',
+    kind: 'relocation',
+    classification: 'Documented',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 76 },
+    once: true,
+    variants: [
+      {
+        id: 'early',
+        conditions: [
+          { type: 'yearAtLeast', year: 1895 },
+          { type: 'yearAtMost', year: 1896 },
+          { type: 'locationIs', locationId: 'gottingen' },
+        ],
+        title: 'A Workshop, Not a Department',
+        locationLabel: 'Göttingen',
+        yearLabel: '1895',
+        image: {
+          setting: 'a hall with a long wall of blackboards in a small town of steep tiled roofs',
+          year: 1895,
+          characters: ['hilbert'],
+          mood: 'arrival, appetite',
+          details: ['a long wall of blackboards', 'a removal crate still roped', 'steep tiled roofs', 'a lecture list', 'lime trees'],
+          alt: 'A hall with a long wall of blackboards and a roped removal crate standing in it.',
+        },
+        pages: [
+          {
+            id: 'arrive',
+            narration:
+              'Göttingen is a smaller town than Königsberg and a larger place. Klein has been assembling it for years the way a man assembles an orchestra, and the chair he has arranged is not a reward. It is a commission.',
+          },
+          {
+            id: 'plan',
+            narration:
+              'In his first month he stands up in a half-empty room — within fifteen years it will not hold the people who come — and tells them what the place is going to be.',
+            speaker: 'DAVID',
+            dialogue: 'Then we will not run a department here. We will run a workshop, and the doors stay open, and anyone who can do the work belongs in it.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'early' },
+          { type: 'theme', theme: 'institutionVsIndependence', amount: 1 },
+          { type: 'resources', effects: { network: 2, standing: 1 } },
+        ],
+        historicalNote:
+          'Hilbert was appointed professor at Göttingen in 1895, into a department Felix Klein was deliberately building into a world centre. The dialogue is dramatized.',
+      },
+      {
+        id: 'late',
+        conditions: [
+          { type: 'yearAtLeast', year: 1897 },
+          { type: 'locationIs', locationId: 'gottingen' },
+        ],
+        title: 'The Crates in the Hall',
+        locationLabel: 'Göttingen',
+        yearLabel: '1897–1899',
+        image: {
+          setting: 'an unfamiliar hallway with roped crates and a coat still on',
+          year: 1898,
+          characters: ['hilbert'],
+          mood: 'late start, unspent appetite',
+          details: ['roped crates', 'a coat still buttoned', 'an unswept floor', 'a lecture list for next term', 'evening light'],
+          alt: 'Roped removal crates standing in an unfamiliar hallway at dusk.',
+        },
+        pages: [
+          {
+            id: 'late',
+            narration:
+              'The crates come off the cart in the dark and stay roped in the hall for a week, because there is a term to start and nobody here has any idea yet what he intends. He is not a young man any more, and the century has almost run out on him.',
+          },
+          {
+            id: 'plan',
+            narration:
+              'Klein has been assembling this place for years the way a man assembles an orchestra. Hilbert walks the length of the blackboard wall on his first evening, alone, and says it out loud to see how it sounds.',
+            speaker: 'DAVID',
+            dialogue: 'Not a department. A workshop. The doors stay open and anyone who can do the work belongs in it — and we shall have to be quick about it.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'late' },
+          { type: 'resources', effects: { network: 1 } },
+        ],
+        historicalNote:
+          'Hilbert took up the Göttingen chair in 1895. This variant follows a life that reached it only at the end of the decade.',
+      },
+    ],
+  },
+  {
     id: 'hilbert-entry-closing',
     characterId: 'hilbert',
     chapterId: 'entry',
@@ -918,34 +1008,61 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
     variants: [
       {
         id: 'gottingen',
-        conditions: [{ type: 'locationIs', locationId: 'gottingen' }],
-        title: 'The Call',
+        conditions: [{ type: 'narrativeFlag', flag: 'hilbert.gottingen', value: 'early' }],
+        title: 'Four Years of Building',
         locationLabel: 'Göttingen',
-        yearLabel: '1895–1899',
+        yearLabel: '1899',
         image: {
-          setting: 'a small university town of steep roofs and a hall with a long wall of blackboards',
-          year: 1896,
+          setting: 'a lecture list for the coming term pinned above a wall of blackboards',
+          year: 1899,
           characters: ['hilbert'],
-          mood: 'arrival, appetite',
-          details: ['a long wall of blackboards', 'steep tiled roofs', 'a removal crate', 'a lecture list', 'lime trees'],
-          alt: 'A hall with a long wall of blackboards in a small university town of steep tiled roofs.',
+          mood: 'momentum, ground gained',
+          details: ['a lecture list for next term', 'a wall of blackboards', 'proof sheets of a book', 'chalk in a tin', 'autumn light'],
+          alt: 'A lecture list pinned above a long wall of blackboards, with book proofs on the ledge.',
         },
         pages: [
           {
-            id: 'arrive',
+            id: 'list',
             narration:
-              'Göttingen is a smaller town than Königsberg and a larger place. Klein has been assembling it for years the way a man assembles an orchestra, and the chair he has arranged is not a reward. It is a commission.',
+              'Four years of it now, and the list for next term has three seminars on it that did not exist in this town when he arrived. The workshop he described to a half-empty room is a place with a queue outside it.',
           },
           {
-            id: 'plan',
-            speaker: 'DAVID',
-            dialogue: 'Then we will not run a department here. We will run a workshop, and the doors stay open, and anyone who can do the work belongs in it.',
+            id: 'proofs',
             narration:
-              'In his first month he stands up in a half-empty room — within fifteen years it will not hold the people who come — and tells them what the place is going to be.',
+              'The proofs of the geometry book are on the ledge with the chalk. It has taken Euclid apart to the last hinge, and it has taught him that the interesting sentence is never the one that closes a subject. The century has one year left to run.',
           },
         ],
         historicalNote:
-          'Hilbert was appointed professor at Göttingen in 1895, in a department Felix Klein was deliberately building into a world centre. The dialogue is dramatized.',
+          'Hilbert built up the Göttingen mathematical school from his 1895 appointment; the Foundations of Geometry appeared in 1899.',
+      },
+      {
+        id: 'late-call',
+        conditions: [{ type: 'narrativeFlag', flag: 'hilbert.gottingen' }],
+        title: 'Arrived Late',
+        locationLabel: 'Göttingen',
+        yearLabel: '1899',
+        image: {
+          setting: 'a new office with the crates only half unpacked and a term already started',
+          year: 1899,
+          characters: ['hilbert'],
+          mood: 'impatience with lost time',
+          details: ['half-unpacked crates', 'books stacked on the floor', 'an untouched blackboard', 'a lecture list', 'evening light'],
+          alt: 'Half-unpacked crates and books stacked on the floor of a new office.',
+        },
+        pages: [
+          {
+            id: 'crates',
+            narration:
+              'Half the books are still in the crates when the term ends. He has been here months, not years, and the town has not yet worked out what he is for.',
+          },
+          {
+            id: 'ahead',
+            narration:
+              'The century has one year left to run. He has a decade of beginnings in a drawer and a wall of blackboards he has barely written on, and for the first time in his life he resents the arithmetic of it.',
+          },
+        ],
+        historicalNote:
+          'Hilbert reached Göttingen in 1895. This variant follows a life that got there at the very end of the decade.',
       },
       {
         id: 'stayed',
@@ -1248,6 +1365,11 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
             dialogue: 'A subject is alive as long as it has an abundance of problems. Take these. They are not mine after today.',
             narration:
               'The hall has not moved in fifty minutes. He comes to the end of the list and does not finish with a peroration.',
+          },
+          {
+            id: 'home',
+            narration:
+              'He is home before the end of September. The first thing he does with the second week of term is chalk the sixth problem along the garden wall where the students can get at it. Paris was a fortnight; the list is the rest of his life.',
           },
         ],
         effects: [
@@ -1915,7 +2037,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           {
             id: 'after',
             narration:
-              'Somebody laughs before he can stop himself and it goes very badly for the room. The vote is lost anyway; the sentence is not. It takes four more years and the fall of an empire before the habilitation is granted. She lectures the whole time regardless, and the students come, and by the end nobody can quite remember what the objection had been.',
+              'Somebody laughs before he can stop himself, and it goes very badly for the room. The vote is lost anyway; the sentence is not.',
           },
         ],
         effects: [
@@ -1947,14 +2069,14 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           {
             id: 'notice',
             narration:
-              'The printed list says the course is his. Everyone who attends knows within one minute that it is not. She will use the arrangement for four years, and the seminar it produces will be the best thing in Germany, and his name will be on the door.',
+              'The printed list says the course is his. Everyone who attends knows within one minute that it is not. The statute is satisfied and the mathematics gets done, and both of those are true at once, and neither of them is comfortable.',
           },
           {
             id: 'said',
             speaker: 'DAVID',
             dialogue: 'It is a shabby arrangement and I am ashamed of it. It is also the only door in the building that opens. Use it.',
             narration:
-              'He tells her the arrangement himself, in his own office, because it is not a thing to put in a letter.',
+              'He tells her the arrangement himself, in his own office, because it is not a thing to put in a letter, and he does not dress it up.',
           },
         ],
         effects: [
@@ -2089,6 +2211,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'late' },
           { type: 'relationship', characterId: 'noether', familiarity: 2, respect: 2, flag: 'invariants' },
           { type: 'resources', effects: { theory: 1, network: 1 } },
         ],
@@ -2130,6 +2253,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'late' },
           { type: 'relationship', characterId: 'noether', familiarity: 1, respect: 2, flag: 'invariants' },
           { type: 'resources', effects: { theory: 1 } },
         ],
@@ -2141,6 +2265,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
         conditions: [
           { type: 'yearAtLeast', year: 1922 },
           { type: 'projectCompleted', projectId: 'hilbert-recruits-noether' },
+          { not: { type: 'narrativeFlag', flag: 'hilbert.awayForIt' } },
         ],
         title: 'Reports of a Seminar',
         yearLabel: '1922–1925',
@@ -2156,7 +2281,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           {
             id: 'post',
             narration:
-              'He fought four years to get her a room and a lecture list, and now he is not in the building where the lecturing happens. What reaches him is second-hand: offprints, a student’s enthusiastic letter, the seminar described by people who were there.',
+              'He made room for her — the letters, the committee mornings, the four years of it — and now he is not in the building where the lecturing happens. What reaches him is second-hand: offprints, a student’s enthusiastic letter, the seminar described by people who were there.',
           },
           {
             id: 'theorem',
@@ -2224,7 +2349,11 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
     once: true,
     variants: [
       {
-        id: 'default',
+        id: 'secured-here',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'hilbert.bathhouse' },
+          { type: 'locationIs', locationId: 'gottingen' },
+        ],
         title: 'Her Own Name on the List',
         yearLabel: '1919',
         image: {
@@ -2248,9 +2377,9 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           },
           {
             id: 'said',
+            narration: 'Someone in the corridor calls it generous of him, and he turns round to correct them. Afterwards he goes to the first lecture and sits at the back like a student, taking notes.',
             speaker: 'DAVID',
             dialogue: 'It is not a favour and it never was. We are simply no longer refusing to use what we have.',
-            narration: 'Someone in the corridor calls it generous of him, and he turns round to correct them. Afterwards he goes to the first lecture and sits at the back like a student, taking notes.',
           },
         ],
         effects: [
@@ -2260,6 +2389,84 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Noether received her habilitation at Göttingen in 1919 after sustained advocacy by Hilbert and Klein, and later a small salaried position. The dialogue is dramatized.',
+      },
+      {
+        id: 'secured-away',
+        conditions: [{ type: 'narrativeFlag', flag: 'hilbert.bathhouse' }],
+        title: 'The Small Type, Described',
+        yearLabel: '1919',
+        image: {
+          setting: 'a desk far from the corridor it reads about, one letter opened flat',
+          year: 1919,
+          characters: ['hilbert'],
+          mood: 'won, and not present for it',
+          details: ['a letter opened flat', 'a paperknife', 'an empty chair opposite', 'a stamp book', 'spring light through a strange window'],
+          alt: 'A letter opened flat on a desk beside a paperknife and an empty chair.',
+        },
+        pages: [
+          {
+            id: 'letter',
+            narration:
+              'The letter describes the corridor for him: the new list, her name on it, printed the same size as everyone else’s. Four years, a lost war, a new constitution and a great many committee mornings, and he will never see the piece of small type it took.',
+          },
+          {
+            id: 'cost',
+            narration:
+              'It has cost him standing with men whose opinion used to matter to him, and he finds he does not miss them. It has cost her four years she is never getting back, and she does not mention it in the letter, which is worse.',
+          },
+          {
+            id: 'said',
+            narration: 'He writes back the same evening, two lines, and then sits for a while with the pen still in his hand.',
+            speaker: 'DAVID',
+            dialogue: 'It is not a favour and it never was. We are simply no longer refusing to use what we have — and I should like to have been in the corridor.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'hilbert.noetherSecured', value: true },
+          { type: 'flag', flag: 'hilbert.awayForIt', value: true },
+          { type: 'relationship', characterId: 'noether', familiarity: 1, respect: 2, flag: 'habilitation-granted' },
+          { type: 'resources', effects: { network: 1, standing: 1 } },
+        ],
+        historicalNote:
+          'Noether’s 1919 habilitation followed advocacy by Hilbert and Klein. This variant follows a life that did the arranging from a distance.',
+      },
+      {
+        id: 'arrival',
+        title: 'She Comes to Göttingen',
+        yearLabel: '1915–1916',
+        image: {
+          setting: 'a lecture room being opened up for a term nobody expected to run',
+          year: 1915,
+          characters: ['hilbert'],
+          mood: 'a door wedged open, provisionally',
+          details: ['a trunk in a corridor', 'a fresh chalk tray', 'a printed course announcement', 'wartime notices on a wall', 'cold light'],
+          alt: 'A trunk standing in a corridor beside a lecture room with a fresh chalk tray.',
+        },
+        pages: [
+          {
+            id: 'invitation',
+            narration:
+              'The invitation is his and the committee mornings are his and the arrangement, when it is made, is nobody’s to be proud of. But she comes, with a trunk and a folder of invariants, and the term begins.',
+          },
+          {
+            id: 'unfinished',
+            narration:
+              'She is not paid. She has no title anyone will print. What she has is a room with a blackboard in it, and six young men in the front row who work out inside a fortnight that she is the best mathematician any of them will meet.',
+          },
+          {
+            id: 'said',
+            narration: 'Somebody asks him, kindly, whether this is really going to be worth the trouble it is about to cause.',
+            speaker: 'DAVID',
+            dialogue: 'It is going to cause a great deal of trouble, and she is going to stay. Those are two separate sentences and I mean both of them.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'hilbert.noetherSecured', value: true },
+          { type: 'relationship', characterId: 'noether', familiarity: 2, respect: 2, flag: 'came-to-gottingen' },
+          { type: 'resources', effects: { network: 2 } },
+        ],
+        historicalNote:
+          'Noether came to Göttingen in 1915 at Hilbert’s and Klein’s invitation, lectured without pay or title, and was not granted habilitation until 1919. The dialogue is dramatized.',
       },
     ],
   },
@@ -2313,6 +2520,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'late' },
           { type: 'relationship', characterId: 'einstein', familiarity: 2, respect: 2, tension: 1, flag: 'field-equations' },
           { type: 'resources', effects: { theory: 1, exposure: 1 } },
         ],
@@ -2358,6 +2566,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'hilbert.gottingen', value: 'late' },
           { type: 'relationship', characterId: 'einstein', familiarity: 1, respect: 2, tension: 1, flag: 'field-equations' },
           { type: 'resources', effects: { theory: 1 } },
         ],
@@ -2388,7 +2597,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
             speaker: 'DAVID',
             dialogue: 'We have the whole apparatus of curvature sitting on the shelf and not one physicist in Germany has walked through that door to ask about gravity. Somebody will. Eventually somebody always does.',
             narration:
-              'The pages go back in the drawer with the others, and what he says to the empty room turns out to be true — only not in the year he expects, and by then the shelf has a great deal of dust on it.',
+              'What he says to the empty room turns out to be true — only not in the year he expects, and by then the shelf has a great deal of dust on it.',
           },
         ],
         effects: [{ type: 'resources', effects: { theory: 1, exposure: -1 } }],
@@ -2769,7 +2978,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
       {
         id: 'school',
         conditions: [
-          { type: 'locationIs', locationId: 'gottingen' },
+          { type: 'narrativeFlag', flag: 'hilbert.gottingen' },
           { type: 'projectCompleted', projectId: 'hilbert-recruits-noether' },
         ],
         title: 'The Best Two Hundred Yards in the World',
@@ -3190,6 +3399,7 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
       {
         id: 'full',
         conditions: [
+          { type: 'narrativeFlag', flag: 'hilbert.gottingen' },
           {
             type: 'completedProjectCountAtLeast',
             projectIds: [
@@ -3228,6 +3438,47 @@ export const HILBERT_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Hilbert died in Göttingen in February 1943 and few people attended the funeral; his gravestone carries his Königsberg motto.',
+      },
+      {
+        id: 'home',
+        conditions: [
+          {
+            type: 'completedProjectCountAtLeast',
+            projectIds: [
+              'hilbert-finiteness-theorem',
+              'hilbert-foundations-of-geometry',
+              'hilbert-problems',
+              'hilbert-integral-equations',
+              'hilbert-recruits-noether',
+              'hilbert-formalist-program',
+            ],
+            count: 4,
+          },
+        ],
+        title: 'Over Three of the Seven',
+        yearLabel: '1943',
+        image: {
+          setting: 'a frozen river under low bridges in a Baltic city, a small procession on the far bank',
+          year: 1943,
+          characters: ['hilbert'],
+          mood: 'immense quiet',
+          details: ['ice on the river', 'low stone bridges', 'a handful of figures', 'snow on a quay', 'grey sky'],
+          alt: 'A frozen river under low stone bridges with a few figures on the far bank.',
+        },
+        pages: [
+          {
+            id: 'funeral',
+            narration:
+              'A dozen people come. He was born eight minutes from the hall he last lectured in, and the walk to the cemetery goes over three of the seven bridges, which is not the shortest way and is the one he would have taken.',
+          },
+          {
+            id: 'stone',
+            narration:
+              'The stone, when it is cut, carries six words and no titles. We must know. We will know. Half the world is at war and the sentence sits there on a slab beside a river that is doing arithmetic with barges, waiting, in the imperative.',
+          },
+        ],
+        historicalNote:
+          'Hilbert died in February 1943 with very few mourners, and his gravestone carries the Königsberg motto. This variant follows a life that never left his birthplace.',
       },
       {
         id: 'default',

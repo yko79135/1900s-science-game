@@ -26,6 +26,7 @@ export const hilbertContent: CharacterContent = {
       { locationId: 'gottingen', year: 1895, note: 'Appointed professor at Göttingen.' },
       { locationId: 'gottingen', year: 1899, note: 'Publishes Foundations of Geometry.' },
       { locationId: 'paris', year: 1900, note: 'Presents his list of unsolved problems at the International Congress of Mathematicians.' },
+      { locationId: 'gottingen', year: 1901, note: 'Returns from the Paris congress to his chair at Göttingen.' },
       { locationId: 'gottingen', year: 1915, note: 'Recruits Emmy Noether to Göttingen and works in parallel with Einstein on general relativity.' },
       { locationId: 'gottingen', year: 1930, note: 'Retires, declaring "We must know, we will know" as his epitaph-to-be.' },
       { locationId: 'gottingen', year: 1943, note: 'Dies in a Göttingen emptied of the mathematical community he built.' },

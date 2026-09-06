@@ -454,7 +454,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'johnson.takesEverything', value: true },
                   { type: 'theme', theme: 'curiosityVsCaution', amount: -1 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, theory: 1 } },
                 ],
               },
               {
@@ -521,7 +521,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'johnson.takesEverything', value: true },
                   { type: 'theme', theme: 'curiosityVsCaution', amount: -1 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, theory: 1 } },
                 ],
               },
               {
@@ -1062,6 +1062,11 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
             narration:
               'The cost is not in the lecture. It is in the corridor afterwards, and the walk to the rooms she is permitted to rent, and the arithmetic she does every single day about which of a hundred small things is worth saying out loud.',
           },
+          {
+            id: 'leaves',
+            narration:
+              'The term ends in the spring and she does not enrol for the next one. There is a marriage, and a child coming, and the plain arithmetic of a stipend that pays nothing against a teaching post that pays a salary. She has never once pretended a sum said something other than what it said.',
+          },
         ],
         effects: [
           { type: 'markContextCardSeen', cardId: 'johnson-card-1939-integration' },
@@ -1109,6 +1114,11 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
             id: 'go',
             narration:
               'She goes. The state has opened a door the width of three people and she intends to walk through the middle of it with her shoulders square and her arithmetic correct to the last decimal place.',
+          },
+          {
+            id: 'leaves',
+            narration:
+              'The term ends in the spring and she does not enrol for the next one. There is a marriage, and a child coming, and the plain arithmetic of a stipend that pays nothing against a teaching post that pays a salary. She has never once pretended a sum said something other than what it said.',
           },
         ],
         effects: [
@@ -1590,6 +1600,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
             ],
           },
         ],
+        effects: [{ type: 'flag', flag: 'johnson.hired', value: true }],
         historicalNote:
           'Johnson joined NACA Langley in June 1953 in the segregated West Area Computing unit and was loaned within about two weeks to the Flight Research Division; the temporary assignment became permanent. The section head and dialogue are dramatized.',
       },
@@ -1609,7 +1620,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'notice',
             narration:
-              'The notice has been folded and unfolded enough times that it is soft at the creases. A laboratory in Virginia, hand computing, women wanted who are quick and do not make mistakes.',
+              'The notice has been folded and unfolded enough times that it is soft at the creases and beginning to part along one of them. She has stopped reading it. She takes it out to look at the shape of it, the way you check that a key is still in your pocket.',
           },
           {
             id: 'ready',
@@ -1630,6 +1641,140 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'johnson-the-answer',
+    characterId: 'johnson',
+    chapterId: 'breakthrough',
+    kind: 'personal',
+    classification: 'Plausible',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 97 },
+    once: true,
+    variants: [
+      {
+        id: 'yes',
+        conditions: [
+          { any: [{ type: 'narrativeFlag', flag: 'johnson.hired' }, { type: 'locationIs', locationId: 'hamptonLangley' }] },
+          { type: 'yearAtLeast', year: 1954 },
+          { type: 'yearAtMost', year: 1957 },
+        ],
+        title: 'The Letter That Said Yes',
+        yearLabel: '1953',
+        image: {
+          setting: 'a government envelope opened at a kitchen table, early 1950s',
+          year: 1953,
+          characters: ['johnson'],
+          mood: 'level, disbelieving, practical',
+          details: ['a franked government envelope', 'a kitchen table cleared for it', 'three school satchels by a door', 'a calendar with a date circled'],
+          alt: 'An opened franked government envelope lying on a cleared kitchen table.',
+        },
+        pages: [
+          {
+            id: 'envelope',
+            narration:
+              'The envelope is thin, which she has been told means no, and it is franked by a government she has never once been employed by. She reads it standing at the table with her coat still on and then reads the salary line twice, which is the only part she doubts.',
+          },
+          {
+            id: 'daughters',
+            narration:
+              'Three daughters are told at supper that they are moving to Virginia because their mother has been offered work doing arithmetic. The middle one wants to know whether it is the kind of arithmetic she does with them or a different kind.',
+            speaker: 'HER MIDDLE DAUGHTER',
+            dialogue: 'Is it hard arithmetic? Harder than ours?',
+          },
+          {
+            id: 'answer',
+            narration:
+              'She says it is the same arithmetic, only somebody is finally paying for it, and this is true and also the largest understatement she will make all decade. Then she washes up, in order, smallest plate to largest, because none of them can be missed.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { funds: 1, wellbeing: 1 } }],
+        historicalNote:
+          'Johnson applied to NACA after learning in 1952 that Langley was hiring Black women mathematicians, was offered a post, and moved her family to Virginia in 1953. The supper table and the dialogue are dramatized.',
+      },
+      {
+        id: 'silence',
+        conditions: [
+          { type: 'choiceWas', choiceKey: 'johnson-word-from-langley:apply', choiceId: 'apply' },
+          { type: 'yearAtLeast', year: 1954 },
+          { type: 'yearAtMost', year: 1957 },
+        ],
+        title: 'The Silence That Became an Answer',
+        yearLabel: 'the middle fifties',
+        image: {
+          setting: 'a hall table where the post is left, mid-1950s',
+          year: 1955,
+          characters: ['johnson'],
+          mood: 'patient, hardening, unbowed',
+          details: ['a small stack of post with nothing official in it', 'a hall table with a runner', 'a coat on a hook', 'a drawer standing slightly open'],
+          alt: 'A small stack of ordinary post on a hall table beside a slightly open drawer.',
+        },
+        pages: [
+          {
+            id: 'counting',
+            narration:
+              'Fourteen days to arrive. Twenty for a person to read it. Thirty, being generous, for a person to write back. She stopped counting somewhere in the second year, which for her is the same as shutting a door.',
+          },
+          {
+            id: 'friend',
+            narration:
+              'A woman at church who knows what she applied for asks about it once, in the kindest possible way, and gets an answer that ends the subject for good.',
+            speaker: 'KATHERINE',
+            dialogue: 'They have my letter. I know what is in it and I know it is correct. The rest of it was never mine to do.',
+          },
+          {
+            id: 'drawer',
+            narration:
+              'The copy she kept goes into the drawer with the register and the clipping. She is not bitter about it, which costs her something; bitterness would at least have been a use for the feeling.',
+          },
+        ],
+        effects: [
+          { type: 'flag', flag: 'johnson.neverAnswered', value: true },
+          { type: 'resources', effects: { wellbeing: -1 } },
+        ],
+        historicalNote:
+          'A divergence: Johnson’s 1952 application to NACA was accepted and she began at Langley in June 1953. Black women applicants elsewhere frequently received no reply at all.',
+      },
+      {
+        id: 'unsent',
+        conditions: [
+          { type: 'yearAtLeast', year: 1954 },
+          { type: 'yearAtMost', year: 1957 },
+        ],
+        title: 'The Envelope in the Drawer',
+        yearLabel: 'the middle fifties',
+        image: {
+          setting: 'an addressed envelope lying unsent in a schoolroom desk drawer, mid-1950s',
+          year: 1955,
+          characters: ['johnson'],
+          mood: 'unresolved, private, steady',
+          details: ['an addressed but unstamped envelope', 'a class register', 'a jar of pencils', 'a drawer half pulled out'],
+          alt: 'An addressed, unstamped envelope lying in a schoolroom desk drawer beside a register.',
+        },
+        pages: [
+          {
+            id: 'drawer',
+            narration:
+              'It is addressed. It has been addressed for two years. The stamp is in the same drawer, in a small tin with paper clips, and the two of them have never once been in her hand at the same time.',
+          },
+          {
+            id: 'reason',
+            narration:
+              'There are thirty-one children who expect her in September, a household that runs on a teacher’s salary, and a drive to Virginia that would cost more than she has ever spent on herself. All three of those are true. So is the envelope.',
+            speaker: 'KATHERINE',
+            dialogue: 'Next year. When the youngest is bigger and the money is easier. It will still be arithmetic next year.',
+          },
+          {
+            id: 'still',
+            narration:
+              'It is the only sum she has ever knowingly refused to finish, and she knows that too, and she shuts the drawer with her hip because her hands are full of somebody else’s spelling papers.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { funds: 1, wellbeing: -1 } }],
+        historicalNote:
+          'A divergence from the documented life, in which Johnson applied in 1952 and joined NACA the following year.',
+      },
+    ],
+  },
+  {
     id: 'johnson-card-west-computing',
     characterId: 'johnson',
     kind: 'historicalEvent',
@@ -1642,7 +1787,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'west-area',
         conditions: [
-          { type: 'locationIs', locationId: 'hamptonLangley' },
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
           { type: 'yearAtLeast', year: 1954 },
           { type: 'yearAtMost', year: 1959 },
         ],
@@ -1719,6 +1864,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'from-outside',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1954 },
           { type: 'yearAtMost', year: 1959 },
         ],
@@ -1771,7 +1917,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'section-head',
         conditions: [
-          { type: 'locationIs', locationId: 'hamptonLangley' },
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
           { type: 'yearAtLeast', year: 1954 },
           { type: 'yearAtMost', year: 1958 },
         ],
@@ -1802,7 +1948,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'lend',
             narration:
-              'It is Vaughan who lends Katherine out to the engineers and does not chase her back. Every woman in that building understands the trade: one of us in that building is worth more than all of us together in this one.',
+              'The reason Katherine ever sets foot in the engineers’ building is that Vaughan lends her out and then does not chase her back. Every woman in the west unit understands the trade: one of us over there is worth more than all of us together in here.',
           },
         ],
         effects: [
@@ -1815,6 +1961,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'no-one-above',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1954 },
           { type: 'yearAtMost', year: 1958 },
         ],
@@ -1842,7 +1989,9 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'becomes',
             narration:
-              'So she becomes careful in a particular way — the way of a person who cannot afford one public mistake — and she teaches it, eventually, to her daughters, who did not ask.',
+              'So she becomes careful in a particular way — the way of a person who cannot afford one public mistake — and she teaches it, eventually, to her daughters, who did not ask to be taught it.',
+            speaker: 'KATHERINE',
+            dialogue: 'Do it twice. Not because you are a girl. Because there is nobody standing behind you to catch it.',
           },
         ],
         effects: [{ type: 'resources', effects: { wellbeing: -1 } }],
@@ -1911,7 +2060,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'the-machine-arrives',
         conditions: [
-          { type: 'locationIs', locationId: 'hamptonLangley' },
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
           { type: 'yearAtLeast', year: 1955 },
           { type: 'yearAtMost', year: 1959 },
         ],
@@ -1950,6 +2099,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'in-a-magazine',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1955 },
           { type: 'yearAtMost', year: 1959 },
         ],
@@ -2017,7 +2167,9 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'hall',
             narration:
-              'Her husband is ill in the way that does not turn around. It takes most of a year and she does not miss a working day in it, which is not heroism; it is that the household needs the wage and the daughters need the ordinary morning.',
+              'Her husband is ill in the way that does not turn around. It takes most of a year and she does not miss a working day in it, which is not heroism; it is that the household needs the wage and the daughters need the ordinary morning. She says the same seven sentences at the same hour every day and this is one of them.',
+            speaker: 'KATHERINE',
+            dialogue: 'You will get up, you will eat, and you will go to school. I will carry the rest of it. That is the arrangement.',
           },
           {
             id: 'nights',
@@ -2092,7 +2244,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
               { type: 'choiceWas', choiceKey: 'johnson-breakthrough-opening:assignment', choiceId: 'ask' },
             ],
           },
-          { type: 'locationIs', locationId: 'hamptonLangley' },
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
           { type: 'yearAtLeast', year: 1959 },
           { type: 'yearAtMost', year: 1961 },
         ],
@@ -2133,7 +2285,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'credited',
         conditions: [
-          { type: 'locationIs', locationId: 'hamptonLangley' },
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
           { type: 'yearAtLeast', year: 1959 },
           { type: 'yearAtMost', year: 1961 },
         ],
@@ -2172,6 +2324,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'unwritten',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1959 },
           { type: 'yearAtMost', year: 1961 },
         ],
@@ -2194,7 +2347,9 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'answer',
             narration:
-              'It takes her four evenings and it comes out clean. There is no cover to put it on, no distribution list, no pigeonhole. There is a pad on a kitchen table, and it is correct, and correctness does not require an audience to be true.',
+              'It takes her four evenings and it comes out clean. There is no cover to put it on, no distribution list and no pigeonhole, and when somebody at the table asks her who on earth she is doing it for, she does not have to think about the answer.',
+            speaker: 'KATHERINE',
+            dialogue: 'For me. It is correct. A thing does not stop being correct because nobody came to look at it.',
           },
           {
             id: 'drawer',
@@ -2249,6 +2404,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'johnson.hired', value: true },
           { type: 'flag', flag: 'johnson.inFlightResearch', value: true },
           { type: 'resources', effects: { standing: 2, network: 1 } },
         ],
@@ -2285,6 +2441,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           },
         ],
         effects: [
+          { type: 'flag', flag: 'johnson.hired', value: true },
           { type: 'flag', flag: 'johnson.inFlightResearch', value: true },
           { type: 'resources', effects: { standing: 2, network: 1 } },
         ],
@@ -2325,7 +2482,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'ready',
             narration:
-              'She is already in the room where this is being worked out, at a desk somebody once loaned her for two weeks. Ahead of her is a decade in which the arithmetic will decide whether men come home. She sharpens a pencil and pulls the tables across.',
+              'She is already in the room where this is being worked out, at a desk in a building she was never originally hired into. Ahead of her is a decade in which the arithmetic will decide whether men come home. She sharpens a pencil and pulls the tables across.',
           },
         ],
         historicalNote:
@@ -2417,7 +2574,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'johnson.checksTwice', value: true },
                   { type: 'theme', theme: 'precisionVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, computation: 1 } },
                 ],
               },
               {
@@ -2445,7 +2602,9 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       },
       {
         id: 'langley',
-        conditions: [{ type: 'locationIs', locationId: 'hamptonLangley' }],
+        conditions: [
+          { any: [{ type: 'locationIs', locationId: 'hamptonLangley' }, { type: 'narrativeFlag', flag: 'johnson.hired' }] },
+        ],
         title: 'A Man Will Be Sitting On It',
         locationLabel: 'Hampton / Langley',
         yearLabel: '1961',
@@ -2486,7 +2645,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
                 effects: [
                   { type: 'flag', flag: 'johnson.checksTwice', value: true },
                   { type: 'theme', theme: 'precisionVsSpeed', amount: 2 },
-                  { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
+                  { type: 'resources', effects: { standing: 1, wellbeing: -1, computation: 1 } },
                 ],
               },
               {
@@ -2645,8 +2804,52 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           'Alan Shepard’s Freedom 7 suborbital flight in May 1961 lasted about fifteen minutes and splashed down close to the predicted point. Johnson’s trajectory work supported it. The operations-room detail is dramatized.',
       },
       {
+        id: 'inside-not-hers',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'johnson.hired' },
+          { type: 'yearAtLeast', year: 1962 },
+          { type: 'yearAtMost', year: 1963 },
+        ],
+        title: 'Somebody Else’s Circle',
+        yearLabel: '1961',
+        image: {
+          setting: 'a research building corridor on the morning of a launch, radios audible through open doors, 1961',
+          year: 1961,
+          characters: ['johnson'],
+          mood: 'proximate, professional, slightly aside',
+          details: ['open office doors along a corridor', 'a radio on a filing cabinet', 'a chart taped up at the far end', 'paper cups on a window ledge'],
+          alt: 'A corridor of open office doors with a chart taped up at the far end and paper cups on a ledge.',
+        },
+        pages: [
+          {
+            id: 'corridor',
+            narration:
+              'Every door on the corridor is open and every radio in the building is on the same station, and the whole place stands in the doorways with its arms folded. The chart at the end of the corridor has a circle pencilled offshore. She did not draw it.',
+          },
+          {
+            id: 'colleague',
+            narration:
+              'The man beside her did some of the work and is not enjoying the wait, and says the thing people say when they have handed a number to somebody who is going to sit on top of it.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Fifteen minutes. Fifteen minutes and we find out whether we can do arithmetic.',
+          },
+          {
+            id: 'inside',
+            narration:
+              'He comes down inside the circle. The corridor makes a noise and then goes back to work. She stands a moment longer than the others, looking at a piece of paper somebody else produced, thinking about how she would have set it out and which line she would have checked again.',
+          },
+        ],
+        effects: [
+          { type: 'markContextCardSeen', cardId: 'johnson-card-1961-shepard' },
+          { type: 'resources', effects: { network: 1 } },
+        ],
+        historicalNote:
+          'The Freedom 7 flight and its accurate splashdown are documented; in the record Johnson computed that trajectory. This variant belongs to a life inside the laboratory whose hands were on other problems that year.',
+      },
+      {
         id: 'watched',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1962 },
           { type: 'yearAtMost', year: 1963 },
         ],
@@ -2664,12 +2867,14 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'watch',
             narration:
-              'It goes up on a Friday morning and the whole country stops, and she stops with it, standing in front of a television with a cup going cold in her hand. Fifteen minutes. He is in the water almost before she has finished being frightened.',
+              'It goes up on a Friday morning and the whole country stops, and she stops with it, standing in front of a television with a cup going cold in her hand. Fifteen minutes. He is in the water almost before she has finished being frightened. Her youngest wants to know how they knew where to look for him.',
+            speaker: 'HER YOUNGEST DAUGHTER',
+            dialogue: 'How did they find him so fast? The ocean is the whole bottom of the map.',
           },
           {
             id: 'numbers',
             narration:
-              'The announcer says the capsule landed within a few miles of the predicted point, and she thinks: somebody worked that out. Somebody sat with the tables and did it backwards from the ocean. She knows exactly how that is done and she has never been asked.',
+              'So she explains it, at the sink, with a cup and a saucer and the flat of her hand for the Earth turning underneath: you do not aim at the ocean, you aim at where the ocean will be. It takes four minutes and she is entirely accurate and there is nobody in the room who needed to hear it.',
           },
           {
             id: 'proud',
@@ -2702,6 +2907,8 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             any: [
               { type: 'projectCompleted', projectId: 'johnson-freedom-7-trajectory' },
+              { type: 'projectCompleted', projectId: 'johnson-glenn-verification' },
+              { type: 'narrativeFlag', flag: 'johnson.hired' },
               { type: 'choiceWas', choiceKey: 'johnson-crisis-opening:pressure', choiceId: 'check' },
             ],
           },
@@ -2734,7 +2941,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'accepts',
             narration:
-              'She is forty-three years old and has been a mathematician for twenty-five of them, and the word "girl" travels the length of the corridor to reach her. She notices it. She sets it down. Then she asks for the printout, and clears the desk, and begins.',
+              'She is forty-three years old and has been a mathematician for twenty-five of them, and the word “girl” travels the length of the corridor to reach her. She notices it. She sets it down. Then she asks for the printout, and clears the desk, and begins.',
           },
         ],
         effects: [
@@ -2748,6 +2955,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
       {
         id: 'heard-about-it',
         conditions: [
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
           { type: 'yearAtLeast', year: 1962 },
           { type: 'yearAtMost', year: 1963 },
         ],
@@ -2897,7 +3105,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'file',
             narration:
-              'One folder closed, one folder not yet opened, squared to the same edge of the desk because she cannot leave a row crooked. The flight she computed came down inside the circle. That is the whole of what she will claim.',
+              'One folder closed, one folder not yet opened, squared to the same edge of the desk the way she has squared every row since she was six. The flight she computed came down inside the circle. That is the whole of what she will claim.',
           },
           {
             id: 'next',
@@ -2907,6 +3115,62 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
         ],
         historicalNote:
           'Johnson’s trajectory work supported the 1961 Freedom 7 flight; the orbital verification for Glenn followed in 1962.',
+      },
+      {
+        id: 'asked-for',
+        conditions: [{ type: 'narrativeFlag', flag: 'johnson.askedByName' }],
+        title: 'They Learn to Say Her Name',
+        yearLabel: '1963',
+        image: {
+          setting: 'a corridor noticeboard with a typed distribution list pinned to it, about 1963',
+          year: 1963,
+          characters: ['johnson'],
+          mood: 'changed, understated, watchful',
+          details: ['a typed distribution list pinned at eye height', 'a wire tray of mission folders', 'a telephone on a corridor shelf', 'a window onto a launch complex'],
+          alt: 'A typed distribution list pinned to a corridor noticeboard beside a shelf telephone.',
+        },
+        pages: [
+          {
+            id: 'name',
+            narration:
+              'A man who has never flown anything she computed asked for her, by capability if not by title, and the request came down a corridor of people who had to stop and work out who was meant. They know now. That is the change, and it is a small one, and it is the only kind that lasts.',
+          },
+          {
+            id: 'after',
+            narration:
+              'She drives home through a town that has not heard of any of this and does not have a table she is welcome at, and the two facts sit in the car with her the whole way, neither of them cancelling the other. She has been carrying pairs like that since she was ten. She has never yet dropped one.',
+          },
+        ],
+        historicalNote:
+          'Before his 1962 orbital flight John Glenn asked that Johnson check the electronic computer’s figures by hand. Segregation in American public life persisted until the civil rights legislation of the mid-1960s.',
+      },
+      {
+        id: 'inside',
+        conditions: [{ type: 'narrativeFlag', flag: 'johnson.hired' }],
+        title: 'Two Doors Down From It',
+        yearLabel: '1963',
+        image: {
+          setting: 'a research office at the end of a working day with mission charts filed away, about 1963',
+          year: 1963,
+          characters: ['johnson'],
+          mood: 'proximate, patient, hungry',
+          details: ['charts rolled and racked', 'a mission folder in a wire tray', 'a coat over a chair back', 'corridor light under a shut door'],
+          alt: 'Rolled charts racked beside a wire tray of mission folders in an office at day’s end.',
+        },
+        pages: [
+          {
+            id: 'near',
+            narration:
+              'Two men have gone up and come home and she was in the building for both of them, two doors down from the desks where the trajectories were set out, close enough to hear the arguments through the partition and not once asked into them.',
+          },
+          {
+            id: 'ready',
+            narration:
+              'She has done the work that made those flights possible and none of the work the newspapers name. That is an ordinary distinction inside a laboratory and an unbearable one at a kitchen table, and she does not raise it at either. She sharpens the pencils and waits for the problem that will have to come to her.',
+          },
+        ],
+        historicalNote:
+          'Johnson computed the Freedom 7 trajectory and verified Glenn’s orbital figures; this variant belongs to a life inside the programme whose hands were on other parts of it.',
       },
       {
         id: 'default',
@@ -2958,6 +3222,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
             any: [
               { type: 'locationIs', locationId: 'capeCanaveral' },
               { type: 'locationIs', locationId: 'hamptonLangley' },
+              { type: 'narrativeFlag', flag: 'johnson.hired' },
             ],
           },
         ],
@@ -3143,6 +3408,97 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
     ],
   },
   {
+    id: 'johnson-moon-landing',
+    characterId: 'johnson',
+    chapterId: 'legacy',
+    kind: 'historicalEvent',
+    classification: 'Documented',
+    sourceIds,
+    trigger: { event: 'afterAction', priority: 86 },
+    once: true,
+    variants: [
+      {
+        id: 'inside',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'johnson.hired' },
+          { type: 'yearAtLeast', year: 1968 },
+          { type: 'yearAtMost', year: 1969 },
+        ],
+        title: 'The Night of the Landing',
+        yearLabel: '1969',
+        image: {
+          setting: 'a family front room in July 1969 with a television broadcast running late',
+          year: 1969,
+          characters: ['johnson'],
+          mood: 'held, disbelieving, quietly proprietary',
+          details: ['a television with a grey image', 'grown daughters on the floor by it', 'a fan turning in a window', 'a pad and pencil on the arm of a chair'],
+          alt: 'A grey television image lit in a dark front room with a pad and pencil on a chair arm.',
+        },
+        pages: [
+          {
+            id: 'watch',
+            narration:
+              'Grown daughters on the floor in front of the set, a fan turning in the window, and a grey picture from a place she has looked at from a porch her whole life without once believing anybody would go and stand on it.',
+          },
+          {
+            id: 'asked',
+            narration:
+              'The eldest wants to know which part of it her mother did, meaning it warmly, and it is a harder question than she expects. She answers with the part that keeps her awake, which is never the part people mean.',
+            speaker: 'KATHERINE',
+            dialogue: 'Not the going. Anybody can be thrown at something that big. I worked on the coming back.',
+          },
+          {
+            id: 'after',
+            narration:
+              'They come home a week later, into an ocean, at a time somebody wrote down in advance. She goes to bed at two and is at her desk at eight, because the next one flies in November and the tables do not write themselves.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { wellbeing: 1, standing: 1 } }],
+        historicalNote:
+          'Johnson worked on Apollo trajectory, rendezvous and return problems and later described the return as the part that mattered most. The family scene and the dialogue are dramatized.',
+      },
+      {
+        id: 'outside',
+        conditions: [
+          { type: 'yearAtLeast', year: 1968 },
+          { type: 'yearAtMost', year: 1969 },
+        ],
+        title: 'The Night of the Landing',
+        yearLabel: '1969',
+        image: {
+          setting: 'a front room in July 1969 with a television broadcast running past midnight',
+          year: 1969,
+          characters: ['johnson'],
+          mood: 'awed, absorbed, calculating',
+          details: ['a grey television image', 'a pad on a lap', 'a fan in a window', 'a cup gone cold on a side table'],
+          alt: 'A grey television image in a dark room with a pad open on a lap.',
+        },
+        pages: [
+          {
+            id: 'watch',
+            narration:
+              'It is the middle of the night and she is not going to bed. Men are walking about on the Moon, which she has been able to see from her own porch her whole life without once believing anybody would go and stand on it.',
+          },
+          {
+            id: 'asked',
+            narration:
+              'Somebody in the room asks, half asleep, how they will get back off it, and she puts the pad on her knee and works out the answer while the picture jumps, because she cannot hear a question like that and leave it alone.',
+            speaker: 'KATHERINE',
+            dialogue: 'They go up to meet the other one. It only works if the meeting was arranged years ago and arranged exactly.',
+          },
+          {
+            id: 'after',
+            narration:
+              'She gets a figure for the time they have to leave in and it is a small window, alarmingly small, and she checks it twice and gets the same answer. Then she sits with the pad on her knee until the broadcast ends.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { wellbeing: 1 } }],
+        historicalNote:
+          'The July 1969 landing is documented; in the record Johnson was working on Apollo rendezvous and return problems at the time. This variant belongs to a life outside the programme.',
+      },
+    ],
+  },
+  {
     id: 'johnson-lunar-return',
     characterId: 'johnson',
     chapterId: 'legacy',
@@ -3156,8 +3512,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
         id: 'backup-used',
         conditions: [
           { type: 'projectCompleted', projectId: 'johnson-apollo-rendezvous' },
-          { type: 'yearAtLeast', year: 1969 },
-          { type: 'yearAtMost', year: 1970 },
+          { type: 'yearAtLeast', year: 1970 },
         ],
         title: 'The Filing Cabinet Opens',
         yearLabel: '1970',
@@ -3191,10 +3546,49 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           'Johnson’s backup navigation and return procedures contributed to the safe return of the Apollo 13 crew in 1970 after an in-flight failure. Her personal reaction is dramatized.',
       },
       {
+        id: 'inside-the-agency',
+        conditions: [
+          { type: 'narrativeFlag', flag: 'johnson.hired' },
+          { type: 'yearAtLeast', year: 1970 },
+        ],
+        title: 'Somebody’s Folder, Opened at Last',
+        yearLabel: '1970',
+        image: {
+          setting: 'a lit office at three in the morning during a spacecraft emergency, 1970',
+          year: 1970,
+          characters: ['johnson'],
+          mood: 'sleepless, useful, held back',
+          details: ['a star chart unrolled on a spare desk', 'a telephone with the receiver off', 'a corridor of lit offices', 'a thermos and two cups'],
+          alt: 'A star chart unrolled on a spare desk in a lit office with a telephone receiver off the cradle.',
+        },
+        pages: [
+          {
+            id: 'called',
+            narration:
+              'The telephone goes at eleven and by midnight half the division is at its desks with the lights on. A craft on the way to the Moon has lost the power to do its own thinking and there are three men inside it a very long way from any ocean.',
+          },
+          {
+            id: 'folder',
+            narration:
+              'Somebody down the corridor has the procedures for exactly this, written years ago against exactly this, and she spends the night checking their arithmetic line by line because that is what she is for and because nobody in the building is going to sleep anyway.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Read it back to me. Slowly. If it is wrong I want to hear it in somebody else’s mouth.',
+          },
+          {
+            id: 'water',
+            narration:
+              'They come down in the Pacific a little after dawn and the corridor empties without any speeches in it. She drives home in daylight and sleeps four hours and is back at two, because the folders do not check themselves.',
+          },
+        ],
+        effects: [{ type: 'resources', effects: { standing: 1, network: 1, health: -1 } }],
+        historicalNote:
+          'The Apollo 13 crew returned safely in 1970 using backup procedures prepared in advance; in the documented life Johnson helped write them. The night-shift detail is dramatized.',
+      },
+      {
         id: 'heard-it',
         conditions: [
-          { type: 'yearAtLeast', year: 1969 },
-          { type: 'yearAtMost', year: 1970 },
+          { not: { type: 'narrativeFlag', flag: 'johnson.hired' } },
+          { type: 'yearAtLeast', year: 1970 },
         ],
         title: 'Three Men and a Long Way Home',
         yearLabel: '1970',
@@ -3312,7 +3706,9 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
           {
             id: 'still',
             narration:
-              'On Sunday she sings, and does not think about any of it for two hours, and comes home and opens the folder again. It is a life with two halves and she is not willing to give up either one.',
+              'On Sunday she sings, and does not think about any of it for two hours, and comes home and opens the folder again. Somebody who loves her suggests, gently, that she might do less of this, and gets an answer with no argument left in it.',
+            speaker: 'KATHERINE',
+            dialogue: 'I am not tired of it. I am only tired. Those are different things and I know which one I have.',
           },
         ],
         effects: [{ type: 'resources', effects: { health: -1, wellbeing: 1 } }],
@@ -3346,45 +3742,73 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'watch',
+            id: 'after',
             narration:
-              'They land, and walk about, and come home. She watches it like everybody else, in a room with the lights off, and what she feels most sharply is not triumph. It is the specific relief of a person whose figures have just been tested by the universe and not found wanting.',
+              'The decade closes the way a long computation closes: not with a flourish but with a last column agreeing with the one beside it. Men have gone to the Moon and come back, twice on procedures she helped set out, and the tables that made it possible are racked and labelled and will be pulled down by strangers.',
           },
           {
             id: 'return',
             narration:
-              'The going was never the frightening part. The frightening part was always the return: a small craft leaving a rock to meet another small craft above it, on one attempt, on numbers somebody worked out years earlier at a desk. She worked out some of those numbers. That will do.',
+              'The going was never the frightening part. The frightening part was always the return, and the return is the part she was given. She takes the photograph of the lunar surface down off the wall, squares the stack of tables under it, and puts the pencil parallel to the edge, because she cannot leave a row crooked.',
           },
         ],
         historicalNote:
-          'Johnson contributed trajectory, rendezvous and backup navigation work across the Apollo programme through the lunar landings.',
+          'Johnson contributed trajectory, rendezvous and backup navigation work across the Apollo programme through the lunar landings and the Apollo 13 return.',
       },
       {
-        id: 'default',
-        title: 'Watching From the Room She Was Not In',
+        id: 'inside',
+        conditions: [{ type: 'narrativeFlag', flag: 'johnson.hired' }],
+        title: 'The Part of It That Was Hers',
         yearLabel: '1969–1970',
         image: {
-          setting: 'a darkened front room with a television showing a lunar broadcast, 1969',
-          year: 1969,
+          setting: 'a research office being tidied at the end of a long programme, 1970',
+          year: 1970,
           characters: ['johnson'],
-          mood: 'moved, distant, unregretful',
-          details: ['a grey television image in a dark room', 'a pad on a lap', 'a lamp switched off', 'a window with the curtains open to the night'],
-          alt: 'A darkened room lit only by a television showing a grey lunar broadcast.',
+          mood: 'sober, proud, unfinished',
+          details: ['a drawer of superseded tables', 'a photograph of the lunar surface pinned crooked', 'a wire tray emptied', 'a window at evening'],
+          alt: 'A drawer of superseded tables open beside a crookedly pinned photograph of the lunar surface.',
         },
         pages: [
           {
-            id: 'watch',
+            id: 'drawer',
             narration:
-              'The pictures are grey and jumping and it is the middle of the night and she is not going to bed. Men are walking about on the Moon, which she has been able to see from her own porch her whole life without once believing anybody would go and stand on it.',
+              'The decade goes into a drawer: superseded tables, ranges nobody will fly again, a photograph of a grey plain pinned up crooked by somebody who has since transferred. She was in the building for the whole of it and her hands were on some of it and not on the parts the newspapers named.',
+          },
+          {
+            id: 'honest',
+            narration:
+              'She is too exact a person to claim more than she did and too honest to pretend it did not sting. Both things go in the drawer as well. Then she squares the stack, because she cannot leave a row crooked, and looks at what is still on the desk.',
+          },
+        ],
+        historicalNote:
+          'Johnson worked at Langley through the Apollo years; this variant belongs to a life inside the programme that was not given its most celebrated problems.',
+      },
+      {
+        id: 'default',
+        title: 'The Pad on the Arm of the Chair',
+        yearLabel: '1969–1970',
+        image: {
+          setting: 'a front room in the small hours with a filled pad on the arm of a chair, 1970',
+          year: 1970,
+          characters: ['johnson'],
+          mood: 'moved, distant, unregretful',
+          details: ['a pad filled edge to edge', 'a lamp switched off', 'a television gone to a blank screen', 'curtains open to the night'],
+          alt: 'A pad filled with handwriting on the arm of a chair beside a switched-off lamp.',
+        },
+        pages: [
+          {
+            id: 'pad',
+            narration:
+              'The pad on the arm of the chair has the whole decade on it in pencil: launch windows worked from newspaper times, returns estimated from an announcer’s figures, every one of them checked twice against nothing but itself.',
           },
           {
             id: 'sum',
             narration:
-              'On the pad in her lap is a rough calculation of the return, done for no reason at all except that she wanted to know, and it agrees with the announcer to the accuracy the announcer is speaking to. She was never in that room. She would have been good in it.',
+              'Nobody has ever asked to see it and she has never offered, and the pencil has worn down to a length she would not have tolerated at nineteen. She turns the last page over, writes the date at the top of a clean one, and does not go to bed, because there is another flight in the spring.',
           },
         ],
         historicalNote:
-          'A divergence from the documented life, in which Johnson worked on Apollo trajectory and rendezvous calculations.',
+          'A divergence from the documented life, in which Johnson worked on Apollo trajectory, rendezvous and backup navigation calculations.',
       },
     ],
   },
@@ -3465,6 +3889,7 @@ export const JOHNSON_STORY_SCENES: StoryScene[] = [
             ],
             count: 3,
           },
+          { type: 'narrativeFlag', flag: 'johnson.hired' },
         ],
         title: 'Checked by Hand',
         yearLabel: 'after 1970',
