@@ -1,11 +1,50 @@
 import type { CharacterId, LifeChapterId } from '../../types';
 import type { StoryScene } from '../../types/story';
 import { CHAPTERS_BY_CHARACTER, CHARACTERS, LOCATIONS } from '../content';
-import { EINSTEIN_STORY_SCENES } from './einstein';
+import { BOHR_REPLACED_CONTEXT_CARDS, BOHR_STORY_SCENES } from './bohr';
+import { CURIE_REPLACED_CONTEXT_CARDS, CURIE_STORY_SCENES } from './curie';
+import { EINSTEIN_REPLACED_CONTEXT_CARDS, EINSTEIN_STORY_SCENES } from './einstein';
+import { FRANKLIN_REPLACED_CONTEXT_CARDS, FRANKLIN_STORY_SCENES } from './franklin';
+import { GODEL_REPLACED_CONTEXT_CARDS, GODEL_STORY_SCENES } from './godel';
+import { HILBERT_REPLACED_CONTEXT_CARDS, HILBERT_STORY_SCENES } from './hilbert';
+import { JOHNSON_REPLACED_CONTEXT_CARDS, JOHNSON_STORY_SCENES } from './johnson';
+import { NOETHER_REPLACED_CONTEXT_CARDS, NOETHER_STORY_SCENES } from './noether';
+import { OPPENHEIMER_REPLACED_CONTEXT_CARDS, OPPENHEIMER_STORY_SCENES } from './oppenheimer';
+import { RAMANUJAN_REPLACED_CONTEXT_CARDS, RAMANUJAN_STORY_SCENES } from './ramanujan';
+import { TURING_REPLACED_CONTEXT_CARDS, TURING_STORY_SCENES } from './turing';
+import { VONNEUMANN_REPLACED_CONTEXT_CARDS, VONNEUMANN_STORY_SCENES } from './vonneumann';
 
-export { EINSTEIN_REPLACED_CONTEXT_CARDS, EINSTEIN_STORY_SCENES } from './einstein';
+/** Every authored scene for every playable life, in roster order. */
+export const STORY_SCENES: StoryScene[] = [
+  ...BOHR_STORY_SCENES,
+  ...CURIE_STORY_SCENES,
+  ...EINSTEIN_STORY_SCENES,
+  ...FRANKLIN_STORY_SCENES,
+  ...GODEL_STORY_SCENES,
+  ...HILBERT_STORY_SCENES,
+  ...JOHNSON_STORY_SCENES,
+  ...NOETHER_STORY_SCENES,
+  ...OPPENHEIMER_STORY_SCENES,
+  ...RAMANUJAN_STORY_SCENES,
+  ...TURING_STORY_SCENES,
+  ...VONNEUMANN_STORY_SCENES,
+];
 
-export const STORY_SCENES: StoryScene[] = [...EINSTEIN_STORY_SCENES];
+/** Board context cards that an authored scene now tells in full; the board never shows these. */
+export const REPLACED_CONTEXT_CARDS_BY_CHARACTER: Record<CharacterId, string[]> = {
+  bohr: [...BOHR_REPLACED_CONTEXT_CARDS],
+  curie: [...CURIE_REPLACED_CONTEXT_CARDS],
+  einstein: [...EINSTEIN_REPLACED_CONTEXT_CARDS],
+  franklin: [...FRANKLIN_REPLACED_CONTEXT_CARDS],
+  godel: [...GODEL_REPLACED_CONTEXT_CARDS],
+  hilbert: [...HILBERT_REPLACED_CONTEXT_CARDS],
+  johnson: [...JOHNSON_REPLACED_CONTEXT_CARDS],
+  noether: [...NOETHER_REPLACED_CONTEXT_CARDS],
+  oppenheimer: [...OPPENHEIMER_REPLACED_CONTEXT_CARDS],
+  ramanujan: [...RAMANUJAN_REPLACED_CONTEXT_CARDS],
+  turing: [...TURING_REPLACED_CONTEXT_CARDS],
+  vonneumann: [...VONNEUMANN_REPLACED_CONTEXT_CARDS],
+};
 
 const STORY_BY_ID = new Map(STORY_SCENES.map((scene) => [scene.id, scene]));
 
@@ -15,6 +54,16 @@ export function storySceneById(id: string): StoryScene | undefined {
 
 export function authoredScenesForCharacter(characterId: CharacterId): StoryScene[] {
   return STORY_SCENES.filter((scene) => scene.characterId === characterId);
+}
+
+/** The one-time scene shown before a full campaign's first chapter, if the life has one. */
+export function prologueSceneId(characterId: CharacterId): string | undefined {
+  return STORY_SCENES.find((scene) => scene.characterId === characterId && scene.kind === 'prologue')?.id;
+}
+
+/** The scene shown after the final chapter closes, if the life has one. */
+export function epilogueSceneId(characterId: CharacterId): string | undefined {
+  return STORY_SCENES.find((scene) => scene.characterId === characterId && scene.kind === 'epilogue')?.id;
 }
 
 export function fallbackOpeningId(characterId: CharacterId, chapterId: LifeChapterId): string {

@@ -27,30 +27,49 @@ function storylessEinstein(): GameState {
 }
 
 describe('narrative campaign flow', () => {
-  it('starts a full Einstein game without queueing story pages', () => {
+  it('opens a full Einstein game on the prologue, with the first chapter opening queued behind it', () => {
     const game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
-    expect(hasActiveStory(game)).toBe(false);
-    expect(getActiveStoryView(game)).toBeNull();
-    expect(game.narrative?.pendingSceneIds).toEqual([]);
-    expect(game.players[0].seenContextCardIds).not.toContain('einstein-card-1905');
+    expect(hasActiveStory(game)).toBe(true);
+    expect(getActiveStoryView(game)?.scene.id).toBe('einstein-prologue-century');
+    expect(game.narrative?.pendingSceneIds).toEqual(['einstein-formation-opening']);
+    // Context cards that a scene now tells in full never appear on the board.
+    expect(game.players[0].seenContextCardIds).toContain('einstein-card-1905');
   });
 
-  it('advances chapters directly without a closing story interruption', () => {
+  it('plays the closing scene before the chapter actually turns, then turns it', () => {
     let game: GameState = storylessEinstein();
     const beforeChapter = game.players[0].chapterIndex;
 
     game = storyAwareGameReducer(game, { type: 'END_CHAPTER' });
+    expect(getActiveStoryView(game)?.scene.kind).toBe('chapterClosing');
+    expect(game.players[0].chapterIndex).toBe(beforeChapter);
+
+    let guard = 0;
+    while (hasActiveStory(game) && guard++ < 50) {
+      const view = getActiveStoryView(game)!;
+      if (view.page.choices?.length && !view.chosenChoiceId) {
+        game = storyAwareGameReducer(game, { type: 'STORY_CHOOSE', choiceId: view.page.choices[0].id });
+      } else {
+        game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
+      }
+    }
     expect(game.players[0].chapterIndex).toBe(beforeChapter + 1);
-    expect(getActiveStoryView(game)).toBeNull();
   });
 
-  it('does not queue fallback pages for characters without authored stories', () => {
+  it('ignores board actions while a story page is showing', () => {
+    const game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
+    const after = storyAwareGameReducer(game, { type: 'TEACH_OR_EARN' });
+    expect(after.players[0].currentYear).toBe(game.players[0].currentYear);
+    expect(getActiveStoryView(after)?.scene.id).toBe('einstein-prologue-century');
+  });
+
+  it('starts every authored life on its own prologue', () => {
     const game = initializeStoryGame(createGame(['curie'], 7, 'full'));
-    expect(getActiveStoryView(game)).toBeNull();
-    expect(game.narrative?.pendingSceneIds).toEqual([]);
+    expect(getActiveStoryView(game)?.scene.kind).toBe('prologue');
+    expect(getActiveStoryView(game)?.scene.characterId).toBe('curie');
   });
 
-  it('clears a pending story interruption when an existing save resumes', () => {
+  it('keeps a pending story page when an existing save resumes', () => {
     const base = createGame(['einstein'], 9, 'full');
     const resumed = prepareResumedStoryGame({
       ...base,
@@ -63,14 +82,21 @@ describe('narrative campaign flow', () => {
       },
     });
 
-    expect(resumed.narrative?.activeSceneId).toBeUndefined();
-    expect(resumed.narrative?.pendingSceneIds).toEqual([]);
-    expect(hasActiveStory(resumed)).toBe(false);
+    expect(resumed.narrative?.activeSceneId).toBe('einstein-prologue-century');
+    expect(hasActiveStory(resumed)).toBe(true);
+  });
+
+  it('lets a page be turned back without losing the chosen answer', () => {
+    let game: GameState = initializeStoryGame(createGame(['einstein'], 42, 'full'));
+    game = storyAwareGameReducer(game, { type: 'STORY_NEXT' });
+    expect(getActiveStoryView(game)?.pageIndex).toBe(1);
+    game = storyAwareGameReducer(game, { type: 'STORY_BACK' });
+    expect(getActiveStoryView(game)?.pageIndex).toBe(0);
   });
 });
 
 describe('Einstein state-aware story variants', () => {
-  it('completes Special Relativity without queueing a story page', () => {
+  it('shows the Bern breakthrough scene when Special Relativity is completed there in 1905', () => {
     let game: GameState = createGame(['einstein'], 1905, 'full');
     game = {
       ...game,
@@ -102,7 +128,9 @@ describe('Einstein state-aware story variants', () => {
     game = storyAwareGameReducer(game, { type: 'ATTEMPT_PROJECT', projectId: 'einstein-special-relativity' });
 
     expect(game.players[0].completedProjectIds).toContain('einstein-special-relativity');
-    expect(getActiveStoryView(game)).toBeNull();
+    const view = getActiveStoryView(game);
+    expect(view?.scene.id).toBe('einstein-special-relativity-breakthrough');
+    expect(view?.variant.id).toBe('bern-1905');
   });
 
   it('uses Canon Hilbert when Hilbert is not a human player', () => {

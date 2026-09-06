@@ -5,6 +5,7 @@ import type {
   GameState,
   LifeChapterId,
   PlayerState,
+  ResourceTokenType,
 } from '../types';
 import { LIFE_CHAPTER_ORDER } from '../types';
 import type {
@@ -26,17 +27,19 @@ import {
   PROJECTS_BY_CHARACTER,
 } from '../data/content';
 import {
-  EINSTEIN_REPLACED_CONTEXT_CARDS,
+  REPLACED_CONTEXT_CARDS_BY_CHARACTER,
   STORY_SCENES,
   chapterClosingSceneId,
   chapterOpeningSceneId,
+  epilogueSceneId,
+  prologueSceneId,
   storySceneById,
 } from '../data/story';
 
 export type StoryAwareAction = GameAction | StoryAction;
 
 /** Temporary product switch: preserve authored narrative content without showing story pages. */
-export const STORY_PAGES_ENABLED = false;
+export const STORY_PAGES_ENABLED = true;
 
 interface StoryEventContext {
   event: StoryTriggerEvent;
@@ -77,12 +80,14 @@ function withNarrative(state: GameState, narrative: NarrativeState): GameState {
   return { ...state, narrative, updatedAt: Date.now() };
 }
 
-function markEinsteinCardsHandled(state: GameState): GameState {
+/** Context cards that an authored story scene replaces are marked seen so the board never shows both. */
+function markReplacedCardsHandled(state: GameState): GameState {
   return {
     ...state,
     players: state.players.map((player) => {
-      if (player.characterId !== 'einstein') return player;
-      const merged = new Set([...player.seenContextCardIds, ...EINSTEIN_REPLACED_CONTEXT_CARDS]);
+      const replaced = REPLACED_CONTEXT_CARDS_BY_CHARACTER[player.characterId] ?? [];
+      if (replaced.length === 0) return player;
+      const merged = new Set([...player.seenContextCardIds, ...replaced]);
       return { ...player, seenContextCardIds: [...merged] };
     }),
   };
@@ -102,19 +107,20 @@ export function ensureNarrativeState(state: GameState): GameState {
       pendingTransition: undefined,
     });
   }
-  const normalized = markEinsteinCardsHandled(state);
+  const normalized = markReplacedCardsHandled(state);
   return normalized.narrative ? normalized : withNarrative(normalized, createEmptyNarrativeState());
 }
 
 /** Initializes narrative state; story pages are queued only while the feature is enabled. */
 export function initializeStoryGame(state: GameState): GameState {
   if (!STORY_PAGES_ENABLED) return withNarrative(state, createEmptyNarrativeState());
-  let next = withNarrative(markEinsteinCardsHandled(state), createEmptyNarrativeState());
+  let next = withNarrative(markReplacedCardsHandled(state), createEmptyNarrativeState());
   const player = next.players[next.activePlayerIndex];
   if (!player) return next;
 
   const ids: string[] = [];
-  if (player.characterId === 'einstein' && next.gameLength === 'full') ids.push('einstein-prologue-century');
+  const prologue = prologueSceneId(player.characterId);
+  if (prologue && next.gameLength === 'full') ids.push(prologue);
   ids.push(chapterOpeningSceneId(player.characterId, currentChapterId(player)));
   next = queueScenes(next, ids, player.id);
   return next;
@@ -294,15 +300,42 @@ function eventMatches(scene: StoryScene, context: StoryEventContext): boolean {
   return true;
 }
 
+/** The earliest year a variant's conditions admit, so that scenes about earlier events are told first. */
+function earliestYearOf(condition: StoryCondition): number | undefined {
+  if ('all' in condition) {
+    const years = condition.all.map(earliestYearOf).filter((year): year is number => year !== undefined);
+    return years.length ? Math.max(...years) : undefined;
+  }
+  if ('any' in condition) {
+    const years = condition.any.map(earliestYearOf).filter((year): year is number => year !== undefined);
+    return years.length ? Math.min(...years) : undefined;
+  }
+  if ('not' in condition) return undefined;
+  return condition.type === 'yearAtLeast' ? condition.year : undefined;
+}
+
+function variantEarliestYear(variant: StoryVariant): number {
+  const years = (variant.conditions ?? []).map(earliestYearOf).filter((year): year is number => year !== undefined);
+  return years.length ? Math.max(...years) : 0;
+}
+
 function eligibleScenes(state: GameState, player: PlayerState, context: StoryEventContext): StoryScene[] {
   const narrative = narrativeOf(state);
-  return STORY_SCENES.filter((scene) => {
-    if (scene.characterId && scene.characterId !== player.characterId) return false;
-    if (scene.chapterId && scene.chapterId !== currentChapterId(player)) return false;
-    if (!eventMatches(scene, context)) return false;
-    if (scene.once && (narrative.seenSceneIds.includes(scene.id) || narrative.activeSceneId === scene.id || narrative.pendingSceneIds.includes(scene.id))) return false;
-    return Boolean(selectStoryVariant(state, scene, player));
-  }).sort((a, b) => (b.trigger.priority ?? 0) - (a.trigger.priority ?? 0));
+  const eligible: { scene: StoryScene; year: number }[] = [];
+  for (const scene of STORY_SCENES) {
+    if (scene.characterId && scene.characterId !== player.characterId) continue;
+    if (scene.chapterId && scene.chapterId !== currentChapterId(player)) continue;
+    if (!eventMatches(scene, context)) continue;
+    if (scene.once && (narrative.seenSceneIds.includes(scene.id) || narrative.activeSceneId === scene.id || narrative.pendingSceneIds.includes(scene.id))) continue;
+    const variant = selectStoryVariant(state, scene, player);
+    if (!variant) continue;
+    eligible.push({ scene, year: variantEarliestYear(variant) });
+  }
+  // Chronology first — a scene whose conditions begin in 1914 is told before one that begins in 1915 —
+  // then the author's priority breaks ties among scenes of the same moment.
+  return eligible
+    .sort((a, b) => a.year - b.year || (b.scene.trigger.priority ?? 0) - (a.scene.trigger.priority ?? 0))
+    .map((entry) => entry.scene);
 }
 
 function activateScene(state: GameState, sceneId: string, focusPlayerId: string, pendingSceneIds: string[]): GameState {
@@ -357,7 +390,14 @@ function updateFocusPlayer(state: GameState, playerId: string, updater: (player:
   };
 }
 
+const TOKEN_KEYS: ResourceTokenType[] = ['theory', 'proof', 'evidence', 'computation', 'engineering'];
+
+/** Story effects may nudge the six life resources and, by name, any research token. */
 function applyResourceEffects(player: PlayerState, effects: Record<string, number | undefined>): PlayerState {
+  const tokens = { ...player.resources.tokens };
+  for (const key of TOKEN_KEYS) {
+    if (effects[key] !== undefined) tokens[key] = Math.max(0, (tokens[key] ?? 0) + (effects[key] ?? 0));
+  }
   return {
     ...player,
     resources: {
@@ -368,6 +408,7 @@ function applyResourceEffects(player: PlayerState, effects: Record<string, numbe
       standing: player.resources.standing + (effects.standing ?? 0),
       network: player.resources.network + (effects.network ?? 0),
       exposure: Math.max(0, player.resources.exposure + (effects.exposure ?? 0)),
+      tokens,
     },
   };
 }
@@ -547,7 +588,8 @@ export function storyAwareGameReducer(inputState: GameState, action: StoryAwareA
     const chapterId = currentChapterId(player);
     const ids = [chapterClosingSceneId(player.characterId, chapterId)];
     const isLast = player.chapterIndex >= LIFE_CHAPTER_ORDER.length - 1;
-    if (isLast && player.characterId === 'einstein') ids.push('einstein-epilogue');
+    const epilogue = epilogueSceneId(player.characterId);
+    if (isLast && epilogue) ids.push(epilogue);
     state = queueScenes(state, ids, player.id);
     if (hasActiveStory(state)) {
       return withNarrative(state, {
@@ -592,7 +634,7 @@ export function currentNarrativeChapterSummary(state: GameState, playerId: strin
 
 /** Useful for the Chronicle and authoring tools. */
 export function contextCardReplacementStatus(characterId: CharacterId): string[] {
-  if (characterId !== 'einstein') return [];
-  const actual = new Set(CONTEXT_CARDS_BY_CHARACTER.einstein.map((card) => card.id));
-  return EINSTEIN_REPLACED_CONTEXT_CARDS.filter((id) => actual.has(id));
+  const replaced = REPLACED_CONTEXT_CARDS_BY_CHARACTER[characterId] ?? [];
+  const actual = new Set((CONTEXT_CARDS_BY_CHARACTER[characterId] ?? []).map((card) => card.id));
+  return replaced.filter((id) => actual.has(id));
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { CharacterId, GameState } from './types';
 import { createGame, restartGame } from './engine/reducer';
 import {
+  hasActiveStory,
   initializeStoryGame,
   prepareResumedStoryGame,
   storyAwareGameReducer,
@@ -23,6 +24,7 @@ import { RulesModal } from './components/screens/RulesModal';
 import { TutorialOverlay } from './components/screens/TutorialOverlay';
 import { EndgameScreen } from './components/screens/EndgameScreen';
 import { BoardScreen } from './components/board/BoardScreen';
+import { StoryScreen } from './components/story/StoryScreen';
 import './styles/screens.css';
 
 type UiScreen = 'title' | 'setup' | 'select';
@@ -119,7 +121,9 @@ export default function App() {
   if (game) {
     return (
       <>
-        {game.phase === 'endgame' ? (
+        {hasActiveStory(game) ? (
+          <StoryScreen state={game} dispatch={dispatch} />
+        ) : game.phase === 'endgame' ? (
           <EndgameScreen
             state={game}
             onNewGame={() => {
