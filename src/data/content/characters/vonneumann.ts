@@ -39,7 +39,7 @@ export const vonNeumannContent: CharacterContent = {
       id: 'formation',
       characterId: 'vonneumann',
       label: 'Formation',
-      yearStart: 1903,
+      yearStart: 1913,
       yearEnd: 1921,
       startingLocationId: 'budapest',
       summary: 'Precocious childhood in Budapest.',

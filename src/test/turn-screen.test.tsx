@@ -5,17 +5,21 @@ import { createGame, gameReducer } from '../engine/reducer';
 import { previewAction, turnOptions, researchTotal } from '../engine/turn';
 import { initializeStoryGame } from '../engine/story';
 import { unplayedPresence, scientistsAt } from '../engine/presence';
+import { CHAPTERS_BY_CHARACTER } from '../data/content';
 
 function einstein() {
   return initializeStoryGame(createGame(['einstein'], 11, 'full'));
 }
+
+/** The year a life becomes playable, read from the data rather than pinned here. */
+const FIRST_YEAR = String(CHAPTERS_BY_CHARACTER.einstein[0].yearStart);
 
 describe('the turn screen', () => {
   it('opens on the year, not the map, and shows the five numbers', () => {
     render(
       <BoardScreen state={einstein()} dispatch={vi.fn()} onSave={vi.fn()} onRestartGame={vi.fn()} onExitToTitle={vi.fn()} />,
     );
-    expect(screen.getByRole('heading', { name: '1879' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: FIRST_YEAR })).toBeVisible();
     for (const label of ['Research', 'Funds', 'Wellbeing', 'Health', 'Standing']) {
       expect(screen.getByText(label)).toBeVisible();
     }
@@ -66,7 +70,7 @@ describe('the turn screen', () => {
     fireEvent.click(screen.getByText('Look at the map'));
     expect(screen.getByTestId('map-hud')).toBeVisible();
     fireEvent.click(screen.getByTestId('back-to-turn-btn'));
-    expect(screen.getByRole('heading', { name: '1879' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: FIRST_YEAR })).toBeVisible();
   });
 });
 

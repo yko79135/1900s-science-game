@@ -40,7 +40,7 @@ export const bohrContent: CharacterContent = {
       id: 'formation',
       characterId: 'bohr',
       label: 'Formation',
-      yearStart: 1885,
+      yearStart: 1895,
       yearEnd: 1903,
       startingLocationId: 'copenhagen',
       summary: 'Childhood in Copenhagen in an academic family.',

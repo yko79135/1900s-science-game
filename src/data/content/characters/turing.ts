@@ -40,7 +40,7 @@ export const turingContent: CharacterContent = {
       id: 'formation',
       characterId: 'turing',
       label: 'Formation',
-      yearStart: 1912,
+      yearStart: 1921,
       yearEnd: 1926,
       startingLocationId: 'london',
       summary: 'Childhood schooling, showing early independent aptitude for mathematics and science.',

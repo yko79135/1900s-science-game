@@ -40,7 +40,7 @@ export const godelContent: CharacterContent = {
       id: 'formation',
       characterId: 'godel',
       label: 'Formation',
-      yearStart: 1906,
+      yearStart: 1916,
       yearEnd: 1924,
       startingLocationId: 'brno',
       summary: 'Childhood in Brno, showing early aptitude for mathematics and languages.',

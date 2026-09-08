@@ -42,7 +42,7 @@ export const einsteinContent: CharacterContent = {
       id: 'formation',
       characterId: 'einstein',
       label: 'Formation',
-      yearStart: 1879,
+      yearStart: 1889,
       yearEnd: 1896,
       startingLocationId: 'zurich',
       summary: 'Childhood in Germany and Italy, and the move to Switzerland to complete secondary school.',

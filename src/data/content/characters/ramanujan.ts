@@ -40,7 +40,7 @@ export const ramanujanContent: CharacterContent = {
       id: 'formation',
       characterId: 'ramanujan',
       label: 'Formation',
-      yearStart: 1887,
+      yearStart: 1897,
       yearEnd: 1903,
       startingLocationId: 'kumbakonam',
       summary: 'Childhood in Kumbakonam; early aptitude for mathematics noticed by teachers.',

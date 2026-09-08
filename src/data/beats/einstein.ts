@@ -20,10 +20,10 @@ export const EINSTEIN_BEATS: StoryBeat[] = [
     id: 'einstein-beat-late-words',
     characterId: 'einstein',
     conditions: [
-      { type: 'yearAtLeast', year: 1881 },
-      { type: 'yearAtMost', year: 1886 },
+      { type: 'yearAtLeast', year: 1889 },
+      { type: 'yearAtMost', year: 1893 },
     ],
-    text: 'He is slow to speak, and tries each sentence out under his breath first, then says it once, properly.',
+    text: 'He still tries each sentence out under his breath before he says it, and the masters read the pause as insolence.',
     priority: 30,
   },
   {

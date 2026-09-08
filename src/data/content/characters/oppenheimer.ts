@@ -40,7 +40,7 @@ export const oppenheimerContent: CharacterContent = {
       id: 'formation',
       characterId: 'oppenheimer',
       label: 'Formation',
-      yearStart: 1904,
+      yearStart: 1914,
       yearEnd: 1922,
       startingLocationId: 'newYork',
       summary: 'Childhood in New York, educated at the Ethical Culture School.',

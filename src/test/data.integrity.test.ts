@@ -188,3 +188,19 @@ describe('map locations', () => {
     expect(detailMapViewForLocation('instituteWV').id).toBe('appalachia-virginia');
   });
 });
+
+describe('a life becomes playable when the person could plausibly act', () => {
+  it('never opens a campaign on an infant, and never on a chapter too short to play', () => {
+    for (const character of CHARACTER_LIST) {
+      const characterId = character.id;
+      const formation = CHAPTERS_BY_CHARACTER[characterId]?.[0];
+      expect(formation, `${characterId} formation`).toBeDefined();
+      const ageAtStart = formation!.yearStart - character.bornYear;
+      // The turn screen offers posts, funding and travel; a toddler cannot take them.
+      expect(ageAtStart, `${characterId} starts at age ${ageAtStart}`).toBeGreaterThanOrEqual(5);
+      const turns = formation!.yearEnd - formation!.yearStart + 1;
+      expect(turns, `${characterId} formation is ${turns} turns`).toBeGreaterThanOrEqual(6);
+      expect(formation!.yearStart, `${characterId} starts before it ends`).toBeLessThan(formation!.yearEnd);
+    }
+  });
+});

@@ -40,7 +40,7 @@ export const johnsonContent: CharacterContent = {
       id: 'formation',
       characterId: 'johnson',
       label: 'Formation',
-      yearStart: 1918,
+      yearStart: 1923,
       yearEnd: 1928,
       startingLocationId: 'whiteSulphurSprings',
       summary: 'Early childhood; rapid academic progress leads her to skip several grades.',

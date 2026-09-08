@@ -43,7 +43,7 @@ export const hilbertContent: CharacterContent = {
       id: 'formation',
       characterId: 'hilbert',
       label: 'Formation',
-      yearStart: 1862,
+      yearStart: 1872,
       yearEnd: 1880,
       startingLocationId: 'konigsberg',
       summary: 'Childhood and schooling in Königsberg.',

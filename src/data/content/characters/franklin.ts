@@ -42,7 +42,7 @@ export const franklinContent: CharacterContent = {
       id: 'formation',
       characterId: 'franklin',
       label: 'Formation',
-      yearStart: 1920,
+      yearStart: 1930,
       yearEnd: 1938,
       startingLocationId: 'london',
       summary: 'Childhood and schooling in London; early interest in science.',

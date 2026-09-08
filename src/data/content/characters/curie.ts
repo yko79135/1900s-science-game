@@ -39,7 +39,7 @@ export const curieContent: CharacterContent = {
       id: 'formation',
       characterId: 'curie',
       label: 'Formation',
-      yearStart: 1867,
+      yearStart: 1877,
       yearEnd: 1891,
       startingLocationId: 'warsaw',
       summary: 'Childhood and clandestine study in Russian-controlled Warsaw, where women were barred from the university.',

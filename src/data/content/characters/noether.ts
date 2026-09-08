@@ -40,7 +40,7 @@ export const noetherContent: CharacterContent = {
       id: 'formation',
       characterId: 'noether',
       label: 'Formation',
-      yearStart: 1882,
+      yearStart: 1892,
       yearEnd: 1900,
       startingLocationId: 'erlangen',
       summary: 'Grows up in Erlangen, daughter of mathematician Max Noether.',
