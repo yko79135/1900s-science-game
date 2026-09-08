@@ -9,6 +9,8 @@ import {
   saveCurrentGame,
 } from '../engine/save';
 import { ACTIONS_PER_TURN, chapterActionBudget } from '../engine/rules';
+import { CHAPTERS_BY_CHARACTER } from '../data/content';
+import { SCHEMA_VERSION } from '../types';
 
 beforeEach(() => {
   localStorage.clear();
@@ -59,7 +61,7 @@ describe('save/load serialization', () => {
     };
     const migrated = migrateSave({ schemaVersion: 2, savedAt: Date.now(), game: legacyGame });
 
-    expect(migrated?.schemaVersion).toBe(5);
+    expect(migrated?.schemaVersion).toBe(SCHEMA_VERSION);
     expect(migrated?.players[0].currentYear).toBe(1924);
     expect(migrated?.players[0].timeActionsRemaining).toBe(chapterActionBudget(1924, 1933));
     expect(migrated?.players[0].turnActionsRemaining).toBe(ACTIONS_PER_TURN);
@@ -92,5 +94,30 @@ describe('save/load serialization', () => {
     expect(migrated?.players[0].insights.map((item) => item.insightId)).toEqual(
       expect.arrayContaining(['equivalence-principle', 'tensor-geometry']),
     );
+  });
+});
+
+describe('a save made before chapters moved off birth', () => {
+  it('re-anchors the life inside its chapter instead of charging a decade a turn', () => {
+    const game = createGame(['curie'], 11, 'full');
+    const chapter = CHAPTERS_BY_CHARACTER.curie[0];
+    // A version-5 save sitting ten years before the chapter now starts.
+    const stale = {
+      schemaVersion: 5,
+      savedAt: Date.now(),
+      game: {
+        ...game,
+        schemaVersion: 5,
+        players: [{ ...game.players[0], currentYear: 1867, timeActionsRemaining: 25 }],
+      },
+    };
+
+    const migrated = migrateSave(stale);
+    expect(migrated).not.toBeNull();
+    const player = migrated!.players[0];
+    expect(player.currentYear).toBe(chapter.yearStart);
+    expect(player.currentYear).toBeGreaterThanOrEqual(chapter.yearStart);
+    expect(player.timeActionsRemaining).toBeLessThanOrEqual(chapter.yearEnd - chapter.yearStart + 1);
+    expect(migrated!.schemaVersion).toBe(SCHEMA_VERSION);
   });
 });

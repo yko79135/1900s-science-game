@@ -129,6 +129,29 @@ export function migrateSave(raw: unknown): GameState | null {
     };
   }
 
+  if (game.schemaVersion < 6) {
+    // Chapters no longer begin at birth, so a save made before that change can
+    // sit outside its own chapter — which made every action look as if it cost
+    // a decade. Re-anchor each unfinished life inside its chapter.
+    game = {
+      ...game,
+      schemaVersion: 6,
+      players: game.players.map((player) => {
+        const chapter = CHAPTERS_BY_CHARACTER[player.characterId]?.[player.chapterIndex];
+        if (!chapter || player.finished) return player;
+        if (player.currentYear >= chapter.yearStart && player.currentYear <= chapter.yearEnd) return player;
+
+        const currentYear = Math.max(chapter.yearStart, Math.min(chapter.yearEnd, player.currentYear));
+        return {
+          ...player,
+          currentYear,
+          timeActionsRemaining: Math.min(player.timeActionsRemaining, chapterActionBudget(currentYear, chapter.yearEnd)),
+          currentLocationId: player.currentLocationId || chapter.startingLocationId,
+        };
+      }),
+    };
+  }
+
   return {
     ...game,
     schemaVersion: SCHEMA_VERSION,
