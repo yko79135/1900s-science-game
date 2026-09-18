@@ -162,8 +162,12 @@ export function travelOptions(state: GameState, player: PlayerState, limit = 6):
   const onRoute = new Set(character.canonicalRoute.map((stop) => stop.locationId));
   const visited = new Set(player.routeHistory.map((entry) => entry.locationId));
 
+  // A child does not choose a city because a scientist lives in it; a child
+  // moves where the family moves, which is the route this life actually took.
+  const age = ageOf(player);
   const candidates = Object.values(LOCATIONS)
     .filter((location) => location.id !== player.currentLocationId)
+    .filter((location) => age >= 18 || onRoute.has(location.id))
     .filter((location) => player.currentYear >= location.activeStart && (location.activeEnd === null || player.currentYear <= location.activeEnd))
     .map((location) => {
       const company = companyAt(state, location.id, player.currentYear, player.characterId);
@@ -188,6 +192,34 @@ export function travelOptions(state: GameState, player: PlayerState, limit = 6):
     return { ...base, enabled: false, blockedReason: entry.evaluation.reasons[0] };
   });
 }
+
+/**
+ * A life at ten cannot take a university chair, and a schoolchild asking a
+ * ministry for a research grant is a joke the game should not make. Actions
+ * unlock as the person grows up.
+ */
+export function ageOf(player: PlayerState): number {
+  return player.currentYear - CHARACTERS[player.characterId].bornYear;
+}
+
+/** The youngest age at which each action makes sense in a person's mouth. */
+const UNLOCKS_AT: Record<string, number> = {
+  earn: 15,
+  funding: 22,
+  advocate: 20,
+  institution: 30,
+  collaborate: 14,
+};
+
+/** School-age labels, so the same action reads like the life it belongs to. */
+const YOUNG_LABELS: Record<string, { label: string; detail?: string }> = {
+  study: { label: 'Read past bedtime', detail: 'Whatever is in the house' },
+  prove: { label: 'Work through the problems' },
+  calculate: { label: 'Fill a page with arithmetic' },
+  measure: { label: 'Take things apart and look' },
+  build: { label: 'Make something that works' },
+  rest: { label: 'Be a child for a year' },
+};
 
 /** Everything a life can spend this year on, ready to render. */
 export function turnOptions(state: GameState, player: PlayerState): TurnOption[] {
@@ -220,5 +252,14 @@ export function turnOptions(state: GameState, player: PlayerState): TurnOption[]
   options.push(option(state, 'advocate', 'Speak publicly', 'people', { type: 'ADVOCACY' }));
   options.push(option(state, 'institution', 'Build an institution', 'people', { type: 'BUILD_INSTITUTION' }));
 
-  return [...options, ...travelOptions(state, player)];
+  const age = ageOf(player);
+  const grown = options
+    .filter((item) => age >= (UNLOCKS_AT[item.id] ?? 0))
+    .map((item) => {
+      if (age >= 18) return item;
+      const young = YOUNG_LABELS[item.id];
+      return young ? { ...item, label: young.label, detail: young.detail ?? item.detail } : item;
+    });
+
+  return [...grown, ...travelOptions(state, player)];
 }

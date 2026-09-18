@@ -1,5 +1,6 @@
 import type { GameState } from '../../types';
 import { computeFinalScore, getCharacter, summarizeConsequences } from '../../engine/rules';
+import { verdictFor } from '../../engine/verdict';
 
 export function EndgameScreen({ state, onNewGame, onExit }: { state: GameState; onNewGame: () => void; onExit: () => void }) {
   return (
@@ -12,9 +13,14 @@ export function EndgameScreen({ state, onNewGame, onExit }: { state: GameState; 
           const summary = computeFinalScore(player);
           const consequences = summarizeConsequences(player);
           const consequenceKeys = Object.keys(consequences);
+          const verdict = verdictFor(state, player);
           return (
             <article key={player.id} className="card endgame-card">
               <h2 style={{ borderBottom: `3px solid ${character.color}` }}>{character.name}</h2>
+              <p className="endgame-card__verdict" data-testid={`verdict-${player.characterId}`}>
+                {verdict.rank}
+              </p>
+              <p className="endgame-card__reason">{verdict.reason}</p>
               <p className="endgame-card__legacy">
                 Legacy: <strong>{summary.totalLegacy}</strong> / benchmark {summary.benchmark} ({Math.round(summary.benchmarkRatio * 100)}%)
               </p>

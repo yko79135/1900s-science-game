@@ -528,3 +528,18 @@
 .knowledge-board__status {
   font-weight: 600;
 }
+
+/* The one line a player repeats after a run. */
+.endgame-card__verdict {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0.6rem 0 0.2rem;
+  color: var(--accent);
+  text-wrap: balance;
+}
+.endgame-card__reason {
+  margin: 0 0 0.9rem;
+  color: var(--panel-text-dim);
+  font-size: 0.94rem;
+}

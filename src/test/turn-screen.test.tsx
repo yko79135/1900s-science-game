@@ -74,6 +74,27 @@ describe('the turn screen', () => {
   });
 });
 
+describe('a life too young for the option', () => {
+  it('offers a child reading and rest, not a university post or a grant', () => {
+    const state = einstein();
+    const ids = turnOptions(state, state.players[0]).map((o) => o.id);
+    expect(ids).toContain('study');
+    expect(ids).toContain('rest');
+    for (const grownUp of ['earn', 'funding', 'advocate', 'institution']) {
+      expect(ids, `a ten-year-old should not be offered ${grownUp}`).not.toContain(grownUp);
+    }
+    // And no emigrating alone to a city off the family's route.
+    const travel = ids.filter((id) => id.startsWith('travel-'));
+    expect(travel.every((id) => ['travel-bern', 'travel-berlin', 'travel-princeton', 'travel-zurich'].includes(id))).toBe(true);
+  });
+
+  it('names the action the way the age would', () => {
+    const state = einstein();
+    const study = turnOptions(state, state.players[0]).find((o) => o.id === 'study');
+    expect(study?.label).toBe('Read past bedtime');
+  });
+});
+
 describe('lives crossing', () => {
   it('places an unplayed scientist somewhere every year of their life, not only on route years', () => {
     // Gödel's route names 1930 (Königsberg) and 1931 (Vienna). In 1932, 1935,
