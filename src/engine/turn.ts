@@ -177,7 +177,7 @@ export function travelOptions(state: GameState, player: PlayerState, limit = 6):
   const age = ageOf(player);
   const candidates = Object.values(LOCATIONS)
     .filter((location) => location.id !== player.currentLocationId)
-    .filter((location) => age >= 18 || onRoute.has(location.id))
+    .filter((location) => age >= CHILDHOOD_ENDS || onRoute.has(location.id))
     .filter((location) => player.currentYear >= location.activeStart && (location.activeEnd === null || player.currentYear <= location.activeEnd))
     .map((location) => {
       const company = companyAt(state, location.id, player.currentYear, player.characterId);
@@ -221,6 +221,9 @@ const UNLOCKS_AT: Record<string, number> = {
   collaborate: 14,
 };
 
+/** Where the childhood wording stops, matching the age the work starts costing. */
+const CHILDHOOD_ENDS = 16;
+
 /** School-age labels, so the same action reads like the life it belongs to. */
 const YOUNG_LABELS: Record<string, { label: string; detail?: string }> = {
   study: { label: 'Read past bedtime', detail: 'Whatever is in the house' },
@@ -235,9 +238,14 @@ const YOUNG_LABELS: Record<string, { label: string; detail?: string }> = {
 export function turnOptions(state: GameState, player: PlayerState): TurnOption[] {
   const options: TurnOption[] = [];
 
+  // A worn-down life still sees the work it cannot face this year. Dropping the
+  // cards instead would leave the player with a warning and no sign of what the
+  // warning was about.
+  const wornOut = player.resources.wellbeing <= 0 && ageOf(player) >= 16;
+
   for (const entry of RESEARCH_ACTIONS) {
     const preview = previewAction(state, { type: 'GENERATE_TOKEN', kind: entry.kind });
-    if (!preview.changes.length && !preview.applied) continue;
+    if (!preview.changes.length && !preview.applied && !wornOut) continue;
     options.push(
       option(state, entry.id, entry.label, 'research', { type: 'GENERATE_TOKEN', kind: entry.kind }, preview.token),
     );
@@ -268,7 +276,7 @@ export function turnOptions(state: GameState, player: PlayerState): TurnOption[]
   const grown = options
     .filter((item) => age >= (UNLOCKS_AT[item.id] ?? 0))
     .map((item) => {
-      if (age >= 18) return item;
+      if (age >= CHILDHOOD_ENDS) return item;
       const young = YOUNG_LABELS[item.id];
       return young ? { ...item, label: young.label, detail: young.detail ?? item.detail } : item;
     });

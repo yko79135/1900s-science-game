@@ -1,72 +1,58 @@
-import type { GameState } from '../../types';
-import type { GameAction } from '../../engine/reducer';
 import type { Goal } from '../../engine/goals';
-import { goalsFor } from '../../engine/goals';
+import type { GameAction } from '../../engine/reducer';
+
+/**
+ * What this life is aiming at, in the slot the reference gives 이 주의 목표.
+ *
+ * A goal that cannot be started yet still shows its requirements and says what
+ * to prepare, because a player told only to wait has been given nothing to
+ * decide.
+ */
 
 export interface GoalListProps {
-  state: GameState;
+  goals: Goal[];
   dispatch: (action: GameAction) => void;
 }
 
-/**
- * The work, on the main screen, every turn. A life's reason for existing should
- * not be two clicks away behind a map.
- */
-export function GoalList({ state, dispatch }: GoalListProps) {
-  const player = state.players[state.activePlayerIndex];
-  const goals = goalsFor(state, player);
+export function GoalList({ goals, dispatch }: GoalListProps) {
   if (!goals.length) return null;
 
   return (
-    <section className="goals" aria-label="The work">
+    <section className="aims" aria-label="What this life is aiming at">
       <h2>The work</h2>
-      <ul className="goals__list">
+      <ul>
         {goals.map((goal) => (
-          <GoalCard key={goal.project.id} goal={goal} dispatch={dispatch} />
+          <li key={goal.project.id} className={`aim aim--${goal.state}`} data-testid={`goal-${goal.project.id}`}>
+            <div className="aim__line">
+              <span className="aim__name">{goal.project.name}</span>
+              <span className="aim__years">
+                {goal.years} {goal.years === 1 ? 'yr' : 'yrs'}
+              </span>
+            </div>
+            <p className="aim__next">{goal.nextStep}</p>
+            {goal.state === 'ready' ? (
+              <button
+                type="button"
+                className="btn btn-primary aim__do"
+                data-testid={`goal-do-${goal.project.id}`}
+                onClick={() => dispatch({ type: 'ATTEMPT_PROJECT', projectId: goal.project.id })}
+              >
+                Do the work
+              </button>
+            ) : (
+              <ul className="aim__needs">
+                {goal.requirements
+                  .filter((requirement) => !requirement.met)
+                  .map((requirement) => (
+                    <li key={requirement.label}>
+                      {requirement.label} {requirement.have}/{requirement.need}
+                    </li>
+                  ))}
+              </ul>
+            )}
+          </li>
         ))}
       </ul>
     </section>
-  );
-}
-
-function GoalCard({ goal, dispatch }: { goal: Goal; dispatch: (action: GameAction) => void }) {
-  const { project, state, requirements, nextStep, years } = goal;
-  const unmet = requirements.filter((r) => !r.met);
-
-  return (
-    <li className={`goal goal--${state}`} data-testid={`goal-${project.id}`}>
-      <div className="goal__head">
-        <h3 className="goal__name">{project.name}</h3>
-        <span className="goal__years">
-          {years} {years === 1 ? 'yr' : 'yrs'}
-        </span>
-      </div>
-
-      <p className="goal__next">{nextStep}</p>
-
-      {state !== 'done' && unmet.length > 0 && (
-        <ul className="goal__needs">
-          {unmet.map((requirement) => (
-            <li key={requirement.label}>
-              <span className="goal__need-label">{requirement.label}</span>
-              <span className="goal__need-count">
-                {requirement.have}/{requirement.need}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {state === 'ready' && (
-        <button
-          type="button"
-          className="btn btn-primary goal__do"
-          data-testid={`goal-do-${project.id}`}
-          onClick={() => dispatch({ type: 'ATTEMPT_PROJECT', projectId: project.id })}
-        >
-          Do the work
-        </button>
-      )}
-    </li>
   );
 }

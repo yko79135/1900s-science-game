@@ -19,9 +19,16 @@ describe('the turn screen', () => {
     render(
       <BoardScreen state={einstein()} dispatch={vi.fn()} onSave={vi.fn()} onRestartGame={vi.fn()} onExitToTitle={vi.fn()} />,
     );
-    expect(screen.getByRole('heading', { name: FIRST_YEAR })).toBeVisible();
-    for (const label of ['Research', 'Funds', 'Wellbeing', 'Health', 'Standing']) {
+    // The year and the countdown lead the status bar, as on the reference.
+    expect(screen.getByText(FIRST_YEAR)).toBeVisible();
+    for (const label of ['funds', 'wellbeing', 'age']) {
       expect(screen.getByText(label)).toBeVisible();
+    }
+    // And what the life is made of is a row of its own. Scoped to that row,
+    // because the same words also name what an action produces.
+    const madeOf = within(screen.getByLabelText('Research'));
+    for (const label of ['Theory', 'Proof', 'Evidence', 'Standing']) {
+      expect(madeOf.getByText(label)).toBeVisible();
     }
     expect(screen.queryByTestId('map-hud')).toBeNull();
   });
@@ -32,7 +39,7 @@ describe('the turn screen', () => {
       <BoardScreen state={state} dispatch={vi.fn()} onSave={vi.fn()} onRestartGame={vi.fn()} onExitToTitle={vi.fn()} />,
     );
     const study = screen.getByTestId('turn-study');
-    expect(within(study).getByText(/year/)).toBeVisible();
+    expect(within(study).getByText(/\byrs?\b/)).toBeVisible();
     // Whatever the card promises must be what the reducer actually does.
     const promised = turnOptions(state, state.players[0]).find((o) => o.id === 'study');
     const actual = previewAction(state, { type: 'GENERATE_TOKEN', kind: 'study' });
@@ -70,7 +77,7 @@ describe('the turn screen', () => {
     fireEvent.click(screen.getByText('Look at the map'));
     expect(screen.getByTestId('map-hud')).toBeVisible();
     fireEvent.click(screen.getByTestId('back-to-turn-btn'));
-    expect(screen.getByRole('heading', { name: FIRST_YEAR })).toBeVisible();
+    expect(screen.getByText(FIRST_YEAR)).toBeVisible();
   });
 });
 

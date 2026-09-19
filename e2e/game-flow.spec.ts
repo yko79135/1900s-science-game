@@ -70,11 +70,14 @@ test('a complete game can be played from character selection to final scoring', 
   await expect(page.getByRole('heading', { name: /./ }).first()).toBeVisible();
   await readStory(page);
 
-  // The turn screen is the default surface: one year, five numbers, and every
-  // action carrying the effect it will really have.
+  // The turn screen is the default surface: the year and what the life has in
+  // a status bar, the work it is made of in a row, and every action carrying
+  // the effect it will really have.
   await expect(page.getByTestId('turn-study')).toBeVisible();
   await expect(page.getByTestId('turn-study')).toContainText('Research');
-  await expect(page.getByRole('term').filter({ hasText: 'Wellbeing' })).toBeVisible();
+  await expect(page.locator('.status').getByText('wellbeing')).toBeVisible();
+  await expect(page.locator('.tokens').getByText('Theory')).toBeVisible();
+  await expect(page.locator('.vitality')).toBeVisible();
 
   // The map opens on top of it and hands control back.
   await page.getByText('Look at the map').click();

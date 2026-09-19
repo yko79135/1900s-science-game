@@ -9,8 +9,18 @@ async function readStory(page: Page) {
   }
 }
 
-test('the work is on the screen and the years wear a life down', async ({ page }) => {
-  test.setTimeout(120_000);
+/** Anything the year is holding up: a scene to read, or post to open. */
+async function settle(page: Page) {
+  await readStory(page);
+  const mail = page.getByTestId('turn-read-cards');
+  if (await mail.isVisible().catch(() => false)) {
+    await mail.click();
+    await readStory(page);
+  }
+}
+
+test('the year is one screen, and the work on it wears a life down', async ({ page }) => {
+  test.setTimeout(90_000);
   const errors: string[] = [];
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -23,34 +33,44 @@ test('the work is on the screen and the years wear a life down', async ({ page }
   await page.getByTestId('begin-game-btn').click();
   const tutorialNext = page.getByTestId('tutorial-next-btn');
   for (let i = 0; i < 5; i++) if (await tutorialNext.isVisible().catch(() => false)) await tutorialNext.click();
+
+  // A scene arrives over the year rather than instead of it: the picture, the
+  // name and the line are on top, and the year is still underneath.
+  await expect(page.locator('.scene__frame')).toBeVisible();
+  await expect(page.locator('.scene__art')).toBeVisible();
+  await expect(page.locator('.turn')).toBeAttached();
   await readStory(page);
 
+  // Back on the year, every part of the reference's layout is present.
+  await expect(page.locator('.status')).toBeVisible();
+  await expect(page.locator('.stage__portrait')).toBeVisible();
+  await expect(page.locator('.tokens')).toBeVisible();
+  await expect(page.locator('.vitality')).toBeVisible();
   await expect(page.getByTestId('turn-study')).toBeVisible();
+  await expect(page.locator('.aims .aim').first()).toBeVisible();
 
-  const goals = page.locator('[data-testid^="goal-"]').filter({ hasNot: page.locator('button') });
-  console.log('GOALS AT START:', (await page.locator('.goal').allInnerTexts()).join(' || '));
+  // Work year after year and the life runs down. Childhood is free, so this
+  // has to run past it; when a chapter's years are gone, move on and keep going.
+  let worn = false;
+  for (let i = 0; i < 40 && !worn; i++) {
+    await settle(page);
+    if (await page.locator('.turn__warning').isVisible().catch(() => false)) { worn = true; break; }
 
-  // Grind until the work stops being possible.
-  let grind = 0;
-  for (; grind < 60; grind++) {
-    const readIt = page.getByRole('button', { name: 'Read it' });
-    if (await readIt.isVisible().catch(() => false)) { await readIt.click(); await readStory(page); continue; }
     const study = page.getByTestId('turn-study');
-    if (!(await study.isVisible().catch(() => false))) {
-      const moveOn = page.getByTestId('turn-end-chapter');
-      if (await moveOn.isVisible().catch(() => false)) { await moveOn.click(); await readStory(page); continue; }
-      break;
+    if ((await study.isVisible().catch(() => false)) && (await study.isEnabled())) {
+      await study.click();
+      continue;
     }
-    if (!(await study.isEnabled())) break;
-    await study.click();
-    await readStory(page);
-    if (await page.locator('.turn__warning').isVisible().catch(() => false)) break;
+
+    const moveOn = page.getByTestId('turn-end-chapter');
+    if ((await moveOn.isVisible().catch(() => false)) && (await moveOn.isEnabled())) {
+      await moveOn.click();
+      continue;
+    }
+    break;
   }
-  console.log('GRIND TURNS BEFORE STRAIN:', grind);
-  console.log('WARNING:', await page.locator('.turn__warning').innerText().catch(() => '(none)'));
-  console.log('LEDGER:', await page.locator('.turn__ledger').innerText().catch(() => '(none)'));
-  console.log('STATS:', await page.locator('.turn__stats').innerText());
-  console.log('GOALS NOW:', (await page.locator('.goal').allInnerTexts()).join(' || '));
+  expect(worn, 'a life that only ever works should end up worn down').toBe(true);
+  await expect(page.locator('.turn__warning')).toBeVisible();
 
   expect(errors.filter((e) => !/favicon|story-image/i.test(e))).toEqual([]);
 });

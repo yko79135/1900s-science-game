@@ -128,9 +128,7 @@ export default function App() {
   if (game) {
     return (
       <>
-        {hasActiveStory(game) ? (
-          <StoryScreen state={game} dispatch={dispatch} />
-        ) : game.phase === 'endgame' ? (
+        {game.phase === 'endgame' ? (
           <EndgameScreen
             state={game}
             onNewGame={() => {
@@ -154,6 +152,7 @@ export default function App() {
             onExitToTitle={handleExitToTitle}
           />
         )}
+        {hasActiveStory(game) && <StoryScreen state={game} dispatch={dispatch} />}
         {showTutorial && (
           <TutorialOverlay
             onDone={() => {
