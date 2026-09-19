@@ -1004,4 +1004,32 @@ export const FRANKLIN_BEATS: StoryBeat[] = [
     priority: 6,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'franklin-beat-strain-exposures',
+    characterId: 'franklin',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'She runs the exposures long because she will not trust a shorter one, and the letter from Paris has been in her coat pocket unanswered for three weeks.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'franklin-beat-strain-coat',
+    characterId: 'franklin',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'She has taken to keeping her coat on indoors, and the technician remarks, without being asked, that the room is not as cold as all that.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'franklin-beat-strain-unstarted',
+    characterId: 'franklin',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The camera is loaded, the specimen is mounted, the hours are written on the card, and she does not start the exposure.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

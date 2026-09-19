@@ -999,4 +999,32 @@ export const NOETHER_BEATS: StoryBeat[] = [
     priority: 7,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'noether-beat-strain-lost-thread',
+    characterId: 'noether',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'She loses the thread twice at the blackboard and does not laugh about it, and the students come out of the hour quieter than they went into it.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'noether-beat-strain-first-bend',
+    characterId: 'noether',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'She sets off to walk the students out as she always does and turns back at the first bend, and one of them asks her, carefully, whether she is unwell.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'noether-beat-strain-no-lecture',
+    characterId: 'noether',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'No lecture is announced for this term under anybody’s name, and the offprints stay on the table in the string they arrived in.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

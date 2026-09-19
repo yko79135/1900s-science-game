@@ -990,4 +990,32 @@ export const CURIE_BEATS: StoryBeat[] = [
     priority: 5,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'curie-beat-strain-column',
+    characterId: 'curie',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'She enters the same figure twice in one afternoon and finds it only because the column refuses to add.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'curie-beat-strain-fingertips',
+    characterId: 'curie',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'Her fingertips split and are slow to close, and she has begun answering the question about her hands before anybody has finished asking it.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'curie-beat-strain-electrometer',
+    characterId: 'curie',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The electrometer is warmed and steady, and she sits in front of it until the light goes out of the shed, and the notebook stays empty.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

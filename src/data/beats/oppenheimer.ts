@@ -1001,4 +1001,32 @@ export const OPPENHEIMER_BEATS: StoryBeat[] = [
     priority: 9,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'oppenheimer-beat-strain-ashtray',
+    characterId: 'oppenheimer',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'He lights each one off the last and the ashtray is full before the morning meeting, and his brother’s letter stays folded in the jacket.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'oppenheimer-beat-strain-belt',
+    characterId: 'oppenheimer',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'The belt goes in another notch, and somebody stops him at the door to tell him plainly that his collar no longer touches his neck.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'oppenheimer-beat-strain-blackboard',
+    characterId: 'oppenheimer',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'He stands at the blackboard with the chalk up and the room waiting, and after a while somebody else finishes the sentence and the meeting moves on.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

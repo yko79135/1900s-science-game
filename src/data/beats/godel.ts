@@ -965,4 +965,32 @@ export const GODEL_BEATS: StoryBeat[] = [
     priority: 6,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'godel-beat-strain-unsent',
+    characterId: 'godel',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'He weighs the bread and the butter the way he would weigh a proof, and the letter to his mother is begun four times and sent none of them.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'godel-beat-strain-cold-soup',
+    characterId: 'godel',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'The plate is set down in front of him and he waits until somebody else has eaten from it, and the soup goes cold while he waits.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'godel-beat-strain-date',
+    characterId: 'godel',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The notebook is open and the shorthand is ready, and by evening the page carries the date and nothing underneath the date.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

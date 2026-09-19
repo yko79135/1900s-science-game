@@ -4,6 +4,7 @@ import type { GameAction } from '../../engine/reducer';
 import type { Change, TurnOption } from '../../engine/turn';
 import { companyHere, researchTotal, turnOptions } from '../../engine/turn';
 import { activeBeat } from '../../engine/beats';
+import { GoalList } from './GoalList';
 import { CHAPTERS_BY_CHARACTER, CHARACTERS, LOCATIONS } from '../../data/content';
 import { pendingContextCards } from '../../engine/reducer';
 import '../../styles/turn.css';
@@ -16,7 +17,7 @@ export interface TurnScreenProps {
 }
 
 const GROUP_LABEL: Record<string, string> = {
-  research: 'The work',
+  research: 'How you spend the year',
   living: 'Getting by',
   people: 'People',
   travel: 'Elsewhere',
@@ -77,7 +78,10 @@ export function TurnScreen({ state, dispatch, onOpenMap, onOpenChronicle }: Turn
         <dl className="turn__stats">
           <div><dt>Research</dt><dd>{researchTotal(player)}</dd></div>
           <div><dt>Funds</dt><dd>{player.resources.funds}</dd></div>
-          <div><dt>Wellbeing</dt><dd>{player.resources.wellbeing}</dd></div>
+          <div className={player.resources.wellbeing <= 2 ? 'turn__stat--low' : undefined}>
+            <dt>Wellbeing</dt>
+            <dd>{player.resources.wellbeing}</dd>
+          </div>
           <div><dt>Health</dt><dd>{player.resources.health}</dd></div>
           <div><dt>Standing</dt><dd>{player.resources.standing}</dd></div>
         </dl>
@@ -106,6 +110,14 @@ export function TurnScreen({ state, dispatch, onOpenMap, onOpenChronicle }: Turn
         </section>
       )}
 
+      {player.resources.wellbeing <= 2 && (
+        <p className="turn__warning" role="status">
+          {player.resources.wellbeing === 0
+            ? 'There is no more work in this year. Rest, or the rest of the life goes with it.'
+            : 'The work is taking more than it gives back. A year off would put it right.'}
+        </p>
+      )}
+
       {cards.length > 0 && (
         <section className="turn__interrupt">
           <p>{cards.length === 1 ? 'Something has happened.' : `${cards.length} things have happened.`}</p>
@@ -114,6 +126,8 @@ export function TurnScreen({ state, dispatch, onOpenMap, onOpenChronicle }: Turn
           </button>
         </section>
       )}
+
+      <GoalList state={state} dispatch={dispatch} />
 
       <div className="turn__groups">
         {groups.map((group) => {

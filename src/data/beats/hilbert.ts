@@ -965,4 +965,32 @@ export const HILBERT_BEATS: StoryBeat[] = [
     priority: 6,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'hilbert-beat-strain-rained-out',
+    characterId: 'hilbert',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'The same line of algebra has stood on the garden blackboard for a week, and the rain has taken half of it and he has not been out to look.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'hilbert-beat-strain-bicycle',
+    characterId: 'hilbert',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'The bicycle stays against the wall a fortnight and his supper is carried out to the study, because he will not come in to the table for it.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'hilbert-beat-strain-chalk',
+    characterId: 'hilbert',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'He stands among the fruit trees with the chalk in his hand and the branches dripping, and goes back indoors without having written anything.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

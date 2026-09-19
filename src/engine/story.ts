@@ -246,6 +246,8 @@ export function conditionMatches(state: GameState, player: PlayerState, conditio
       return condition.projectIds.filter((id) => player.completedProjectIds.includes(id)).length >= condition.count;
     case 'resourceAtLeast':
       return resourceValue(player, condition.resource) >= condition.value;
+    case 'resourceAtMost':
+      return resourceValue(player, condition.resource) <= condition.value;
     case 'insightAcquired':
       return player.insights.some((acquisition) => acquisition.insightId === condition.insightId);
     case 'insightSourceIs':

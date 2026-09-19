@@ -1005,4 +1005,32 @@ export const BOHR_BEATS: StoryBeat[] = [
     priority: 8,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'bohr-beat-strain-dictation',
+    characterId: 'bohr',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'The dictation stops in the middle of a clause for the third time before lunch, and the pen waits, and the clause is given up.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'bohr-beat-strain-before-soup',
+    characterId: 'bohr',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'He leaves his own dinner table before the soup is finished, and the guests below listen to him walking the length of the room and back.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'bohr-beat-strain-ninth-draft',
+    characterId: 'bohr',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The paper is in its ninth version and there will be no tenth, and along the corridor the institute settles the day’s questions without coming to his door.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

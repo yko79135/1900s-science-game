@@ -323,7 +323,10 @@ describe('reducer: attempting and completing a project', () => {
     game = gameReducer(game, { type: 'ATTEMPT_PROJECT', projectId: 'einstein-special-relativity' });
     const player = game.players[0];
     expect(player.completedProjectIds).toContain('einstein-special-relativity');
-    expect(player.currentYear).toBe(1906);
+    // Work costs the years it took: Special Relativity is two years' work, so
+    // it moves the calendar two years, not one.
+    expect(player.currentYear).toBe(1907);
+    expect(player.timeActionsRemaining).toBe(chapterActionBudget(1905, 1909) - 2);
     expect(player.turnActionsRemaining).toBe(2);
     expect(player.legacyPoints).toBeGreaterThan(0);
     expect(player.resources.tokens.theory).toBe(0);

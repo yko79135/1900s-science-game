@@ -994,4 +994,32 @@ export const JOHNSON_BEATS: StoryBeat[] = [
     priority: 6,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'johnson-beat-strain-three-numbers',
+    characterId: 'johnson',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'She checks the one column three times and gets three numbers, and arithmetic she could do in her sleep will not come out right on paper.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'johnson-beat-strain-choir',
+    characterId: 'johnson',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'She misses the Wednesday practice at church for the third week running, and on Thursday a covered dish arrives at the door.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'johnson-beat-strain-folder',
+    characterId: 'johnson',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The trajectory sheets go back into the folder exactly as they came out, and when the engineers ask for the numbers by Friday she tells them to ask somebody else.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

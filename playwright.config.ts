@@ -21,6 +21,11 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        // Set CHROMIUM_PATH where the browser is not where Playwright expects
+        // it; unset, Playwright finds its own, which is the usual case.
+        ...(process.env.CHROMIUM_PATH
+          ? { launchOptions: { executablePath: process.env.CHROMIUM_PATH } }
+          : {}),
       },
     },
   ],

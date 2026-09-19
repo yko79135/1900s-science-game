@@ -126,9 +126,7 @@ export function evaluateTravel(player: PlayerState, destinationId: string): Trav
   if (player.timeActionsRemaining < RELOCATE_TIME_COST) {
     reasons.push('No years remaining in this chapter.');
   }
-  if (player.turnActionsRemaining < RELOCATE_TIME_COST) {
-    reasons.push('No actions remaining this turn.');
-  }
+
   return { allowed: reasons.length === 0, reasons, fundsCost, timeCost: RELOCATE_TIME_COST };
 }
 
@@ -278,6 +276,7 @@ export function canAttemptProject(
   project: ResearchProject,
   turnActionCost = project.timeCost,
 ): ProjectEligibility {
+  void turnActionCost; // The years a project costs are spent, not gated on.
   const reasons: string[] = [];
 
   if (player.completedProjectIds.includes(project.id)) {
@@ -305,11 +304,12 @@ export function canAttemptProject(
       reasons.push(`Requires ${amount} ${token} (has ${player.resources.tokens[token] ?? 0}).`);
     }
   }
+  // A piece of work costs the years it took, and the player reads those years
+  // on the screen. Committing to work longer than the chapter has left is
+  // allowed: it simply consumes the rest of the chapter, which is the choice
+  // a person actually faces late in a life.
   if (player.timeActionsRemaining < 1) {
     reasons.push('No years remaining in this chapter.');
-  }
-  if (player.turnActionsRemaining < turnActionCost) {
-    reasons.push(`Requires ${turnActionCost} turn actions (has ${player.turnActionsRemaining}).`);
   }
   if (player.resources.funds < project.fundsCost) {
     reasons.push(`Requires ${project.fundsCost} Funds (has ${player.resources.funds}).`);

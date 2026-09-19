@@ -212,6 +212,26 @@ function canSpendAction(player: PlayerState, turnCost: number): boolean {
   return player.timeActionsRemaining >= 1 && player.turnActionsRemaining >= turnCost;
 }
 
+/**
+ * Spends several years of a life at once, for work that took several years.
+ *
+ * The year counter is the only clock a player can see, so it is the only one
+ * allowed to stop them. Turn points drain alongside and are floored at zero;
+ * the turn simply ends and the next one begins, which is what a player already
+ * expects after a long stretch of work.
+ */
+function spendYears(player: PlayerState, years: number): Pick<PlayerState, 'timeActionsRemaining' | 'turnActionsRemaining' | 'currentYear'> {
+  const chapter = currentChapter(player);
+  const chapterBudget = chapterActionBudget(chapter.yearStart, chapter.yearEnd);
+  const spend = Math.max(1, Math.min(years, player.timeActionsRemaining));
+  const actionsSpentAfter = chapterBudget - player.timeActionsRemaining + spend;
+  return {
+    timeActionsRemaining: player.timeActionsRemaining - spend,
+    turnActionsRemaining: Math.max(0, player.turnActionsRemaining - spend),
+    currentYear: yearForActionsSpent(chapter.yearStart, chapter.yearEnd, actionsSpentAfter),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Action types
 // ---------------------------------------------------------------------------
@@ -233,6 +253,9 @@ export type GameAction =
   | { type: 'END_CHAPTER' };
 
 const TIME_COST_DEFAULT = 1;
+
+/** Below this age the work is still play, and costs a life nothing. */
+const WORKING_AGE = 16;
 
 /** Draws one deterministic random number from the game's seeded sequence. */
 function drawRandom(state: GameState, maxExclusive: number): { value: number; state: GameState } {
@@ -348,10 +371,10 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         }
       }
 
-      if (!canSpendAction(player, timeCost)) {
-        return log(state, player.currentYear, `Cannot attempt "${project.name}": requires ${timeCost} turn actions.`);
+      if (player.timeActionsRemaining < 1) {
+        return log(state, player.currentYear, `Cannot attempt "${project.name}": no years left in this chapter.`);
       }
-      const projectTiming = spendAction(player, timeCost);
+      const projectTiming = spendYears(player, timeCost);
       next = updatePlayer(next, player.id, (p) => ({
         ...p,
         currentLocationId: effectivePlayer.currentLocationId,
@@ -388,6 +411,14 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         experimentEngineering: 'engineering',
       };
       const tokenType = map[action.kind];
+      // A year bent over the work costs something. Without this the right play
+      // is always to work, and a life with nothing to spend has nothing to
+      // decide. A child reading past bedtime is not burning out, so the cost
+      // begins when the work becomes the person's living.
+      const working = player.currentYear - character.bornYear >= WORKING_AGE;
+      if (working && player.resources.wellbeing <= 0) {
+        return log(state, player.currentYear, `${character.name} cannot face another year like the last one.`);
+      }
       const bonus = location?.researchBonuses[tokenType] ?? 0;
       const usingThoughtExperiment = character.ability.id === 'thought-experiment' && action.kind === 'study' && !player.abilityUsedThisChapter;
       const gained = 1 + bonus + (usingThoughtExperiment ? 1 : 0);
@@ -397,7 +428,11 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         ...genTiming,
         abilityUsedThisChapter: p.abilityUsedThisChapter || usingThoughtExperiment,
         studyProgress: { ...p.studyProgress, [tokenType]: (p.studyProgress[tokenType] ?? 0) + 1 },
-        resources: { ...p.resources, tokens: { ...p.resources.tokens, [tokenType]: (p.resources.tokens[tokenType] ?? 0) + gained } },
+        resources: {
+          ...p.resources,
+          tokens: { ...p.resources.tokens, [tokenType]: (p.resources.tokens[tokenType] ?? 0) + gained },
+          wellbeing: working ? clamp(p.resources.wellbeing - 1, 0, 10) : p.resources.wellbeing,
+        },
       }));
       next = grantAvailableInsights(next, player.id);
       return next;
@@ -446,8 +481,14 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
     case 'TEACH_OR_EARN': {
       if (!canSpendAction(player, TIME_COST_DEFAULT)) return state;
       const location = LOCATIONS[player.currentLocationId];
-      const employment = location?.employment[0];
-      const fundsGain = employment?.fundsPerChapter ?? 2;
+      // Take the best post the city offers, not whichever is listed first: a
+      // grown man should not be stuck in the schoolroom that raised him.
+      const employment = [...(location?.employment ?? [])].sort(
+        (a, b) => (b.fundsPerChapter ?? 0) - (a.fundsPerChapter ?? 0),
+      )[0];
+      // A year of honest work pays something, even where there is no post to
+      // hold. Otherwise a life can be offered an action that changes nothing.
+      const fundsGain = Math.max(1, employment?.fundsPerChapter ?? 2);
       const standingDelta = employment?.standingDelta ?? 0;
       const teachTiming = spendAction(player, TIME_COST_DEFAULT);
       return updatePlayer(state, player.id, (p) => ({
@@ -477,7 +518,7 @@ function reduceGameAction(state: GameState, action: GameAction): GameState {
         ...restTiming,
         resources: {
           ...p.resources,
-          wellbeing: clamp(p.resources.wellbeing + 2, 0, 10),
+          wellbeing: clamp(p.resources.wellbeing + 3, 0, 10),
           health: clamp(p.resources.health + 1, 0, 10),
         },
       }));
@@ -609,14 +650,33 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     return rotateTurn(ended, player.id);
   }
 
-  const next = grantPassiveInsightsToAllPlayers(reduceGameAction(state, action));
+  let next = grantPassiveInsightsToAllPlayers(reduceGameAction(state, action));
   if (action.type === 'END_CHAPTER' || next.phase === 'endgame') return next;
+  next = recoverFromYearAway(state, next, player.id, action);
 
   const updatedPlayer = next.players.find((candidate) => candidate.id === player.id);
   if (updatedPlayer && updatedPlayer.turnActionsRemaining <= 0) {
     return rotateTurn(next, player.id);
   }
   return next;
+}
+
+/**
+ * A year that was not spent bent over the work gives a little back. This is
+ * what keeps a life sustainable without making rest the only answer: teaching,
+ * travelling, arguing in public and sitting with colleagues all count as
+ * living, and a life that does nothing but produce runs itself down.
+ */
+function recoverFromYearAway(before: GameState, after: GameState, playerId: string, action: GameAction): GameState {
+  if (action.type === 'GENERATE_TOKEN' || action.type === 'REST_AND_FAMILY') return after;
+  const was = before.players.find((p) => p.id === playerId);
+  const is = after.players.find((p) => p.id === playerId);
+  if (!was || !is || is.currentYear === was.currentYear) return after;
+  if (is.resources.wellbeing >= 10) return after;
+  return updatePlayer(after, playerId, (p) => ({
+    ...p,
+    resources: { ...p.resources, wellbeing: clamp(p.resources.wellbeing + 1, 0, 10) },
+  }));
 }
 
 function endChapter(state: GameState, playerId: string): GameState {

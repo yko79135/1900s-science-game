@@ -1020,4 +1020,32 @@ export const RAMANUJAN_BEATS: StoryBeat[] = [
     priority: 5,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'ramanujan-beat-strain-late-rice',
+    characterId: 'ramanujan',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'He cooks rice at two in the morning because that is the hour it occurs to him to eat, and the letter home is still three lines long on the table.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'ramanujan-beat-strain-full-plates',
+    characterId: 'ramanujan',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'The food goes back from his room as full as it came for the fourth day running, and they have begun leaving it outside the door rather than asking.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'ramanujan-beat-strain-slate',
+    characterId: 'ramanujan',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'The slate is by the bed and the notebook lies open at a page from last month, and nothing whatever is added to it this week.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

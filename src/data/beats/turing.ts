@@ -1012,4 +1012,32 @@ export const TURING_BEATS: StoryBeat[] = [
     priority: 5,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'turing-beat-strain-turns-back',
+    characterId: 'turing',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'He goes out to run and turns back at the end of the road, and the post on the mat by the door is three weeks deep.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'turing-beat-strain-chain',
+    characterId: 'turing',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'The chain has been slipping for a month and he wheels the bicycle home rather than mend it, and the man on the gate asks whether he is quite all right.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'turing-beat-strain-middle-page',
+    characterId: 'turing',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'He writes the problem out longhand in the middle of the page, the way he always has, and then works outward from it in neither direction.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

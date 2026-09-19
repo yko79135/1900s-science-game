@@ -1003,4 +1003,32 @@ export const EINSTEIN_BEATS: StoryBeat[] = [
     priority: 9,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'einstein-beat-strain-half-read',
+    characterId: 'einstein',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'The applications go back into the drawer half read, and the notebook of questions about clocks has not been opened in a fortnight.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'einstein-beat-strain-collar',
+    characterId: 'einstein',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'His collar is yesterday’s and his coffee has gone cold twice on the desk, and the colleague who walks home with him asks whether he is sleeping at all.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'einstein-beat-strain-clean-sheet',
+    characterId: 'einstein',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'He sits down at nine with a sharpened pencil and a clean sheet, and at noon the sheet is still clean.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

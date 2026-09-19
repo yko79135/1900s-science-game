@@ -1007,4 +1007,32 @@ export const VONNEUMANN_BEATS: StoryBeat[] = [
     priority: 9,
     repeatable: true,
   },
+
+  // -------------------------------------------------------------------------
+  // Strain, when the years of work have taken more than they have given back
+  // -------------------------------------------------------------------------
+  {
+    id: 'vonneumann-beat-strain-leaves-early',
+    characterId: 'vonneumann',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 4 }],
+    text: 'He is the first to leave his own party, before eleven, and the proof he went upstairs to finish is where he left it at lunch.',
+    priority: 40,
+    repeatable: true,
+  },
+  {
+    id: 'vonneumann-beat-strain-receiver',
+    characterId: 'vonneumann',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 2 }],
+    text: 'At three in the morning he lifts the telephone and sets it down again without asking the question, and the house has heard him do it twice this week.',
+    priority: 50,
+    repeatable: true,
+  },
+  {
+    id: 'vonneumann-beat-strain-blank-heading',
+    characterId: 'vonneumann',
+    conditions: [{ type: 'resourceAtMost', resource: 'wellbeing', value: 0 }],
+    text: 'Six committees are waiting on a memorandum from him, and the paper in the typewriter carries the heading and nothing under the heading.',
+    priority: 60,
+    repeatable: true,
+  },
 ];

@@ -106,6 +106,16 @@ export function previewAction(state: GameState, action: GameAction): { changes: 
   };
 }
 
+/** Why an action is greyed out, in words a player can act on. */
+function blockedBecause(state: GameState, action: GameAction): string {
+  const player = state.players[state.activePlayerIndex];
+  if (action.type === 'GENERATE_TOKEN' && player.resources.wellbeing <= 0) {
+    return 'Too worn down to work. Rest first.';
+  }
+  if (player.timeActionsRemaining < 1) return 'No years left in this chapter.';
+  return 'Not possible this year.';
+}
+
 function option(
   state: GameState,
   id: string,
@@ -124,7 +134,7 @@ function option(
     changes: preview.changes,
     years: preview.years || 1,
     enabled: preview.applied,
-    blockedReason: preview.applied ? undefined : 'No time left this chapter.',
+    blockedReason: preview.applied ? undefined : blockedBecause(state, action),
   };
 }
 
@@ -234,7 +244,9 @@ export function turnOptions(state: GameState, player: PlayerState): TurnOption[]
   }
 
   const location = LOCATIONS[player.currentLocationId];
-  const post = location?.employment[0];
+  const post = [...(location?.employment ?? [])].sort(
+    (a, b) => (b.fundsPerChapter ?? 0) - (a.fundsPerChapter ?? 0),
+  )[0];
   options.push(
     option(state, 'earn', 'Teach or take a post', 'living', { type: 'TEACH_OR_EARN' }, post?.title ?? 'Whatever work this city offers'),
   );
