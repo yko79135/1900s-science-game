@@ -34,6 +34,19 @@ const OLD_STYLE: CharacterId[] = [
 
 /** Three pages in five should be somebody speaking. */
 const MIN_SPOKEN_SHARE = 0.6;
+/**
+ * How much of the speech is contracted.
+ *
+ * This is the single number that separates dialogue from literature. People
+ * say "don't", "it's", "I've"; prose says "do not", "it is", "I have". A first
+ * pass at this file reached 78% spoken and still read as riddles, and the
+ * reason was measurable: 12 of its 904 spoken lines contained a contraction.
+ * Everyone was speaking expanded, formal, faintly archaic English, and every
+ * line landed like an epigram.
+ */
+const MIN_CONTRACTION_SHARE = 0.35;
+/** Speech is short. A line that runs long is a paragraph wearing a name tag. */
+const MAX_MEAN_LINE_WORDS = 13;
 /** A page is one beat, not a paragraph. */
 const MAX_PAGE_WORDS = 45;
 /** A few long pages are tolerable; a habit of them is not. */
@@ -50,6 +63,28 @@ const JARGON = [
   'tensor', 'isotope', 'diffraction', 'photoelectric', 'thermodynamic',
   'isomorphism', 'cardinality', 'undecidable', 'stochastic',
 ];
+
+/**
+ * Constructions nobody uses out loud. Each has a spoken form that costs
+ * nothing — "shall" is "will" or "'ll", "that we may" is "so we can" — and
+ * leaving them in is what makes a period character sound like a translation
+ * of a period character.
+ */
+const STILTED = [
+  /\bI shall\b/i,
+  /\bwe shall\b/i,
+  /\bshall not\b/i,
+  /\bthat we may\b/i,
+  /\bthat I may\b/i,
+  /\bneed not\b/i,
+  /\bmay not\b/i,
+  /\bhas it not\b/i,
+  /\bis it not\b/i,
+  /\bnothing whatever\b/i,
+  /\bvery well then\b/i,
+];
+
+const CONTRACTION = /\w['’](?:s|t|re|ve|ll|d|m|n)\b/i;
 
 function wordsOf(page: StoryPage): number {
   return `${page.narration ?? ''} ${page.dialogue ?? ''}`.trim().split(/\s+/).filter(Boolean).length;
@@ -75,6 +110,33 @@ describe('a rewritten life reads as a conversation', () => {
           share,
           `${id}: ${spoken} of ${pages.length} pages are spoken (${Math.round(share * 100)}%)`,
         ).toBeGreaterThanOrEqual(MIN_SPOKEN_SHARE);
+      });
+
+      it('sounds like speech, not like prose', () => {
+        const spoken = pages.map((entry) => entry.page.dialogue).filter(Boolean) as string[];
+        const contracted = spoken.filter((line) => CONTRACTION.test(line)).length;
+        const share = contracted / Math.max(1, spoken.length);
+        expect(
+          share,
+          `${id}: only ${contracted} of ${spoken.length} spoken lines use a contraction (${Math.round(share * 100)}%)`,
+        ).toBeGreaterThanOrEqual(MIN_CONTRACTION_SHARE);
+      });
+
+      it('keeps spoken lines short', () => {
+        const spoken = pages.map((entry) => entry.page.dialogue).filter(Boolean) as string[];
+        const mean = spoken.reduce((sum, line) => sum + line.split(/\s+/).filter(Boolean).length, 0) / Math.max(1, spoken.length);
+        expect(Number(mean.toFixed(1)), `${id}: spoken lines average ${mean.toFixed(1)} words`).toBeLessThanOrEqual(MAX_MEAN_LINE_WORDS);
+      });
+
+      it('avoids constructions nobody says out loud', () => {
+        const offenders: string[] = [];
+        for (const entry of pages) {
+          const line = entry.page.dialogue;
+          if (!line) continue;
+          const hit = STILTED.find((pattern) => pattern.test(line));
+          if (hit) offenders.push(`${entry.sceneId}: "${line.slice(0, 60)}"`);
+        }
+        expect(offenders.slice(0, 8)).toEqual([]);
       });
 
       it('names whoever is speaking', () => {

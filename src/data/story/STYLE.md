@@ -104,6 +104,63 @@ departure, a room after everyone has gone.
 character themselves speaks too — `speaker: 'ALBERT'`. A reader must never
 have to guess who is talking.
 
+## Dialogue is speech, not prose — the failure to avoid
+
+The first pass at this rewrite reached 78% spoken lines and still read as a
+string of riddles. The problem was not the amount of dialogue. It was that
+every line was *written* rather than *said*.
+
+Two things caused it, and both are measurable.
+
+**1. Nobody used a contraction.** Eleven lines out of nine hundred. Everyone
+said "it is not", "I shall", "cannot", "do not", so every character sounded
+like a translated stage play. Ordinary speech contracts constantly. Target at
+least a third of spoken lines carrying one, and in practice you will write more
+than that without trying, if you write what people say.
+
+Never write: *I shall*, *we shall*, *that we may*, *need not*, *is it not*,
+*very well then*. Write *I'll*, *we'll*, *so we can*, *you don't have to*,
+*isn't it*, *all right*.
+
+**2. Every line tried to be memorable.** Each one landed like a closing line —
+an image, a reversal, an epigram:
+
+> "Show me the clock hung above all the others, that we may go and ask it."
+> "The others move the furniture about. This one takes out a wall."
+> "There is something in every room. Go to sleep."
+> "Then you were hunting the wrong animal."
+
+These are good sentences and that is exactly what is wrong with them. Put
+twenty in a row and the reader stops following a conversation and starts
+decoding a poem. **No line may sound like a closing line.** At most one line
+per scene may be striking, and only at the end of it.
+
+Most lines should be unremarkable on their own. The meaning lives in the
+sequence, not in the sentence.
+
+### What real speech has that this file did not
+
+- **Contractions, everywhere.** "It's", "don't", "I've", "can't", "that's".
+- **Clumsiness.** "Wait." / "Say that again." / "No, I mean—" / "Sorry, what?"
+  / "Hang on." / "I don't get it." This is not filler. It is the sound of a
+  person thinking while talking.
+- **People answering the wrong question,** repeating themselves, trailing off,
+  interrupting, and asking again because the first answer did not land.
+- **Plainness.** If a character means "I think the textbook is wrong", they say
+  "I think the textbook is wrong". They do not gesture at it with an image.
+  Implication is what makes writing read as a riddle.
+- **Short lines.** Five to fifteen words is normal; the average across a life
+  should sit around twelve or below. One-word lines are good. A long speech is
+  several pages.
+
+### Period characters, modern speech
+
+These people lived a century ago, but write them the way a good subtitled film
+translates old dialogue: contemporary, plain, unfussy. Period flavour comes
+from *what* they talk about — trams, telegrams, coal, rent — never from
+inverted syntax. A character may be formal with a professor and loose with a
+friend; that is register, and register is fine. Archaic grammar is not.
+
 ## The voice
 
 - Close third person, present tense, for narration. Plain words. Short
