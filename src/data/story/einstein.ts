@@ -40,23 +40,64 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'ulm',
             narration:
-              'Snow still lies grey in the gutters of Ulm on the March morning the boy arrives. His mother frets about the shape of his head until the doctor laughs at her and goes home. Below the window a cart goes past with a load of copper wire for the works down by the river.',
+              'Ulm, March. Snow still lies grey in the gutters. Below the window a cart goes past with a load of copper wire.',
           },
           {
-            id: 'wires',
-            narration:
-              'Europe is being rewired. Gaslight is giving way to filament, horses to timetables, and the men who wind the dynamos believe the physics behind them is very nearly finished — a few decimals left to tidy, and then the work is done. Two brothers in Munich are about to bet a family on that belief.',
-          },
-          {
-            id: 'late',
-            narration:
-              'The boy is slow to speak. He seems to build each sentence somewhere out of sight and then say it once, whole, as though it had cost him something to make.',
+            id: 'head',
             speaker: 'PAULINE',
-            dialogue: 'Say it to me, then. Say anything at all.',
+            dialogue: 'Hermann. Look at the shape of his head.',
+          },
+          {
+            id: 'head-2',
+            speaker: 'HERMANN',
+            dialogue: 'It is a head. He will grow into it.',
+          },
+          {
+            id: 'finished',
+            speaker: 'HERMANN',
+            dialogue: 'They say the science of it is finished. A few decimals left to tidy, and then it is only wire and cost.',
+          },
+          {
+            id: 'munich',
+            narration:
+              'They move to Munich before the year is out. Hermann and his brother Jakob take a workshop and start winding wire onto iron.',
+          },
+          {
+            id: 'silent',
+            narration: 'Two years on, the boy still does not speak. Not one word that anybody has caught.',
+          },
+          {
+            id: 'silent-2',
+            speaker: 'PAULINE',
+            dialogue: 'Say anything at all. Say my name. Say the word for spoon.',
+          },
+          {
+            id: 'silent-3',
+            speaker: 'HERMANN',
+            dialogue: 'Leave him. He is building it somewhere we cannot see it. He will say it when it is whole.',
+          },
+          {
+            id: 'soup',
+            narration: 'When it comes, months later, it comes whole. He puts down his spoon at supper.',
+          },
+          {
+            id: 'soup-2',
+            speaker: 'ALBERT',
+            dialogue: 'The soup is too hot.',
+          },
+          {
+            id: 'soup-3',
+            speaker: 'PAULINE',
+            dialogue: 'He can speak. Albert — why have you never said anything before?',
+          },
+          {
+            id: 'soup-4',
+            speaker: 'ALBERT',
+            dialogue: 'Everything was all right before.',
           },
         ],
         historicalNote:
-          'Einstein was born in Ulm in March 1879 and the family moved to Munich, where his father and uncle ran an electrical business. His late speech as a small child is reported in standard biographies. The dialogue is dramatized wording, not a quotation.',
+          'Einstein was born in Ulm in March 1879; the family moved to Munich, where his father Hermann and uncle Jakob ran an electrical business. His late speech as a small child, and the family story that his first remark was a complaint about the soup, are repeated in the standard biographies. All dialogue is dramatized wording, not quotation.',
       },
     ],
   },
@@ -89,30 +130,159 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'compass',
+            id: 'sickbed',
             narration:
-              'He is five and ill in bed when his father puts a pocket compass into his hand. Wherever Albert turns it, the needle swings back to the same stubborn north. Nothing is touching it. Something enormous and invisible is holding it, and the room is suddenly not the size he thought it was.',
+              'He is five and ill in bed. His father sits on the edge of it and puts something small and brass into his hand.',
+          },
+          {
+            id: 'flat',
+            speaker: 'HERMANN',
+            dialogue: 'Hold it flat. Let it settle.',
+          },
+          {
+            id: 'wobble',
+            speaker: 'ALBERT',
+            dialogue: 'It is a needle. It wobbles and then it stops.',
+          },
+          {
+            id: 'turn',
+            speaker: 'HERMANN',
+            dialogue: 'Good. Now turn yourself around.',
+          },
+          {
+            id: 'turning',
+            narration: 'He turns, quilt and all, until the window is where the door was.',
+          },
+          {
+            id: 'didnt',
+            speaker: 'ALBERT',
+            dialogue: 'The needle did not turn.',
+          },
+          {
+            id: 'no',
+            speaker: 'HERMANN',
+            dialogue: 'No.',
+          },
+          {
+            id: 'why',
+            speaker: 'ALBERT',
+            dialogue: 'I turned. Why did it not?',
+          },
+          {
+            id: 'pulling',
+            speaker: 'HERMANN',
+            dialogue: 'Something is pulling on it. It has been pulling the whole time.',
+          },
+          {
+            id: 'where',
+            speaker: 'ALBERT',
+            dialogue: 'From where?',
+          },
+          {
+            id: 'earth',
+            speaker: 'HERMANN',
+            dialogue: 'The earth, they say. From under the floor and out past the roof and everywhere in between.',
+          },
+          {
+            id: 'touching',
+            speaker: 'ALBERT',
+            dialogue: 'But nothing is touching it. Not your hand. Not the glass. Nothing.',
+          },
+          {
+            id: 'again',
+            narration: 'He turns the case again, slowly, watching the needle refuse him.',
+          },
+          {
+            id: 'room',
+            speaker: 'ALBERT',
+            dialogue: 'Papa. There is something in this room that I cannot see.',
+          },
+          {
+            id: 'sleep',
+            speaker: 'HERMANN',
+            dialogue: 'There is something in every room. Go to sleep.',
+          },
+          {
+            id: 'cant',
+            speaker: 'ALBERT',
+            dialogue: 'I cannot now.',
           },
           {
             id: 'workshop',
             narration:
-              'Downstairs the workshop smells of hot varnish and brass filings. His uncle winds armatures for the street lighting of small Bavarian towns and lets the boy hold the ends of things.',
+              'Downstairs the workshop smells of hot varnish and brass filings. Uncle Jakob winds wire onto iron for the street lamps of small Bavarian towns.',
+          },
+          {
+            id: 'hunt',
             speaker: 'JAKOB',
-            dialogue: 'Whatever it is you are hunting, give it a name first. Call it x. Then hunt it until it holds still.',
+            dialogue: 'You are always hunting something. Here is the trick. The thing you are hunting has no name yet, so you give it one. Call it x.',
+          },
+          {
+            id: 'hunt-2',
+            speaker: 'JAKOB',
+            dialogue: 'Then you chase it around the page until it holds still and tells you what it was.',
+          },
+          {
+            id: 'hunt-3',
+            speaker: 'ALBERT',
+            dialogue: 'And if it never holds still?',
+          },
+          {
+            id: 'hunt-4',
+            speaker: 'JAKOB',
+            dialogue: 'Then you were hunting the wrong animal. Wind this.',
           },
           {
             id: 'school',
-            narration:
-              'At the Gymnasium the lessons are recited in unison and corrected with a stick. He works through a geometry book alone in a fortnight and is marked down for insolence. A boy who asks why is a nuisance in a room built for boys who answer when asked.',
+            narration: 'At the Gymnasium the lessons are recited in unison and corrected with a stick.',
+          },
+          {
+            id: 'school-2',
+            speaker: 'THE TEACHER',
+            dialogue: 'Einstein. The class is on page forty.',
+          },
+          {
+            id: 'school-3',
+            speaker: 'ALBERT',
+            dialogue: 'I finished the book.',
+          },
+          {
+            id: 'school-5',
+            speaker: 'ALBERT',
+            dialogue: 'In a fortnight. It is a good book. It only asks questions it can answer.',
+          },
+          {
+            id: 'school-6',
+            speaker: 'THE TEACHER',
+            dialogue: 'Your presence in this room rots the respect of the class. Sit down and recite with the others.',
+          },
+          {
+            id: 'contracts',
+            narration: 'Then the lighting contracts go to a larger firm. The workshop is sold in the spring.',
+          },
+          {
+            id: 'alps',
+            speaker: 'HERMANN',
+            dialogue: 'We go over the Alps. There is work in Italy or there is work nowhere.',
+          },
+          {
+            id: 'stay',
+            speaker: 'HERMANN',
+            dialogue: 'You stay and finish the certificate. A lodging house on the far side of the park.',
+          },
+          {
+            id: 'maja',
+            speaker: 'MAJA',
+            dialogue: 'It has one window and the window faces a wall. I went and looked.',
           },
           {
             id: 'choice',
-            narration:
-              'Then the lighting contracts go to a larger firm. The workshop is sold, the family will try again over the Alps, and Albert is to stay behind in a Munich lodging house until his certificate is finished. He is fifteen. The room has one window and it faces a wall.',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Rent is Fridays. The window does not open. Three years is a long time, boy. What will you do with yourself?',
             choices: [
               {
                 id: 'leave',
-                label: 'Find a way over the Alps and follow them',
+                label: 'Get out. Follow them over the Alps.',
                 effects: [
                   { type: 'flag', flag: 'einstein.leftMunich', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
@@ -121,7 +291,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'endure',
-                label: 'Stay, keep your head down, and finish the certificate',
+                label: 'Stay. Head down. Finish the certificate.',
                 effects: [
                   { type: 'flag', flag: 'einstein.enduredMunich', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: -1 },
@@ -130,7 +300,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'workshop',
-                label: 'Stay, but spend the evenings with the dynamos',
+                label: 'Stay — and spend every evening with the dynamos.',
                 effects: [
                   { type: 'flag', flag: 'einstein.workshopYears', value: true },
                   { type: 'resources', effects: { network: 1, funds: 1 } },
@@ -140,7 +310,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'The compass his father showed him, the electrical business, his impatience with rote Gymnasium teaching, and the family’s move to Italy after the business failed are all documented. Dialogue is dramatized.',
+          'The compass his father showed him when he was ill as a small boy, the family electrical workshop run with his uncle Jakob, his impatience with rote Gymnasium teaching, and the family’s move to Italy after the business lost its contracts are all documented. The teacher and the landlady stand in for people whose names are not recorded. Dialogue is dramatized.',
       },
     ],
   },
@@ -176,23 +346,80 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'train',
             narration:
-              'The train climbs out of Bavaria in the dark and comes down into a morning full of shouting and lemon trees. In his coat he has a doctor’s note saying his nerves require rest, and a mathematics report saying the rest of him is entirely well.',
+              'The train climbs out of Bavaria in the dark and comes down into a morning full of shouting and lemon trees.',
           },
           {
-            id: 'father',
+            id: 'door',
+            speaker: 'MAJA',
+            dialogue: 'You are supposed to be in Munich.',
+          },
+          {
+            id: 'note',
+            speaker: 'ALBERT',
+            dialogue: 'I had a note from a doctor. My nerves require rest.',
+          },
+          {
+            id: 'note-2',
+            speaker: 'ALBERT',
+            dialogue: 'And a note from the mathematics master saying the rest of me is entirely well. I showed them one at a time.',
+          },
+          {
+            id: 'kitchen',
             narration:
-              'The new works are already in trouble. His father does the arithmetic at the kitchen table twice, as if it might come out differently the second time.',
+              'The new works are already in trouble. His father does the arithmetic at the kitchen table twice, as if it might come out differently.',
+          },
+          {
+            id: 'engineer',
             speaker: 'HERMANN',
-            dialogue: 'The firm needs an engineer, Albert. Not a philosopher. Engineers eat.',
+            dialogue: 'The firm needs an engineer, Albert. Not a philosopher.',
           },
           {
-            id: 'papers',
-            narration:
-              'That winter he gives up his German citizenship. For the next five years he will belong to no country at all, which turns out to be a condition he can live in comfortably, and one that makes every clerk in Europe suspicious of him.',
+            id: 'engineer-2',
+            speaker: 'ALBERT',
+            dialogue: 'I could be an engineer who thinks.',
+          },
+          {
+            id: 'engineer-3',
+            speaker: 'HERMANN',
+            dialogue: 'Engineers eat. Think afterwards, at your leisure, on a full stomach.',
+          },
+          {
+            id: 'consulate',
+            narration: 'That winter he signs a paper at a consulate and stops being German.',
+          },
+          {
+            id: 'what',
+            speaker: 'MAJA',
+            dialogue: 'What are you now, then?',
+          },
+          {
+            id: 'nothing',
+            speaker: 'ALBERT',
+            dialogue: 'Nothing at all. It is restful.',
+          },
+          {
+            id: 'mama',
+            speaker: 'MAJA',
+            dialogue: 'Mama will cry.',
+          },
+          {
+            id: 'mama-2',
+            speaker: 'ALBERT',
+            dialogue: 'Mama will cry and then ask what it cost. Five years belonging to no country — it suits me perfectly.',
+          },
+          {
+            id: 'clerks',
+            speaker: 'MAJA',
+            dialogue: 'And every clerk in Europe will look at you twice.',
+          },
+          {
+            id: 'clerks-2',
+            speaker: 'ALBERT',
+            dialogue: 'They already do. Now at least they will have a reason.',
           },
         ],
         historicalNote:
-          'Einstein left the Munich Gymnasium early and joined his family in Italy, and renounced his German citizenship in 1896, remaining stateless until he became Swiss in 1901. Dialogue is dramatized.',
+          'Einstein left the Munich Gymnasium early and joined his family in Italy after their business failed, and renounced his German citizenship in 1896, remaining stateless until he became Swiss in 1901. Dialogue is dramatized.',
       },
       {
         id: 'stayed',
@@ -214,19 +441,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'letters',
-            narration:
-              'The lodging house keeps his room and the letters keep arriving with Italian stamps on them. He answers about one in three, and the ones he answers are mostly about a problem he has been carrying since the compass.',
+            narration: 'The lodging house keeps his room. The letters keep arriving with Italian stamps on them.',
           },
           {
-            id: 'maja',
-            narration:
-              'His sister writes the way she talks, in a rush, without punctuation, and the last line of every letter is the same question in a different order.',
+            id: 'eating',
             speaker: 'MAJA',
-            dialogue: 'Mama wants to know whether you are eating. I told her you were reading. She did not find that as funny as I did.',
+            dialogue: 'Mama wants to know whether you are eating.',
+          },
+          {
+            id: 'eating-2',
+            speaker: 'MAJA',
+            dialogue: 'I told her you were reading. She did not find that as funny as I did.',
+          },
+          {
+            id: 'reply',
+            narration: 'He answers about one letter in three, and the ones he answers keep circling back to the needle.',
+          },
+          {
+            id: 'ask',
+            speaker: 'ALBERT',
+            dialogue: 'Ask Papa this for me. If nothing touches the needle, what is in the space between?',
+          },
+          {
+            id: 'ask-2',
+            speaker: 'MAJA',
+            dialogue: 'Papa says: wire, if you are lucky. Papa says come south.',
+          },
+          {
+            id: 'south',
+            speaker: 'ALBERT',
+            dialogue: 'Tell them I am finishing it. Tell them the room is fine.',
+          },
+          {
+            id: 'timetable',
+            narration:
+              'He does not go south. He learns the timetable of the trains that do by heart, which is not the same thing.',
+          },
+          {
+            id: 'bricks',
+            speaker: 'ALBERT',
+            dialogue: 'The room is not fine. I have counted the bricks in the wall opposite. Twice. They agree.',
           },
         ],
         historicalNote:
-          'Einstein was left in Munich to finish school when the family moved to Italy. This variant follows a life that endured the year rather than leaving it. Dialogue is dramatized.',
+          'Einstein was left behind in Munich to finish school when the family moved to Italy. This telling follows a boy who endured that year rather than walking out of it. Dialogue is dramatized.',
       },
     ],
   },
@@ -259,25 +517,108 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'school',
+            id: 'aarau',
             narration:
-              'He has failed the entrance examination once already, in everything but mathematics and physics, and been sent to a school in Aarau to fill in the rest of himself. Here the teachers ask what he thinks and then, alarmingly, wait for the answer.',
+              'He failed the entrance examination once — everything except mathematics and physics — and was sent here to fill in the rest of himself.',
           },
           {
-            id: 'thought',
-            narration:
-              'On the hill above the town he asks himself what he would see if he ran alongside a beam of light at exactly its own speed. A wave standing perfectly still. Frozen crests, going nowhere. Nobody has ever seen such a thing, and the equations for light do not permit it to exist.',
+            id: 'wall',
+            speaker: 'THE TEACHER',
+            dialogue: 'You have been on that wall for an hour, Einstein. What are you doing?',
           },
           {
-            id: 'aloud',
-            narration:
-              'He says it out loud to the grass, because there is nobody else on the hill, and because saying a thing out loud is how he finds out whether it is stupid.',
+            id: 'running',
             speaker: 'ALBERT',
-            dialogue: 'Then either the light is wrong, or the running is. And the light is not wrong.',
+            dialogue: 'Running.',
+          },
+          {
+            id: 'sitting',
+            speaker: 'THE TEACHER',
+            dialogue: 'You are sitting down.',
+          },
+          {
+            id: 'beam',
+            speaker: 'ALBERT',
+            dialogue: 'In my head I am running beside a beam of light. Keeping up with it exactly.',
+          },
+          {
+            id: 'follow',
+            speaker: 'THE TEACHER',
+            dialogue: 'I do not follow.',
+          },
+          {
+            id: 'pond',
+            speaker: 'ALBERT',
+            dialogue: 'Drop a stone in the pond behind the church. What do you get?',
+          },
+          {
+            id: 'rings',
+            speaker: 'THE TEACHER',
+            dialogue: 'Rings. Going outward.',
+          },
+          {
+            id: 'bank',
+            speaker: 'ALBERT',
+            dialogue: 'Now walk along the bank beside one ring, at exactly the speed it travels. What does it look like?',
+          },
+          {
+            id: 'still',
+            speaker: 'THE TEACHER',
+            dialogue: 'Still, I suppose. A ridge of water sitting there, doing nothing.',
+          },
+          {
+            id: 'lamp',
+            speaker: 'ALBERT',
+            dialogue: 'Light is rings too. A lamp throws them, the sun throws them, out through the room in every direction.',
+          },
+          {
+            id: 'frozen',
+            speaker: 'ALBERT',
+            dialogue: 'So if I run beside a beam at its own speed, I should see a ridge of light standing still beside me. Frozen. Going nowhere.',
+          },
+          {
+            id: 'never',
+            speaker: 'ALBERT',
+            dialogue: 'Nobody has ever seen such a thing. Not in any workshop in Europe. Not once.',
+          },
+          {
+            id: 'faster',
+            speaker: 'THE TEACHER',
+            dialogue: 'Perhaps nobody has run fast enough.',
+          },
+          {
+            id: 'rules',
+            speaker: 'ALBERT',
+            dialogue: 'That is the trouble. The rules we have for light will not allow it to stand still. Run as hard as you like — it leaves you at the same speed.',
+          },
+          {
+            id: 'rain',
+            speaker: 'THE TEACHER',
+            dialogue: 'Nonsense. Run through rain and the rain hits you harder.',
+          },
+          {
+            id: 'rain-2',
+            speaker: 'ALBERT',
+            dialogue: 'Yes. Rain behaves. Light does not. That is the whole of my afternoon.',
+          },
+          {
+            id: 'one',
+            speaker: 'THE TEACHER',
+            dialogue: 'Then one of the two must be wrong. The light, or the running.',
+          },
+          {
+            id: 'light',
+            speaker: 'ALBERT',
+            dialogue: 'The light is not wrong. So it is the running. I have no idea yet what that means.',
+          },
+          {
+            id: 'write',
+            speaker: 'THE TEACHER',
+            dialogue: 'Neither have I. Write it down anyway.',
           },
         ],
         historicalNote:
-          'Einstein described this thought experiment about riding alongside a light beam, from his year at the Aarau cantonal school, in his own later autobiographical writing. The wording here is dramatized.',
+          'Einstein described this thought experiment — what he would see if he chased a light beam at its own speed — in his own later autobiographical writing, and dated it to his year at the Aarau cantonal school, where teaching was far freer than in Munich. The teacher here stands in for that school; the wording is dramatized.',
       },
     ],
   },
@@ -308,17 +649,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'certificate',
-            narration:
-              'The Aarau certificate is a single folded sheet and it is worth more than everything else he owns. He is seventeen, admitted, stateless, and about to be the youngest person in the room for four years running.',
+            narration: 'The Aarau certificate is one folded sheet. It is worth more than everything else he owns.',
+          },
+          {
+            id: 'citizen',
+            speaker: 'THE CLERK',
+            dialogue: 'Citizenship.',
+          },
+          {
+            id: 'citizen-2',
+            speaker: 'ALBERT',
+            dialogue: 'None.',
+          },
+          {
+            id: 'citizen-3',
+            speaker: 'THE CLERK',
+            dialogue: 'That is not a thing a man is permitted to be.',
+          },
+          {
+            id: 'citizen-4',
+            speaker: 'ALBERT',
+            dialogue: 'And yet here I am, holding up your queue.',
+          },
+          {
+            id: 'age',
+            speaker: 'THE CLERK',
+            dialogue: 'Age.',
+          },
+          {
+            id: 'age-2',
+            speaker: 'ALBERT',
+            dialogue: 'Seventeen.',
+          },
+          {
+            id: 'age-3',
+            speaker: 'THE CLERK',
+            dialogue: 'You will be the youngest in the section. Every year, for four years.',
+          },
+          {
+            id: 'age-4',
+            speaker: 'ALBERT',
+            dialogue: 'I shall try to be insufferable about it.',
           },
           {
             id: 'gate',
-            narration:
-              'At the gate he stops long enough to notice that nobody is watching him arrive. It is the first genuinely good news of his adult life.',
+            narration: 'At the gate he stops. Trams grind past on the wet rails. Nobody is watching him arrive.',
+          },
+          {
+            id: 'good',
+            speaker: 'ALBERT',
+            dialogue: 'Nobody here knows who my father was. That is the best news I have ever had.',
           },
         ],
         historicalNote:
-          'Einstein completed his schooling at Aarau and entered the Zürich polytechnic in 1896. The scene is dramatized.',
+          'Einstein completed his schooling at Aarau and entered the Zürich polytechnic in 1896 as a stateless seventeen-year-old, younger than his classmates. The clerk and the exchange are dramatized.',
       },
       {
         id: 'default',
@@ -337,16 +721,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           {
             id: 'ledger',
             narration:
-              'He finishes it out in the room that faces a wall, and what he carries out of Munich fits in one case and a notebook. The case holds shirts. The notebook holds a question about light, written in a hand that has not yet learned to be careful.',
+              'He finishes it out in the room that faces a wall. What he carries out of Munich fits in one case and one notebook.',
+          },
+          {
+            id: 'porter',
+            speaker: 'THE PORTER',
+            dialogue: 'Is that everything?',
+          },
+          {
+            id: 'porter-2',
+            speaker: 'ALBERT',
+            dialogue: 'The case has shirts in it. The notebook is the heavy one.',
+          },
+          {
+            id: 'porter-3',
+            speaker: 'THE PORTER',
+            dialogue: 'Books?',
+          },
+          {
+            id: 'porter-4',
+            speaker: 'ALBERT',
+            dialogue: 'One question. I have had it since I was five and I have not put it down yet.',
+          },
+          {
+            id: 'porter-5',
+            speaker: 'THE PORTER',
+            dialogue: 'Must be a good one.',
+          },
+          {
+            id: 'porter-6',
+            speaker: 'ALBERT',
+            dialogue: 'It is about light. Ask me again in ten years.',
           },
           {
             id: 'ahead',
-            narration:
-              'Ahead of him is a country that does not care who his father was, and a language of examinations he has no intention of learning to speak well. He gets on the train anyway.',
+            narration: 'Ahead of him is a country that does not care who his father was.',
+          },
+          {
+            id: 'exams',
+            speaker: 'ALBERT',
+            dialogue: 'And a whole language of examinations that I have no intention of learning to speak well.',
+          },
+          {
+            id: 'late',
+            speaker: 'THE PORTER',
+            dialogue: 'Train is late anyway.',
+          },
+          {
+            id: 'late-2',
+            speaker: 'ALBERT',
+            dialogue: 'Good. Gives me time to be wrong about something else.',
           },
         ],
         historicalNote:
-          'A divergent closing for a formation that did not follow the documented route out of Munich. The question about light is the documented constant.',
+          'A closing for a boy who stayed in Munich to the end rather than following his family south. The question about light, and the move into Switzerland afterwards, are the documented constants.',
       },
     ],
   },
@@ -380,24 +808,87 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'city',
-            narration:
-              'Zürich smells of lake water and coal smoke and cheap coffee. The lectures are excellent and they stop at about 1890, which is precisely where the interesting part starts.',
+            narration: 'Zürich smells of lake water, coal smoke and cheap coffee. The benches in the theatre are full by eight.',
           },
           {
-            id: 'grossmann',
-            narration:
-              'A classmate takes notes in a hand so even it looks printed, and does not appear to mind that the seat beside him is empty three mornings in four.',
+            id: 'weber',
+            speaker: 'PROFESSOR WEBER',
+            dialogue: 'We begin, as we always begin, with the foundations.',
+          },
+          {
+            id: 'foundations',
+            narration: 'The lectures are excellent and they stop at about 1890, which is exactly where the interesting part starts.',
+          },
+          {
+            id: 'ask',
+            speaker: 'ALBERT',
+            dialogue: 'Herr Professor. When do we reach the last ten years?',
+          },
+          {
+            id: 'ask-2',
+            speaker: 'PROFESSOR WEBER',
+            dialogue: 'When you have earned the right to be bored by them, Einstein. Sit down.',
+          },
+          {
+            id: 'maxwell',
+            speaker: 'ALBERT',
+            dialogue: 'He has not said Maxwell once. Not once in a month.',
+          },
+          {
+            id: 'maxwell-2',
             speaker: 'GROSSMANN',
-            dialogue: 'Sit where you like. I write it all down anyway, and I am told my handwriting is my best feature.',
+            dialogue: 'He will. Give him thirty years.',
+          },
+          {
+            id: 'notes',
+            narration: 'Grossmann takes notes in a hand so even it looks printed.',
+          },
+          {
+            id: 'notes-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'Sit wherever you like. Come or do not come. I write it all down regardless.',
+          },
+          {
+            id: 'notes-3',
+            speaker: 'ALBERT',
+            dialogue: 'Why?',
+          },
+          {
+            id: 'notes-4',
+            speaker: 'GROSSMANN',
+            dialogue: 'I am told my handwriting is my best feature. It would be a waste not to use it on somebody.',
+          },
+          {
+            id: 'mileva',
+            narration: 'There is one woman in the section. She has read the new papers and disagrees with him about all of them.',
+          },
+          {
+            id: 'mileva-2',
+            speaker: 'MILEVA',
+            dialogue: 'You have read that badly.',
+          },
+          {
+            id: 'mileva-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have read it twice.',
+          },
+          {
+            id: 'mileva-4',
+            speaker: 'MILEVA',
+            dialogue: 'Then you have read it badly twice. Come and argue about it properly. I have coffee and you have nothing else to do.',
+          },
+          {
+            id: 'arithmetic',
+            narration: 'Four years, then a teaching diploma, then — if a professor likes you — an assistantship.',
           },
           {
             id: 'choice',
-            narration:
-              'Four years, then a teaching diploma, then — if a professor likes you — an assistantship. Everyone in the section understands the arithmetic. He has to decide what to spend the years on.',
+            speaker: 'GROSSMANN',
+            dialogue: 'Everyone in the section can do that arithmetic. The only open question is what you spend the four years on. So. What will it be?',
             choices: [
               {
                 id: 'reading',
-                label: 'Read Maxwell and Boltzmann alone and skip the lectures',
+                label: 'Skip the lectures. Read Maxwell and Boltzmann alone.',
                 effects: [
                   { type: 'flag', flag: 'einstein.selfTaught', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
@@ -406,7 +897,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'lectures',
-                label: 'Attend everything and make yourself useful to the professors',
+                label: 'Attend everything. Make yourself useful to the professors.',
                 effects: [
                   { type: 'flag', flag: 'einstein.goodStudent', value: true },
                   { type: 'resources', effects: { standing: 1, network: 1 } },
@@ -414,7 +905,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'laboratory',
-                label: 'Live in the physics laboratory and burn your hands',
+                label: 'Live in the laboratory and burn your hands.',
                 effects: [
                   { type: 'flag', flag: 'einstein.laboratoryYears', value: true },
                   { type: 'resources', effects: { health: -1, network: 1 } },
@@ -424,7 +915,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'Einstein studied at the Zürich polytechnic from 1896, befriended Marcel Grossmann there, cut lectures to read modern physics on his own, and relied on Grossmann’s notes. Dialogue is dramatized.',
+          'Einstein entered the Zürich polytechnic in 1896, was taught physics by Professor Heinrich Weber, befriended Marcel Grossmann, and studied alongside Mileva Marić, the only woman in their section. He cut lectures to read the newest physics on his own and relied on Grossmann’s notes. Dialogue is dramatized.',
       },
     ],
   },
@@ -459,20 +950,71 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'notes',
-            narration:
-              'The notebooks come across the table in a stack, corners squared. Grossmann has been to every lecture Albert has missed, and has never once said so out loud.',
+            narration: 'The notebooks come across the café table in a stack, corners squared.',
           },
           {
-            id: 'said',
-            narration:
-              'They argue about whether a physicist needs the newest mathematics or only the mathematics that works. Grossmann is winning, which he does by not raising his voice.',
+            id: 'every',
+            speaker: 'ALBERT',
+            dialogue: 'You went to every lecture I missed.',
+          },
+          {
+            id: 'every-2',
             speaker: 'GROSSMANN',
-            dialogue: 'You will pass because I write neatly. What you do afterwards is entirely your own affair, and I expect it will be strange.',
+            dialogue: 'I went to every lecture. That yours were missed is a separate fact, and I have never once mentioned it.',
           },
           {
-            id: 'later',
-            narration:
-              'Years from now Albert will send this man a problem about curved space and get back, by return of post, the name of the mathematics he needs. Neither of them knows that this afternoon.',
+            id: 'every-3',
+            speaker: 'ALBERT',
+            dialogue: 'You just did.',
+          },
+          {
+            id: 'every-4',
+            speaker: 'GROSSMANN',
+            dialogue: 'I said it was separate. I did not say I had forgotten it.',
+          },
+          {
+            id: 'argue',
+            speaker: 'ALBERT',
+            dialogue: 'A physicist needs the mathematics that works. Not the newest kind.',
+          },
+          {
+            id: 'argue-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'You only say that because the newest kind is difficult.',
+          },
+          {
+            id: 'argue-3',
+            speaker: 'ALBERT',
+            dialogue: 'I say it because nature is not showing off.',
+          },
+          {
+            id: 'winning',
+            narration: 'Grossmann is winning, which he does by never raising his voice.',
+          },
+          {
+            id: 'pass',
+            speaker: 'GROSSMANN',
+            dialogue: 'You will pass because I write neatly. What you do afterwards is entirely your own affair.',
+          },
+          {
+            id: 'pass-2',
+            speaker: 'ALBERT',
+            dialogue: 'And what do you imagine I will do?',
+          },
+          {
+            id: 'pass-3',
+            speaker: 'GROSSMANN',
+            dialogue: 'Something strange. I would put money on it, if I had any.',
+          },
+          {
+            id: 'future',
+            speaker: 'ALBERT',
+            dialogue: 'If I ever need a kind of mathematics I have never heard of, I shall write to you.',
+          },
+          {
+            id: 'future-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'Do. I shall keep the post office standing by.',
           },
         ],
         effects: [
@@ -480,7 +1022,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'resources', effects: { network: 1 } },
         ],
         historicalNote:
-          'Marcel Grossmann was Einstein’s fellow student and lifelong friend; Einstein used his lecture notes and later relied on him for the differential geometry behind general relativity. Dialogue is dramatized.',
+          'Marcel Grossmann was Einstein’s fellow student and lifelong friend; Einstein sat few lectures and used Grossmann’s notes to pass, and years later wrote to him for the geometry he needed for general relativity. Dialogue is dramatized.',
       },
       {
         id: 'letters',
@@ -501,13 +1043,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'parcel',
-            narration:
-              'The parcel comes wrapped in brown paper and tied with a length of string too good to throw away. Inside are four months of lectures in that impossible even handwriting, and a note that reads, in full: you owe me nothing, which is the most expensive kind of debt.',
+            narration: 'The parcel comes wrapped in brown paper and tied with a length of string too good to throw away.',
           },
           {
-            id: 'answer',
-            narration:
-              'He writes back the same evening, three pages, none of them about the lectures.',
+            id: 'inside',
+            narration: 'Inside: four months of lectures, copied out in that impossible even handwriting.',
+          },
+          {
+            id: 'note',
+            speaker: 'GROSSMANN',
+            dialogue: 'You owe me nothing.',
+          },
+          {
+            id: 'note-2',
+            speaker: 'ALBERT',
+            dialogue: 'That is the most expensive kind of debt there is, and he knows it.',
+          },
+          {
+            id: 'reply',
+            narration: 'He writes back the same evening. Three pages, none of them about the lectures.',
+          },
+          {
+            id: 'reply-2',
+            speaker: 'ALBERT',
+            dialogue: 'I have a question about light and nobody here will sit still long enough for it.',
+          },
+          {
+            id: 'reply-3',
+            speaker: 'ALBERT',
+            dialogue: 'You always sat still for it. Even when you were certain I was wrong.',
+          },
+          {
+            id: 'reply-4',
+            speaker: 'ALBERT',
+            dialogue: 'Especially then.',
           },
         ],
         effects: [
@@ -515,7 +1084,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'resources', effects: { network: 1 } },
         ],
         historicalNote:
-          'A dramatized version of the same documented friendship for a life that spent these years away from Zürich.',
+          'The same documented friendship, told for a life that spent these years away from Zürich. Grossmann’s notes and his steadiness are on the record; the parcel is dramatized.',
       },
     ],
   },
@@ -549,24 +1118,74 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'stuck',
-            narration:
-              'The calculation has not moved in nine days. He eats bread and does the sums again and gets the same wrong answer with more decimal places, which is somehow worse.',
+            narration: 'The stove is out. The calculation has not moved in nine days.',
+          },
+          {
+            id: 'stuck-2',
+            speaker: 'ALBERT',
+            dialogue: 'Nine days. The same wrong answer every night, only tidier.',
           },
           {
             id: 'violin',
-            narration:
-              'So he takes down the violin. Mozart does not solve anything, but he plays until the shape of the problem changes, the way a room changes when you move one chair.',
+            narration: 'Then he takes down the violin.',
+          },
+          {
+            id: 'door',
             speaker: 'THE LANDLADY',
-            dialogue: 'Herr Einstein. It is one in the morning. It is a very beautiful noise and it is one in the morning.',
+            dialogue: 'Herr Einstein.',
+          },
+          {
+            id: 'door-2',
+            speaker: 'THE LANDLADY',
+            dialogue: 'It is one in the morning.',
+          },
+          {
+            id: 'door-3',
+            speaker: 'ALBERT',
+            dialogue: 'Is it? I am sorry. I shall stop.',
+          },
+          {
+            id: 'door-4',
+            speaker: 'THE LANDLADY',
+            dialogue: 'It is a very beautiful noise and it is one in the morning.',
+          },
+          {
+            id: 'knot',
+            speaker: 'ALBERT',
+            dialogue: 'May I ask you something. When you cannot undo a knot, what do you do?',
+          },
+          {
+            id: 'knot-2',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Put it down. Go to bed. It is looser in the morning.',
+          },
+          {
+            id: 'knot-3',
+            speaker: 'ALBERT',
+            dialogue: 'That is precisely what this is. Only I cannot go to bed, so I play instead.',
+          },
+          {
+            id: 'knot-4',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Then play it quieter.',
           },
           {
             id: 'quieter',
             narration:
-              'He apologises through the door, and plays more quietly, and at some point before dawn writes down a line that is not wrong.',
+              'He plays quieter. Mozart solves nothing, but the shape of the problem changes, the way a room changes when somebody moves one chair.',
+          },
+          {
+            id: 'line',
+            narration: 'Some time before dawn he writes down a line that is not wrong.',
+          },
+          {
+            id: 'line-2',
+            speaker: 'ALBERT',
+            dialogue: 'There. She was right. It was looser.',
           },
         ],
         historicalNote:
-          'Einstein played the violin from childhood and throughout his life, often while thinking. The particular night is dramatized.',
+          'Einstein played the violin from childhood and all his life, frequently while stuck on a problem. The particular night, and the landlady, are dramatized.',
       },
       {
         id: 'settled',
@@ -586,17 +1205,49 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'evening',
-            narration:
-              'Somebody two floors down has a piano and no shame, and on Thursdays they meet in the middle. He is not a good violinist. He is an unstoppable one.',
+            id: 'piano',
+            narration: 'Somebody two floors down has a piano and no shame. On Thursdays they meet in the middle.',
           },
           {
-            id: 'after',
-            narration:
-              'Afterwards, on the stairs, he finds that the thing that would not come apart all week has quietly come apart. He does not tell anyone that this is his method. They would want to see the method.',
+            id: 'bring',
+            speaker: 'THE NEIGHBOUR',
+            dialogue: 'Thursday. Bring the fiddle. Do not bring the physics.',
+          },
+          {
+            id: 'bring-2',
+            speaker: 'ALBERT',
+            dialogue: 'I cannot always tell them apart.',
+          },
+          {
+            id: 'unstoppable',
+            narration: 'He is not a good violinist. He is an unstoppable one.',
+          },
+          {
+            id: 'ahead',
+            speaker: 'THE NEIGHBOUR',
+            dialogue: 'You are ahead again. You are always ahead.',
+          },
+          {
+            id: 'ahead-2',
+            speaker: 'ALBERT',
+            dialogue: 'I am where the music is going. You are where it is.',
+          },
+          {
+            id: 'stairs',
+            narration: 'Afterwards, on the stairs, the thing that would not come apart all week has quietly come apart.',
+          },
+          {
+            id: 'again',
+            speaker: 'THE NEIGHBOUR',
+            dialogue: 'Same time next week?',
+          },
+          {
+            id: 'again-2',
+            speaker: 'ALBERT',
+            dialogue: 'Yes. And do not tell anyone this is how I work. They would want to come and watch.',
           },
         ],
-        historicalNote: 'Einstein’s lifelong violin playing is documented; this evening is dramatized.',
+        historicalNote: 'Einstein’s lifelong violin playing is documented. The Thursday evenings and the neighbour are dramatized.',
       },
     ],
   },
@@ -627,17 +1278,54 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'list',
-            narration:
-              'The diploma is real. So is the list on the corridor wall: four assistantships, four names, none of them his. He reads it twice, which is once more than necessary.',
+            narration: 'The diploma is real. So is the list pinned to the corridor wall.',
+          },
+          {
+            id: 'list-2',
+            narration: 'Four assistantships. Four names. None of them his.',
+          },
+          {
+            id: 'classmate',
+            speaker: 'A CLASSMATE',
+            dialogue: 'Weber took two of them. Neither of them you.',
+          },
+          {
+            id: 'classmate-2',
+            speaker: 'ALBERT',
+            dialogue: 'He told me once that I was clever, and that I did not let myself be told anything.',
+          },
+          {
+            id: 'classmate-3',
+            speaker: 'A CLASSMATE',
+            dialogue: 'Was he wrong?',
+          },
+          {
+            id: 'classmate-4',
+            speaker: 'ALBERT',
+            dialogue: 'No. That is what makes it sting.',
           },
           {
             id: 'letters',
-            narration:
-              'He writes to professors in three countries, politely, then less politely, then politely again. Some of them do not answer. He tells himself that a man who skipped the lectures cannot be surprised when the lecturers skip him, and finds that this does not help as much as it should.',
+            narration: 'He writes to professors in three countries. Politely, then less politely, then politely again.',
+          },
+          {
+            id: 'letters-3',
+            speaker: 'ALBERT',
+            dialogue: 'A man who skipped the lectures cannot be astonished when the lecturers skip him.',
+          },
+          {
+            id: 'letters-4',
+            speaker: 'A CLASSMATE',
+            dialogue: 'Does saying that help?',
+          },
+          {
+            id: 'letters-5',
+            speaker: 'ALBERT',
+            dialogue: 'Not nearly as much as it ought to.',
           },
         ],
         historicalNote:
-          'Einstein received his diploma in 1900 but, unlike his classmates, was not given an assistantship, and spent two years without an academic post. Dramatized wording.',
+          'Einstein took his diploma in 1900 but, alone among his classmates, was given no assistantship, and spent two years without an academic post. His relations with Professor Weber had soured. Dialogue is dramatized.',
       },
       {
         id: 'diploma',
@@ -656,17 +1344,70 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'passed',
-            narration:
-              'He passes. The margin is not enormous and the handwriting he passed on was not his own, and he says so, cheerfully, to the man who lent it.',
+            narration: 'He passes. The margin is not enormous.',
           },
           {
-            id: 'ahead',
-            narration:
-              'They sit by the lake until the steamers stop running. Neither of them has a post. One of them has a father who knows people, and is too decent to mention it tonight.',
+            id: 'passed-2',
+            speaker: 'ALBERT',
+            dialogue: 'The handwriting I passed on was not mine.',
+          },
+          {
+            id: 'passed-3',
+            speaker: 'GROSSMANN',
+            dialogue: 'No.',
+          },
+          {
+            id: 'passed-4',
+            speaker: 'ALBERT',
+            dialogue: 'I should like that noted. Loudly. In front of people.',
+          },
+          {
+            id: 'passed-5',
+            speaker: 'GROSSMANN',
+            dialogue: 'It is noted. Sit down.',
+          },
+          {
+            id: 'lake',
+            narration: 'They sit by the lake until the steamers stop running.',
+          },
+          {
+            id: 'post',
+            speaker: 'GROSSMANN',
+            dialogue: 'Neither of us has a post.',
+          },
+          {
+            id: 'post-2',
+            speaker: 'ALBERT',
+            dialogue: 'One of us has a father who knows people.',
+          },
+          {
+            id: 'post-3',
+            speaker: 'GROSSMANN',
+            dialogue: 'And one of us is too decent to mention it tonight.',
+          },
+          {
+            id: 'post-4',
+            speaker: 'ALBERT',
+            dialogue: 'You just mentioned it.',
+          },
+          {
+            id: 'post-5',
+            speaker: 'GROSSMANN',
+            dialogue: 'I mentioned that I was not mentioning it. Entirely different thing.',
+          },
+          {
+            id: 'end',
+            speaker: 'ALBERT',
+            dialogue: 'Whatever happens next, I am not going to be grateful quietly.',
+          },
+          {
+            id: 'end-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'I should be disappointed in you if you were.',
           },
         ],
         historicalNote:
-          'Grossmann’s father later recommended Einstein for the Bern patent office post. The evening is dramatized.',
+          'Grossmann’s father later recommended Einstein for the post at the Bern patent office. The evening by the lake is dramatized.',
       },
       {
         id: 'default',
@@ -683,17 +1424,55 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'pack',
-            narration:
-              'The room goes back to the landlady with the stove blacked and the books returned. Four years reduce to one case and one notebook, and it is the notebook that is heavy.',
+            narration: 'The room goes back to the landlady with the stove blacked and the books returned.',
+          },
+          {
+            id: 'pack-2',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Four years, and this is all of it?',
+          },
+          {
+            id: 'pack-3',
+            speaker: 'ALBERT',
+            dialogue: 'One case and one notebook.',
+          },
+          {
+            id: 'pack-4',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Which is the heavy one?',
+          },
+          {
+            id: 'pack-5',
+            speaker: 'ALBERT',
+            dialogue: 'The notebook. It always is.',
+          },
+          {
+            id: 'letter',
+            narration: 'On the bare table there is one letter, written, folded, and not yet posted.',
           },
           {
             id: 'wait',
-            narration:
-              'What happens next depends on somebody else answering a letter. It is the first time in his life that has been true, and he does not care for it at all.',
+            speaker: 'THE LANDLADY',
+            dialogue: 'And now?',
+          },
+          {
+            id: 'wait-2',
+            speaker: 'ALBERT',
+            dialogue: 'Now everything waits on somebody else answering a letter.',
+          },
+          {
+            id: 'wait-3',
+            speaker: 'THE LANDLADY',
+            dialogue: 'That happens to everybody sooner or later.',
+          },
+          {
+            id: 'wait-4',
+            speaker: 'ALBERT',
+            dialogue: 'It has never once happened to me. I do not care for it at all.',
           },
         ],
         historicalNote:
-          'A divergent closing for an education that did not follow the documented Zürich route. Einstein’s two years without a post afterwards are documented.',
+          'A closing for an education that did not run through the documented Zürich route. The two years without a post that followed his diploma are documented.',
       },
     ],
   },
@@ -727,28 +1506,88 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'adverts',
-            narration:
-              'Two years of tutoring advertisements: mathematics and physics, most thorough instruction, moderate fee. Two years of trial lessons free of charge to anyone curious. He gets a stand-in post at a technical school and loses it when the regular man comes back.',
+            narration: 'A folded newspaper on the table, his own advertisement circled in ink. Mathematics and physics. Trial lesson free of charge.',
+          },
+          {
+            id: 'anyone',
+            speaker: 'MILEVA',
+            dialogue: 'Did anybody come?',
+          },
+          {
+            id: 'anyone-2',
+            speaker: 'ALBERT',
+            dialogue: 'One. An engineer who wanted his son drilled for an examination.',
+          },
+          {
+            id: 'anyone-4',
+            speaker: 'ALBERT',
+            dialogue: 'I taught the boy something interesting instead. He is no longer my pupil.',
+          },
+          {
+            id: 'posts',
+            narration: 'Two years of this. A stand-in post at a technical school, and then the regular man comes back and the post goes with him.',
+          },
+          {
+            id: 'posts-2',
+            speaker: 'MILEVA',
+            dialogue: 'Four men from our section have assistantships. You have a diploma.',
+          },
+          {
+            id: 'posts-3',
+            speaker: 'ALBERT',
+            dialogue: 'Four men from our section went to the lectures.',
+          },
+          {
+            id: 'posts-5',
+            speaker: 'ALBERT',
+            dialogue: 'Weber would have taken me if I had once said Herr Professor as though I meant it.',
           },
           {
             id: 'stateless',
-            narration:
-              'He is a citizen of nowhere with a teaching diploma nobody wants. In the winter he pays for Swiss papers with money he does not really have, on the theory that a country is a useful thing to be from.',
+            narration: 'In the winter he pays for Swiss papers with money he does not have. Being from nowhere has stopped being restful.',
+          },
+          {
+            id: 'stateless-2',
+            speaker: 'THE CLERK',
+            dialogue: 'The fee is payable in full. Today.',
+          },
+          {
+            id: 'stateless-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have belonged to nothing for five years. It turns out nothing does not employ people.',
           },
           {
             id: 'bern',
-            narration:
-              'Then a letter. A friend’s father has spoken to a director in Bern, and there is an examination to sit, and a desk at the end of it that has nothing whatever to do with physics.',
+            narration: 'Then a letter from Zürich, in a hand so even it looks printed.',
+          },
+          {
+            id: 'bern-2',
             speaker: 'GROSSMANN',
-            dialogue: 'It is not a chair, Albert. It is a desk, a salary, and eight hours a day of other men’s machines. I think you would be extremely good at it.',
+            dialogue: 'My father has spoken to the director of the patent office in Bern. There is an examination to sit.',
+          },
+          {
+            id: 'bern-3',
+            speaker: 'ALBERT',
+            dialogue: 'Patents. Marcel, I would be a clerk.',
+          },
+          {
+            id: 'bern-4',
+            speaker: 'GROSSMANN',
+            dialogue: 'You would be a clerk with a salary, eight hours of other men’s machines, and every evening of your life to yourself.',
+          },
+          {
+            id: 'bern-7',
+            speaker: 'MILEVA',
+            dialogue: 'Take it. We cannot go on eating arguments.',
           },
           {
             id: 'choice',
-            narration: 'The examination is in three weeks. He has to decide what he is willing to be for a while.',
+            speaker: 'MILEVA',
+            dialogue: 'The examination is in three weeks. What are you willing to be, and for how long?',
             choices: [
               {
                 id: 'patent',
-                label: 'Take the desk in Bern',
+                label: 'Sit the examination. Be a clerk in Bern.',
                 effects: [
                   { type: 'flag', flag: 'einstein.patentPost', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: 1 },
@@ -757,7 +1596,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'university',
-                label: 'Keep writing to professors until one of them answers',
+                label: 'Keep writing to professors until one of them answers.',
                 effects: [
                   { type: 'flag', flag: 'einstein.heldOut', value: true },
                   { type: 'resources', effects: { standing: 1, funds: -1 } },
@@ -765,7 +1604,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'teaching',
-                label: 'Take whatever school will have you',
+                label: 'Take whatever school will have you.',
                 effects: [
                   { type: 'flag', flag: 'einstein.schoolmaster', value: true },
                   { type: 'resources', effects: { funds: 1, wellbeing: -1 } },
@@ -775,7 +1614,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'Einstein advertised private lessons, held temporary teaching posts, became a Swiss citizen in 1901, and took the Bern patent examiner post in 1902 after Marcel Grossmann’s father recommended him. Dialogue is dramatized.',
+          'Einstein advertised private lessons, held temporary teaching posts, became a Swiss citizen in 1901, and took the Bern patent examiner post in 1902 after Marcel Grossmann’s father recommended him. The clerk stands in for officials whose names are not recorded. Dialogue is dramatized.',
       },
     ],
   },
@@ -810,24 +1649,64 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'desk',
-            narration:
-              'Eight hours a day of other men’s inventions. He learns to find the flaw in a machine in about the time it takes to unroll the drawing, and to write the refusal in language that does not humiliate the inventor.',
+            narration: 'The examining room in Bern. Rolled drawings to the ceiling, a clock on the wall, and a desk too high to slouch at.',
+          },
+          {
+            id: 'haller',
+            speaker: 'HALLER',
+            dialogue: 'Read every application as though the man were a liar and a genius at the same time.',
+          },
+          {
+            id: 'haller-2',
+            speaker: 'ALBERT',
+            dialogue: 'Both at once?',
+          },
+          {
+            id: 'haller-3',
+            speaker: 'HALLER',
+            dialogue: 'Always both. Find the place where the machine would stop. Then write the refusal so it does not humiliate him.',
           },
           {
             id: 'drawer',
-            narration:
-              'The second drawer of the desk holds work of his own. When footsteps come along the corridor the drawer closes, and it closes silently, because he has oiled it.',
+            narration: 'The second drawer holds work of his own. He has oiled the runners so it shuts without a sound.',
+          },
+          {
+            id: 'drawer-2',
+            speaker: 'BESSO',
+            dialogue: 'Haller can hear that drawer from the corridor.',
+          },
+          {
+            id: 'drawer-3',
+            speaker: 'ALBERT',
+            dialogue: 'Haller can hear a fly change its mind. He has never said one word about it.',
+          },
+          {
+            id: 'drawer-4',
+            speaker: 'BESSO',
+            dialogue: 'Because your reports are the best in the building.',
+          },
+          {
+            id: 'drawer-5',
+            speaker: 'ALBERT',
+            dialogue: 'Then the arrangement is honest. He buys the daylight. I keep the evenings.',
           },
           {
             id: 'walk',
-            narration:
-              'Walking home along the arcades he argues about clocks and signals with a friend from the office, at length, in both directions.',
+            narration: 'Walking home under the arcades they argue, and go past his own street, and turn back, and go past it again.',
+          },
+          {
+            id: 'walk-2',
             speaker: 'BESSO',
-            dialogue: 'Albert. We have now walked past your own street twice, and you are still talking about two clocks that do not agree.',
+            dialogue: 'That is twice now. Twice past your own door, over two clocks that will not agree.',
+          },
+          {
+            id: 'walk-3',
+            speaker: 'ALBERT',
+            dialogue: 'They will agree eventually. One of us has to give, and I am beginning to think it is not me.',
           },
         ],
         historicalNote:
-          'Einstein worked as a patent examiner in Bern from 1902 and discussed physics with his colleague Michele Besso, whom he thanked in the 1905 relativity paper. The drawer and the dialogue are dramatized.',
+          'Einstein worked as a patent examiner in Bern from 1902 under the director Friedrich Haller, and discussed physics daily with his colleague Michele Besso, whom he thanked in the 1905 relativity paper. The drawer and all dialogue are dramatized.',
       },
       {
         id: 'lean',
@@ -848,17 +1727,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'sums',
-            narration:
-              'He does the household arithmetic first, because it is the harder problem. Rent, coal, the tutoring fee that has not arrived, the fee he will have to ask for twice.',
+            narration: 'He does the household arithmetic first, because it is the harder problem.',
+          },
+          {
+            id: 'sums-2',
+            speaker: 'MILEVA',
+            dialogue: 'Rent, coal, and the tutoring fee that has not come.',
+          },
+          {
+            id: 'sums-3',
+            speaker: 'ALBERT',
+            dialogue: 'I shall ask for it twice. The second time is always the one that works.',
+          },
+          {
+            id: 'sums-5',
+            speaker: 'ALBERT',
+            dialogue: 'And if he never pays, we shall be poor and interesting instead of poor and bored.',
           },
           {
             id: 'work',
-            narration:
-              'Then he clears the table and does the other kind. Poverty, he decides, is only intolerable when it is also boring, and he has been careful never to be bored.',
+            narration: 'Then he clears the table of that arithmetic and does the other kind, which costs nothing.',
+          },
+          {
+            id: 'work-2',
+            speaker: 'MILEVA',
+            dialogue: 'You are the only man I know who is cheerful about this.',
+          },
+          {
+            id: 'work-3',
+            speaker: 'ALBERT',
+            dialogue: 'I am not cheerful. I am refusing to be bored. From outside they look the same.',
           },
         ],
         historicalNote:
-          'Einstein lived on very little income in the years before and around the patent office post. The scene is dramatized.',
+          'Einstein lived on very little in the years before and around the patent office post. The morning is dramatized.',
       },
       {
         id: 'default',
@@ -878,13 +1780,31 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'trade',
-            narration:
-              'The bargain is simple and he made it with his eyes open: they buy the daylight, he keeps the evenings, and nobody asks what he does with them.',
+            narration: 'The bargain is simple and he made it with his eyes open.',
+          },
+          {
+            id: 'trade-2',
+            speaker: 'ALBERT',
+            dialogue: 'They buy the daylight. I keep the evenings.',
+          },
+          {
+            id: 'trade-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'The evenings are not very long.',
+          },
+          {
+            id: 'trade-4',
+            speaker: 'ALBERT',
+            dialogue: 'No. But nobody asks me what I do with them.',
+          },
+          {
+            id: 'trade-6',
+            speaker: 'ALBERT',
+            dialogue: 'An assistant has the whole day — and a professor telling him what to do with it. I know which bargain I would rather hold.',
           },
           {
             id: 'evening',
-            narration:
-              'The evenings are not long. They are, however, entirely his, which is a thing no assistant to a professor in Europe can say.',
+            narration: 'The lamp is filled twice a week. It is the only honest record of what happens in this room.',
           },
         ],
         historicalNote: 'A dramatized composite of Einstein’s salaried years outside academia.',
@@ -917,22 +1837,144 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'metal',
-            narration:
-              'Shine light on a metal plate and it gives up electrons. Make the light brighter and it gives up more of them, but not faster ones. Change the colour and everything changes. Waves cannot do this. Waves have never been asked to.',
+            narration: 'The lamp is lit and the manuscript is finished. He has read the first page four times to see whether he still believes it.',
+          },
+          {
+            id: 'broken',
+            speaker: 'BESSO',
+            dialogue: 'You have the face of a man who has broken something.',
+          },
+          {
+            id: 'broken-2',
+            speaker: 'ALBERT',
+            dialogue: 'I have. Sit down, Michele. Shine a light on a clean metal plate. What happens?',
+          },
+          {
+            id: 'broken-3',
+            speaker: 'BESSO',
+            dialogue: 'It gets warm.',
+          },
+          {
+            id: 'broken-4',
+            speaker: 'ALBERT',
+            dialogue: 'It spits out tiny pieces of itself. Little specks of charge. The light knocks them loose.',
+          },
+          {
+            id: 'brighter',
+            speaker: 'ALBERT',
+            dialogue: 'Turn the lamp up. Twice as bright. What should the specks do?',
+          },
+          {
+            id: 'brighter-2',
+            speaker: 'BESSO',
+            dialogue: 'Harder push, faster specks. Any engineer would tell you that.',
+          },
+          {
+            id: 'brighter-3',
+            speaker: 'ALBERT',
+            dialogue: 'They do not go faster. More of them come off, and every single one leaves at exactly the speed it did before.',
+          },
+          {
+            id: 'colour',
+            speaker: 'ALBERT',
+            dialogue: 'Now leave the brightness alone and change the colour. Red to blue.',
+          },
+          {
+            id: 'colour-3',
+            speaker: 'ALBERT',
+            dialogue: 'Fewer come off. And every one of them leaves faster.',
+          },
+          {
+            id: 'colour-5',
+            speaker: 'ALBERT',
+            dialogue: 'Brightness changes how many. Colour changes how hard. Brightness does nothing to the hardness at all.',
+          },
+          {
+            id: 'colour-6',
+            speaker: 'BESSO',
+            dialogue: 'A wave cannot do that. A bigger wave hits harder. That is what a wave is.',
+          },
+          {
+            id: 'jug',
+            narration: 'He gets up and fetches the water jug off the washstand and puts it in Besso’s hands.',
+          },
+          {
+            id: 'jug-2',
+            speaker: 'ALBERT',
+            dialogue: 'Pour that on the flowerbed. The whole jug, in a steady stream.',
+          },
+          {
+            id: 'jug-3',
+            speaker: 'BESSO',
+            dialogue: 'The soil drinks it. Nothing moves.',
+          },
+          {
+            id: 'jug-4',
+            speaker: 'ALBERT',
+            dialogue: 'Now freeze the same water into hailstones and throw them one at a time.',
+          },
+          {
+            id: 'jug-5',
+            speaker: 'BESSO',
+            dialogue: 'Something gets knocked out of the bed.',
+          },
+          {
+            id: 'jug-6',
+            speaker: 'ALBERT',
+            dialogue: 'Only if one single stone is heavy enough. Throwing twice as many small ones does nothing whatever.',
+          },
+          {
+            id: 'hail',
+            speaker: 'BESSO',
+            dialogue: 'You are about to tell me that light is hail.',
+          },
+          {
+            id: 'hail-2',
+            speaker: 'ALBERT',
+            dialogue: 'I am telling you light arrives in separate lumps. Countable ones. And a blue lump is a heavier stone than a red one.',
+          },
+          {
+            id: 'hail-4',
+            speaker: 'ALBERT',
+            dialogue: 'Brightness is how many stones a second. Colour is how heavy each one is. That is the entire paper, in a jug of water.',
           },
           {
             id: 'quanta',
-            narration:
-              'So he stops asking them to. Light arrives in lumps: separate, countable, each carrying what its colour is worth. It explains the plate exactly, and it disagrees with a hundred years of triumphant optics.',
+            speaker: 'BESSO',
+            dialogue: 'And a hundred years of men who proved light is a wave?',
+          },
+          {
+            id: 'quanta-2',
+            speaker: 'ALBERT',
+            dialogue: 'Were not wrong. That is the part that keeps me awake at night.',
+          },
+          {
+            id: 'quanta-4',
+            speaker: 'ALBERT',
+            dialogue: 'And it cannot be both, and it is both, and nobody alive knows how. I have written it down anyway.',
+          },
+          {
+            id: 'quanta-6',
+            speaker: 'ALBERT',
+            dialogue: 'The lump needs a name. I call it a quantum. The word only means a portion — a helping.',
+          },
+          {
+            id: 'quanta-8',
+            speaker: 'ALBERT',
+            dialogue: 'Like soup. Light comes in helpings, Michele, and you cannot be served half of one.',
           },
           {
             id: 'revolutionary',
-            narration:
-              'He tells a friend that of everything he has written this year, this is the only piece that is genuinely revolutionary, and he does not say it as a boast. He says it the way a man says there is a crack in the wall.',
+            narration: 'He ties the pages with string. Of everything on this desk tonight, it is the one that frightens him.',
+          },
+          {
+            id: 'revolutionary-3',
+            speaker: 'ALBERT',
+            dialogue: 'The others move the furniture about. This one takes out a wall.',
           },
         ],
         historicalNote:
-          'Einstein’s 1905 light-quantum paper explained the photoelectric effect and later won him the Nobel Prize. He described it in correspondence as the only revolutionary thing among his 1905 papers; the wording here is dramatized.',
+          'Einstein’s 1905 paper proposed that light is absorbed and emitted in discrete packets, explaining why the colour of light — not its brightness — sets the speed of the electrons a metal gives up. It later won him the Nobel Prize, and he called it in correspondence the only genuinely revolutionary thing he wrote that year. The conversation with Besso is dramatized.',
       },
       {
         id: 'default',
@@ -947,17 +1989,41 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'idea',
-            narration:
-              'It arrives late and in a different room from the one he expected, but it arrives whole: light in countable pieces, each one worth exactly what its colour says.',
+            narration: 'It arrives late, and in a different room from the one he expected, and it arrives whole.',
+          },
+          {
+            id: 'idea-2',
+            speaker: 'THE LANDLADY',
+            dialogue: 'That lamp has been burning since Thursday.',
+          },
+          {
+            id: 'idea-3',
+            speaker: 'ALBERT',
+            dialogue: 'Answer me something. Pour water on a flowerbed and nothing shifts. Why does one hailstone shift it?',
+          },
+          {
+            id: 'idea-4',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Because a hailstone is a lump and water is not.',
+          },
+          {
+            id: 'idea-5',
+            speaker: 'ALBERT',
+            dialogue: 'Just so. Light is hail. It comes in lumps, I can prove it, and nobody is going to thank me.',
           },
           {
             id: 'cost',
-            narration:
-              'He knows what he is asking people to give up. He posts it anyway. There is no polite version of this idea.',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Will it pay your rent?',
+          },
+          {
+            id: 'cost-2',
+            speaker: 'ALBERT',
+            dialogue: 'Not a centime. There is no polite way to say it either. I am posting it in the morning.',
           },
         ],
         historicalNote:
-          'A divergent breakthrough for a life that reached the light-quantum idea somewhere other than Bern in 1905. The physics is documented; the setting is not.',
+          'A breakthrough for a life that reached the light-in-packets idea somewhere other than Bern in 1905. The physics is documented; the setting and the landlady are not.',
       },
     ],
   },
@@ -987,22 +2053,104 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'jitter',
-            narration:
-              'Grains suspended in water jitter, and have jittered under microscopes for eighty years while everyone agreed it was mysterious and went back to work.',
+            narration: 'A borrowed microscope, a drop of water on a slide, and one grain of pollen that will not hold still.',
+          },
+          {
+            id: 'jitter-2',
+            speaker: 'ALBERT',
+            dialogue: 'Look at it. Left. Back. Nowhere. Left again.',
+          },
+          {
+            id: 'jitter-3',
+            speaker: 'MILEVA',
+            dialogue: 'It has done that under microscopes for eighty years. Everyone agrees it is mysterious and goes to lunch.',
+          },
+          {
+            id: 'jitter-4',
+            speaker: 'ALBERT',
+            dialogue: 'What is hitting it?',
+          },
+          {
+            id: 'jitter-5',
+            speaker: 'MILEVA',
+            dialogue: 'Nothing is hitting it. The water is still.',
+          },
+          {
+            id: 'crowd',
+            speaker: 'ALBERT',
+            dialogue: 'The water is not still. The water is a crowd.',
+          },
+          {
+            id: 'crowd-3',
+            speaker: 'ALBERT',
+            dialogue: 'Stand a man in the middle of the market square at noon. Shoulders on every side of him, all shoving.',
+          },
+          {
+            id: 'crowd-4',
+            speaker: 'ALBERT',
+            dialogue: 'Mostly the shoves cancel. Now and again more arrive from the left than the right, and he staggers.',
+          },
+          {
+            id: 'crowd-6',
+            speaker: 'MILEVA',
+            dialogue: 'From an upstairs window you would see only a man twitching in an empty square.',
+          },
+          {
+            id: 'crowd-7',
+            speaker: 'MILEVA',
+            dialogue: 'But your grain is a thousand times too big to be shifted by one of them.',
+          },
+          {
+            id: 'crowd-8',
+            speaker: 'ALBERT',
+            dialogue: 'By one, yes. But they do not arrive evenly, and they arrive in their millions.',
+          },
+          {
+            id: 'mach',
+            speaker: 'MILEVA',
+            dialogue: 'Half of Vienna says atoms are only a way of talking. Nobody has ever seen one.',
+          },
+          {
+            id: 'mach-2',
+            speaker: 'ALBERT',
+            dialogue: 'Then let the way of talking make a prediction, and we shall see who is only talking.',
           },
           {
             id: 'bookkeeping',
-            narration:
-              'He does the bookkeeping instead: how far a grain should wander in a second if it is being shoved from every side by things too small to see. The answer is a number. Numbers can be measured against.',
+            narration: 'He does the bookkeeping of the shoving: how far a grain should wander in one second, if it is jostled by things too small to see.',
+          },
+          {
+            id: 'bookkeeping-2',
+            speaker: 'ALBERT',
+            dialogue: 'There. A number. So far, in one second, for a grain that size, in water at that warmth.',
+          },
+          {
+            id: 'bookkeeping-3',
+            speaker: 'MILEVA',
+            dialogue: 'And if a man with a microscope measures it and gets something else?',
+          },
+          {
+            id: 'bookkeeping-4',
+            speaker: 'ALBERT',
+            dialogue: 'Then there are no atoms and I am a fool, and the whole argument is settled by Tuesday.',
           },
           {
             id: 'atoms',
-            narration:
-              'Atoms had been a convenience, a way of talking. Now they leave footprints, and the footprints have a size.',
+            speaker: 'MILEVA',
+            dialogue: 'And if he gets your number?',
+          },
+          {
+            id: 'atoms-2',
+            speaker: 'ALBERT',
+            dialogue: 'Then nobody may call them a way of talking ever again. They will have left footprints, and the footprints will have a size.',
+          },
+          {
+            id: 'atoms-3',
+            narration: 'It is not a picture of an atom. It is better than that. It is a number somebody else can go out and break.',
           },
         ],
         historicalNote:
-          'Einstein’s 1905 paper on Brownian motion gave a quantitative test for molecular reality; experiments soon confirmed it. The scene is dramatized.',
+          'Einstein’s 1905 paper on the jittering of small particles in a fluid turned the reality of molecules into a measurable prediction; experiments confirmed it within a few years and ended the serious scientific argument about whether atoms exist. The conversation is dramatized.',
       },
       {
         id: 'default',
@@ -1017,17 +2165,41 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'count',
-            narration:
-              'He counts what cannot be seen by watching what it pushes. The result is not a picture of an atom. It is something better: a prediction an experimenter can go and break.',
+            narration: 'No microscope and no slide. A glass of water on the sill and four pages of arithmetic.',
+          },
+          {
+            id: 'count-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'You are counting things nobody can see.',
+          },
+          {
+            id: 'count-3',
+            speaker: 'ALBERT',
+            dialogue: 'I am counting them by what they push. A man in a crowd staggers; you learn the crowd from the stagger.',
+          },
+          {
+            id: 'count-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And the answer comes out as what?',
+          },
+          {
+            id: 'count-5',
+            speaker: 'ALBERT',
+            dialogue: 'How far a speck in water should wander in one second. Anyone with a microscope and patience can check me.',
           },
           {
             id: 'send',
-            narration:
-              'The paper goes out. Somewhere there is a man with a microscope and enough patience, and that man is about to settle a century-old argument on Albert’s behalf.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And if they check you and you are wrong?',
+          },
+          {
+            id: 'send-2',
+            speaker: 'ALBERT',
+            dialogue: 'Then I shall have saved the century some time. That is a respectable way to be wrong.',
           },
         ],
         historicalNote:
-          'A divergent breakthrough for the same documented result reached outside Bern in 1905.',
+          'The same documented result — a measurable prediction from the jostling of invisible molecules — reached outside Bern in 1905.',
       },
     ],
   },
@@ -1061,24 +2233,177 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'tram',
-            narration:
-              'The tram pulls away from the clock tower and he looks back at the illuminated face of it, the way anyone does. Then he thinks: the time I am reading left that tower a moment ago and had to travel here to reach me.',
+            narration: 'The last tram of the evening pulls away from the clock tower. Both of them look back at the lit face of it, the way anyone does.',
           },
           {
-            id: 'now',
-            narration:
-              'And if he were moving away fast enough, the news would never catch him at all; the hands would appear to stop. There is no universal instant that every clock in the world shares. There is only a signal, going at one particular speed, that everybody has to wait for.',
+            id: 'tram-2',
+            speaker: 'ALBERT',
+            dialogue: 'Michele. That time up there. When did it leave the tower?',
+          },
+          {
+            id: 'tram-4',
+            speaker: 'ALBERT',
+            dialogue: 'You will say it is leaving now. It is not. That light left the clock a moment ago and had to travel down the street to your eye.',
+          },
+          {
+            id: 'tram-6',
+            speaker: 'BESSO',
+            dialogue: 'A very small moment. And?',
+          },
+          {
+            id: 'now-2',
+            speaker: 'ALBERT',
+            dialogue: 'And now make this tram faster. As fast as the light itself. Keep looking back at the clock.',
+          },
+          {
+            id: 'now-3',
+            speaker: 'BESSO',
+            dialogue: 'Then I never catch any newer news of it. The hands would stand still.',
+          },
+          {
+            id: 'now-4',
+            speaker: 'ALBERT',
+            dialogue: 'For you. The clock in the square goes on striking the hour for everybody in the square.',
+          },
+          {
+            id: 'now-6',
+            speaker: 'ALBERT',
+            dialogue: 'And do not tell me yours is the wrong one. Show me the clock hung above all the others, that we may go and ask it.',
+          },
+          {
+            id: 'towers',
+            narration: 'The tram turns into the long arcaded street. Two more towers along it, and in this town no two of them ever quite agree.',
+          },
+          {
+            id: 'towers-2',
+            speaker: 'BESSO',
+            dialogue: 'Very well. Run towards a light and it arrives at you faster. That is the end of it.',
+          },
+          {
+            id: 'towers-3',
+            speaker: 'ALBERT',
+            dialogue: 'That is the whole trouble. It does not. It comes at you at the same speed however hard you run.',
+          },
+          {
+            id: 'towers-5',
+            speaker: 'ALBERT',
+            dialogue: 'Every measurement anybody has ever made says so. And the rules for light say it too, and they have never yet been wrong.',
+          },
+          {
+            id: 'rain',
+            speaker: 'BESSO',
+            dialogue: 'Rain does not behave like that. Run through rain and it hits you harder.',
+          },
+          {
+            id: 'rain-2',
+            speaker: 'ALBERT',
+            dialogue: 'Rain behaves. Light refuses. I have spent ten years being polite about it.',
+          },
+          {
+            id: 'rain-4',
+            speaker: 'BESSO',
+            dialogue: 'Then something in that sentence has to give.',
+          },
+          {
+            id: 'rain-6',
+            speaker: 'ALBERT',
+            dialogue: 'The clock gives. The ruler gives. The word now gives. Never the light.',
+          },
+          {
+            id: 'rain-7',
+            speaker: 'BESSO',
+            dialogue: 'Albert, that is not physics. That is a man losing his nerve in the rain.',
+          },
+          {
+            id: 'train',
+            narration: 'They get down at the bridge. He does not stop walking and he does not stop talking.',
+          },
+          {
+            id: 'train-2',
+            speaker: 'ALBERT',
+            dialogue: 'Lightning strikes a train. Once at the front, once at the back. A man on the platform, exactly halfway, sees the two flashes together.',
+          },
+          {
+            id: 'train-3',
+            speaker: 'BESSO',
+            dialogue: 'Then they happened together. That is what together means.',
+          },
+          {
+            id: 'train-4',
+            speaker: 'ALBERT',
+            dialogue: 'Now a woman sitting in the middle of the carriage. The train is moving. She is carried towards one flash and away from the other.',
+          },
+          {
+            id: 'train-5',
+            speaker: 'BESSO',
+            dialogue: 'So she meets the front one first. She is moving, that is all.',
+          },
+          {
+            id: 'train-6',
+            speaker: 'ALBERT',
+            dialogue: 'She is not moving. Not as far as her carriage is concerned. She is sitting perfectly still in the middle of her own world.',
+          },
+          {
+            id: 'train-8',
+            speaker: 'ALBERT',
+            dialogue: 'And neither of them is mistaken. That is the thing I cannot make anybody swallow. They are both right.',
+          },
+          {
+            id: 'train-10',
+            speaker: 'ALBERT',
+            dialogue: 'At the same time is not a fact about the world. It is an agreement between two clocks about a signal that takes time to arrive.',
+          },
+          {
+            id: 'give',
+            narration: 'Besso stops in the middle of the bridge. It is raining and neither of them notices for some time.',
+          },
+          {
+            id: 'give-2',
+            speaker: 'BESSO',
+            dialogue: 'And if that is true. What else falls over?',
+          },
+          {
+            id: 'give-3',
+            speaker: 'ALBERT',
+            dialogue: 'A moving clock runs slow. A moving ruler is short. Not by a trick of looking — that is what they are.',
+          },
+          {
+            id: 'give-5',
+            speaker: 'ALBERT',
+            dialogue: 'Nobody has ever seen a short ruler, because trams are slow. At tram speeds the change is smaller than a dust mote.',
+          },
+          {
+            id: 'give-6',
+            speaker: 'BESSO',
+            dialogue: 'I am going to bed. I do not accept one word of it.',
+          },
+          {
+            id: 'give-7',
+            speaker: 'ALBERT',
+            dialogue: 'Good. Refuse it again tomorrow. You are the only man in Bern who refuses it properly.',
+          },
+          {
+            id: 'night',
+            narration: 'He does not sleep. Five weeks of work come apart and settle back in a different order, and by six in the morning it is finished.',
           },
           {
             id: 'solved',
-            narration:
-              'He does not sleep. In the morning he goes to his friend’s door before work, and says one thing before he says good morning.',
             speaker: 'ALBERT',
-            dialogue: 'Thank you. The problem is finished. Space and time will have to give up a little of their dignity, but it is finished.',
+            dialogue: 'Thank you. It is finished. Space and time will have to give up some of their dignity, but it is finished.',
+          },
+          {
+            id: 'solved-2',
+            speaker: 'BESSO',
+            dialogue: 'Albert. It is six o’clock and you are standing in my doorway.',
+          },
+          {
+            id: 'solved-3',
+            speaker: 'ALBERT',
+            dialogue: 'Yes. Fetch your coat, we shall be late.',
           },
         ],
         historicalNote:
-          'Einstein completed special relativity in Bern in 1905 after long discussions with Michele Besso, whom he is reported to have thanked the following morning. The wording of the dialogue is dramatized, not quoted.',
+          'Einstein completed special relativity in Bern in 1905 after long walking arguments with Michele Besso, whom he thanked in the paper and is reported to have visited the next morning. Bern’s clock towers and trams were part of his daily life. The train-and-lightning argument is his own; all wording here is dramatized, not quoted.',
       },
       {
         id: 'default',
@@ -1093,22 +2418,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'late',
-            narration:
-              'There is no clock tower outside this window and the year is not the one he would have chosen, and none of that turns out to matter. The question he carried up a hill as a boy has finally consented to be answered.',
+            narration: 'No clock tower outside this window, and the year is not the one he would have chosen. It makes no difference whatever.',
+          },
+          {
+            id: 'late-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Explain it to me as though I were the porter.',
+          },
+          {
+            id: 'late-3',
+            speaker: 'ALBERT',
+            dialogue: 'Lightning hits both ends of a train. On the platform the two flashes are at the same moment. On the train they are not.',
+          },
+          {
+            id: 'late-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'One of them has it wrong.',
           },
           {
             id: 'what',
-            narration:
-              'Simultaneity is not a fact about the world. It is an agreement between two clocks about a signal that takes time to arrive. Everything else — the shrinking, the slowing, the mass and the energy — falls out of that one sentence like coins out of a coat.',
+            speaker: 'ALBERT',
+            dialogue: 'Neither. At the same moment is only an agreement between two clocks about a signal that takes time to arrive.',
+          },
+          {
+            id: 'what-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And what falls out of that?',
+          },
+          {
+            id: 'what-3',
+            speaker: 'ALBERT',
+            dialogue: 'A moving clock runs slow. A moving ruler is short. And at the end of it, weight and energy turn out to be one thing said twice.',
           },
           {
             id: 'quiet',
-            narration:
-              'He sits with it a long time. Whoever he tells first will not understand, and will be polite about it, and that is the whole of the celebration.',
+            narration: 'He sits with it a long while. Whoever he tells first will be polite and will not understand, and that is the whole of the celebration.',
           },
         ],
         historicalNote:
-          'A divergent breakthrough for a life that arrived at special relativity by another road. The content of the theory is documented; the circumstances are not.',
+          'A breakthrough for a life that arrived at special relativity by another road. The content of the theory is documented; the circumstances are not.',
       },
     ],
   },
@@ -1149,20 +2497,65 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'posted',
-            narration:
-              'The envelopes leave one small post office within a few months of each other. Light in pieces. The size of molecules. The end of absolute time. A short afterthought about mass and energy that he nearly did not bother to write.',
+            narration: 'Four envelopes leave one small post office inside a few months. He counts out the coins for the stamps twice.',
+          },
+          {
+            id: 'posted-2',
+            speaker: 'THE CLERK',
+            dialogue: 'Registered?',
+          },
+          {
+            id: 'posted-3',
+            speaker: 'ALBERT',
+            dialogue: 'Ordinary. I cannot afford to have my opinions insured.',
+          },
+          {
+            id: 'posted-4',
+            speaker: 'THE CLERK',
+            dialogue: 'What is in them?',
+          },
+          {
+            id: 'posted-5',
+            speaker: 'ALBERT',
+            dialogue: 'Light in lumps. The size of the things water is made of. The end of the word now. And a short one about weight and energy.',
+          },
+          {
+            id: 'posted-7',
+            speaker: 'THE CLERK',
+            dialogue: 'Eighty centimes.',
           },
           {
             id: 'office',
-            narration:
-              'On Monday he is back at the desk by eight, refusing a patent for an improved gravel sorter. He does not mention any of it to the office. There is no way to mention it that does not sound insane.',
+            narration: 'On Monday he is back at the desk by eight, refusing a patent for an improved gravel sorter.',
+          },
+          {
+            id: 'office-2',
             speaker: 'A COLLEAGUE',
             dialogue: 'You look terrible, Einstein. Have you been working?',
           },
           {
+            id: 'office-3',
+            speaker: 'ALBERT',
+            dialogue: 'Only in the evenings. Nothing worth putting in a report.',
+          },
+          {
             id: 'wait',
-            narration:
-              'The journals print them. Nothing happens, for a while. Then the letters start to come, and they come from the men whose textbooks he read on his own instead of going to lectures.',
+            narration: 'The journals print them. Then nothing happens for the better part of a year.',
+          },
+          {
+            id: 'wait-2',
+            speaker: 'BESSO',
+            dialogue: 'Berlin has written to you.',
+          },
+          {
+            id: 'wait-3',
+            speaker: 'ALBERT',
+            dialogue: 'Planck. He has read the one about the clocks three times and wishes to argue about page nine.',
+          },
+          {
+            id: 'wait-5',
+            speaker: 'ALBERT',
+            dialogue: 'Michele, I read that man’s books instead of going to lectures. He is arguing with me. Nothing has ever been better.',
           },
         ],
         effects: [
@@ -1171,7 +2564,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.miracleYear', value: true },
         ],
         historicalNote:
-          'In 1905 Einstein published four papers — on light quanta, Brownian motion, special relativity, and mass–energy equivalence — while employed full time at the patent office and holding no academic position. Dialogue is dramatized.',
+          'In 1905 Einstein published four papers — on light in packets, on the jostling of particles in water, on special relativity, and on the equivalence of mass and energy — while employed full time at the patent office and holding no academic position. Max Planck was among the first established physicists to take the work seriously. Dialogue is dramatized.',
       },
       {
         id: 'three-papers',
@@ -1196,20 +2589,36 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'posted',
-            narration:
-              'The envelopes leave one small post office within a few months of each other. Light in pieces. The size of molecules. The end of absolute time. A short afterthought about mass and energy that he nearly did not bother to write.',
+            narration: 'Four envelopes leave one small post office inside a few months, and nobody watching would look twice at any of them.',
+          },
+          {
+            id: 'posted-2',
+            speaker: 'THE CLERK',
+            dialogue: 'Heavy, these.',
+          },
+          {
+            id: 'posted-3',
+            speaker: 'ALBERT',
+            dialogue: 'One is about light. One is about water. One is about clocks. The thin one is the worst of them.',
           },
           {
             id: 'work',
-            narration:
-              'None of it is anybody’s job. He does the day he is paid for, comes home, clears whatever is on the table, and works until the lamp needs filling. Nobody who sees him on the stairs would guess at any of it, and he prefers it that way.',
+            narration: 'None of it is anybody’s job. He does the day he is paid for, comes home, clears the table, and works until the lamp needs filling.',
+          },
+          {
+            id: 'work-2',
             speaker: 'A COLLEAGUE',
             dialogue: 'You look terrible. Have you been working?',
           },
           {
-            id: 'wait',
-            narration:
-              'The journals print them. Nothing happens, for a while. Then the letters start to come, and they come from the men whose textbooks he read on his own instead of going to lectures.',
+            id: 'work-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have been arranging some furniture. Nobody on the stairs would guess at it, and I prefer that.',
+          },
+          {
+            id: 'wait-2',
+            speaker: 'ALBERT',
+            dialogue: 'The journals print them, and nothing happens for a year. Then the letters come, from the men whose books I read instead of going to their lectures.',
           },
         ],
         effects: [
@@ -1218,7 +2627,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.miracleYear', value: true },
         ],
         historicalNote:
-          'In 1905 Einstein published four transformative papers in a single year while holding no academic position. This variant follows a life that did the same work somewhere other than Bern. Dialogue is dramatized.',
+          'In 1905 Einstein published four transformative papers in a single year while holding no academic position. This telling follows a life that did the same work somewhere other than Bern. Dialogue is dramatized.',
       },
       {
         id: 'two-papers',
@@ -1244,13 +2653,27 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'two',
-            narration:
-              'Two results, close together, out of a life that has no laboratory, no assistant, and no chair. Either one of them would redirect a career. Together they make it difficult for physics to keep not knowing his name.',
+            narration: 'Two results out of a life with no laboratory, no assistant and no chair. Either one of them would redirect a career.',
+          },
+          {
+            id: 'two-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Two papers in a year, from a clerk. They will start learning your name.',
+          },
+          {
+            id: 'two-3',
+            speaker: 'ALBERT',
+            dialogue: 'They will spell it wrong first. Everyone does.',
           },
           {
             id: 'third',
-            narration:
-              'The third thing is still in the drawer, in pieces, and he takes it out most evenings and puts it back most nights. It will keep. It has kept since he was sixteen.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And the third thing? The one in the drawer.',
+          },
+          {
+            id: 'third-2',
+            speaker: 'ALBERT',
+            dialogue: 'In pieces. I take it out most evenings and put it back most nights. It will keep — it has kept since I was sixteen.',
           },
         ],
         effects: [
@@ -1259,7 +2682,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.miracleYear', value: true },
         ],
         historicalNote:
-          'A partial version of the documented 1905 cluster. Einstein really did produce this work without an academic post.',
+          'A partial version of the documented 1905 cluster. Einstein really did produce this work with no academic post.',
       },
       {
         id: 'one-paper',
@@ -1285,21 +2708,34 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'printed',
-            narration:
-              'His name is in the journal, set in a type that makes it look like somebody else’s. He reads his own paragraphs as a stranger would and finds two sentences he should have cut.',
+            narration: 'The journal comes in a paper wrapper. His name is set in a type that makes it look like somebody else’s.',
+          },
+          {
+            id: 'printed-2',
+            speaker: 'MILEVA',
+            dialogue: 'Well?',
+          },
+          {
+            id: 'printed-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have read my own paragraphs as a stranger would. There are two sentences I should have cut.',
           },
           {
             id: 'rest',
-            narration:
-              'The rest of it is still in the drawer. One paper is not a year that changes physics. It is a door held open with a foot.',
+            speaker: 'MILEVA',
+            dialogue: 'And the rest of it? The other pages?',
+          },
+          {
+            id: 'rest-2',
+            speaker: 'ALBERT',
+            dialogue: 'Still in the drawer. One paper is not a year that changes physics. It is a door held open with a foot.',
           },
         ],
         effects: [
           { type: 'markContextCardSeen', cardId: 'einstein-card-1905' },
           { type: 'resources', effects: { standing: 1 } },
         ],
-        historicalNote:
-          'A reduced version of the documented 1905 output, for a life that published less that year.',
+        historicalNote: 'A reduced version of the documented 1905 output, for a life that published less that year.',
       },
       {
         id: 'drawer',
@@ -1320,13 +2756,27 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'inside',
-            narration:
-              'There are thirty pages in the drawer about clocks and forty about the size of molecules, and none of them have gone anywhere. Each one stops at the place where finishing it would take a month he does not have.',
+            narration: 'Thirty pages in the drawer about clocks. Forty about the size of molecules. None of them have gone anywhere.',
+          },
+          {
+            id: 'inside-2',
+            speaker: 'BESSO',
+            dialogue: 'You have been at the same page since Easter.',
+          },
+          {
+            id: 'inside-3',
+            speaker: 'ALBERT',
+            dialogue: 'Each one stops where finishing it would cost a month I do not have.',
           },
           {
             id: 'year',
-            narration:
-              'The century does not notice him this year. The desk is warm, the salary comes on time, and the walk home is beautiful in the rain. It is possible to be perfectly happy and not be doing the thing you were for.',
+            speaker: 'BESSO',
+            dialogue: 'You seem happy enough.',
+          },
+          {
+            id: 'year-2',
+            speaker: 'ALBERT',
+            dialogue: 'The desk is warm, the salary comes on time, and it is possible to be happy and not be doing the thing you are for.',
           },
         ],
         effects: [
@@ -1334,7 +2784,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.unpublishedDrawer', value: true },
         ],
         historicalNote:
-          'The documented 1905 papers were written in exactly these conditions — full-time clerical work, no institution. This variant follows a life in which they stayed unfinished.',
+          'The documented 1905 papers were written in exactly these conditions — full-time clerical work, no institution. Here they stayed unfinished.',
       },
     ],
   },
@@ -1370,17 +2820,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'offer',
-            narration:
-              'The letter uses the word Professor and it is addressed to him. It has taken nine years, everything he managed to finish in the evenings, and the intervention of men he has never met over dinners he was not invited to.',
+            narration: 'The letter has an embossed seal and the word Professor in it, and it is addressed to him.',
+          },
+          {
+            id: 'offer-2',
+            speaker: 'HALLER',
+            dialogue: 'You are giving notice.',
+          },
+          {
+            id: 'offer-3',
+            speaker: 'ALBERT',
+            dialogue: 'Zürich. They are offering me a chair. It has taken nine years and a good deal of other men’s dinners.',
+          },
+          {
+            id: 'offer-4',
+            speaker: 'HALLER',
+            dialogue: 'Your reports are the best in this building. The department will miss them.',
+          },
+          {
+            id: 'offer-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is the strangest compliment I have ever been paid.',
+          },
+          {
+            id: 'offer-6',
+            speaker: 'HALLER',
+            dialogue: 'It was not a compliment. It was a complaint.',
           },
           {
             id: 'notice',
-            narration:
-              'He hands in his notice at the office. The director shakes his hand and says the department will miss his reports, and means it, which is the strangest compliment he has ever received.',
+            narration: 'He clears the desk. He carries out rather less than he carried in.',
+          },
+          {
+            id: 'notice-2',
+            speaker: 'ALBERT',
+            dialogue: 'Nine years of other men’s machines, and they made me. I shall never say that where a professor can hear it.',
           },
         ],
         historicalNote:
-          'Einstein left the patent office in 1909 for his first academic appointment, following the reception of his 1905 papers.',
+          'Einstein left the patent office in 1909 for his first academic appointment, after his 1905 papers were taken up by the established physicists. Friedrich Haller was the patent office director; the exchange is dramatized.',
       },
       {
         id: 'one-result',
@@ -1404,17 +2882,30 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'letters',
-            narration:
-              'Three men in three countries have written to him about the paper. None of the three has a post to offer. Being interesting turns out to be a different profession from being employable.',
+            narration: 'Three men in three countries have written to him about the paper. Three short letters, all of them warm.',
+          },
+          {
+            id: 'letters-2',
+            speaker: 'MILEVA',
+            dialogue: 'Does any of them offer you a post?',
+          },
+          {
+            id: 'letters-3',
+            speaker: 'ALBERT',
+            dialogue: 'Not one. Being interesting turns out to be a different profession from being employable.',
           },
           {
             id: 'keep',
-            narration:
-              'He keeps the desk, the salary, and the drawer. There is more in the drawer than there was, and that is the only ledger he trusts.',
+            speaker: 'MILEVA',
+            dialogue: 'So you keep the desk.',
+          },
+          {
+            id: 'keep-2',
+            speaker: 'ALBERT',
+            dialogue: 'The desk, the salary, and the drawer. There is more in it than there was, and it is the only ledger I trust.',
           },
         ],
-        historicalNote:
-          'A divergent closing for a life whose early publications drew attention but no chair.',
+        historicalNote: 'A closing for a life whose early publications drew attention but no chair.',
       },
       {
         id: 'default',
@@ -1431,17 +2922,34 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'record',
-            narration:
-              'The record shows a decade of impeccable examinations. He has refused a hundred perpetual motion machines with more courtesy than any of them deserved and has never once been late.',
+            narration: 'The record shows a decade of impeccable examinations, and not one day late.',
+          },
+          {
+            id: 'record-2',
+            speaker: 'HALLER',
+            dialogue: 'A hundred perpetual motion machines refused, and every one of the inventors thanked you for it.',
+          },
+          {
+            id: 'record-3',
+            speaker: 'ALBERT',
+            dialogue: 'I tell them where the machine stops. Men will forgive almost anything if you are exact about it.',
           },
           {
             id: 'drawer',
-            narration:
-              'The drawer is heavier than when he started. Nobody has read what is in it. He is thirty, and he can feel the century going past outside the window like a train that does not stop here.',
+            speaker: 'HALLER',
+            dialogue: 'And the second drawer?',
+          },
+          {
+            id: 'drawer-2',
+            speaker: 'ALBERT',
+            dialogue: 'Heavier than when I came. Nobody has read a page of it.',
+          },
+          {
+            id: 'drawer-3',
+            narration: 'He is thirty. Outside the high window the century goes past like a train that does not stop here.',
           },
         ],
-        historicalNote:
-          'A divergent closing for a life that stayed at the patent desk without publishing the 1905 work.',
+        historicalNote: 'A closing for a life that stayed at the patent desk without publishing the 1905 work.',
       },
     ],
   },
@@ -1474,29 +2982,68 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'first',
-            narration:
-              'His first lectures are bad. He has prepared them the way he was taught, which is to say he has written down what a professor sounds like, and the students copy it politely and understand nothing.',
+            narration: 'His first lectures are bad. He has written down what a professor sounds like, and he reads it out.',
+          },
+          {
+            id: 'first-2',
+            speaker: 'A STUDENT',
+            dialogue: 'Herr Professor. We did not follow that last step.',
+          },
+          {
+            id: 'first-3',
+            speaker: 'ALBERT',
+            dialogue: 'Neither did I. Wait there.',
           },
           {
             id: 'stop',
-            narration:
-              'In the fourth week he stops pretending. He puts the notes down and works the problem on the blackboard in front of them, wrongly, twice, and then correctly.',
-            speaker: 'A STUDENT',
-            dialogue: 'Herr Professor — we did not follow that last step.',
+            narration: 'He puts the notes down and works the problem on the board in front of them. Wrongly. Then wrongly again.',
+          },
+          {
+            id: 'stop-3',
+            speaker: 'ALBERT',
+            dialogue: 'Do not copy this down yet. Copy it when it is right. Watch it be wrong first — that is the part nobody ever shows you.',
           },
           {
             id: 'again',
-            narration:
-              'Neither did he, he says, and does it again more slowly. Attendance doubles by Christmas. He has discovered that thinking out loud in public is the only kind of teaching he can do, and that it happens to be good.',
+            narration: 'The third attempt holds. Somebody at the back says oh, out loud, and does not mean to.',
+          },
+          {
+            id: 'again-2',
+            speaker: 'A STUDENT',
+            dialogue: 'Is that allowed? Being wrong in front of us.',
+          },
+          {
+            id: 'again-3',
+            speaker: 'ALBERT',
+            dialogue: 'It is the only kind of teaching I can do. Attendance will tell us whether it is any good.',
+          },
+          {
+            id: 'again-4',
+            narration: 'Attendance doubles by Christmas.',
+          },
+          {
+            id: 'salary',
+            speaker: 'MILEVA',
+            dialogue: 'The salary is smaller than the office paid. The hours are longer.',
+          },
+          {
+            id: 'salary-2',
+            speaker: 'ALBERT',
+            dialogue: 'And I talk all day instead of thinking. I had not accounted for the talking.',
+          },
+          {
+            id: 'salary-3',
+            speaker: 'MILEVA',
+            dialogue: 'Then go back to the desk. You were happy there, and nobody ever asked you a question you could not answer.',
           },
           {
             id: 'choice',
-            narration:
-              'The salary is smaller than the patent office paid and the hours are longer. Somewhere behind him is a quiet desk where nobody ever asked him a question he could not answer.',
+            speaker: 'MILEVA',
+            dialogue: 'You cannot keep both. A chair, or a quiet desk with the evenings in it. Choose.',
             choices: [
               {
                 id: 'professor',
-                label: 'Take the chair and be a professor of physics',
+                label: 'Take the chair. Be a professor of physics.',
                 effects: [
                   { type: 'flag', flag: 'einstein.tookChair', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: -2 },
@@ -1505,7 +3052,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'clerk',
-                label: 'Keep the desk, the salary, and the quiet',
+                label: 'Keep the desk, the salary, and the quiet.',
                 effects: [
                   { type: 'flag', flag: 'einstein.keptDesk', value: true },
                   { type: 'theme', theme: 'institutionVsIndependence', amount: 2 },
@@ -1550,20 +3097,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'delegation',
-            narration:
-              'They come to Zürich in person to fetch him, two of the most decorated men in German science, and they make the offer as though embarrassed by how generous it is.',
-            speaker: 'THE VISITOR',
-            dialogue: 'No lectures. No students. No duties of any kind. Only the Academy, and whatever it is you wish to think about.',
+            narration: 'They come to Zürich in person to fetch him: two of the most decorated men in German science, on an ordinary Tuesday.',
+          },
+          {
+            id: 'delegation-2',
+            speaker: 'PLANCK',
+            dialogue: 'No lectures. No students. No duties of any kind.',
+          },
+          {
+            id: 'delegation-4',
+            speaker: 'PLANCK',
+            dialogue: 'And in return you think. The Academy would simply like to be the address at which you do it.',
+          },
+          {
+            id: 'delegation-5',
+            speaker: 'ALBERT',
+            dialogue: 'You are offering me a salary for thinking.',
+          },
+          {
+            id: 'delegation-6',
+            speaker: 'PLANCK',
+            dialogue: 'I am aware of how it sounds. I have argued for it in rooms you would not have enjoyed.',
           },
           {
             id: 'terms',
-            narration:
-              'It is a salary for thinking. It is also Berlin: parade grounds, a court, a language of rank he abandoned at sixteen along with the passport.',
+            narration: 'It is also Berlin. Parade grounds, a court, and a language of rank he gave up at sixteen along with the passport.',
+          },
+          {
+            id: 'terms-2',
+            speaker: 'MILEVA',
+            dialogue: 'You swore you would never live in that country again.',
+          },
+          {
+            id: 'terms-3',
+            speaker: 'ALBERT',
+            dialogue: 'I swore a great many things at seventeen, and all in the same tone of voice.',
           },
           {
             id: 'arrive',
-            narration:
-              'He goes. The flat is too large and the streets are too straight and there is a room with nothing in it but a table, and on the table he puts the problem of gravity.',
+            narration: 'He goes. The flat is too large, the streets are too straight, and one room holds nothing but a table.',
+          },
+          {
+            id: 'arrive-2',
+            speaker: 'ALBERT',
+            dialogue: 'On that table goes gravity. Everything else in this city can wait its turn.',
           },
         ],
         effects: [
@@ -1571,7 +3148,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'resources', effects: { funds: 1, standing: 1 } },
         ],
         historicalNote:
-          'Einstein was recruited to the Prussian Academy of Sciences in Berlin in 1914 with a research salary and no teaching obligations. The visitors and dialogue are dramatized.',
+          'Einstein was recruited to the Prussian Academy of Sciences in Berlin in 1914 with a research salary and no teaching obligations; Max Planck was among those who travelled to Zürich to persuade him. Dialogue is dramatized.',
       },
       {
         id: 'elsewhere',
@@ -1591,23 +3168,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'unanswered',
-            narration:
-              'The envelope from Berlin stands against the hall mirror for a month, and every day he walks past it and does not open it, and every day he decides to decide tomorrow.',
+            narration: 'The envelope from Berlin stands against the hall mirror for a month. He walks past it twice a day.',
+          },
+          {
+            id: 'unanswered-2',
+            speaker: 'MILEVA',
+            dialogue: 'It is still there.',
+          },
+          {
+            id: 'unanswered-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have decided to decide tomorrow. I have now decided that thirty times.',
           },
           {
             id: 'reason',
-            narration:
-              'They are offering him a salary for thinking. He has noticed that the men who take such salaries end up thinking about what the salary is for, and that the question is always asked eventually, and never by the man drawing it.',
+            speaker: 'MILEVA',
+            dialogue: 'They are offering you a salary to think. You have wanted that since you were nineteen.',
+          },
+          {
+            id: 'reason-2',
+            speaker: 'ALBERT',
+            dialogue: 'And one morning somebody will come and ask what the salary was for. That question is always asked.',
+          },
+          {
+            id: 'reason-3',
+            speaker: 'MILEVA',
+            dialogue: 'And if you are wrong about them?',
+          },
+          {
+            id: 'reason-4',
+            speaker: 'ALBERT',
+            dialogue: 'Then I shall have been rude to an Academy. I find I can live with that.',
           },
           {
             id: 'shut',
-            narration:
-              'In the end he writes four lines declining, in his politest German, and posts it on the way to a lecture. The envelope goes into a drawer with the other things he has not become.',
+            narration: 'He writes four lines declining, in his politest German, and posts it on the way to a lecture.',
           },
         ],
         effects: [{ type: 'flag', flag: 'einstein.declinedBerlin', value: true }],
-        historicalNote:
-          'A divergent turn for a life that did not take the Berlin appointment. The offer itself is documented.',
+        historicalNote: 'A turn for a life that did not take the Berlin appointment. The offer itself is documented.',
       },
     ],
   },
@@ -1642,22 +3241,59 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'august',
-            narration:
-              'In August the city empties into the railway stations singing. By October the university men have written their own contribution to the war: a page defending the army’s conduct, signed by ninety-three of the best minds in Germany.',
+            narration: 'In August the city empties into the railway stations singing. By October the university men have written their contribution.',
+          },
+          {
+            id: 'august-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Have you read it? Ninety-three names.',
+          },
+          {
+            id: 'august-3',
+            speaker: 'ALBERT',
+            dialogue: 'I read it in the corridor with my coat still on. I could not make myself sit down to it.',
           },
           {
             id: 'names',
-            narration:
-              'He reads the names in the corridor with his coat still on. Four of them are men he eats lunch with. Two of them taught him something he still uses.',
+            narration: 'The sheet is pinned at eye height. A page defending the army’s conduct, signed by ninety-three of the best minds in Germany.',
+          },
+          {
+            id: 'names-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Four of them eat lunch with you.',
+          },
+          {
+            id: 'names-3',
+            speaker: 'ALBERT',
+            dialogue: 'Two of them taught me something I still use every day of my life.',
+          },
+          {
+            id: 'names-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'They are patriots. It is not a crime.',
+          },
+          {
+            id: 'names-5',
+            speaker: 'ALBERT',
+            dialogue: 'They are professors. They spent thirty years telling me a true thing does not care which country you are standing in.',
+          },
+          {
+            id: 'names-7',
+            speaker: 'ALBERT',
+            dialogue: 'And now I find that physics has borders, and that they were drawn some time last Tuesday.',
+          },
+          {
+            id: 'other',
+            narration: 'A physician he barely knows has drafted the opposite document. A great deal of space at the bottom for names, and almost nothing above it.',
           },
           {
             id: 'appeal',
-            narration:
-              'A physician he barely knows has drafted the opposite document — an appeal to Europeans, arguing that a continent of educated men has just agreed to destroy itself and might, on reflection, prefer not to. Almost nobody will sign it.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Four men have put their names to that. Four, against ninety-three. What will you do?',
             choices: [
               {
                 id: 'sign',
-                label: 'Put your name to the appeal for a Europe that still exists',
+                label: 'Put your name to the appeal for a Europe that still exists.',
                 effects: [
                   { type: 'flag', flag: 'einstein.pacifist', value: true },
                   { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
@@ -1666,7 +3302,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'silent',
-                label: 'Say nothing and keep to the equations',
+                label: 'Say nothing. Keep to the equations.',
                 effects: [
                   { type: 'flag', flag: 'einstein.quietWar', value: true },
                   { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
@@ -1674,7 +3310,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'private',
-                label: 'Write privately, across the lines, to whoever still answers',
+                label: 'Write privately, across the lines, to whoever still answers.',
                 effects: [
                   { type: 'flag', flag: 'einstein.privateLetters', value: true },
                   { type: 'resources', effects: { network: 1, exposure: 1 } },
@@ -1685,7 +3321,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1914-war' }],
         historicalNote:
-          'In October 1914 ninety-three German intellectuals signed a manifesto defending Germany’s war conduct; Einstein was one of very few who signed a counter-appeal for European unity instead. The corridor scene is dramatized.',
+          'In October 1914 ninety-three German intellectuals signed a manifesto defending Germany’s war conduct; Einstein was one of a very small number who signed a counter-appeal for European unity instead, drafted by the physician Georg Nicolai. The corridor scene is dramatized.',
       },
       {
         id: 'away',
@@ -1705,22 +3341,44 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'silence',
-            narration:
-              'The war has been going on long enough now to have a shape, and its shape, from a desk, is silence. The French journals stopped coming, then the English ones. A letter he sent one July came back in November stamped to say the country it was addressed to can no longer be written to.',
+            narration: 'The French journals stop coming. Then the English ones. The shelf keeps the gap where they used to stand.',
+          },
+          {
+            id: 'silence-2',
+            speaker: 'THE POSTMAN',
+            dialogue: 'This one came back, sir. Stamped.',
+          },
+          {
+            id: 'silence-3',
+            speaker: 'ALBERT',
+            dialogue: 'Four months to travel to England and be told England can no longer be written to.',
           },
           {
             id: 'names',
-            narration:
-              'And the declarations keep coming, one country at a time, each one signed by exactly the men who taught him that knowledge belongs to nobody. He counts the signatures and finds that physics has borders after all.',
+            narration: 'And the declarations keep coming, one country at a time, each signed by the men who taught him that knowledge belongs to nobody.',
+          },
+          {
+            id: 'names-2',
+            speaker: 'THE POSTMAN',
+            dialogue: 'Bad business all round.',
+          },
+          {
+            id: 'names-3',
+            speaker: 'ALBERT',
+            dialogue: 'It is worse than bad. It is tidy. Every one of them signed neatly, on the line provided.',
+          },
+          {
+            id: 'draft',
+            narration: 'Then somebody sends him the other kind of document, folded in with a letter that took nine weeks to arrive.',
           },
           {
             id: 'appeal',
-            narration:
-              'Somebody sends him a draft of the other kind of document: an appeal to Europeans, asking educated men to refuse to hate on schedule. There is space at the bottom for names, and almost nothing above it.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'An appeal to Europeans. Asking educated men to refuse to hate on schedule. There is space at the bottom and almost nothing above it.',
             choices: [
               {
                 id: 'sign',
-                label: 'Put your name to the appeal for a Europe that still exists',
+                label: 'Put your name to the appeal for a Europe that still exists.',
                 effects: [
                   { type: 'flag', flag: 'einstein.pacifist', value: true },
                   { type: 'theme', theme: 'dutyVsConscience', amount: 2 },
@@ -1729,7 +3387,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'silent',
-                label: 'Say nothing and keep to the equations',
+                label: 'Say nothing. Keep to the equations.',
                 effects: [
                   { type: 'flag', flag: 'einstein.quietWar', value: true },
                   { type: 'resources', effects: { standing: 1, wellbeing: -1 } },
@@ -1737,7 +3395,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'private',
-                label: 'Write privately, across the lines, to whoever still answers',
+                label: 'Write privately, across the lines, to whoever still answers.',
                 effects: [
                   { type: 'flag', flag: 'einstein.privateLetters', value: true },
                   { type: 'resources', effects: { network: 1, exposure: 1 } },
@@ -1748,7 +3406,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1914-war' }],
         historicalNote:
-          'The rupture of international scientific correspondence during the First World War, and Einstein’s refusal to join the nationalist declarations, are documented. This variant places him away from Berlin.',
+          'The rupture of international scientific correspondence during the First World War, and Einstein’s refusal to join the nationalist declarations, are documented. Here he is away from Berlin.',
       },
     ],
   },
@@ -1783,20 +3441,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'letters',
-            narration:
-              'Every letter he posts to Göttingen comes back faster than the post has any right to manage, and each one has gone a little further along the same road. Somebody there is working the same problem with better tools and more sleep.',
+            narration: 'Every letter he posts to Göttingen comes back faster than the post has any right to manage.',
+          },
+          {
+            id: 'letters-2',
+            speaker: 'ALBERT',
+            dialogue: 'You have gone further along my road than I have. Again.',
           },
           {
             id: 'summer',
-            narration:
-              'He had lectured there in the summer, six mornings, holding nothing back, because holding back would have been beneath both of them. He is now finding out what that cost.',
+            speaker: 'ALBERT',
+            dialogue: 'I lectured here six mornings in the summer and held nothing back. Not one card.',
+          },
+          {
+            id: 'summer-2',
             speaker: 'HILBERT',
-            dialogue: 'Show me which part of the physics your mathematics is not permitted to break. Then I will know where to stop.',
+            dialogue: 'You did. It was the most expensive generosity I have ever watched a man commit.',
+          },
+          {
+            id: 'fence',
+            speaker: 'HILBERT',
+            dialogue: 'Show me which part of the physics your mathematics is not permitted to break. Then I shall know where to stop.',
+          },
+          {
+            id: 'fence-2',
+            speaker: 'ALBERT',
+            dialogue: 'Energy. Whatever else the equations do, they may not make energy out of nothing.',
+          },
+          {
+            id: 'fence-3',
+            speaker: 'HILBERT',
+            dialogue: 'Good. That is a fence. Everything on the other side of it I intend to push over.',
           },
           {
             id: 'november',
-            narration:
-              'So he stops sleeping properly and sends work in weekly instalments, correcting himself twice in public, because being wrong in front of Göttingen turns out to be cheaper than being slow. He has already drafted the generous letter he means to send when it is over, and keeps it where he can see it.',
+            narration: 'He stops sleeping properly and sends work in weekly instalments, correcting himself twice in public.',
+          },
+          {
+            id: 'november-2',
+            speaker: 'ALBERT',
+            dialogue: 'Being wrong in front of Göttingen is cheaper than being slow in front of it.',
+          },
+          {
+            id: 'november-3',
+            narration: 'He has already drafted the generous letter he means to send when it is over, and keeps it where he can see it.',
           },
         ],
         effects: [
@@ -1827,20 +3515,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'exchange',
-            narration:
-              'The exchange with Göttingen runs all autumn: postcards, then letters, then telegrams, each one arriving a step further along than the last. Neither man mentions speed. Both of them are counting days.',
+            narration: 'Postcards, then letters, then telegrams, all autumn. Each one arrives a step further along than the last.',
+          },
+          {
+            id: 'exchange-2',
+            speaker: 'BESSO',
+            dialogue: 'Neither of you has once mentioned speed.',
+          },
+          {
+            id: 'exchange-3',
+            speaker: 'ALBERT',
+            dialogue: 'Neither of us has once stopped counting the days. It is a very courteous sort of sprint.',
           },
           {
             id: 'said',
-            narration:
-              'The mathematician’s objection, when it comes, is the useful kind — not that the physics is wrong, but that it is not yet forced.',
+            narration: 'The objection, when it arrives from Göttingen, is the useful kind: not that the physics is wrong, but that it is not yet forced.',
+          },
+          {
+            id: 'said-2',
             speaker: 'HILBERT',
-            dialogue: 'Physics is far too difficult for physicists. Show me what your equations are forbidden to do, and I will show you what they must be.',
+            dialogue: 'Physics is far too difficult for physicists. Tell me what your equations are forbidden to do, and I shall tell you what they must be.',
           },
           {
             id: 'close',
-            narration:
-              'He works eleven days without properly stopping. Somewhere in the middle of them he decides what kind of letter he will send to Göttingen at the end of this: the one without a single barbed sentence in it. Deciding in advance is the only way he has ever managed to be gracious.',
+            narration: 'He works eleven days without properly stopping. Somewhere in the middle of them he decides what letter he will send at the end.',
+          },
+          {
+            id: 'close-2',
+            speaker: 'ALBERT',
+            dialogue: 'The one without a single barbed sentence in it. I have written it already.',
+          },
+          {
+            id: 'close-3',
+            speaker: 'BESSO',
+            dialogue: 'Before you know who wins?',
+          },
+          {
+            id: 'close-4',
+            speaker: 'ALBERT',
+            dialogue: 'Deciding in advance is the only way I have ever managed to be gracious.',
           },
         ],
         effects: [
@@ -1848,7 +3561,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.gottingenRace', value: true },
         ],
         historicalNote:
-          'The Einstein–Hilbert correspondence and near-simultaneous derivation of the field equations in November 1915 are documented. The remark about physicists is in the spirit of Hilbert’s recorded wit but the wording is dramatized.',
+          'The Einstein–Hilbert correspondence and near-simultaneous derivation of the field equations in November 1915 are documented. The remark about physicists is in the spirit of Hilbert’s recorded wit, but the wording is dramatized.',
       },
       {
         id: 'human-hilbert-elsewhere',
@@ -1870,18 +3583,31 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'silence',
-            narration:
-              'The letters he sends to the mathematicians go unanswered. Not refused — simply not answered, the way post behaves when the man it is addressed to has gone somewhere the war has not published.',
+            narration: 'The letters he sends to the mathematicians are not refused. They are simply not answered.',
+          },
+          {
+            id: 'silence-2',
+            speaker: 'BESSO',
+            dialogue: 'Still nothing from Göttingen?',
+          },
+          {
+            id: 'silence-3',
+            speaker: 'ALBERT',
+            dialogue: 'Nothing. So I do the geometry myself, badly and slowly, and get there in the end.',
           },
           {
             id: 'alone',
-            narration:
-              'So he does the geometry himself, badly and slowly, and gets there in the end. Nobody arrives one week ahead of him. He finds he would have preferred the competition, and is not sure what that says about him.',
+            speaker: 'BESSO',
+            dialogue: 'Nobody arrived a week ahead of you. You should be pleased.',
+          },
+          {
+            id: 'alone-2',
+            speaker: 'ALBERT',
+            dialogue: 'I find I would have preferred the competition. I am not sure what that says about me.',
           },
         ],
         effects: [{ type: 'flag', flag: 'einstein.hilbertSilence', value: true }],
-        historicalNote:
-          'A divergent version of the documented 1915 exchange, for a life in which the Göttingen correspondence never happened.',
+        historicalNote: 'A version of the documented 1915 exchange for a life in which the Göttingen correspondence never happened.',
       },
     ],
   },
@@ -1910,23 +3636,227 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
+            id: 'study',
+            narration: 'Pages of calculation on the desk, the chair and the floor. An astronomical table lies open at Mercury.',
+          },
+          {
+            id: 'study-2',
+            speaker: 'ELSA',
+            dialogue: 'You have not eaten since yesterday. What is it this time?',
+          },
+          {
+            id: 'study-3',
+            speaker: 'ALBERT',
+            dialogue: 'A man falling off a roof.',
+          },
+          {
+            id: 'study-4',
+            speaker: 'ELSA',
+            dialogue: 'Albert.',
+          },
+          {
+            id: 'roofer',
+            speaker: 'ALBERT',
+            dialogue: 'I am entirely serious. Years ago, in Bern, I read about one. He fell, he was not badly hurt, and he said the strangest thing.',
+          },
+          {
+            id: 'roofer-3',
+            speaker: 'ALBERT',
+            dialogue: 'That while he was falling he felt nothing at all. No weight.',
+          },
+          {
+            id: 'roofer-4',
+            speaker: 'ELSA',
+            dialogue: 'Well, of course. There was nothing under him.',
+          },
+          {
+            id: 'roofer-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is it. That is the whole thing. Weight is not what you feel when you fall.',
+          },
+          {
+            id: 'roofer-6',
+            speaker: 'ALBERT',
+            dialogue: 'It is what you feel when the floor stops you. Stand still and the floor shoves up at your feet all day long.',
+          },
+          {
+            id: 'roofer-8',
+            speaker: 'ALBERT',
+            dialogue: 'It shoves at you every minute of your life, and that shove is the thing you have been calling your weight.',
+          },
+          {
+            id: 'lift',
+            speaker: 'ALBERT',
+            dialogue: 'Now come into the lift with me. No windows. The cable breaks. What do you feel?',
+          },
+          {
+            id: 'lift-2',
+            speaker: 'ELSA',
+            dialogue: 'Nothing, I suppose. I should float about the box and scream.',
+          },
+          {
+            id: 'lift-3',
+            speaker: 'ALBERT',
+            dialogue: 'Both, and in that order. Now: is there anything you could do inside that box to find out what is happening?',
+          },
+          {
+            id: 'lift-4',
+            speaker: 'ELSA',
+            dialogue: 'Drop something. But it would float too.',
+          },
+          {
+            id: 'lift-5',
+            speaker: 'ALBERT',
+            dialogue: 'It floats. So you cannot tell whether you are falling down a shaft, or drifting far out in space where there is no earth at all.',
+          },
+          {
+            id: 'lift-7',
+            speaker: 'ALBERT',
+            dialogue: 'They would feel the same because they are the same. Now turn it round. Have something haul that box upward, faster and faster.',
+          },
+          {
+            id: 'lift-8',
+            speaker: 'ELSA',
+            dialogue: 'I should be pressed down onto the floor.',
+          },
+          {
+            id: 'lift-9',
+            speaker: 'ALBERT',
+            dialogue: 'Exactly as though you had weight. You could stand up. You could drop a spoon and watch it fall.',
+          },
+          {
+            id: 'lift-10',
+            speaker: 'ELSA',
+            dialogue: 'So from inside I could not tell whether I am being pulled by the earth or hauled by a rope.',
+          },
+          {
+            id: 'lift-11',
+            speaker: 'ALBERT',
+            dialogue: 'Not by any measurement whatever. Which means gravity and being hauled are one single thing wearing two hats.',
+          },
+          {
+            id: 'sits',
+            narration: 'She sits down on the arm of the chair without meaning to, and does not pick up the tray again.',
+          },
+          {
+            id: 'sits-2',
+            speaker: 'ELSA',
+            dialogue: 'Very well. And that took you eight years?',
+          },
+          {
+            id: 'beam',
+            speaker: 'ALBERT',
+            dialogue: 'Because of the light. Shine a lamp across your hauled box, from one wall to the other.',
+          },
+          {
+            id: 'beam-3',
+            speaker: 'ALBERT',
+            dialogue: 'It crosses. And while it crosses, the box is hauled upward — so the beam lands lower on the far wall than where it set out.',
+          },
+          {
+            id: 'beam-5',
+            speaker: 'ALBERT',
+            dialogue: 'From inside, it would look bent. And the two boxes are the same box. So near the earth, near the sun, light must bend as well.',
+          },
+          {
+            id: 'beam-6',
+            speaker: 'ELSA',
+            dialogue: 'Light has no weight. Nothing can pull on it.',
+          },
+          {
+            id: 'beam-7',
+            speaker: 'ALBERT',
+            dialogue: 'Nothing does. It goes perfectly straight. It is the place it is going through that is not flat.',
+          },
+          {
+            id: 'cloth',
+            speaker: 'ELSA',
+            dialogue: 'Now you have lost me.',
+          },
+          {
+            id: 'cloth-3',
+            narration: 'They take the cloth off the table and hold it taut between them, two corners each. He sets the flat-iron down in the middle of it.',
+          },
+          {
+            id: 'cloth-4',
+            speaker: 'ELSA',
+            dialogue: 'It sags.',
+          },
+          {
+            id: 'cloth-5',
+            speaker: 'ALBERT',
+            dialogue: 'Now roll a marble across the cloth, off to one side. Watch it.',
+          },
+          {
+            id: 'cloth-6',
+            speaker: 'ELSA',
+            dialogue: 'It curves in towards the iron.',
+          },
+          {
+            id: 'cloth-7',
+            speaker: 'ALBERT',
+            dialogue: 'And nothing pulled it. The iron never touched it. The cloth was bent, and the marble went straight.',
+          },
+          {
+            id: 'cloth-8',
+            speaker: 'ELSA',
+            dialogue: 'And the sun is the iron.',
+          },
+          {
+            id: 'cloth-9',
+            speaker: 'ALBERT',
+            dialogue: 'The sun is the iron. Space is the cloth. And the earth is the marble, going straight for all it is worth.',
+          },
+          {
+            id: 'cloth-11',
+            speaker: 'ALBERT',
+            dialogue: 'The starlight goes straight too. Across a dent. It will arrive in the wrong place, and that is how they will catch me out.',
+          },
+          {
             id: 'mercury',
-            narration:
-              'Mercury has been wandering for sixty years. Its orbit creeps around the sun by an amount nobody has been able to account for, and astronomers have invented an entire hidden planet rather than admit they cannot.',
+            narration: 'Mercury has been wandering for sixty years. Its orbit creeps round the sun by an amount nobody can account for.',
+          },
+          {
+            id: 'mercury-3',
+            speaker: 'ALBERT',
+            dialogue: 'A hair, Elsa. Forty-three seconds of arc in a hundred years. They have invented an entire hidden planet rather than admit they cannot explain it.',
           },
           {
             id: 'number',
-            narration:
-              'He puts the new equations in and turns the handle and out comes the creep: forty-three seconds of arc a century, with nothing adjusted and nothing added. He sits still for a while. Something goes wrong in his chest for three days afterwards, as though the news had to be paid for somewhere.',
+            narration: 'He puts the new equations in and turns the handle. Nothing adjusted. Nothing added. Nothing chosen to make it come right.',
+          },
+          {
+            id: 'number-2',
+            speaker: 'ALBERT',
+            dialogue: 'Forty-three.',
+          },
+          {
+            id: 'number-4',
+            speaker: 'ALBERT',
+            dialogue: 'That is exactly the number the astronomers measure. Elsa — it came out of the equations. I did not put it in.',
+          },
+          {
+            id: 'number-5',
+            narration: 'He sits very still. For three days afterwards something goes wrong in his chest, as though the news had to be paid for somewhere.',
           },
           {
             id: 'what',
-            narration:
-              'Gravity is not a force reaching across an empty room. There is no empty room. Matter tells the room what shape to be, and everything falling is only going straight in a place that has been bent.',
+            speaker: 'ELSA',
+            dialogue: 'Say it once more. Plainly. So I can tell it to somebody.',
+          },
+          {
+            id: 'what-2',
+            speaker: 'ALBERT',
+            dialogue: 'There is no force reaching across an empty room. There is no empty room. Heavy things tell the room what shape to be.',
+          },
+          {
+            id: 'what-4',
+            speaker: 'ALBERT',
+            dialogue: 'And falling is going straight, in a place that has been bent by everything in it.',
           },
         ],
         historicalNote:
-          'Einstein completed the field equations in Berlin in November 1915; the calculation of Mercury’s perihelion advance was the first confirmation, and he described a strong physical reaction to it. Wording dramatized.',
+          'Einstein completed the field equations of general relativity in Berlin in November 1915. The falling man who feels no weight, and the sealed box that cannot tell gravity from acceleration, are his own arguments, dating back to Bern. The first confirmation was Mercury’s unexplained orbital creep of about forty-three seconds of arc per century, which the equations produced with nothing adjusted; he described a violent physical reaction to it. Elsa Löwenthal was his cousin and later his wife; the conversation is dramatized.',
       },
       {
         id: 'zurich',
@@ -1945,22 +3875,80 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'ask',
-            narration:
-              'He asks his old friend what mathematics exists for surfaces that bend, and is handed a name he has never heard and a stack of volumes he cannot read for a fortnight. Then he can. Then he cannot stop.',
+            speaker: 'ALBERT',
+            dialogue: 'Marcel. I need a kind of mathematics I do not have.',
+          },
+          {
+            id: 'ask-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'You said you would write to me if that ever happened. It has only taken fifteen years.',
+          },
+          {
+            id: 'ask-3',
+            speaker: 'ALBERT',
+            dialogue: 'I need to do geometry inside a place that will not lie flat. A surface that sags where something heavy sits on it.',
+          },
+          {
+            id: 'ask-4',
+            speaker: 'GROSSMANN',
+            dialogue: 'Ah. There is such a thing. Italians, mostly. Nobody has ever found the slightest use for it.',
+          },
+          {
+            id: 'ask-6',
+            speaker: 'GROSSMANN',
+            dialogue: 'You will hate it for a fortnight and be using it by the end of the month. I shall fetch the volumes before you change your mind.',
+          },
+          {
+            id: 'read',
+            narration: 'He hates it for a fortnight. Then he cannot stop, and the lamp is lit at four in the morning for a year.',
+          },
+          {
+            id: 'read-2',
+            speaker: 'ALBERT',
+            dialogue: 'You have handed me the only tool in Europe that fits.',
+          },
+          {
+            id: 'read-3',
+            speaker: 'GROSSMANN',
+            dialogue: 'I shall help you with the mathematics. I will have nothing whatever to do with the physics.',
           },
           {
             id: 'close',
-            narration:
-              'When the equations finally close they are simpler than the mess he fought through to reach them, which is the sign, every time, that a thing is true.',
+            narration: 'When the equations finally close, they are simpler than the mess he fought through to reach them.',
+          },
+          {
+            id: 'close-2',
+            speaker: 'ALBERT',
+            dialogue: 'There. Gravity is not a pull. Heavy things bend the space around them and everything else runs straight through the bend.',
+          },
+          {
+            id: 'close-3',
+            speaker: 'GROSSMANN',
+            dialogue: 'And that is falling.',
+          },
+          {
+            id: 'close-4',
+            speaker: 'ALBERT',
+            dialogue: 'That is falling. It comes out simpler than the road to it, which is the sign, every time, that a thing is true.',
           },
           {
             id: 'cost',
-            narration:
-              'He has been ill, and rude to people who did not deserve it, and absent from a house where he was needed. The equations do not know any of that. They will still be true when everyone involved is dead.',
+            speaker: 'ALBERT',
+            dialogue: 'I have been ill, and rude to people who did not deserve it, and absent from a house where I was needed.',
+          },
+          {
+            id: 'cost-2',
+            speaker: 'GROSSMANN',
+            dialogue: 'The equations do not know any of that.',
+          },
+          {
+            id: 'cost-3',
+            speaker: 'ALBERT',
+            dialogue: 'No. They will still be true when every one of us is dead. I mind that less than I ought to.',
           },
         ],
         historicalNote:
-          'Marcel Grossmann supplied Einstein with the differential geometry underlying general relativity during their Zürich collaboration. The scene is dramatized.',
+          'Marcel Grossmann supplied Einstein with the differential geometry of curved surfaces that general relativity required, during their Zürich collaboration in the early 1910s. The conversation is dramatized.',
       },
       {
         id: 'default',
@@ -1975,17 +3963,34 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'done',
-            narration:
-              'It takes eight years and it comes out in a room nobody will ever photograph. Gravity is geometry. Falling is the straightest line available in a place that has been bent by everything in it.',
+            narration: 'Eight years, and it comes out in a room that nobody will ever photograph.',
+          },
+          {
+            id: 'done-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Give it to me in one sentence.',
+          },
+          {
+            id: 'done-3',
+            speaker: 'ALBERT',
+            dialogue: 'Gravity is not a pull. Heavy things bend the space around them, and everything else goes straight through the bend.',
+          },
+          {
+            id: 'done-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'A stone dropped from a window?',
+          },
+          {
+            id: 'done-5',
+            speaker: 'ALBERT',
+            dialogue: 'Takes the straightest road available, in a place that will not lie flat. That is all falling has ever been.',
           },
           {
             id: 'alone',
-            narration:
-              'He puts the pen down. Outside it is raining and a cart is going past and somebody two streets away is being shouted at. Inside, the universe has just changed shape, and there is nobody awake to tell.',
+            narration: 'Outside it is raining and a cart is going past. Inside, the world has changed shape, and there is nobody awake to tell.',
           },
         ],
-        historicalNote:
-          'A divergent completion of general relativity outside its documented Berlin setting. The physics is documented.',
+        historicalNote: 'A completion of general relativity outside its documented Berlin setting. The physics is documented.',
       },
     ],
   },
@@ -2019,24 +4024,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'winter',
-            narration:
-              'There is no coal and there is very little fat and the city eats turnips in every form a cook can invent. He loses a quarter of himself in two months and does not notice until his collar goes slack.',
+            narration: 'No coal, very little fat, and a city eating turnips in every form a cook can invent.',
+          },
+          {
+            id: 'winter-2',
+            speaker: 'ELSA',
+            dialogue: 'Your collar is loose. When did that happen?',
           },
           {
             id: 'nursed',
-            narration:
-              'A cousin arrives with soup and an unsentimental manner and simply takes over, in the way of people who have decided that an argument would be a waste of both their time.',
             speaker: 'ELSA',
-            dialogue: 'Eat this first. The universe has waited fourteen billion years, it can wait until half past one.',
+            dialogue: 'Eat this first.',
+          },
+          {
+            id: 'nursed-2',
+            speaker: 'ALBERT',
+            dialogue: 'After this page.',
+          },
+          {
+            id: 'nursed-3',
+            speaker: 'ELSA',
+            dialogue: 'The universe has waited a very long time. It can wait until half past one.',
+          },
+          {
+            id: 'nursed-4',
+            speaker: 'ALBERT',
+            dialogue: 'That is an unanswerable argument and I resent it deeply.',
           },
           {
             id: 'work',
-            narration:
-              'He works propped up on pillows with the tray across his knees, which is not heroic, only what there is to do. The pages come out slower and about as good.',
+            narration: 'He works propped on pillows with the tray across his knees. It is not heroic. It is only what there is to do.',
+          },
+          {
+            id: 'work-2',
+            speaker: 'ELSA',
+            dialogue: 'Is it going well?',
+          },
+          {
+            id: 'work-3',
+            speaker: 'ALBERT',
+            dialogue: 'Slower. About as good. Slower is not the same as worse — it took me thirty years to learn that.',
           },
         ],
         historicalNote:
-          'Einstein became seriously ill in 1917 amid wartime shortages in Berlin and was nursed by his cousin Elsa, whom he later married. Dialogue is dramatized.',
+          'Einstein became seriously ill in 1917 amid the wartime food shortages in Berlin and was nursed by his cousin Elsa Löwenthal, whom he married in 1919. Dialogue is dramatized.',
       },
       {
         id: 'holding',
@@ -2057,17 +4088,36 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'ration',
-            narration:
-              'The ration card is pinned to the shelf where the sugar used to be. He is thinner than he was and better at arithmetic about bread than any physicist ought to need to be.',
+            narration: 'The ration card is pinned to the shelf where the sugar used to be kept.',
+          },
+          {
+            id: 'ration-2',
+            speaker: 'THE LANDLADY',
+            dialogue: 'You are playing with your coat on again.',
+          },
+          {
+            id: 'ration-3',
+            speaker: 'ALBERT',
+            dialogue: 'My fingers are cold. It is not the coat’s fault that the Mozart is bad.',
           },
           {
             id: 'music',
-            narration:
-              'In the evening he plays with his coat on, badly, because his fingers are cold. It is the only hour of the day that has nothing to do with the war, and he defends it like a border.',
+            speaker: 'THE LANDLADY',
+            dialogue: 'It is an hour a day. Everybody should have one.',
+          },
+          {
+            id: 'music-2',
+            speaker: 'ALBERT',
+            dialogue: 'It is the only hour with nothing to do with the war in it. I defend it like a border.',
+          },
+          {
+            id: 'music-3',
+            speaker: 'THE LANDLADY',
+            dialogue: 'Then play the quiet one, and defend it more softly.',
           },
         ],
         historicalNote:
-          'Wartime shortages in Germany from 1916 onward are documented, as is Einstein’s constant violin playing. The scene is dramatized.',
+          'Wartime shortages in Germany from 1916 onward are documented, as is Einstein’s constant violin playing. The landlady is dramatized.',
       },
     ],
   },
@@ -2097,17 +4147,89 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'prediction',
-            narration:
-              'The theory makes a promise it cannot take back: starlight passing the sun must bend, by a definite amount, and the only time anyone can look is during a total eclipse.',
+            narration: 'The theory has made a promise it cannot take back.',
+          },
+          {
+            id: 'prediction-2',
+            speaker: 'ELSA',
+            dialogue: 'Which promise?',
+          },
+          {
+            id: 'prediction-3',
+            speaker: 'ALBERT',
+            dialogue: 'Starlight passing close by the sun arrives in the wrong place. It is bent going past, by a definite amount.',
+          },
+          {
+            id: 'prediction-4',
+            speaker: 'ELSA',
+            dialogue: 'Then somebody should go and look.',
+          },
+          {
+            id: 'prediction-5',
+            speaker: 'ALBERT',
+            dialogue: 'You cannot see a star that sits beside the sun. The sun drowns the whole sky for a million miles.',
+          },
+          {
+            id: 'prediction-7',
+            speaker: 'ALBERT',
+            dialogue: 'Unless the moon slides in front of it. Then for six minutes, in the middle of the day, the stars come out beside the sun.',
+          },
+          {
+            id: 'letter',
+            narration: 'A letter comes from England, by way of a neutral country, in the middle of a war.',
+          },
+          {
+            id: 'letter-2',
+            speaker: 'EDDINGTON',
+            dialogue: 'There is a total eclipse in May. I intend to be underneath it with a camera.',
+          },
+          {
+            id: 'letter-3',
+            speaker: 'EDDINGTON',
+            dialogue: 'I shall photograph the stars beside the sun that day, and the same stars at night six months later.',
+          },
+          {
+            id: 'letter-4',
+            speaker: 'EDDINGTON',
+            dialogue: 'Then I lay one plate over the other. If those stars have shifted, their light was bent on the way to us.',
+          },
+          {
+            id: 'letter-5',
+            speaker: 'EDDINGTON',
+            dialogue: 'If they have not shifted, your theory is finished, and a good deal else with it.',
+          },
+          {
+            id: 'letter-6',
+            speaker: 'ELSA',
+            dialogue: 'He is English.',
+          },
+          {
+            id: 'letter-7',
+            speaker: 'ALBERT',
+            dialogue: 'He is an Englishman proposing to test a German theory while the two countries are shelling each other.',
+          },
+          {
+            id: 'letter-9',
+            speaker: 'ALBERT',
+            dialogue: 'He says the sky does not take sides. He will not fight, and they very nearly gaoled him for it.',
           },
           {
             id: 'wait',
-            narration:
-              'The next one falls in the spring. Between now and then there is nothing whatever for him to do about it, which he discovers is the hardest work he has ever attempted.',
+            narration: 'The eclipse falls in the spring. Between now and then there is nothing whatever for him to do about it.',
+          },
+          {
+            id: 'wait-2',
+            speaker: 'ELSA',
+            dialogue: 'And if the stars have not moved?',
+          },
+          {
+            id: 'wait-3',
+            speaker: 'ALBERT',
+            dialogue: 'Then I am wrong, and I shall say so from a platform in front of the ninety-three. Waiting is the hardest work I have ever attempted.',
           },
         ],
         historicalNote:
-          'General relativity predicted the deflection of starlight, testable only during a solar eclipse; the 1919 expedition was mounted to look for it.',
+          'General relativity predicted that starlight grazing the sun would be deflected by a definite amount, observable only during a total solar eclipse. Arthur Eddington, a Quaker who refused military service, learned of the theory through neutral Holland during the war and organised the May 1919 expedition that tested it by comparing eclipse photographs with night plates of the same stars. The letter and the conversation are dramatized.',
       },
       {
         id: 'still-a-clerk',
@@ -2125,17 +4247,39 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'ledger',
-            narration:
-              'Ten years of impeccable service and a decade of evenings. The war passed over the office without stopping. Men he studied with have chairs now, and one of them has a street.',
+            narration: 'Ten years of impeccable service. The war passed over the office without stopping.',
+          },
+          {
+            id: 'ledger-2',
+            speaker: 'HALLER',
+            dialogue: 'You have never once been late.',
+          },
+          {
+            id: 'ledger-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have never once been anything else.',
+          },
+          {
+            id: 'ledger-4',
+            speaker: 'HALLER',
+            dialogue: 'Men you studied with have chairs now. One of them has a street named after him.',
+          },
+          {
+            id: 'ledger-5',
+            speaker: 'ALBERT',
+            dialogue: 'A short street. I have walked down it.',
           },
           {
             id: 'notebook',
-            narration:
-              'The notebook is thicker than it was. Some of it is right. Nobody has read it, and nobody has told him he is wrong, and he cannot decide which of those is the loss.',
+            narration: 'The notebook is thicker than it was. Some of it is right.',
+          },
+          {
+            id: 'notebook-2',
+            speaker: 'ALBERT',
+            dialogue: 'Nobody has read it, and nobody has told me I am wrong. I cannot decide which of those is the loss.',
           },
         ],
-        historicalNote:
-          'A divergent closing for a life that stayed outside the university after 1909.',
+        historicalNote: 'A closing for a life that stayed outside the university after 1909.',
       },
       {
         id: 'default',
@@ -2152,17 +4296,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'count',
-            narration:
-              'Four years of it, and the counting is done in the newspapers now, in columns. Whole seminar rooms are gone. The men who signed the declarations are still here, and mostly still confident.',
+            narration: 'Four years of it, and the counting is done in the newspapers now, in columns.',
+          },
+          {
+            id: 'count-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Whole seminar rooms are gone. I taught half of one of them.',
+          },
+          {
+            id: 'count-3',
+            speaker: 'ALBERT',
+            dialogue: 'And every man who signed the declarations is still here, and mostly still confident.',
+          },
+          {
+            id: 'count-5',
+            speaker: 'ALBERT',
+            dialogue: 'I have said so quietly, and to the wrong people, which is the same as not saying it.',
           },
           {
             id: 'ahead',
-            narration:
-              'He comes out of the decade with less of his health, fewer of his friends, and one certainty: that he will never again put his signature under anybody’s flag. A great deal is unfinished. That is not.',
+            narration: 'He comes out of the decade with less of his health and fewer of his friends.',
+          },
+          {
+            id: 'ahead-2',
+            speaker: 'ALBERT',
+            dialogue: 'One thing is settled, though. I shall never again put my name under anybody’s flag.',
+          },
+          {
+            id: 'ahead-3',
+            speaker: 'ALBERT',
+            dialogue: 'A great deal is unfinished. That is not.',
           },
         ],
         historicalNote:
-          'A divergent closing framed around the documented human cost of the war and Einstein’s lasting internationalism.',
+          'A closing framed around the documented human cost of the war and Einstein’s lasting internationalism.',
       },
     ],
   },
@@ -2196,25 +4363,66 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'city',
-            narration:
-              'Europe comes out of the war thinner and much louder, arguing in queues and newspapers about whose fault it was. Coal is a rumour. The learned societies reconvene and discover that half their foreign members will not sit in a room with the other half.',
+            narration: 'The first winter after the war. The queue outside the bread shop turns the corner before the shutters are up.',
           },
           {
-            id: 'reputation',
-            narration:
-              'His name is on the wrong list. In some rooms that makes him a traitor; in others, mostly foreign ones, it makes him the one German anyone abroad is still willing to be in a room with. Both descriptions are inconvenient and one of them is about to be extremely useful.',
-          },
-          {
-            id: 'letters',
-            narration:
-              'And the post has changed character. Fewer offprints, more appeals: committees for hunger relief, for prisoners, for a league of nations, for the reopening of scientific congresses to everybody.',
+            id: 'city-2',
             speaker: 'A COLLEAGUE',
-            dialogue: 'They do not want your physics, Einstein. They want your name at the top of their page. You do understand those are different things.',
+            dialogue: 'You have got thinner.',
+          },
+          {
+            id: 'city-3',
+            speaker: 'ALBERT',
+            dialogue: 'Everyone has got thinner. It is the one thing the whole continent has managed to agree on.',
+          },
+          {
+            id: 'lists',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'The societies are meeting again. Half the foreign members will not sit in a room with the other half.',
+          },
+          {
+            id: 'lists-2',
+            speaker: 'ALBERT',
+            dialogue: 'And I am on the wrong list in both rooms. Nobody expects me at dinner. It is restful.',
+          },
+          {
+            id: 'lists-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'You are the one German they will still receive abroad. Do not pretend that is nothing.',
+          },
+          {
+            id: 'lists-4',
+            speaker: 'ALBERT',
+            dialogue: 'It is not a virtue either. It is what comes of reading a page before putting my name on it.',
+          },
+          {
+            id: 'post',
+            narration: 'There are eleven letters on the desk this week and not one of them is about physics.',
+          },
+          {
+            id: 'post-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Hunger relief. Prisoners still not sent home. A league of nations. Congresses reopened to everybody.',
+          },
+          {
+            id: 'post-3',
+            speaker: 'ALBERT',
+            dialogue: 'And every one of them wants the same four inches of paper at the bottom of the page.',
+          },
+          {
+            id: 'post-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'They do not want your physics, Einstein. They want your name at the top of theirs. Those are different things.',
+          },
+          {
+            id: 'post-5',
+            speaker: 'ALBERT',
+            dialogue: 'I know what they are. I have read all eleven to the end, which is already an answer of a kind.',
           },
           {
             id: 'name',
-            narration:
-              'He understands it perfectly. There are eleven such letters on the desk this week and he has read every one of them to the end, which is already an answer of a kind, and not one he has admitted to giving.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Then give the answer out loud. What is a name for, now that you have one?',
             choices: [
               {
                 id: 'lend',
@@ -2237,7 +4445,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'Post-war conditions in Berlin and Einstein’s isolation among German academics after refusing the war declarations are documented, as is his growing involvement in relief and internationalist appeals. Dialogue is dramatized.',
+          'Post-war conditions in Berlin and Einstein’s isolation among German academics after refusing the war declarations are documented, as is his growing involvement in relief and internationalist appeals. The colleague stands in for people whose names are not recorded, and the dialogue is dramatized.',
       },
       {
         id: 'default',
@@ -2254,20 +4462,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'after',
-            narration:
-              'The war ends the way a fever ends, leaving everyone thinner and less certain of what they were shouting. Bread is rationed. Coal is a rumour. The universities reopen and pretend nothing has changed.',
+            narration: 'The war ends the way a fever ends. Bread is rationed, coal is a rumour, and the universities reopen pretending nothing happened.',
           },
           {
-            id: 'letters',
-            narration:
-              'The post has changed character too. Fewer offprints, more appeals: committees for hunger relief, for prisoners, for a league of nations, for reopening the congresses to everybody who was recently being shot at.',
+            id: 'after-2',
             speaker: 'A COLLEAGUE',
-            dialogue: 'They do not want your physics, Einstein. They want your name at the top of their page. You do understand those are different things.',
+            dialogue: 'You did not sit down at the meeting.',
+          },
+          {
+            id: 'after-3',
+            speaker: 'ALBERT',
+            dialogue: 'I stood at the back with my coat on. I could not make myself sit down to it.',
+          },
+          {
+            id: 'post',
+            narration: 'The post has changed character since the armistice. Fewer offprints. Many more appeals.',
+          },
+          {
+            id: 'post-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Hunger relief. Prisoners. A league of nations. Congresses opened to everybody who was recently being shot at.',
+          },
+          {
+            id: 'post-3',
+            speaker: 'ALBERT',
+            dialogue: 'Eleven this week. They arrive by every delivery, like the milk.',
+          },
+          {
+            id: 'post-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'They do not want your physics, Einstein. They want your name at the top of their page. Those are different things.',
+          },
+          {
+            id: 'post-5',
+            speaker: 'ALBERT',
+            dialogue: 'I am forty, and somebody has handed me an instrument I cannot read the dial of.',
+          },
+          {
+            id: 'post-6',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Most men would call that luck.',
+          },
+          {
+            id: 'post-7',
+            speaker: 'ALBERT',
+            dialogue: 'Most men can read the dial. I should like to know what it measures before I start spending it.',
+          },
+          {
+            id: 'post-8',
+            narration: 'He reads every one of the eleven to the end. That is already an answer, and not one he has admitted to giving.',
           },
           {
             id: 'name',
-            narration:
-              'He understands it perfectly. A name is a strange instrument to be handed at forty by people who cannot read a line of what earned it, and there is no manual for the thing.',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'So. What is the name for?',
             choices: [
               {
                 id: 'lend',
@@ -2319,22 +4567,80 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'telegram',
-            narration:
-              'The telegram comes from a colleague in Leiden, who has heard from London, who has heard from the men with the plates. Deflection observed. Consistent with prediction. Eleven words, and one of them is his whole life.',
+            narration: 'The telegram comes from Leiden, from a colleague who has heard from London, who has heard from the men with the plates.',
           },
           {
-            id: 'plates',
-            narration:
-              'It is not a photograph of a bending ray. It is a set of star positions measured against the same stars taken six months earlier, and the difference is smaller than the width of a hair held at arm’s length, and it is there.',
+            id: 'telegram-2',
+            speaker: 'ELSA',
+            dialogue: 'Read it out.',
+          },
+          {
+            id: 'telegram-3',
+            speaker: 'ALBERT',
+            dialogue: 'Deflection observed. Consistent with prediction. Eleven words, and one of them is the last ten years of my life.',
+          },
+          {
+            id: 'elsa',
+            speaker: 'ELSA',
+            dialogue: 'Say it so that I can tell my sister.',
+          },
+          {
+            id: 'elsa-2',
+            speaker: 'ALBERT',
+            dialogue: 'They photographed the stars beside the sun while the moon covered it. Then the same stars at night, months later.',
+          },
+          {
+            id: 'elsa-3',
+            speaker: 'ALBERT',
+            dialogue: 'They laid one plate over the other. The stars beside the sun are sitting in the wrong place.',
+          },
+          {
+            id: 'elsa-4',
+            speaker: 'ELSA',
+            dialogue: 'The stars moved?',
+          },
+          {
+            id: 'elsa-5',
+            speaker: 'ALBERT',
+            dialogue: 'The stars did nothing at all. Their light came past the sun, and the road it travelled was not flat.',
+          },
+          {
+            id: 'howfar',
+            speaker: 'ELSA',
+            dialogue: 'And how far wrong are they?',
+          },
+          {
+            id: 'howfar-2',
+            speaker: 'ALBERT',
+            dialogue: 'Less than the width of a hair held out at arm’s length. Exactly that much. Not a hair more.',
+          },
+          {
+            id: 'howfar-3',
+            speaker: 'ELSA',
+            dialogue: 'Somebody measured a hair. On an island. From a photograph.',
+          },
+          {
+            id: 'howfar-4',
+            speaker: 'ALBERT',
+            dialogue: 'Somebody measured it twice and compared. That is the whole business, Elsa. Patience and glass.',
           },
           {
             id: 'calm',
-            narration:
-              'He tells his mother by postcard. Then he goes back to what he was doing, because the equations have been right since the November he finished them and the sky was never going to change its mind about it.',
+            narration: 'He writes a postcard to his mother. Then he goes back to the page he was on before the boy came up the stairs.',
+          },
+          {
+            id: 'calm-2',
+            speaker: 'ELSA',
+            dialogue: 'You are not going to shout?',
+          },
+          {
+            id: 'calm-3',
+            speaker: 'ALBERT',
+            dialogue: 'The equations have been right since November. The sky was never going to change its mind about it.',
           },
         ],
         historicalNote:
-          'Eddington’s 1919 eclipse expedition confirmed the predicted deflection of starlight; the result was announced in London that November. The telegram wording is dramatized.',
+          'Eddington’s 1919 eclipse expedition confirmed the predicted deflection of starlight; the result was announced in London that November. Einstein learned of it by telegram from Hendrik Lorentz in Leiden. The wording is dramatized.',
       },
       {
         id: 'default',
@@ -2351,18 +4657,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'telegram',
-            narration:
-              'The telegram comes from a colleague in Leiden, who has heard from London, who has heard from the men with the plates. Deflection observed. Consistent with prediction. Eleven words, and he has to read them twice to work out how much of it is his.',
+            narration: 'The telegram comes from Leiden, by way of London, from the men with the plates. Deflection observed. Consistent with prediction.',
+          },
+          {
+            id: 'telegram-2',
+            speaker: 'ELSA',
+            dialogue: 'That is your starlight.',
+          },
+          {
+            id: 'telegram-3',
+            speaker: 'ALBERT',
+            dialogue: 'It is the starlight. The prediction belongs to somebody else.',
           },
           {
             id: 'drawer',
-            narration:
-              'The prediction that was tested is the one somebody else finished writing. His own version stops forty pages in, at the place where the geometry got harder than he had time for, and it stopped there in a year he can still name.',
+            narration: 'His own version stops forty pages in, at the place where the geometry got harder than he had time for.',
+          },
+          {
+            id: 'drawer-2',
+            speaker: 'ELSA',
+            dialogue: 'You could say that you had it first.',
+          },
+          {
+            id: 'drawer-3',
+            speaker: 'ALBERT',
+            dialogue: 'I had a question first. He had an answer. Those are not the same claim and I will not make it.',
           },
           {
             id: 'measure',
-            narration:
-              'The starlight bent. That is the part he cares about and the part nobody will attach to him. He puts the telegram in the notebook, at the page where it stops, and does not open either of them again for a long time.',
+            speaker: 'ELSA',
+            dialogue: 'Then what is there to be glad about?',
+          },
+          {
+            id: 'measure-2',
+            speaker: 'ALBERT',
+            dialogue: 'The light bent, Elsa. Somebody went to an island with a camera, and the light bent.',
+          },
+          {
+            id: 'measure-3',
+            speaker: 'ALBERT',
+            dialogue: 'It would have bent if I had never picked up a pen in my life. That is the part I like.',
+          },
+          {
+            id: 'measure-4',
+            narration: 'He puts the telegram inside the notebook, at the page where it stops, and does not open either of them for a long time.',
           },
         ],
         historicalNote:
@@ -2402,20 +4740,90 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'post',
-            narration:
-              'The post arrives in sacks. Invitations, insults, proposals of marriage, three separate schemes for perpetual motion, and a great many letters that begin by explaining relativity to him.',
+            narration: 'The post arrives in sacks now. Invitations, insults, proposals of marriage, and three separate schemes for perpetual motion.',
           },
           {
-            id: 'reporter',
-            narration:
-              'On the pavement a young man from a newspaper walks backwards in front of him, notebook out, asking for it in one sentence.',
+            id: 'post-2',
+            speaker: 'THE SECRETARY',
+            dialogue: 'Nine letters this morning begin by explaining relativity to you.',
+          },
+          {
+            id: 'post-3',
+            speaker: 'ALBERT',
+            dialogue: 'Does any one of them get it right?',
+          },
+          {
+            id: 'post-4',
+            speaker: 'THE SECRETARY',
+            dialogue: 'One is close. He has decided you meant that everything is a matter of opinion.',
+          },
+          {
+            id: 'post-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is the opposite of what I meant, and he has written four pages of it.',
+          },
+          {
+            id: 'street',
+            narration: 'On the pavement a young man from a newspaper walks backwards in front of him with a notebook open.',
+          },
+          {
+            id: 'street-2',
             speaker: 'A REPORTER',
-            dialogue: 'Professor — relativity, in one sentence, for our readers?',
+            dialogue: 'Professor. One sentence. For people who read on a tram.',
+          },
+          {
+            id: 'street-3',
+            speaker: 'ALBERT',
+            dialogue: 'Very well. Two men can disagree about when a thing happened, and both of them be right.',
+          },
+          {
+            id: 'street-4',
+            speaker: 'A REPORTER',
+            dialogue: 'Both right?',
+          },
+          {
+            id: 'street-5',
+            speaker: 'ALBERT',
+            dialogue: 'There is no clock hanging over the world that settles it for everybody. Only light is the same for all of us.',
+          },
+          {
+            id: 'street-6',
+            speaker: 'A REPORTER',
+            dialogue: 'My editor will cut that. It reads as though you are saying nothing is true.',
+          },
+          {
+            id: 'street-7',
+            speaker: 'ALBERT',
+            dialogue: 'It says the opposite. One thing is so true that the clocks have to bend to keep up with it.',
+          },
+          {
+            id: 'street-8',
+            speaker: 'A REPORTER',
+            dialogue: 'Shorter?',
+          },
+          {
+            id: 'street-9',
+            speaker: 'ALBERT',
+            dialogue: 'Shorter than that and it stops being the thing and starts being a slogan.',
           },
           {
             id: 'spend',
-            narration:
-              'He gives him something short and wrong enough to print. Then he goes upstairs and signs four appeals, because he has worked out what this new thing is: not an honour, a currency. And currency is for spending.',
+            narration: 'The morning paper says, in letters two inches high, that the professor has proved nothing is true.',
+          },
+          {
+            id: 'spend-2',
+            speaker: 'ALBERT',
+            dialogue: 'If they will print me saying that, they will print me saying something worth reading.',
+          },
+          {
+            id: 'spend-3',
+            speaker: 'THE SECRETARY',
+            dialogue: 'The four appeals, then. Shall I bring the pen?',
+          },
+          {
+            id: 'spend-4',
+            speaker: 'ALBERT',
+            dialogue: 'Bring the pen. This is not an honour they have given me. It is a currency, and currency is for spending.',
           },
         ],
         effects: [
@@ -2424,7 +4832,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.worldFamous', value: true },
         ],
         historicalNote:
-          'The eclipse announcement made Einstein an international celebrity almost overnight, and he used that fame throughout the 1920s for pacifist and internationalist causes. Dialogue is dramatized.',
+          'The eclipse announcement made Einstein an international celebrity almost overnight, and he used that fame throughout the 1920s for pacifist and internationalist causes. The press repeatedly reduced his work to the claim that everything is relative, which he spent decades denying. Dialogue is dramatized.',
       },
       {
         id: 'confirmed',
@@ -2446,20 +4854,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'papers',
-            narration:
-              'The newspapers of every country print the same story in different sizes: the heavens have been weighed and found bent. Overnight, at forty, he becomes the only physicist most people on earth could name.',
+            narration: 'The newspapers of every country run the same story in different sizes. The heavens have been weighed and found bent.',
+          },
+          {
+            id: 'papers-2',
+            speaker: 'ELSA',
+            dialogue: 'There are people standing outside the house.',
+          },
+          {
+            id: 'papers-3',
+            speaker: 'ALBERT',
+            dialogue: 'In this weather? What do they imagine is going to come out of the door?',
           },
           {
             id: 'halls',
-            narration:
-              'The halls sell out. People who cannot follow a line of algebra come to look at a man who can, and go home satisfied, and he cannot for the life of him work out what they came for.',
+            narration: 'The halls sell out. People who cannot follow a line of algebra come to look at a man who can.',
+          },
+          {
+            id: 'halls-2',
+            speaker: 'A STUDENT',
+            dialogue: 'Professor, they are turning people away at the doors.',
+          },
+          {
+            id: 'halls-3',
             speaker: 'ALBERT',
-            dialogue: 'They have not understood a word. They applauded anyway. It is very moving and very strange.',
+            dialogue: 'They did not understand one word of it. They applauded anyway. It is very moving and extremely strange.',
+          },
+          {
+            id: 'halls-4',
+            speaker: 'A STUDENT',
+            dialogue: 'They came because it is beautiful.',
+          },
+          {
+            id: 'halls-5',
+            speaker: 'ALBERT',
+            dialogue: 'They came because a newspaper told them the sky was bent, and nobody has told them anything surprising since the war.',
+          },
+          {
+            id: 'one',
+            speaker: 'ELSA',
+            dialogue: 'The man at the front asked you to put it in one sentence.',
+          },
+          {
+            id: 'one-2',
+            speaker: 'ALBERT',
+            dialogue: 'I gave him one. He looked at me as though I had been rude to him in front of his wife.',
           },
           {
             id: 'cost',
-            narration:
-              'The work he can do in a day is now measured by the interruptions. He starts writing at five in the morning, which is the only hour the century has not yet claimed.',
+            narration: 'The work he can do in a day is measured now by the interruptions between the parts of it.',
+          },
+          {
+            id: 'cost-2',
+            speaker: 'ALBERT',
+            dialogue: 'I start at five in the morning. It is the only hour the century has not yet claimed.',
           },
         ],
         effects: [
@@ -2468,7 +4916,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.worldFamous', value: true },
         ],
         historicalNote:
-          'The global press reaction to the 1919 confirmation and Einstein’s subsequent celebrity are documented. Dialogue is dramatized.',
+          'The global press reaction to the 1919 confirmation and Einstein’s subsequent celebrity are documented, including packed public lectures given to audiences with no physics. Dialogue is dramatized.',
       },
       {
         id: 'theory-only',
@@ -2490,13 +4938,41 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'known',
-            narration:
-              'The theory is admired by the people equipped to admire it, and there are about two hundred of them in the world. No expedition has sailed. No plates have been measured. It remains, officially, a beautiful conjecture.',
+            narration: 'Twenty chairs, half of them filled, and a blackboard of geometry that perhaps two hundred people in the world can read.',
+          },
+          {
+            id: 'known-2',
+            speaker: 'A STUDENT',
+            dialogue: 'Nobody has gone to look, then. No expedition. No plates.',
+          },
+          {
+            id: 'known-3',
+            speaker: 'ALBERT',
+            dialogue: 'No ship, no island, no camera. Officially it remains a beautiful conjecture.',
           },
           {
             id: 'wait',
-            narration:
-              'He is not troubled. Somebody will look eventually, in some eclipse or other, and the sky will say what it says. He has noticed that he minds the waiting less than his colleagues do, and suspects this is arrogance wearing patience as a coat.',
+            speaker: 'A STUDENT',
+            dialogue: 'Does that not trouble you?',
+          },
+          {
+            id: 'wait-2',
+            speaker: 'ALBERT',
+            dialogue: 'Somebody will look, at some eclipse or other, and the sky will say whatever it says.',
+          },
+          {
+            id: 'wait-3',
+            speaker: 'A STUDENT',
+            dialogue: 'You could press them. They would go, if you asked.',
+          },
+          {
+            id: 'wait-4',
+            speaker: 'ALBERT',
+            dialogue: 'I mind the waiting less than my colleagues do. I suspect that is arrogance wearing patience as a coat.',
+          },
+          {
+            id: 'wait-5',
+            narration: 'He goes home at the usual hour, and the sky stays exactly as unexamined as it was that morning.',
           },
         ],
         effects: [
@@ -2525,13 +5001,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'stand',
-            narration:
-              'The newspapers this decade belong to other people: a channel swimmer, a tenor, a man who has flown further than anyone. Physics gets four lines on an inside page when a professor dies.',
+            narration: 'The rack belongs to other people this decade: a channel swimmer, a tenor, a man who has flown further than anybody.',
           },
           {
-            id: 'anonymous',
-            narration:
-              'He buys his paper and walks home unrecognised, which he tells himself is a mercy and which is, on certain evenings, simply a fact he keeps turning over like a stone in a pocket.',
+            id: 'stand-2',
+            speaker: 'THE NEWSAGENT',
+            dialogue: 'Same one as yesterday?',
+          },
+          {
+            id: 'stand-3',
+            speaker: 'ALBERT',
+            dialogue: 'The same one. Is there anything in it?',
+          },
+          {
+            id: 'stand-4',
+            speaker: 'THE NEWSAGENT',
+            dialogue: 'A professor died. Four lines, inside page, under the shipping.',
+          },
+          {
+            id: 'stand-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is the going rate. I have read the four lines. He was worth forty.',
+          },
+          {
+            id: 'home',
+            narration: 'He pays for the paper with a wet coin and walks home unrecognised past the tram stop.',
+          },
+          {
+            id: 'home-2',
+            speaker: 'ALBERT',
+            dialogue: 'It is a mercy, of course.',
+          },
+          {
+            id: 'home-3',
+            narration: 'He says it aloud, to nobody, and turns it over afterwards like a stone in a pocket.',
           },
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1919-fame' }],
@@ -2570,18 +5073,70 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'telegram',
-            narration:
-              'The telegram catches him abroad, halfway across an ocean on a lecture tour, which means the ceremony happens without him and somebody else reads out his words in a hall he has never seen.',
+            narration: 'The telegram catches him halfway across an ocean on a lecture tour. The ceremony will happen without him.',
           },
           {
-            id: 'citation',
-            narration:
-              'The citation is for the law of the photoelectric effect. It says nothing whatever about space or time. The committee has given him the prize for the one paper he wrote that the committee was sure of, and he finds this funny for about a year.',
+            id: 'telegram-2',
+            speaker: 'ELSA',
+            dialogue: 'Read the whole of it. What is it for?',
+          },
+          {
+            id: 'telegram-3',
+            speaker: 'ALBERT',
+            dialogue: 'The law of the photoelectric effect.',
+          },
+          {
+            id: 'telegram-4',
+            speaker: 'ELSA',
+            dialogue: 'And what is that, when it is at home?',
+          },
+          {
+            id: 'telegram-5',
+            speaker: 'ALBERT',
+            dialogue: 'The paper about light arriving in lumps. Shine a lamp on metal and the metal spits out little pieces of electricity.',
+          },
+          {
+            id: 'telegram-6',
+            speaker: 'ALBERT',
+            dialogue: 'Not a stream pouring in. Lumps. One lump in, one piece out. Brightness only changes how many.',
+          },
+          {
+            id: 'nothing',
+            speaker: 'ELSA',
+            dialogue: 'Nothing about space, then. Nothing about time.',
+          },
+          {
+            id: 'nothing-2',
+            speaker: 'ALBERT',
+            dialogue: 'Not a word. They have given it to me for the one paper they were certain of.',
+          },
+          {
+            id: 'nothing-3',
+            speaker: 'ELSA',
+            dialogue: 'Are you insulted?',
+          },
+          {
+            id: 'nothing-4',
+            speaker: 'ALBERT',
+            dialogue: 'I find it funny. I expect to go on finding it funny for about a year.',
           },
           {
             id: 'money',
-            narration:
-              'The money goes to Zürich, as agreed years ago in a settlement written by lawyers when nobody believed there would ever be any money. He keeps the medal in a drawer with the string and the sealing wax.',
+            narration: 'The money goes to Zürich, as agreed years ago by lawyers, when nobody believed there would ever be any money.',
+          },
+          {
+            id: 'money-2',
+            speaker: 'ELSA',
+            dialogue: 'All of it?',
+          },
+          {
+            id: 'money-3',
+            speaker: 'ALBERT',
+            dialogue: 'All of it. It was written down. I have never once got out of anything that was written down.',
+          },
+          {
+            id: 'money-4',
+            narration: 'The medal goes into a drawer with the string and the sealing wax, and stays there.',
           },
         ],
         effects: [
@@ -2630,24 +5185,114 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'mornings',
-            narration:
-              'The congress runs a week and the real work happens at breakfast. Every morning Albert arrives with a new device made of clocks and shutters and springs, designed to catch the new physics telling a lie.',
+            narration: 'The congress runs a week and the real work happens at breakfast, over cleared plates and a napkin covered in diagrams.',
           },
           {
-            id: 'evenings',
-            narration:
-              'Every evening the answer comes back, patiently, at length, with three qualifications attached — and the device turns out to have been defeated by the very gravity Albert himself put into the world.',
+            id: 'mornings-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'What are the two of you actually arguing about? It has been going since Tuesday.',
+          },
+          {
+            id: 'mornings-3',
+            speaker: 'ALBERT',
+            dialogue: 'Whether the world has made up its mind before anybody looks at it. He says that is an improper question.',
+          },
+          {
+            id: 'mornings-4',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And you say?',
+          },
+          {
+            id: 'mornings-5',
+            speaker: 'ALBERT',
+            dialogue: 'That it is the only question. Watch. Niels — I have brought you a box.',
+          },
+          {
+            id: 'box',
             speaker: 'BOHR',
-            dialogue: 'You are not saying it is wrong, my friend. You are saying you do not like it. Those are very different complaints, and only one of them is physics.',
+            dialogue: 'Ah — yes — a box — it is always a box with you — go on, go on.',
+          },
+          {
+            id: 'box-2',
+            speaker: 'ALBERT',
+            dialogue: 'It hangs from a spring and it is full of light. A hole in the side, a shutter over the hole.',
+          },
+          {
+            id: 'box-3',
+            speaker: 'ALBERT',
+            dialogue: 'The shutter opens for an instant, by clock, and exactly one flash gets out.',
+          },
+          {
+            id: 'box-4',
+            speaker: 'BOHR',
+            dialogue: 'Yes, and then you —',
+          },
+          {
+            id: 'box-5',
+            speaker: 'ALBERT',
+            dialogue: 'And then I weigh it. Lighter by exactly what left. And the clock says exactly when it left.',
+          },
+          {
+            id: 'box-6',
+            speaker: 'ALBERT',
+            dialogue: 'Both. Exactly. Your rule says nature will not permit a man both at once. My box permits it.',
+          },
+          {
+            id: 'pause',
+            narration: 'Bohr stands there holding the coffee pot and does not put it down for a considerable time.',
+          },
+          {
+            id: 'pause-2',
+            speaker: 'BOHR',
+            dialogue: 'That is — no — wait — you must let me —',
+          },
+          {
+            id: 'pause-3',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'He has walked off down the wrong corridor.',
+          },
+          {
+            id: 'pause-4',
+            speaker: 'ALBERT',
+            dialogue: 'He does that when he is being careful. From outside it looks like losing and it takes very much longer.',
+          },
+          {
+            id: 'evening',
+            narration: 'In the evening the answer comes back, at length, with three qualifications attached to the front of it.',
+          },
+          {
+            id: 'evening-2',
+            speaker: 'BOHR',
+            dialogue: 'Your box drops a little when it lightens. It moves, my friend. It moves in your own gravity.',
+          },
+          {
+            id: 'evening-3',
+            speaker: 'BOHR',
+            dialogue: 'And a clock that hangs lower runs slower. You told us that yourself, in 1915.',
+          },
+          {
+            id: 'evening-4',
+            speaker: 'BOHR',
+            dialogue: 'So the clock is no longer exact. Your box has cheated you, and it cheated you with your own theory.',
+          },
+          {
+            id: 'evening-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is the cruellest thing anybody has ever done to me before breakfast.',
+          },
+          {
+            id: 'evening-6',
+            speaker: 'BOHR',
+            dialogue: 'You are not saying it is wrong. You are saying you do not like it. Only one of those is physics.',
           },
           {
             id: 'argue',
-            narration:
-              'They are both right about something and neither of them will live to see which. Tomorrow there will be another breakfast.',
+            speaker: 'BOHR',
+            dialogue: 'Tomorrow there is another breakfast. Will you bring me a better box, or will you let me finish a sentence?',
             choices: [
               {
                 id: 'press',
-                label: 'Press the objection until it breaks or you do',
+                label: 'Bring the better box. Press until it breaks or you do',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 1, tension: 1, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 2 },
@@ -2655,7 +5300,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'listen',
-                label: 'Listen all the way to the end before answering',
+                label: 'Let him finish. Listen all the way to the end',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 2, tension: 0, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 1 },
@@ -2665,7 +5310,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'The Einstein–Bohr exchanges at the Solvay congresses of 1927 and 1930, in which Einstein proposed thought experiments to defeat quantum indeterminacy and Bohr answered them, are documented. Dialogue is dramatized.',
+          'The Einstein–Bohr exchanges at the Solvay congresses of 1927 and 1930 are documented: Einstein arrived each morning with a thought experiment designed to defeat the new physics, and Bohr answered it by evening. The box of light weighed on a spring, defeated by Einstein’s own result that a clock lower in a gravitational field runs slow, is the best known of them. Dialogue is dramatized.',
       },
       {
         id: 'npc-bohr',
@@ -2688,24 +5333,75 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'device',
-            narration:
-              'He brings a box with a shutter and a clock and a spring balance, and he has built it out of pure thought to prove that nature cannot really be as vague as they are claiming. It takes his opponent one night to find the flaw.',
+            narration: 'He has built a machine out of nothing but thought: a shutter, a clock, a spring balance, and a box full of light.',
+          },
+          {
+            id: 'device-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Why a box? Why not simply say what you mean?',
+          },
+          {
+            id: 'device-3',
+            speaker: 'ALBERT',
+            dialogue: 'Because what I mean is that nature is not as vague as they claim, and you cannot argue with a man about vagueness.',
+          },
+          {
+            id: 'device-4',
+            speaker: 'ALBERT',
+            dialogue: 'You can argue with him about a box. A box either does the thing or it does not.',
+          },
+          {
+            id: 'device-5',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And what does yours do?',
+          },
+          {
+            id: 'device-6',
+            speaker: 'ALBERT',
+            dialogue: 'It lets one flash of light out and tells me both the weight that left and the instant it left. They say that cannot be had.',
+          },
+          {
+            id: 'night',
+            narration: 'It takes his opponent one night to find the flaw. He is said to have walked in circles for most of it.',
           },
           {
             id: 'reply',
-            narration:
-              'The reply, when it comes, is delivered in that slow, hedged, endlessly qualified way that makes half the room want to finish the sentence for him — and is, infuriatingly, correct.',
             speaker: 'BOHR',
-            dialogue: 'It is not that nature is vague. It is that your question has assumed an answer nature was never asked to have.',
+            dialogue: 'It is not that nature is vague. It is — how shall I put it — that your question has assumed an answer.',
+          },
+          {
+            id: 'reply-2',
+            speaker: 'BOHR',
+            dialogue: 'An answer nature was never asked to have. You are demanding that it possess something before anyone requires it.',
+          },
+          {
+            id: 'reply-3',
+            speaker: 'ALBERT',
+            dialogue: 'A stone has a position whether or not I am looking at the stone.',
+          },
+          {
+            id: 'reply-4',
+            speaker: 'BOHR',
+            dialogue: 'A stone, yes — certainly — but the stone is very large, and that, my friend, is the entire difficulty.',
+          },
+          {
+            id: 'reply-5',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Which of them is winning?',
+          },
+          {
+            id: 'reply-6',
+            speaker: 'ALBERT',
+            dialogue: 'Neither. That is why we keep doing it. Nobody sane goes thirty years with an argument he can win.',
           },
           {
             id: 'argue',
-            narration:
-              'They part friends and remain opponents for thirty years, which turns out to be a kind of friendship almost nobody else in physics is offered.',
+            speaker: 'BOHR',
+            dialogue: 'The session closes in ten minutes. Shall we go round once more, or shall we go and eat something?',
             choices: [
               {
                 id: 'press',
-                label: 'Press the objection until it breaks or you do',
+                label: 'Round once more. Press until it breaks or you do',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 1, tension: 1, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 2 },
@@ -2713,7 +5409,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'listen',
-                label: 'Listen all the way to the end before answering',
+                label: 'Eat, and let him finish a sentence for once',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 2, tension: 0, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 1 },
@@ -2723,7 +5419,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'The long Einstein–Bohr disagreement over the interpretation of quantum mechanics, conducted with mutual respect, is documented. Dialogue is dramatized.',
+          'The long Einstein–Bohr disagreement over whether the new physics gives a complete account of the world, conducted with great mutual respect over three decades, is documented. Dialogue is dramatized.',
       },
       {
         id: 'human-bohr-elsewhere',
@@ -2745,21 +5441,70 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'letter',
-            narration:
-              'The congress goes ahead without the one man he wanted to argue with. So the argument goes into a letter instead: nine pages, a diagram of a box with a shutter and a clock, and the question underneath it that will not leave him alone.',
+            narration: 'The congress goes ahead without the one man he wanted to argue with. So the argument goes into a letter instead.',
+          },
+          {
+            id: 'letter-2',
+            speaker: 'ELSA',
+            dialogue: 'Nine pages. To one man.',
+          },
+          {
+            id: 'letter-3',
+            speaker: 'ALBERT',
+            dialogue: 'Eight of argument and one apologising for the eight.',
+          },
+          {
+            id: 'letter-4',
+            speaker: 'ELSA',
+            dialogue: 'What is it about this time?',
+          },
+          {
+            id: 'letter-5',
+            speaker: 'ALBERT',
+            dialogue: 'They say you cannot know where a small thing is and how fast it is going. Not ever. Not both.',
+          },
+          {
+            id: 'letter-6',
+            speaker: 'ELSA',
+            dialogue: 'Because the instruments are poor.',
+          },
+          {
+            id: 'letter-7',
+            speaker: 'ALBERT',
+            dialogue: 'No. Because there is nothing there to be known, they say. The world has not settled it until somebody looks.',
+          },
+          {
+            id: 'letter-8',
+            speaker: 'ELSA',
+            dialogue: 'And you have drawn a box.',
+          },
+          {
+            id: 'letter-9',
+            speaker: 'ALBERT',
+            dialogue: 'A box with a shutter and a clock, which I believe forces the world to settle it. He will find the hole in it.',
+          },
+          {
+            id: 'letter-10',
+            speaker: 'ELSA',
+            dialogue: 'Then why send it at all?',
+          },
+          {
+            id: 'letter-11',
+            speaker: 'ALBERT',
+            dialogue: 'Because he will find the hole and I shall learn something. There is nobody else on earth I can say that about.',
           },
           {
             id: 'wait',
-            narration:
-              'Letters are a poor way to be disagreed with. By the time the reply arrives he has thought of two better objections and forgotten why the first one mattered.',
+            narration: 'Letters are a poor way to be disagreed with. By the time the reply comes he has thought of two better objections.',
           },
           {
             id: 'argue',
-            narration: 'He reads it back before sealing it and has to decide what kind of letter it is going to be.',
+            speaker: 'ELSA',
+            dialogue: 'You are reading it over again. Is it a kind letter or a hard one?',
             choices: [
               {
                 id: 'press',
-                label: 'Press the objection until it breaks or you do',
+                label: 'Hard. Press the objection until it breaks or you do',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 1, tension: 1, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 2 },
@@ -2767,7 +5512,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
               },
               {
                 id: 'listen',
-                label: 'Ask the question and leave room for the answer',
+                label: 'Kind. Ask the question and leave room for the answer',
                 effects: [
                   { type: 'relationship', characterId: 'bohr', familiarity: 1, respect: 2, tension: 0, flag: 'quantum-debate' },
                   { type: 'theme', theme: 'determinismVsChance', amount: 1 },
@@ -2777,7 +5522,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'A divergent version of the documented Einstein–Bohr debate, conducted in correspondence rather than face to face.',
+          'A divergent version of the documented Einstein–Bohr debate, conducted in correspondence rather than face to face. Elsa Löwenthal was Einstein’s cousin and second wife; the conversation is dramatized.',
       },
     ],
   },
@@ -2812,20 +5557,85 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'winter',
-            narration:
-              'The flat is being emptied for a winter abroad, the way it has been every winter for years. This time, at the door, he turns and looks at the rooms for longer than the errand requires.',
-            speaker: 'ELSA',
-            dialogue: 'Why are you standing there?',
+            narration: 'The flat is being shut up for a winter abroad, as it has been every winter for years. Trunks stand in the hall.',
           },
           {
-            id: 'answer',
-            narration:
-              'Take a good look at it, he tells her. You will not see it again. She thinks he is being theatrical. He is doing arithmetic — the same arithmetic he has been doing since the lists began appearing in the newspapers with academic titles beside the names.',
+            id: 'winter-2',
+            speaker: 'ELSA',
+            dialogue: 'Why are you standing in the doorway? The cab is paid by the hour.',
+          },
+          {
+            id: 'winter-3',
+            speaker: 'ALBERT',
+            dialogue: 'Turn round and look at it.',
+          },
+          {
+            id: 'winter-4',
+            speaker: 'ELSA',
+            dialogue: 'At what? The rooms?',
+          },
+          {
+            id: 'winter-5',
+            speaker: 'ALBERT',
+            dialogue: 'At the rooms. Very carefully. You will not see them again.',
+          },
+          {
+            id: 'winter-6',
+            speaker: 'ELSA',
+            dialogue: 'You are being theatrical.',
+          },
+          {
+            id: 'winter-7',
+            speaker: 'ALBERT',
+            dialogue: 'I am doing arithmetic. I have been doing it since the lists began appearing with academic titles beside the names.',
+          },
+          {
+            id: 'zurich',
+            speaker: 'ELSA',
+            dialogue: 'We stop at Zürich?',
+          },
+          {
+            id: 'zurich-2',
+            speaker: 'ALBERT',
+            dialogue: 'For an afternoon. Eduard is there.',
+          },
+          {
+            id: 'zurich-3',
+            speaker: 'ELSA',
+            dialogue: 'He will want you to play.',
+          },
+          {
+            id: 'zurich-4',
+            speaker: 'ALBERT',
+            dialogue: 'Then I shall play. He has never wanted conversation from me. Music he can take.',
+          },
+          {
+            id: 'zurich-5',
+            narration: 'They sit an hour in a quiet room in Zürich. He plays; his son listens with his eyes closed; nobody mentions the boat.',
+          },
+          {
+            id: 'zurich-6',
+            speaker: 'ALBERT',
+            dialogue: 'I shall write. Every week.',
+          },
+          {
+            id: 'spring',
+            narration: 'By spring the government has changed, and the letters from friends all say the same sentence in different handwriting.',
+          },
+          {
+            id: 'spring-2',
+            speaker: 'ELSA',
+            dialogue: 'They say do not come back.',
+          },
+          {
+            id: 'spring-3',
+            speaker: 'ALBERT',
+            dialogue: 'They say it politely, and they are right, and there is still a seat at the Academy with my name on it.',
           },
           {
             id: 'resign',
-            narration:
-              'By spring the government has changed and the letters from friends all say the same thing in different handwriting: do not come back. There is a seat at the Academy with his name on it and a page in front of him that could give it up.',
+            speaker: 'ELSA',
+            dialogue: 'And a blank sheet in front of you. Well?',
             choices: [
               {
                 id: 'resign',
@@ -2857,7 +5667,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1933-emigration' }],
         historicalNote:
-          'Einstein left Germany in December 1932 and never returned; after the Nazi seizure of power in 1933 he resigned from the Prussian Academy and renounced his German citizenship. His parting remark to Elsa about looking at the house for the last time is widely reported; the wording here is dramatized.',
+          'Einstein left Germany in December 1932 and never returned; after the Nazi seizure of power in 1933 he resigned from the Prussian Academy and renounced his German citizenship. His parting remark to Elsa about looking at the house for the last time is widely reported. He saw his younger son Eduard, who was ill and under care in Zürich, for the last time in 1933, and played the violin during the visit; the wording here is dramatized.',
       },
       {
         id: 'abroad',
@@ -2879,18 +5689,70 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'The news finds him out of the country, which is a piece of luck so ordinary it takes him a week to understand what it saved him from. The government has changed. The universities are being cleaned.',
+            narration: 'The news finds him out of the country. It takes a week to understand what an ordinary piece of luck has just saved him from.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'ELSA',
+            dialogue: 'What does the paper say?',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'That the government has changed. And that the universities are to be cleaned.',
+          },
+          {
+            id: 'news-4',
+            speaker: 'ELSA',
+            dialogue: 'Cleaned.',
+          },
+          {
+            id: 'news-5',
+            speaker: 'ALBERT',
+            dialogue: 'It is the word they print. It is chosen so that nobody reading it has to picture anything.',
           },
           {
             id: 'letters',
-            narration:
-              'The letters arrive over three weeks from three countries and all of them say the same sentence in different handwriting. Colleagues of twenty years are suddenly, officially, no longer colleagues. Some of them write. Some of them do not, and that silence is its own letter.',
+            narration: 'The letters arrive over three weeks from three countries, and all of them say the same sentence in different handwriting.',
+          },
+          {
+            id: 'letters-2',
+            speaker: 'ELSA',
+            dialogue: 'Who has written?',
+          },
+          {
+            id: 'letters-3',
+            speaker: 'ALBERT',
+            dialogue: 'Six of them. Colleagues of twenty years, no longer colleagues by order of somebody in an office.',
+          },
+          {
+            id: 'letters-4',
+            speaker: 'ELSA',
+            dialogue: 'And the others?',
+          },
+          {
+            id: 'letters-5',
+            speaker: 'ALBERT',
+            dialogue: 'The others have not written. That silence is also a letter and I can read it perfectly well.',
+          },
+          {
+            id: 'seat',
+            narration: 'He still holds the post, and the salary, and a seat at a table he sat at for nineteen years.',
+          },
+          {
+            id: 'seat-2',
+            speaker: 'ELSA',
+            dialogue: 'You could say nothing and let them take it from you.',
+          },
+          {
+            id: 'seat-3',
+            speaker: 'ALBERT',
+            dialogue: 'I could. Then it is a thing done to me, and I shall spend the rest of my life explaining that.',
           },
           {
             id: 'resign',
-            narration:
-              'He has a post there still, and a salary, and a seat at a table he sat at for nineteen years. There is a blank sheet of hotel paper in front of him.',
+            speaker: 'ELSA',
+            dialogue: 'There is hotel paper on the desk. What are you going to write on it?',
             choices: [
               {
                 id: 'resign',
@@ -2943,18 +5805,61 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'He gave that country back at sixteen with a form and a clerk’s stamp, and has spent every year since being told it did not really count. It counts now. The government has changed. The universities are being cleaned.',
+            narration: 'He gave that country back at sixteen, with a form and a clerk’s stamp, and has been told ever since that it did not count.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'ALBERT',
+            dialogue: 'It counts this morning. The government has changed and the universities are to be cleaned.',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ELSA',
+            dialogue: 'You hold nothing there. There is nothing for you to resign.',
+          },
+          {
+            id: 'news-4',
+            speaker: 'ALBERT',
+            dialogue: 'Nothing whatever. No chair, no seat, no salary. It is the weakest position a man can argue from.',
+          },
+          {
+            id: 'news-5',
+            speaker: 'ELSA',
+            dialogue: 'Then do not argue.',
           },
           {
             id: 'letters',
-            narration:
-              'The letters come over three weeks and all of them say the same sentence in different handwriting. Men he has corresponded with for twenty years are suddenly, officially, no longer anything. Some of them write. Some do not, and that silence is its own letter.',
+            narration: 'The letters come over three weeks, and all of them say the same sentence in different handwriting.',
+          },
+          {
+            id: 'letters-2',
+            speaker: 'ALBERT',
+            dialogue: 'Men I have written to for twenty years are suddenly, officially, no longer anything at all.',
+          },
+          {
+            id: 'letters-3',
+            speaker: 'ELSA',
+            dialogue: 'And some have not written.',
+          },
+          {
+            id: 'letters-4',
+            speaker: 'ALBERT',
+            dialogue: 'Some have not. That silence is its own letter, and it is perfectly legible.',
+          },
+          {
+            id: 'have',
+            speaker: 'ELSA',
+            dialogue: 'What do you actually have?',
+          },
+          {
+            id: 'have-2',
+            speaker: 'ALBERT',
+            dialogue: 'A name that carries across borders, and a blank sheet of paper. It is harder than it sounds.',
           },
           {
             id: 'resign',
-            narration:
-              'He holds no post there to give up and no seat to leave empty. All he has is a name that carries across borders and a blank sheet of paper, which turns out to be a harder position than it sounds.',
+            speaker: 'ELSA',
+            dialogue: 'Then decide what goes on the sheet.',
             choices: [
               {
                 id: 'resign',
@@ -3019,13 +5924,35 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'leave',
-            narration:
-              'The trunks go down the stairs one at a time, and the cases hold rather less than nineteen years ought to. The violin travels in the cabin with him. The papers travel in the cabin with him. Everything else is furniture.',
+            narration: 'The trunks go down the stairs one at a time. Nineteen years turn out to fit into fewer of them than anybody expected.',
+          },
+          {
+            id: 'leave-2',
+            speaker: 'ELSA',
+            dialogue: 'The violin can go in the hold with the rest.',
+          },
+          {
+            id: 'leave-3',
+            speaker: 'ALBERT',
+            dialogue: 'The violin travels in the cabin. So do the papers. Everything else is furniture.',
           },
           {
             id: 'coast',
-            narration:
-              'He stands at the rail until the coast is a smudge. He is fifty-four, and stateless again, which is the only condition in which he has ever felt entirely accurate.',
+            narration: 'He stands at the rail until the coastline is a smudge, and then a rumour, and then nothing at all.',
+          },
+          {
+            id: 'coast-2',
+            speaker: 'ELSA',
+            dialogue: 'You will catch cold out here.',
+          },
+          {
+            id: 'coast-3',
+            speaker: 'ALBERT',
+            dialogue: 'I am fifty-four and stateless for the second time. It is the only condition in which I have ever felt entirely accurate.',
+          },
+          {
+            id: 'gulls',
+            narration: 'The gulls give up at the edge of the shipping lane and turn back. He stays where he is.',
           },
         ],
         historicalNote:
@@ -3050,13 +5977,36 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'border',
-            narration:
-              'The equations do not need papers. They have been in twelve languages for years and no border guard has ever asked them anything. He, on the other hand, is asked twice.',
+            narration: 'A night compartment, a case on the rack, a corridor lamp beyond the glass. The train slows for the frontier.',
+          },
+          {
+            id: 'border-2',
+            speaker: 'THE GUARD',
+            dialogue: 'Papers.',
+          },
+          {
+            id: 'border-3',
+            speaker: 'ALBERT',
+            dialogue: 'There. The photograph is nine years old and was not flattering then.',
+          },
+          {
+            id: 'border-4',
+            speaker: 'THE GUARD',
+            dialogue: 'Purpose of travel.',
+          },
+          {
+            id: 'border-5',
+            speaker: 'ALBERT',
+            dialogue: 'Work. The equations went ahead of me in twelve languages and nobody asked them anything at all.',
           },
           {
             id: 'ahead',
-            narration:
-              'Somewhere ahead there is an institute with money and no students and a room he has not seen. It is not a homecoming. He has stopped expecting those.',
+            narration: 'Somewhere ahead there is an institute with money, no students, and a room he has not yet seen.',
+          },
+          {
+            id: 'ahead-2',
+            speaker: 'ALBERT',
+            dialogue: 'It is not a homecoming. I have stopped expecting those.',
           },
         ],
         historicalNote:
@@ -3078,17 +6028,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'plate',
-            narration:
-              'It is not done in a single day. It is done in small administrative steps, each one signed by somebody who considers himself uninvolved: a committee, a list, a form, and finally four screw holes where a nameplate used to be.',
+            narration: 'It is not done in a day. It is done in small steps, each signed by somebody who considers himself uninvolved.',
+          },
+          {
+            id: 'plate-2',
+            speaker: 'THE PORTER',
+            dialogue: 'They had the nameplate off this morning. I was told to do it.',
+          },
+          {
+            id: 'plate-3',
+            speaker: 'ALBERT',
+            dialogue: 'Four screw holes. They have left the holes.',
+          },
+          {
+            id: 'plate-4',
+            speaker: 'THE PORTER',
+            dialogue: 'I could fill them. It takes a minute.',
+          },
+          {
+            id: 'plate-5',
+            speaker: 'ALBERT',
+            dialogue: 'Leave them. Somebody should have to walk past and look at them.',
           },
           {
             id: 'leave',
-            narration:
-              'He takes the violin, the papers, and the coat. Everything else can stay and belong to whoever wants it. What he cannot decide, on the train, is whether he is being driven out or simply going first.',
+            narration: 'He takes the violin, the papers and the coat. The rest can stay and belong to whoever wants it.',
+          },
+          {
+            id: 'leave-2',
+            speaker: 'ALBERT',
+            dialogue: 'What I cannot decide, on the train, is whether I am being driven out or simply going first.',
           },
         ],
         historicalNote:
-          'The bureaucratic removal of Jewish academics from German institutions from 1933 is documented. The scene is dramatized.',
+          'The bureaucratic removal of Jewish academics from German institutions from 1933 is documented. The porter stands in for people whose names are not recorded, and the scene is dramatized.',
       },
       {
         id: 'watched-from-outside',
@@ -3105,13 +6078,36 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'border',
-            narration:
-              'He does not have to leave. He is already outside, and has been for so long that the passport in the drawer is a joke he made at sixteen and never took back. Being safe by an accident of paperwork turns out to feel almost exactly like being lucky and not at all like being right.',
+            narration: 'He does not have to leave. He has been outside so long that the passport in the drawer is a joke he made at sixteen.',
+          },
+          {
+            id: 'border-2',
+            speaker: 'ELSA',
+            dialogue: 'You have been at that window an hour.',
+          },
+          {
+            id: 'border-3',
+            speaker: 'ALBERT',
+            dialogue: 'The trains still run north from here.',
+          },
+          {
+            id: 'border-4',
+            speaker: 'ELSA',
+            dialogue: 'And?',
+          },
+          {
+            id: 'border-5',
+            speaker: 'ALBERT',
+            dialogue: 'And I know people at the other end of that line. Very few of them have anywhere to be sent to.',
           },
           {
             id: 'north',
-            narration:
-              'The trains still run north from here. He watches the direction they go in and thinks about the people he knows at the other end of the line, and how few of them have anywhere to be sent to.',
+            narration: 'Being safe by an accident of paperwork turns out to feel exactly like being lucky and not at all like being right.',
+          },
+          {
+            id: 'north-2',
+            speaker: 'ALBERT',
+            dialogue: 'I am on the correct side of a line I did not draw. That is not a character reference.',
           },
         ],
         historicalNote:
@@ -3152,20 +6148,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'arrive',
-            narration:
-              'The crates come off the cart and stand in the hall for eleven days, because opening them would settle something he is not ready to settle. The coat goes on a hook that is the wrong height. The violin he unpacks the first evening.',
+            narration: 'The crates come off the cart and stand in the hall for eleven days, because opening them would settle something.',
           },
           {
-            id: 'walk',
-            narration:
-              'Then a road, and an institute at the end of it, and a habit of walking there in the morning and back in the afternoon in the same coat until the neighbours stop remarking on it.',
+            id: 'arrive-2',
             speaker: 'ELSA',
-            dialogue: 'It is very quiet here, Albert. You will have to find something to be furious about.',
+            dialogue: 'Eleven days, Albert.',
+          },
+          {
+            id: 'arrive-3',
+            speaker: 'ALBERT',
+            dialogue: 'The violin came out the first evening. The rest can wait until I believe in the address.',
+          },
+          {
+            id: 'hook',
+            narration: 'The coat goes on a hook that is the wrong height. He never does get used to the hook.',
+          },
+          {
+            id: 'hook-2',
+            speaker: 'ELSA',
+            dialogue: 'It is very quiet here. You will have to find something to be furious about.',
+          },
+          {
+            id: 'hook-3',
+            speaker: 'ALBERT',
+            dialogue: 'Give me a fortnight.',
+          },
+          {
+            id: 'flexner',
+            speaker: 'FLEXNER',
+            dialogue: 'There are no duties. No lectures, no examinations, no committees unless you ask for one.',
+          },
+          {
+            id: 'flexner-2',
+            speaker: 'ALBERT',
+            dialogue: 'That was said to me once before, in Berlin, by men who meant it at the time.',
+          },
+          {
+            id: 'flexner-3',
+            speaker: 'FLEXNER',
+            dialogue: 'I shall mean it for as long as I have the job. The question is what you intend to do with it.',
+          },
+          {
+            id: 'flexner-4',
+            speaker: 'ALBERT',
+            dialogue: 'You have asked me that on my first morning, in a hall full of unopened crates.',
+          },
+          {
+            id: 'purpose-lead',
+            narration: 'A salary, a room, a blackboard and about twenty working years. He has never been able to do two things properly at once.',
           },
           {
             id: 'purpose',
-            narration:
-              'There is a salary, a room, no students, and no duties of any kind — the offer Berlin made him twenty years ago, made again by people who have not yet disappointed him. The question is what to spend it on.',
+            speaker: 'ELSA',
+            dialogue: 'One thing, then. Which one?',
             choices: [
               {
                 id: 'unify',
@@ -3189,7 +6225,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'Einstein left Germany permanently in 1933 and took a research post at the newly founded Institute for Advanced Study in Princeton, with no teaching duties. Dialogue is dramatized.',
+          'Einstein left Germany permanently in 1933 and took a research post at the newly founded Institute for Advanced Study in Princeton, brought there by its first director Abraham Flexner. The post carried no teaching duties. Dialogue is dramatized.',
       },
       {
         id: 'stayed',
@@ -3207,20 +6243,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'rooms',
-            narration:
-              'Nothing moves. The same stairs, the same chair, the same view he has stopped noticing. The upheaval is entirely elsewhere, happening to people he knows, and the strangest part is how completely a life can fail to be interrupted.',
+            narration: 'Nothing moves. The same stairs, the same chair, the same view he stopped noticing some years ago.',
           },
           {
-            id: 'wireless',
-            narration:
-              'He buys a better wireless set, which is the only concession the year gets out of him, and listens to it at a volume that makes conversation difficult.',
+            id: 'rooms-2',
             speaker: 'ELSA',
-            dialogue: 'You cannot stop it by hearing it sooner, Albert.',
+            dialogue: 'You have bought a wireless.',
+          },
+          {
+            id: 'rooms-3',
+            speaker: 'ALBERT',
+            dialogue: 'A better one. It is the only concession I was prepared to make to the year.',
+          },
+          {
+            id: 'rooms-4',
+            speaker: 'ELSA',
+            dialogue: 'You have it so loud I cannot hear myself think.',
+          },
+          {
+            id: 'rooms-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is very largely the idea.',
+          },
+          {
+            id: 'news',
+            narration: 'The upheaval is entirely elsewhere, happening to people he knows by name, and a life can fail to be interrupted.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'ELSA',
+            dialogue: 'You cannot stop any of it by hearing it sooner.',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'No. But I can stop pretending afterwards that I did not know.',
+          },
+          {
+            id: 'letters',
+            narration: 'He writes eleven letters that week, most of them to men who are trying to get other men out.',
+          },
+          {
+            id: 'letters-2',
+            speaker: 'ELSA',
+            dialogue: 'And the work?',
+          },
+          {
+            id: 'letters-3',
+            speaker: 'ALBERT',
+            dialogue: 'The work is patient. It has waited thirty years. It can wait until Thursday.',
           },
           {
             id: 'purpose',
-            narration:
-              'There is a salary, a room, and about twenty working years left, and he has never in his life been able to do two things properly at once. So: one thing.',
+            speaker: 'ELSA',
+            dialogue: 'There are twenty working years left, at best. What is the one thing?',
             choices: [
               {
                 id: 'unify',
@@ -3261,20 +6337,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'office',
-            narration:
-              'They give him a room, a blackboard, and no instructions of any kind. In nineteen years at an academy he was never once given nothing to do, and it takes him most of a winter to understand that this is the gift.',
+            narration: 'They give him a room, a blackboard, two chairs and no instructions of any kind.',
+          },
+          {
+            id: 'office-2',
+            speaker: 'FLEXNER',
+            dialogue: 'Is there anything you need?',
+          },
+          {
+            id: 'office-3',
+            speaker: 'ALBERT',
+            dialogue: 'A desk, a chair, paper, a pencil. And a very large wastepaper basket.',
+          },
+          {
+            id: 'office-4',
+            speaker: 'FLEXNER',
+            dialogue: 'Why a large one?',
+          },
+          {
+            id: 'office-5',
+            speaker: 'ALBERT',
+            dialogue: 'Because in my line of work nearly all of it is wrong, and the wrongness has to go somewhere.',
+          },
+          {
+            id: 'duties',
+            speaker: 'FLEXNER',
+            dialogue: 'There are no duties here at all. In nineteen years at an academy, were you ever given nothing to do?',
+          },
+          {
+            id: 'duties-2',
+            speaker: 'ALBERT',
+            dialogue: 'Never once. It has taken me most of a winter to understand that this is the gift.',
           },
           {
             id: 'language',
-            narration:
-              'The language outside the window defeats him for a few months and then stops mattering. Physics is done in the same alphabet everywhere, and the rest can be managed with a shrug and a certain amount of pointing.',
+            narration: 'The language outside the window defeats him for a few months and then quietly stops mattering.',
+          },
+          {
+            id: 'language-2',
             speaker: 'ELSA',
-            dialogue: 'They call you the greatest man in the world here, and they still put you on a committee.',
+            dialogue: 'They call you the greatest man in the world here, and they have still put you on a committee.',
+          },
+          {
+            id: 'language-3',
+            speaker: 'ALBERT',
+            dialogue: 'Every country has a committee. It is the one institution that survives translation.',
+          },
+          {
+            id: 'purpose-lead',
+            narration: 'Twenty working years, at the outside, and he has never in his life done two things properly at once.',
           },
           {
             id: 'purpose',
-            narration:
-              'There are, at most, twenty working years left, and he has never in his life been able to do two things properly at once.',
+            speaker: 'ELSA',
+            dialogue: 'So which is it going to be?',
             choices: [
               {
                 id: 'unify',
@@ -3298,7 +6414,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           },
         ],
         historicalNote:
-          'The Institute for Advanced Study offered permanent research positions with no teaching obligations. Dialogue is dramatized.',
+          'The Institute for Advanced Study, whose first director was Abraham Flexner, offered permanent research positions with no teaching obligations. Dialogue is dramatized.',
       },
     ],
   },
@@ -3335,20 +6451,75 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'pair',
-            narration:
-              'They walk home together most days, an old man in a jumper and a much thinner one buttoned into an overcoat in July. Nobody in the town can work out what they talk about. Neither, some days, can they.',
+            narration: 'They walk home together most days: an old man in a jumper and a much thinner one buttoned into an overcoat in July.',
+          },
+          {
+            id: 'pair-2',
+            speaker: 'GÖDEL',
+            dialogue: 'I have been reading your equations. Not for the physics. For what they permit.',
+          },
+          {
+            id: 'pair-3',
+            speaker: 'ALBERT',
+            dialogue: 'Permit.',
+          },
+          {
+            id: 'pair-4',
+            speaker: 'GÖDEL',
+            dialogue: 'As a lawyer reads a contract. One should always ask what a thing allows, not what its author intended.',
           },
           {
             id: 'time',
-            narration:
-              'Today it is time itself. The logician has been reading the field equations the way a lawyer reads a contract, looking for what they permit rather than what they intend.',
+            speaker: 'ALBERT',
+            dialogue: 'And what do mine allow?',
+          },
+          {
+            id: 'time-2',
             speaker: 'GÖDEL',
-            dialogue: 'Your equations allow a universe that rotates. In such a world one may travel far enough into the future to arrive in one’s own past. I have written it down. It is quite rigorous.',
+            dialogue: 'A universe that turns. Not the stars in it. The whole of it, turning. You did not forbid this.',
+          },
+          {
+            id: 'time-3',
+            speaker: 'ALBERT',
+            dialogue: 'Go on.',
+          },
+          {
+            id: 'time-4',
+            speaker: 'GÖDEL',
+            dialogue: 'In such a world a traveller may set out, go round in a very large circle, and arrive at a time before he left.',
+          },
+          {
+            id: 'bicycle',
+            narration: 'A boy on a bicycle comes past them. Neither man moves out of the way, and the boy goes round.',
+          },
+          {
+            id: 'bicycle-2',
+            speaker: 'GÖDEL',
+            dialogue: 'I have written it down. It is quite rigorous. I checked it four times, and once more this morning.',
           },
           {
             id: 'reply',
-            narration:
-              'Albert walks another twenty paces without answering, which is his highest form of compliment. Then he says that he has always suspected his equations were cleverer than he was, and that it is a great relief to have it confirmed by an expert.',
+            narration: 'Albert walks another twenty paces without answering, which is his highest available form of compliment.',
+          },
+          {
+            id: 'reply-2',
+            speaker: 'ALBERT',
+            dialogue: 'I have always suspected my equations were cleverer than I am.',
+          },
+          {
+            id: 'reply-3',
+            speaker: 'ALBERT',
+            dialogue: 'It is a great relief to have it confirmed by somebody qualified.',
+          },
+          {
+            id: 'reply-4',
+            speaker: 'GÖDEL',
+            dialogue: 'I did not say the world is like that. Only that you did not forbid it. That is a different claim.',
+          },
+          {
+            id: 'reply-5',
+            speaker: 'ALBERT',
+            dialogue: 'Kurt. Allow me one afternoon.',
           },
         ],
         effects: [
@@ -3356,7 +6527,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'flag', flag: 'einstein.godelWalks', value: true },
         ],
         historicalNote:
-          'Einstein and Gödel walked to and from the Institute together for years in Princeton, and Gödel published rotating-universe solutions to the field equations permitting closed timelike curves in 1949. Dialogue is dramatized.',
+          'Einstein and Gödel walked to and from the Institute together for years in Princeton, and Gödel published rotating-universe solutions to Einstein’s equations in 1949, in which a traveller could in principle return to his own past. Dialogue is dramatized.',
       },
       {
         id: 'npc-godel',
@@ -3380,20 +6551,59 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'privilege',
-            narration:
-              'He tells someone, and means it entirely, that his own work no longer amounts to much and that he comes to the institute chiefly for the privilege of walking home with the logician.',
+            narration: 'He tells people, and means it entirely, that his own work no longer amounts to very much these days.',
           },
           {
-            id: 'question',
-            narration:
-              'The logician is unwell in a way that no doctor has been able to name, and afraid of things that have not happened, and the sharpest mind Albert has met since Göttingen.',
-            speaker: 'GÖDEL',
-            dialogue: 'Your universe need not have begun. It may only rotate. I have checked it four times, and once more this morning.',
+            id: 'privilege-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Then why do you come in at all?',
+          },
+          {
+            id: 'privilege-3',
+            speaker: 'ALBERT',
+            dialogue: 'For the privilege of walking home with the logician. I would come in for that alone.',
           },
           {
             id: 'walk',
-            narration:
-              'They part at the corner every afternoon with the same nod. It is the last real friendship of his life and neither of them ever says so out loud.',
+            narration: 'Two overcoats on a summer path, one of them far too heavy, and two long shadows across the lawns.',
+          },
+          {
+            id: 'walk-2',
+            speaker: 'GÖDEL',
+            dialogue: 'Your universe need not have begun at all. It may only turn.',
+          },
+          {
+            id: 'walk-3',
+            speaker: 'ALBERT',
+            dialogue: 'That is an extraordinary thing to say between here and the corner.',
+          },
+          {
+            id: 'walk-4',
+            speaker: 'GÖDEL',
+            dialogue: 'I have checked it four times. And once more this morning, in case the fourth was being kind to me.',
+          },
+          {
+            id: 'walk-5',
+            speaker: 'ALBERT',
+            dialogue: 'And if it is true?',
+          },
+          {
+            id: 'walk-6',
+            speaker: 'GÖDEL',
+            dialogue: 'Then time does not run the way people assume. The assumption was never in your equations. Only in their heads.',
+          },
+          {
+            id: 'corner',
+            narration: 'They part at the same corner every afternoon with the same small nod.',
+          },
+          {
+            id: 'corner-2',
+            speaker: 'ALBERT',
+            dialogue: 'Same time tomorrow.',
+          },
+          {
+            id: 'corner-3',
+            narration: 'It is the last real friendship of his life, and neither of them ever says so out loud.',
           },
         ],
         effects: [
@@ -3422,13 +6632,46 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'walk',
-            narration:
-              'He walks the same road every afternoon, at the same speed, in the same weather-defeating jumper. The conversation happens anyway; it simply has only one participant, and that one has heard all the arguments before.',
+            narration: 'He walks the same road every afternoon, at the same speed, in the same weather-defeating jumper.',
+          },
+          {
+            id: 'walk-2',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'Afternoon, Professor. Talking to yourself again.',
+          },
+          {
+            id: 'walk-3',
+            speaker: 'ALBERT',
+            dialogue: 'Arguing. There is a difference, and it matters a great deal.',
+          },
+          {
+            id: 'walk-4',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'Who is winning?',
+          },
+          {
+            id: 'walk-5',
+            speaker: 'ALBERT',
+            dialogue: 'I am. That is precisely the trouble with it.',
           },
           {
             id: 'miss',
-            narration:
-              'What he misses is not agreement. It is somebody good enough to disagree with him in the correct way — slowly, and about the assumption rather than the answer.',
+            narration: 'What he misses is not agreement. He has never in his life been short of agreement.',
+          },
+          {
+            id: 'miss-2',
+            speaker: 'ALBERT',
+            dialogue: 'I want somebody good enough to disagree with me in the correct way. Slowly. About the assumption, not the answer.',
+          },
+          {
+            id: 'miss-3',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'Can’t help you there.',
+          },
+          {
+            id: 'miss-4',
+            speaker: 'ALBERT',
+            dialogue: 'No. Very few can. Good afternoon.',
           },
         ],
         historicalNote:
@@ -3466,22 +6709,75 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'paper',
-            narration:
-              'He writes it up properly with two younger colleagues: not a refutation, a question. If measuring one thing here settles what is true about a thing over there, then either the description is incomplete or the world is stranger than anyone is admitting.',
+            narration: 'He writes it up properly with two younger colleagues. Not a refutation. A question, four pages long.',
+          },
+          {
+            id: 'paper-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'What am I typing, exactly?',
+          },
+          {
+            id: 'paper-3',
+            speaker: 'ALBERT',
+            dialogue: 'Take two small things made together, then carried a thousand miles apart. Keep them both sealed up.',
+          },
+          {
+            id: 'paper-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Like a pair of gloves in two boxes.',
+          },
+          {
+            id: 'paper-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is my answer, yes. Open one box, see a left glove, and you know the far box without touching it.',
+          },
+          {
+            id: 'paper-6',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Then what is the argument about?',
+          },
+          {
+            id: 'paper-7',
+            speaker: 'ALBERT',
+            dialogue: 'They say the gloves are neither left nor right until somebody looks. Your looking here settles the one over there.',
+          },
+          {
+            id: 'paper-8',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'How would the far one know it had been looked at?',
+          },
+          {
+            id: 'paper-9',
+            speaker: 'ALBERT',
+            dialogue: 'That is the whole paper. Either it knew all along and they have left something out, or the news travels faster than light.',
           },
           {
             id: 'answer',
-            narration:
-              'The answer comes back from Copenhagen within weeks, courteous and unyielding, and the younger generation reads it and returns to work. He has become the man they respect and route around.',
+            narration: 'The reply comes back from Copenhagen within weeks, courteous and unyielding. The young men read it and go back to work.',
+          },
+          {
+            id: 'answer-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'They were very polite about it.',
+          },
+          {
+            id: 'answer-3',
+            speaker: 'ALBERT',
+            dialogue: 'They were. I have become the man they respect and route around.',
           },
           {
             id: 'dice',
-            narration:
-              'He writes to an old friend that he still cannot accept a universe that decides anything by throwing. He knows how this sounds. He is seventy per cent certain he is right and one hundred per cent certain he cannot prove it.',
+            speaker: 'ALBERT',
+            dialogue: 'I still cannot believe the world settles its affairs by throwing dice. I know exactly how that sounds.',
+          },
+          {
+            id: 'dice-2',
+            speaker: 'ALBERT',
+            dialogue: 'Seventy per cent certain I am right. One hundred per cent certain I cannot prove it.',
           },
         ],
         historicalNote:
-          'Einstein published the 1935 paper with two younger colleagues questioning whether quantum mechanics is complete; Bohr replied the same year. His objection to fundamental chance, expressed in correspondence, is documented. Wording is paraphrased, not quoted.',
+          'Einstein published a paper in 1935 with two younger colleagues asking whether the new physics gives a complete account of a pair of particles made together and then separated; Bohr replied the same year. His objection to fundamental chance, expressed in correspondence, is documented. Helen Dukas was his secretary from 1928. Wording is paraphrased, not quoted.',
       },
       {
         id: 'listened',
@@ -3503,22 +6799,60 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'file',
-            narration:
-              'The file of letters is thicker than most men’s collected works. He has read every objection to the end before answering it, which is a discipline he learned late and at some cost to his temper.',
+            narration: 'The file of letters is thicker than most men’s collected works, tied with string, twenty years deep.',
+          },
+          {
+            id: 'file-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Copenhagen again.',
+          },
+          {
+            id: 'file-3',
+            speaker: 'ALBERT',
+            dialogue: 'Copenhagen again. He has answered the objection I made in the spring, and answered it well.',
+          },
+          {
+            id: 'file-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Have you changed your mind?',
+          },
+          {
+            id: 'file-5',
+            speaker: 'ALBERT',
+            dialogue: 'No. I have stopped needing to win, which is a different and much cheaper thing.',
           },
           {
             id: 'position',
-            narration:
-              'He is not persuaded. He has simply stopped needing to win. The theory works, every experiment agrees with it, and he still believes it is a magnificent description of something underneath that nobody has looked at yet.',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Shall I file it with the others?',
+          },
+          {
+            id: 'position-2',
+            speaker: 'ALBERT',
+            dialogue: 'File it where I can reach it. Their theory works. Every experiment anybody has done agrees with it.',
+          },
+          {
+            id: 'position-3',
+            speaker: 'ALBERT',
+            dialogue: 'I simply think it is a beautiful description of the shadow of something nobody has yet gone round to look at.',
           },
           {
             id: 'dice',
-            narration:
-              'He writes that he cannot believe the world settles its affairs by throwing. Then he adds, because he is honest before he is stubborn, that the world is under no obligation to consult him.',
+            narration: 'He writes back the same evening, six pages, after reading every line of the other man’s letter twice.',
+          },
+          {
+            id: 'dice-2',
+            speaker: 'ALBERT',
+            dialogue: 'Put at the end: I cannot believe the world settles its business by throwing.',
+          },
+          {
+            id: 'dice-3',
+            speaker: 'ALBERT',
+            dialogue: 'And under it: the world is under no obligation whatever to consult me.',
           },
         ],
         historicalNote:
-          'Einstein maintained his objection to the completeness of quantum mechanics in correspondence throughout his later life. Wording is paraphrased.',
+          'Einstein maintained his objection to the completeness of the new physics in correspondence throughout his later life, while conceding that its predictions were never wrong. Wording is paraphrased.',
       },
       {
         id: 'unfinished',
@@ -3539,17 +6873,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'incomplete',
-            narration:
-              'The new physics predicts everything anyone has thought to measure, and it does so in terms of what is likely. He does not think it is wrong. He thinks it is a very good description of the shadow of something.',
+            narration: 'The new physics predicts everything anybody has thought to measure, and it does it in terms of what is likely.',
+          },
+          {
+            id: 'incomplete-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'You think it is wrong.',
+          },
+          {
+            id: 'incomplete-3',
+            speaker: 'ALBERT',
+            dialogue: 'I think it is right and unfinished. Those can both be true and usually are.',
+          },
+          {
+            id: 'incomplete-4',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Unfinished how?',
+          },
+          {
+            id: 'incomplete-5',
+            speaker: 'ALBERT',
+            dialogue: 'It gives me the odds beautifully. It will not tell me what is actually there when nobody is in the room.',
+          },
+          {
+            id: 'incomplete-6',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Perhaps nothing is.',
+          },
+          {
+            id: 'incomplete-7',
+            speaker: 'ALBERT',
+            dialogue: 'Perhaps. Then I have spent forty years being wrong about the thing I was most sure of.',
           },
           {
             id: 'alone',
-            narration:
-              'The young men are polite about this. He notices that being treated gently is what happens to a position just before it stops being argued with.',
+            narration: 'The young men are very polite about this. They have been polite about it for some years now.',
+          },
+          {
+            id: 'alone-2',
+            speaker: 'ALBERT',
+            dialogue: 'Being treated gently is what happens to a position just before people stop arguing with it.',
           },
         ],
         historicalNote:
-          'Einstein’s lifelong conviction that quantum mechanics was incomplete rather than incorrect is documented.',
+          'Einstein’s lifelong conviction that the new physics was incomplete rather than incorrect is documented. Dialogue is dramatized.',
       },
     ],
   },
@@ -3593,20 +6960,108 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'summer',
-            narration:
-              'The cottage has no telephone and a borrowed sailing boat that he handles badly and with enormous pleasure. It is August. He is sixty and sunburnt and has not thought about politics in six weeks.',
+            narration: 'The cottage has no telephone. There is a borrowed sailing boat, which he handles badly and with enormous pleasure.',
           },
           {
-            id: 'visitor',
-            narration:
-              'A car comes down the lane driven by a young physicist, because the man in the passenger seat has never learned to drive and has come a long way to say one thing.',
+            id: 'summer-2',
+            narration: 'It is August. He is sixty, sunburnt, and has not thought about politics in six weeks.',
+          },
+          {
+            id: 'car',
+            narration: 'A car comes down the lane and stops crookedly. A younger man is driving, because the passenger never learned how.',
+          },
+          {
+            id: 'car-2',
             speaker: 'SZILÁRD',
-            dialogue: 'A chain reaction in uranium. Not in principle. In a laboratory, this year, with equipment that exists. And Germany has stopped selling the ore.',
+            dialogue: 'I am sorry about the lane. We asked a child where the professor lived and she brought us straight here.',
+          },
+          {
+            id: 'car-3',
+            speaker: 'ALBERT',
+            dialogue: 'They always do. Sit down. You have come a long way to say one thing.',
+          },
+          {
+            id: 'chain',
+            speaker: 'SZILÁRD',
+            dialogue: 'Uranium. They have broken the atom of it in Berlin, and when it breaks it throws out pieces.',
+          },
+          {
+            id: 'chain-2',
+            speaker: 'ALBERT',
+            dialogue: 'Pieces that can break the next one.',
+          },
+          {
+            id: 'chain-3',
+            speaker: 'SZILÁRD',
+            dialogue: 'Pieces that can break two more. And those four. Put enough of it in one place and it does not stop.',
+          },
+          {
+            id: 'chain-4',
+            speaker: 'ALBERT',
+            dialogue: 'How much is enough?',
+          },
+          {
+            id: 'chain-5',
+            speaker: 'SZILÁRD',
+            dialogue: 'Nobody knows yet. That is the point. It is no longer a question of principle. It is a question of tonnage.',
+          },
+          {
+            id: 'glass',
+            narration: 'He puts the glass of water down on the arm of the chair, very carefully, as though it might be needed later.',
+          },
+          {
+            id: 'glass-2',
+            speaker: 'ALBERT',
+            dialogue: 'I did not think of that.',
+          },
+          {
+            id: 'glass-3',
+            speaker: 'SZILÁRD',
+            dialogue: 'Nobody did, until last winter.',
+          },
+          {
+            id: 'glass-4',
+            speaker: 'ALBERT',
+            dialogue: 'Twenty years of saying that nations cannot be trusted with anything sharper than a treaty. And I did not think of that.',
+          },
+          {
+            id: 'ore',
+            speaker: 'SZILÁRD',
+            dialogue: 'Germany has stopped selling the ore out of the mines it took. That is not a scientific fact. It is an administrative one.',
+          },
+          {
+            id: 'ore-2',
+            speaker: 'ALBERT',
+            dialogue: 'Which is worse. Scientists guess at things. Ministries decide them.',
+          },
+          {
+            id: 'draft',
+            narration: 'There is a typed draft on the table, addressed to a president, with a blank line at the foot of the second page.',
+          },
+          {
+            id: 'draft-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'I do not need your physics. Everybody has the physics. I need the one signature that gets read the day it arrives.',
+          },
+          {
+            id: 'flag',
+            speaker: 'ALBERT',
+            dialogue: 'In 1919 I said I would never again put my name under anybody’s flag.',
+          },
+          {
+            id: 'flag-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'This is not a flag. It is a warning about a fire, sent to the man who has the buckets.',
+          },
+          {
+            id: 'flag-3',
+            speaker: 'ALBERT',
+            dialogue: 'Or the man with the matches. I have never once been able to tell those two apart in advance.',
           },
           {
             id: 'sign',
-            narration:
-              'Albert puts down the glass of water. He has spent twenty years arguing that nations cannot be trusted with anything sharper than a treaty, and he says, in German, that this particular possibility had simply never occurred to him. There is a draft letter on the table, addressed to a president.',
+            speaker: 'SZILÁRD',
+            dialogue: 'There is a pen on the table, Professor.',
             choices: [
               {
                 id: 'sign',
@@ -3639,7 +7094,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1939-letter' }],
         historicalNote:
-          'In August 1939 Leo Szilárd, driven by a colleague, visited Einstein at a rented Long Island cottage and persuaded him to sign a letter to President Roosevelt warning of nuclear chain reactions. Einstein’s reported reaction — that he had not thought of that — is documented; the wording here is dramatized.',
+          'In August 1939 Leó Szilárd, driven by a colleague because he could not drive, visited Einstein at a rented Long Island cottage and put the case for a letter to President Roosevelt warning that a runaway chain reaction in uranium had become possible. Einstein’s reported reaction — that he had not thought of that — is documented, as is the German embargo on Czech uranium ore. The wording here is dramatized.',
       },
       {
         id: 'from-afar',
@@ -3661,20 +7116,71 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'letter',
-            narration:
-              'It is August and he has not thought about politics in six weeks. Then the post brings a thick envelope from a physicist he knows slightly, containing a draft of something addressed to a head of state.',
+            narration: 'It is August and he has not thought about politics in six weeks. Then the post brings a thick envelope.',
           },
           {
-            id: 'argument',
-            narration:
-              'The argument in it is four paragraphs long and entirely sound. A chain reaction in uranium: not in principle, in a laboratory, this year, with equipment that exists. And the country he was born in has stopped selling the ore.',
-            speaker: 'SZILÁRD',
-            dialogue: 'I do not need your physics. Everyone has the physics. I need the one signature on earth that will be read the day it arrives.',
+            id: 'letter-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'From the Hungarian. Four paragraphs, and a draft of something addressed to a head of state.',
+          },
+          {
+            id: 'letter-3',
+            speaker: 'ALBERT',
+            dialogue: 'Read me the four paragraphs.',
+          },
+          {
+            id: 'letter-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Uranium. He says that when the atom of it is broken, it throws out pieces that break the next one.',
+          },
+          {
+            id: 'letter-5',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'And those break two more. With enough of it in one place, he says, it does not stop.',
+          },
+          {
+            id: 'letter-6',
+            speaker: 'ALBERT',
+            dialogue: 'Read the next sentence slowly.',
+          },
+          {
+            id: 'letter-7',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Extremely powerful bombs of a new type may be constructed. He has underlined the word may.',
+          },
+          {
+            id: 'window',
+            narration: 'He carries the pages to the window and reads them through twice without sitting down again.',
+          },
+          {
+            id: 'window-2',
+            speaker: 'ALBERT',
+            dialogue: 'I did not think of that. Twenty years of saying nations cannot be trusted, and I did not think of that.',
+          },
+          {
+            id: 'ore',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'He writes that Germany has stopped selling the ore.',
+          },
+          {
+            id: 'ore-2',
+            speaker: 'ALBERT',
+            dialogue: 'Then somebody over there has thought of it. Which ends the argument about whether it is possible.',
+          },
+          {
+            id: 'name',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'The last page says he does not need your physics.',
+          },
+          {
+            id: 'name-2',
+            speaker: 'ALBERT',
+            dialogue: 'No. He needs the one signature on earth that gets read the day it arrives. He is quite right about that.',
           },
           {
             id: 'sign',
-            narration:
-              'He has spent twenty years arguing that nations cannot be trusted with anything sharper than a treaty. He reads it twice and finds, with some annoyance, that this particular possibility had simply never occurred to him. There is a blank line at the bottom.',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'There is a blank line at the bottom. Shall I fetch the pen?',
             choices: [
               {
                 id: 'sign',
@@ -3707,7 +7213,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1939-letter' }],
         historicalNote:
-          'Leo Szilárd drafted the August 1939 letter to President Roosevelt warning of nuclear chain reactions and sought Einstein’s signature because of the weight his name carried. This variant reaches him by post rather than in person. Dialogue is dramatized.',
+          'Leó Szilárd drafted the August 1939 letter to President Roosevelt warning of nuclear chain reactions and sought Einstein’s signature because of the weight his name carried. This variant reaches him by post rather than in person. Helen Dukas was his secretary. Dialogue is dramatized.',
       },
       {
         id: 'after',
@@ -3728,13 +7234,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'water',
-            narration:
-              'The letter has gone. A plain envelope, several careful hands, and then a desk belonging to a head of state, and there is nothing further to be done about any of it from the middle of a bay in August.',
+            narration: 'The letter has gone. A plain envelope, several careful hands, and then a desk belonging to a head of state.',
+          },
+          {
+            id: 'water-2',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'There is no wind at all, Professor.',
+          },
+          {
+            id: 'water-3',
+            speaker: 'ALBERT',
+            dialogue: 'None whatever. We shall sit here until it decides otherwise. I find I do not mind.',
           },
           {
             id: 'weight',
-            narration:
-              'The sail goes slack and the boat sits still. He thinks about how many hands a thing passes through between a signature and a consequence, and how not one of them ever feels like the hand that did it.',
+            narration: 'The sail goes slack. The boat sits still on flat water inside a shoreline of low trees.',
+          },
+          {
+            id: 'weight-2',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'You have been quiet since Tuesday.',
+          },
+          {
+            id: 'weight-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have been counting hands. A thing passes through a great many of them between a signature and a consequence.',
+          },
+          {
+            id: 'weight-4',
+            speaker: 'A NEIGHBOUR',
+            dialogue: 'I don’t follow you.',
+          },
+          {
+            id: 'weight-5',
+            speaker: 'ALBERT',
+            dialogue: 'Nor does any of the hands. Not one of them ever feels like the hand that did it.',
+          },
+          {
+            id: 'weight-6',
+            narration: 'The water does not move for another hour, and neither does he.',
           },
         ],
         effects: [{ type: 'markContextCardSeen', cardId: 'einstein-card-1939-letter' }],
@@ -3767,23 +7305,64 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'sign',
-            narration:
-              'The letter is two pages long and says less than it knows. Extremely powerful bombs of a new type may be constructed. The administration should establish contact. Uranium ore comes chiefly from the Congo.',
+            id: 'read',
+            narration: 'Two typed pages, and they say considerably less than the two men at the table know.',
           },
           {
-            id: 'name',
-            narration:
-              'His signature is the only reason anyone will read it, and everyone at the table understands that this is the entire purpose of the afternoon. He signs it anyway. The alternative is to be right and silent while somebody else is first.',
+            id: 'read-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'Read the middle paragraph aloud. Tell me if it is too strong.',
+          },
+          {
+            id: 'read-3',
+            speaker: 'ALBERT',
+            dialogue: 'Extremely powerful bombs of a new type may be constructed. It is not too strong. It is barely strong enough.',
+          },
+          {
+            id: 'read-4',
+            speaker: 'SZILÁRD',
+            dialogue: 'Then leave it as it stands.',
+          },
+          {
+            id: 'read-5',
+            speaker: 'ALBERT',
+            dialogue: 'Put in where the ore comes from. Ministries move for a cargo manifest. They have never once moved for physics.',
+          },
+          {
+            id: 'pen',
+            narration: 'He signs it at the foot of the second page. The pen belongs to somebody else and the ink is very blue.',
+          },
+          {
+            id: 'pen-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'Thank you.',
+          },
+          {
+            id: 'pen-3',
+            speaker: 'ALBERT',
+            dialogue: 'Do not thank me. My name is the only reason anybody will read it, and we both knew that before lunch.',
+          },
+          {
+            id: 'pen-4',
+            speaker: 'SZILÁRD',
+            dialogue: 'Yes.',
+          },
+          {
+            id: 'pen-5',
+            speaker: 'ALBERT',
+            dialogue: 'The alternative was to be right, and silent, and second. I have no appetite for any of the three.',
           },
           {
             id: 'after',
-            narration:
-              'It takes two months to reach the desk it was written for. He will spend the rest of his life explaining, to people who did not ask, exactly what he did and did not do that August.',
+            narration: 'It takes two months to reach the desk it was written for.',
+          },
+          {
+            id: 'after-2',
+            narration: 'He will spend the rest of his life explaining, to people who never asked, exactly what he did and did not do that August.',
           },
         ],
         historicalNote:
-          'Einstein signed the letter drafted with Szilárd in August 1939; it reached Roosevelt in October. Einstein had no role in the subsequent weapons programme and later described the signature as his one great mistake.',
+          'Einstein signed the letter drafted with Szilárd in August 1939; it reached Roosevelt in October. Einstein had no role in the subsequent weapons programme and later described the signature as the one great mistake of his life.',
       },
       {
         id: 'reluctant',
@@ -3801,13 +7380,46 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'night',
-            narration:
-              'He asks for the night and takes all of it. The letter sits on the porch rail under a beach stone and the tide goes out and comes back and does not offer an opinion.',
+            narration: 'He asks for the night and takes all of it. The letter sits on the porch rail under a beach stone.',
+          },
+          {
+            id: 'night-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'You were persuaded in the first four minutes. I watched you be persuaded.',
+          },
+          {
+            id: 'night-3',
+            speaker: 'ALBERT',
+            dialogue: 'I was. That is not the part that is taking the time.',
+          },
+          {
+            id: 'night-4',
+            speaker: 'SZILÁRD',
+            dialogue: 'What is?',
+          },
+          {
+            id: 'night-5',
+            speaker: 'ALBERT',
+            dialogue: 'The man who has to live afterwards with having been persuaded in four minutes. He argues more slowly.',
+          },
+          {
+            id: 'dawn',
+            narration: 'The tide goes out and comes back and offers no opinion. The coffee goes cold twice.',
           },
           {
             id: 'morning',
-            narration:
-              'In the morning he signs. Not because he has been persuaded — he was persuaded in the first four minutes — but because he has finished arguing with the man who will have to live with it, who is himself.',
+            speaker: 'ALBERT',
+            dialogue: 'Give me the pen.',
+          },
+          {
+            id: 'morning-2',
+            speaker: 'SZILÁRD',
+            dialogue: 'You are sure.',
+          },
+          {
+            id: 'morning-3',
+            speaker: 'ALBERT',
+            dialogue: 'I am sure of nothing. I have finished arguing with myself, which is not the same thing and will have to do.',
           },
         ],
         historicalNote:
@@ -3828,13 +7440,41 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'send',
-            narration:
-              'The warning goes out over his name because his name is the only instrument available that can be heard from that distance. It is not physics. It is the use of a reputation as a tool, and he has never done it for anything smaller.',
+            narration: 'The warning goes out over his name, because his name is the only instrument available that carries that far.',
           },
           {
-            id: 'after',
-            narration:
-              'Afterwards there is nothing to do but go back to the equations, which have never once asked him to decide anything.',
+            id: 'send-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Shall I mark it urgent?',
+          },
+          {
+            id: 'send-3',
+            speaker: 'ALBERT',
+            dialogue: 'It will not help. A letter is urgent when the man who opens it decides that it is.',
+          },
+          {
+            id: 'send-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'It is not really physics, is it.',
+          },
+          {
+            id: 'send-5',
+            speaker: 'ALBERT',
+            dialogue: 'No. It is the use of a reputation as a tool. I have never done that for anything smaller.',
+          },
+          {
+            id: 'seal',
+            narration: 'A plain sealed envelope on the hall table, a hat on its peg, and the front door standing open onto the summer.',
+          },
+          {
+            id: 'seal-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'And now?',
+          },
+          {
+            id: 'seal-3',
+            speaker: 'ALBERT',
+            dialogue: 'Now I go back to the equations. They have never once asked me to decide anything.',
           },
         ],
         historicalNote:
@@ -3872,18 +7512,54 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'He has been resting at a lake and the housekeeper comes out to the porch to tell him what the radio has just said. A city. One aircraft. One device. A number of people that has not been counted yet and will be an estimate forever.',
+            narration: 'He has been resting at a lake. The housekeeper comes out to the porch to tell him what the radio has just said.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'THE HOUSEKEEPER',
+            dialogue: 'A city. One aeroplane. One bomb.',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'How many people?',
+          },
+          {
+            id: 'news-4',
+            speaker: 'THE HOUSEKEEPER',
+            dialogue: 'They did not say. They said a great many.',
           },
           {
             id: 'word',
-            narration:
-              'He says one word in German. It is short and it is not an exclamation; it is the sound a man makes when a long arithmetic finally resolves. Then he sits for a while and does not go back inside.',
+            narration: 'He says one word in German. It is short, and it is not an exclamation.',
+          },
+          {
+            id: 'word-2',
+            narration: 'It is the sound a man makes when a long arithmetic finally comes out.',
+          },
+          {
+            id: 'word-3',
+            speaker: 'THE HOUSEKEEPER',
+            dialogue: 'Shall I switch it off?',
+          },
+          {
+            id: 'word-4',
+            speaker: 'ALBERT',
+            dialogue: 'Leave it on. I should like to hear how they say it the second time.',
           },
           {
             id: 'after',
-            narration:
-              'He put his hand to two pages six years ago and he did not build anything, and both of those facts are true and neither of them helps this afternoon. What is left of him he will spend, from here on, on the argument that this thing must be governed by everybody or it will be owned by somebody.',
+            narration: 'He sits on the porch for the rest of the afternoon and does not go back inside.',
+          },
+          {
+            id: 'after-2',
+            speaker: 'ALBERT',
+            dialogue: 'I put my hand to two pages six years ago and I built nothing. Both are true and neither helps today.',
+          },
+          {
+            id: 'after-3',
+            speaker: 'ALBERT',
+            dialogue: 'From here on it must be governed by everybody or it will be owned by somebody. That is the work I have left.',
           },
         ],
         effects: [
@@ -3891,7 +7567,7 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
           { type: 'resources', effects: { wellbeing: -2, exposure: 1 } },
         ],
         historicalNote:
-          'Einstein learned of Hiroshima from a radio report while at Saranac Lake; his reported one-word reaction is documented and is paraphrased here rather than quoted. He had no part in the weapons programme and afterwards campaigned for international control of atomic energy.',
+          'Einstein learned of Hiroshima from a radio report while staying at Saranac Lake; his reported one-word reaction is documented and is paraphrased here rather than quoted. He had no part in the weapons programme and afterwards campaigned for international control of atomic energy.',
       },
       {
         id: 'signed',
@@ -3913,18 +7589,50 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'The announcement is read three times in an hour because the man reading it cannot quite believe the copy. A city. A single device. The word unprecedented, used correctly for once.',
+            narration: 'The announcement is read three times in an hour, because the man reading it cannot quite believe his own copy.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'A city. A single device. They keep using the word unprecedented.',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'For once correctly.',
           },
           {
             id: 'sit',
-            narration:
-              'He puts his name to a warning six years ago and the warning was heard, and this is what being heard turned out to mean. He does not defend himself out loud. There is nobody in the room to defend himself to.',
+            narration: 'The curtains are drawn against the heat. The newspaper lies face down on a chair where somebody put it.',
+          },
+          {
+            id: 'sit-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'You warned them. Six years ago, you warned them.',
+          },
+          {
+            id: 'sit-3',
+            speaker: 'ALBERT',
+            dialogue: 'I did. And the warning was heard. This afternoon is what being heard turned out to mean.',
+          },
+          {
+            id: 'sit-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'That is not fair to you.',
+          },
+          {
+            id: 'sit-5',
+            speaker: 'ALBERT',
+            dialogue: 'There is nobody in this room I need to defend myself to, and I would rather not begin.',
           },
           {
             id: 'after',
-            narration:
-              'Within a month he is signing appeals again, and this time the appeals are about the thing itself: that it must belong to no single country, that the alternative is a world where every capital is a hostage.',
+            narration: 'Within a month he is signing appeals again, and this time they are about the thing itself.',
+          },
+          {
+            id: 'after-2',
+            speaker: 'ALBERT',
+            dialogue: 'It must belong to no single country. The alternative is a world in which every capital is a hostage.',
           },
         ],
         effects: [
@@ -3954,18 +7662,51 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'A city. One aircraft. One device. He listens to the announcement all the way through twice and then goes and opens the drawer, because he already knows what is in it and wants to be wrong.',
+            narration: 'A city. One aircraft. One device. He listens to the announcement all the way through, twice.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Where are you going?',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'To the desk. There is a drawer I should very much like to be wrong about.',
           },
           {
             id: 'unsigned',
-            narration:
-              'Two typed pages, six years old, with a blank line at the bottom. He asked for one night. The night became a week and the week became a habit, and at no point did he decide anything at all, which he now understands is a way of deciding.',
+            narration: 'Two typed pages, six years old, with a blank line at the bottom of the second.',
+          },
+          {
+            id: 'unsigned-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'You never signed it.',
+          },
+          {
+            id: 'unsigned-3',
+            speaker: 'ALBERT',
+            dialogue: 'I asked for one night. The night became a week, and the week became a habit.',
+          },
+          {
+            id: 'unsigned-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Then you decided nothing at all.',
+          },
+          {
+            id: 'unsigned-5',
+            speaker: 'ALBERT',
+            dialogue: 'That is what I have told myself for six years. I understand this afternoon that it is a way of deciding.',
           },
           {
             id: 'after',
-            narration:
-              'It happened without him, and it would have happened without him in any case, and neither of those sentences is the one he keeps saying to himself.',
+            speaker: 'ALBERT',
+            dialogue: 'It happened without me. It would have happened without me in any case.',
+          },
+          {
+            id: 'after-2',
+            speaker: 'ALBERT',
+            dialogue: 'Neither of those is the sentence I keep saying to myself, and I notice that.',
           },
         ],
         effects: [
@@ -3994,13 +7735,46 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'news',
-            narration:
-              'It happens without him. A city, a single device, and a long chain of names on documents he never saw. He worked out forty years ago what mass was worth in energy, and now somebody has gone and cashed it.',
+            narration: 'It happens without him: a city, a single device, and a long chain of names on documents he never saw.',
+          },
+          {
+            id: 'news-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'Shall I leave the wireless on?',
+          },
+          {
+            id: 'news-3',
+            speaker: 'ALBERT',
+            dialogue: 'Switch it off. I worked out forty years ago what weight is worth if you turn it into energy.',
+          },
+          {
+            id: 'news-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'And somebody has gone and cashed it.',
+          },
+          {
+            id: 'news-5',
+            speaker: 'ALBERT',
+            dialogue: 'Somebody has gone and cashed it. In a currency I did not choose and cannot call back in.',
           },
           {
             id: 'clean',
-            narration:
-              'His hands are clean, in the narrow sense that a court would use. He finds that this is not the comfort he had assumed it would be, and that a man can be innocent of the deed and still be part of the arithmetic.',
+            narration: 'The newspaper lies face down on the chair. The glass of water beside it is not touched all afternoon.',
+          },
+          {
+            id: 'clean-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'You had no hand in it. None at all.',
+          },
+          {
+            id: 'clean-3',
+            speaker: 'ALBERT',
+            dialogue: 'My hands are clean in the narrow sense a court would use. I had assumed that would be more comfort than it is.',
+          },
+          {
+            id: 'clean-4',
+            speaker: 'ALBERT',
+            dialogue: 'A man can be innocent of the deed and still be part of the arithmetic.',
           },
         ],
         effects: [
@@ -4039,18 +7813,55 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'cupboard',
-            narration:
-              'The cupboard behind him holds a bundle for every attempt, tied with string and dated. Every one of them is wrong and he can say exactly where each one turned wrong, which has never once told him where to turn instead.',
+            narration: 'The cupboard behind the desk holds a bundle for every attempt, tied with string, each with a date on the label.',
+          },
+          {
+            id: 'cupboard-2',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'And every one of them is wrong.',
+          },
+          {
+            id: 'cupboard-3',
+            speaker: 'ALBERT',
+            dialogue: 'Every one. I can tell you where each turned wrong. That has never once told me where to turn instead.',
           },
           {
             id: 'close',
-            narration:
-              'This one does not turn. Gravity and the electric field come out in one set of symbols, with nothing bolted on and nothing apologised for, and he follows it to the end four times before he lets himself believe the fourth time.',
+            narration: 'This one does not turn. He follows it to the end four times before he allows himself to believe the fourth.',
+          },
+          {
+            id: 'close-2',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'Say what it means. Plainly. I shall have to repeat it to somebody tomorrow.',
+          },
+          {
+            id: 'close-3',
+            speaker: 'ALBERT',
+            dialogue: 'Gravity is the shape of space. That has been settled since 1915 and nobody argues with it.',
+          },
+          {
+            id: 'close-4',
+            speaker: 'ALBERT',
+            dialogue: 'And the pull of a magnet is a different thing entirely, with different rules, kept in a different drawer.',
+          },
+          {
+            id: 'close-5',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'And now?',
+          },
+          {
+            id: 'close-6',
+            speaker: 'ALBERT',
+            dialogue: 'Now they come out of one set of symbols. Two drawers, one cupboard. Nothing bolted on, nothing apologised for.',
           },
           {
             id: 'quiet',
-            narration:
-              'He does not wake anybody. He makes a fair copy in the neat hand he keeps for things he thinks are true, and sits with it until the window goes fully light, and thinks about all the string in the cupboard.',
+            narration: 'He wakes nobody. He makes a fair copy in the neat hand he keeps for things he believes are true.',
+          },
+          {
+            id: 'quiet-2',
+            speaker: 'ALBERT',
+            dialogue: 'There is a very great deal of string in that cupboard.',
           },
         ],
         historicalNote:
@@ -4071,18 +7882,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'close',
-            narration:
-              'He has been at this since the twenties, in a way he has never quite admitted to anybody: an approach a year, tied with string and dated and put in the cupboard when it turned wrong. This one does not turn. Gravity and the electric field come out in one set of symbols, with nothing bolted on.',
+            narration: 'An approach a year since the twenties, tied with string and dated and put in the cupboard when it turned wrong.',
+          },
+          {
+            id: 'close-2',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'And this one does not turn.',
+          },
+          {
+            id: 'close-3',
+            speaker: 'ALBERT',
+            dialogue: 'This one does not turn. Gravity and the magnet in one set of symbols, with nothing bolted on.',
           },
           {
             id: 'early',
-            narration:
-              'And it has come earlier than it had any right to, which he distrusts entirely. Things that arrive easily have usually arrived wrong. He will spend the next two years trying to break it, and that is the only honest celebration available to him.',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'Then why do you look like that?',
+          },
+          {
+            id: 'early-2',
+            speaker: 'ALBERT',
+            dialogue: 'Because it came easily. Things that arrive easily have usually arrived wrong.',
+          },
+          {
+            id: 'early-3',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'So you are going to try to break it.',
+          },
+          {
+            id: 'early-4',
+            speaker: 'ALBERT',
+            dialogue: 'For two years. It is the only honest way I know of celebrating anything.',
           },
           {
             id: 'quiet',
-            narration:
-              'For tonight, though, he makes a fair copy in the neat hand he only uses for things he thinks are true, and sits with it until it is fully light.',
+            narration: 'For tonight, though, he makes a fair copy in the neat hand he keeps for things he believes are true.',
+          },
+          {
+            id: 'quiet-2',
+            narration: 'He sits with it until the window is fully light.',
           },
         ],
         historicalNote:
@@ -4103,18 +7941,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'close',
-            narration:
-              'Gravity and the electric field, written in one set of symbols, with nothing bolted on. It has taken most of his working life and most of his reputation among people whose opinion he pretends not to value.',
+            narration: 'Gravity and the magnet, written in one set of symbols, with nothing bolted on and nothing apologised for.',
+          },
+          {
+            id: 'close-2',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'It has taken your whole working life.',
+          },
+          {
+            id: 'close-3',
+            speaker: 'ALBERT',
+            dialogue: 'My working life, and most of my reputation among people whose opinion I pretend not to value.',
           },
           {
             id: 'audience',
-            narration:
-              'He is old, and the young men are busy computing quantities he does not believe are fundamental. They will not read this for a decade, if they read it at all.',
+            narration: 'He is old. The young men are busy computing quantities he does not believe are fundamental.',
+          },
+          {
+            id: 'audience-2',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'They will not read it.',
+          },
+          {
+            id: 'audience-3',
+            speaker: 'ALBERT',
+            dialogue: 'Not for ten years. Possibly not at all. That is a separate question from whether it is true.',
+          },
+          {
+            id: 'audience-4',
+            speaker: 'AN ASSISTANT',
+            dialogue: 'Does that not spoil it?',
+          },
+          {
+            id: 'audience-5',
+            speaker: 'ALBERT',
+            dialogue: 'Nothing spoils it. Fetch me the good pen. This one gets a fair copy.',
           },
           {
             id: 'quiet',
-            narration:
-              'He makes a fair copy anyway, in the neat hand he only uses for things he thinks are true, and sits with it until it is fully light.',
+            narration: 'He writes it out in the neat hand he keeps for true things, and sits with it until the room is fully light.',
           },
         ],
         historicalNote:
@@ -4153,20 +8018,56 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'bundles',
-            narration:
-              'The cupboard holds a bundle for every approach, tied with string, dated. Some of them are beautiful. All of them are wrong, and he can say exactly where each one turned wrong, which is not the same as knowing where to turn instead.',
+            narration: 'The cupboard holds a bundle for every approach, tied with string and dated. Some of them are beautiful.',
+          },
+          {
+            id: 'bundles-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'May I ask you something, and only once?',
+          },
+          {
+            id: 'bundles-3',
+            speaker: 'ALBERT',
+            dialogue: 'Once is the correct number. Ask it.',
           },
           {
             id: 'why',
-            narration:
-              'A younger colleague asks, kindly and only once, why he keeps at something everyone else has given up on.',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Why do you keep at a thing that everybody else has given up on?',
+          },
+          {
+            id: 'why-2',
             speaker: 'ALBERT',
-            dialogue: 'Because somebody must work on the thing that will not come out. And I can afford it. My reputation is already made and I cannot spend it on anything better.',
+            dialogue: 'Because somebody must work on the problem that will not come out.',
+          },
+          {
+            id: 'why-3',
+            speaker: 'ALBERT',
+            dialogue: 'And I can afford it. My reputation is already made and there is nothing better to spend it on.',
+          },
+          {
+            id: 'why-4',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And if it never comes out?',
+          },
+          {
+            id: 'why-5',
+            speaker: 'ALBERT',
+            dialogue: 'Then the cupboard is full, and somebody knows thirty places not to look. That is not nothing.',
           },
           {
             id: 'chalk',
-            narration:
-              'He rubs the blackboard down and starts again. He has been starting again since before this young man was born, and he does it with exactly the same expression each time.',
+            narration: 'He rubs the blackboard down with the side of his hand and starts again.',
+          },
+          {
+            id: 'chalk-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'You have the same face every time you do that.',
+          },
+          {
+            id: 'chalk-3',
+            speaker: 'ALBERT',
+            dialogue: 'I have been starting again since before you were born. One develops an expression for it.',
           },
         ],
         historicalNote:
@@ -4192,17 +8093,44 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'evening',
-            narration:
-              'There is always a line on the blackboard that stops halfway. He leaves it there overnight on purpose, so that in the morning he arrives already in the middle of something instead of at the beginning.',
+            narration: 'There is always a line on the blackboard that stops halfway across. He leaves it there overnight on purpose.',
+          },
+          {
+            id: 'evening-2',
+            speaker: 'THE CLEANER',
+            dialogue: 'Shall I wipe that off, Professor?',
+          },
+          {
+            id: 'evening-3',
+            speaker: 'ALBERT',
+            dialogue: 'Never that one. If it goes, I arrive in the morning at the beginning of something.',
+          },
+          {
+            id: 'evening-4',
+            speaker: 'THE CLEANER',
+            dialogue: 'And if it stays?',
+          },
+          {
+            id: 'evening-5',
+            speaker: 'ALBERT',
+            dialogue: 'Then I arrive in the middle, which is a far better place to be met.',
           },
           {
             id: 'peace',
-            narration:
-              'Most days the middle is where he stays. He has made his peace with that, in the way a man makes peace with a country he intends to keep quarrelling with.',
+            narration: 'Most days the middle is where he stays.',
+          },
+          {
+            id: 'peace-2',
+            speaker: 'ALBERT',
+            dialogue: 'I have made my peace with it. The way a man makes peace with a country he intends to go on quarrelling with.',
+          },
+          {
+            id: 'peace-3',
+            narration: 'The coat comes off the hook, the chalk goes back in the tray, and the line stays where it is.',
           },
         ],
         historicalNote:
-          'Einstein worked on unification until the end of his life without completing it. The scene is dramatized.',
+          'Einstein worked on unification until the end of his life without completing it. The cleaner stands in for people whose names are not recorded, and the scene is dramatized.',
       },
     ],
   },
@@ -4246,17 +8174,54 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'work',
-            narration:
-              'There is work beside the bed at the end, because there has been work beside the bed for sixty years and he sees no reason to make an exception now. The last page is unfinished and he knows it and he is not troubled.',
+            narration: 'There is work beside the bed at the end, because there has been work beside the bed for sixty years.',
+          },
+          {
+            id: 'work-2',
+            speaker: 'MARGOT',
+            dialogue: 'The last page is not finished.',
+          },
+          {
+            id: 'work-3',
+            speaker: 'ALBERT',
+            dialogue: 'No. It was never going to be. That is not a thing to be sad about.',
           },
           {
             id: 'refuse',
-            narration:
-              'He refuses the operation. He has done his share, he says, and it is tasteless to prolong life artificially; he would like to go elegantly. The elegance is debatable. The timing is his own.',
+            narration: 'The surgeons come and put the case for an operation, carefully, twice.',
+          },
+          {
+            id: 'refuse-2',
+            speaker: 'ALBERT',
+            dialogue: 'I have done my share.',
+          },
+          {
+            id: 'refuse-3',
+            speaker: 'MARGOT',
+            dialogue: 'They say it would buy you time.',
+          },
+          {
+            id: 'refuse-4',
+            speaker: 'ALBERT',
+            dialogue: 'It is tasteless to prolong a life artificially. I should like to go elegantly.',
+          },
+          {
+            id: 'refuse-5',
+            narration: 'The elegance is debatable. The timing is his own.',
+          },
+          {
+            id: 'ask',
+            speaker: 'MARGOT',
+            dialogue: 'Is there anything you want?',
+          },
+          {
+            id: 'ask-2',
+            speaker: 'ALBERT',
+            dialogue: 'The glasses. The page. And the light left on a little.',
           },
         ],
         historicalNote:
-          'Einstein declined surgery in his final illness in 1955, saying he wanted to go on his own terms, and was working to the end. The wording here is dramatized.',
+          'Einstein declined surgery in his final illness in 1955, saying he had done his share and wanted to go on his own terms, and was working to the end. His stepdaughter Margot was with him. The wording here is dramatized.',
       },
       {
         id: 'some',
@@ -4288,17 +8253,45 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'stack',
-            narration:
-              'Somebody will square the papers into stacks and be careful with them, and that is the whole of what happens to a life’s work in the first week. The finished things go one way. The rest goes into a box marked with a year.',
+            narration: 'Somebody squares the papers into stacks and is careful with them. That is what happens to a life’s work in the first week.',
+          },
+          {
+            id: 'stack-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'The finished ones go on the left.',
+          },
+          {
+            id: 'stack-3',
+            speaker: 'ALBERT',
+            dialogue: 'And the rest into a box with a year written on the lid.',
+          },
+          {
+            id: 'stack-4',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'It is a very large box.',
+          },
+          {
+            id: 'stack-5',
+            speaker: 'ALBERT',
+            dialogue: 'It is the ordinary size. Only the eulogies pretend otherwise.',
           },
           {
             id: 'sum',
-            narration:
-              'He did some of it. Not all of it. He suspects that is the ordinary condition and that only the eulogies pretend otherwise.',
+            narration: 'The violin case is closed. The pipe is on the shelf. The window stands open onto a lawn.',
+          },
+          {
+            id: 'sum-2',
+            speaker: 'HELEN DUKAS',
+            dialogue: 'You did a great deal of it.',
+          },
+          {
+            id: 'sum-3',
+            speaker: 'ALBERT',
+            dialogue: 'Some of it. Not all of it. I have yet to meet the man who did all of it.',
           },
         ],
         historicalNote:
-          'A closing for a life that achieved part of the documented body of work.',
+          'A closing for a life that achieved part of the documented body of work. Helen Dukas was Einstein’s secretary from 1928 until his death.',
       },
       {
         id: 'default',
@@ -4315,13 +8308,41 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'ordinary',
-            narration:
-              'He was given about the usual number of years and spent them on the one question, and the question was not answered, and it was a good question.',
+            narration: 'He was given about the usual number of years and spent them on the one question.',
+          },
+          {
+            id: 'ordinary-2',
+            speaker: 'MARGOT',
+            dialogue: 'And it was never answered.',
+          },
+          {
+            id: 'ordinary-3',
+            speaker: 'ALBERT',
+            dialogue: 'It was never answered. It was a good question. Those are rarer than answers and worth more.',
+          },
+          {
+            id: 'porch',
+            narration: 'An empty chair on the porch, a blanket folded over the arm, evening light coming through the elms.',
           },
           {
             id: 'compass',
-            narration:
-              'Somewhere in a drawer there is a compass with a bent case. He never once mentioned it to anyone as anything other than a toy his father gave him when he was ill.',
+            speaker: 'MARGOT',
+            dialogue: 'There is a compass in the drawer with a dent in the case.',
+          },
+          {
+            id: 'compass-2',
+            speaker: 'ALBERT',
+            dialogue: 'My father gave me that when I was five and ill in bed.',
+          },
+          {
+            id: 'compass-3',
+            speaker: 'MARGOT',
+            dialogue: 'You never talk about it.',
+          },
+          {
+            id: 'compass-4',
+            speaker: 'ALBERT',
+            dialogue: 'There is nothing to say. A needle that would not turn when I did. I have been at that bedside ever since.',
           },
         ],
         historicalNote:
@@ -4373,19 +8394,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'after',
-            narration:
-              'Space bends. Time is local. Light comes in countable pieces, atoms leave footprints, and in the end the two great fields turned out to be one field seen from two sides. Every one of those sentences was a scandal when he wrote it.',
+            id: 'office',
+            narration: 'The office stays as it was for a while. Nobody wants to be the one to rub the blackboard down.',
+          },
+          {
+            id: 'office-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Somebody ought to write down what he did. In order.',
+          },
+          {
+            id: 'office-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Space bends. Time is local. Light comes in countable pieces. Atoms leave footprints.',
+          },
+          {
+            id: 'office-4',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And the last one?',
+          },
+          {
+            id: 'office-5',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'The two great fields turned out to be one field, seen from two sides. He got that at the very end.',
+          },
+          {
+            id: 'office-6',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Every one of those was a scandal when he wrote it.',
           },
           {
             id: 'cost',
-            narration:
-              'It cost a marriage, a country, most of his health, and every evening of his adult life. He would not have called any of that a price. He would have said it was simply what the days were made of.',
+            narration: 'It cost a marriage, a country, most of his health, and every evening of his adult life.',
           },
           {
             id: 'voice',
-            narration:
-              'And the office stays as it is for a while, because nobody wants to be the one to rub the blackboard down.',
             speaker: 'ALBERT',
             dialogue: 'I have no particular gift. I am only very curious, and I was given a great deal of time.',
           },
@@ -4423,19 +8465,40 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         },
         pages: [
           {
-            id: 'after',
-            narration:
-              'Space bends. Time is local. Light comes in countable pieces and atoms leave footprints, and every one of those sentences was a scandal when he wrote it and is now in a schoolbook.',
+            id: 'office',
+            narration: 'The office is as he left it. One line of chalk stops halfway across the blackboard.',
+          },
+          {
+            id: 'office-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Do we rub it out?',
+          },
+          {
+            id: 'office-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Not this week.',
+          },
+          {
+            id: 'office-4',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Space bends. Time is local. Light in countable pieces. Atoms with footprints. All of it in a schoolbook now.',
+          },
+          {
+            id: 'office-5',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And thirty years at the end on a problem that would not come out.',
+          },
+          {
+            id: 'office-6',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'That seems a hard price.',
           },
           {
             id: 'cost',
-            narration:
-              'It cost a marriage, a country, most of his health, and thirty years spent on a problem that would not come out. He would not have described any of that as a price. He would have said it was simply what the days were made of.',
+            narration: 'A marriage, a country, most of his health, and every evening of his adult life.',
           },
           {
             id: 'voice',
-            narration:
-              'And the office stays as it was for a while, because nobody wants to be the one to rub the blackboard down.',
             speaker: 'ALBERT',
             dialogue: 'I have no particular gift. I am only very curious, and I was given a great deal of time.',
           },
@@ -4473,15 +8536,32 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'shelf',
-            narration:
-              'Light in pieces. Atoms with footprints. Time made local. A great deal of work, most of it right, and a shelf that anybody would be glad to have their name along the spine of.',
+            narration: 'A shelf of bound offprints in a row, and one conspicuous gap where something taller should be standing.',
           },
           {
-            id: 'gap',
-            narration:
-              'And one gap in the row, at the place where gravity should have gone. He knew the shape of what belonged there for forty years and never got the mathematics to hold still long enough to write it.',
+            id: 'shelf-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Light in pieces. Atoms with footprints. Time made local. Anybody would be glad of that spine.',
+          },
+          {
+            id: 'shelf-3',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And the gap?',
+          },
+          {
+            id: 'shelf-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Gravity. He knew the shape of what belonged there for forty years.',
+          },
+          {
+            id: 'voice',
             speaker: 'ALBERT',
-            dialogue: 'I could see it. I could not make it stand up. Those are not the same skill and I was only ever given the first one.',
+            dialogue: 'I could see it. I could never make it stand up.',
+          },
+          {
+            id: 'voice-2',
+            speaker: 'ALBERT',
+            dialogue: 'Those are not the same skill, and I was only ever given the first one.',
           },
         ],
         historicalNote:
@@ -4503,13 +8583,34 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'what',
-            narration:
-              'He took gravity away from Newton and gave it back as geometry, and then spent forty years being unable to do the same for everything else. Both halves of that sentence are the same man.',
+            narration: 'A clear night over the rooftops of a small town. Bare elms, frost on the path, one lit upstairs window.',
+          },
+          {
+            id: 'what-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'He took gravity away from Newton and handed it back as geometry.',
+          },
+          {
+            id: 'what-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'And then spent forty years failing to do the same for everything else. The same man, both halves.',
           },
           {
             id: 'legacy',
-            narration:
-              'Somewhere tonight starlight is going past a sun and arriving very slightly late, exactly as much late as a set of equations written in a cold flat in wartime said it would be.',
+            narration: 'Somewhere tonight starlight goes past a sun and arrives very slightly late.',
+          },
+          {
+            id: 'legacy-2',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'How late?',
+          },
+          {
+            id: 'legacy-3',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Less than the width of a hair, held out at arm’s length. He gave the number before anybody looked.',
+          },
+          {
+            id: 'voice',
             speaker: 'ALBERT',
             dialogue: 'The strangest thing about the world is that it can be understood at all. Nothing ever entitled us to that.',
           },
@@ -4539,15 +8640,37 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'drawer',
-            narration:
-              'It came out of a drawer in a civil-service desk, written in the evenings by a man with no laboratory, no assistant, and no institution willing to employ him. That is not a charming detail. That is the whole argument.',
+            narration: 'A plain wooden drawer standing open and empty. A brass handle worn bright, and an old ink stain in the grain.',
+          },
+          {
+            id: 'drawer-2',
+            speaker: 'THE CLERK',
+            dialogue: 'That was his desk. Technical expert, third class.',
+          },
+          {
+            id: 'drawer-3',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And he wrote them here?',
+          },
+          {
+            id: 'drawer-4',
+            speaker: 'THE CLERK',
+            dialogue: 'In the evenings. No laboratory, no assistant, and no institution that would have him.',
+          },
+          {
+            id: 'drawer-5',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'That is a charming detail.',
+          },
+          {
+            id: 'drawer-6',
+            speaker: 'THE CLERK',
+            dialogue: 'It is not a detail. It is the whole argument.',
           },
           {
             id: 'voice',
-            narration:
-              'He never quite lost the suspicion that the world had let him in by accident and might notice at any time.',
             speaker: 'ALBERT',
-            dialogue: 'I was never good at obeying. It turned out to be the only qualification the work required.',
+            dialogue: 'I was never any good at obeying. It turned out to be the only qualification the work required.',
           },
         ],
         historicalNote:
@@ -4569,15 +8692,32 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'lists',
-            narration:
-              'Twice in his life a page went round with names on it, and twice he read the names before he read the argument, and twice he ended up on the shorter list. Nothing else he did required as little thought or cost as much.',
+            narration: 'A desk stacked with signed appeals, a fountain pen, reading glasses, a lamp, and a window going dark.',
+          },
+          {
+            id: 'lists-2',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'Twice in his life a page went round with names on it.',
+          },
+          {
+            id: 'lists-3',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'And twice he ended up on the shorter list.',
+          },
+          {
+            id: 'lists-4',
+            speaker: 'A COLLEAGUE',
+            dialogue: 'He read the names before he read the argument. Both times.',
           },
           {
             id: 'voice',
-            narration:
-              'The equations were the easy part. Equations do not ask you to be brave in a corridor in front of people you have lunch with.',
             speaker: 'ALBERT',
-            dialogue: 'A man may be forgiven for being wrong. Being convenient is harder to explain afterwards.',
+            dialogue: 'The equations were the easy part. Equations never ask you to be brave in a corridor.',
+          },
+          {
+            id: 'voice-2',
+            speaker: 'ALBERT',
+            dialogue: 'A man may be forgiven for having been wrong. Having been convenient is harder to explain afterwards.',
           },
         ],
         historicalNote:
@@ -4598,13 +8738,29 @@ export const EINSTEIN_STORY_SCENES: StoryScene[] = [
         pages: [
           {
             id: 'life',
-            narration:
-              'Not everything he began got finished, and some of what he began was never written down at all. He kept asking. That was the constant, from the sickbed at five to the last morning.',
+            narration: 'Not everything he began was finished, and some of it was never written down at all.',
+          },
+          {
+            id: 'life-2',
+            speaker: 'MARGOT',
+            dialogue: 'This was in the drawer.',
+          },
+          {
+            id: 'life-3',
+            speaker: 'A YOUNG PHYSICIST',
+            dialogue: 'Is it worth anything?',
+          },
+          {
+            id: 'life-4',
+            speaker: 'MARGOT',
+            dialogue: 'It is a toy his father gave him when he was five and ill in bed. He never made more of it than that.',
           },
           {
             id: 'compass',
-            narration:
-              'The compass is still in the drawer. The needle still swings back to the same stubborn north, and nothing is touching it, and nobody has ever satisfactorily explained to a five-year-old why.',
+            narration: 'The needle swings, and settles, and points where it has always pointed. Nothing is touching it.',
+          },
+          {
+            id: 'voice',
             speaker: 'ALBERT',
             dialogue: 'Something had to be behind it, hidden. I never really stopped standing at that bed.',
           },

@@ -8,13 +8,14 @@ what goes inside. The engine is in `src/engine/story.ts`; the types are in
 
 ## What the player experiences
 
-The player is not reading a biography. They are living one life across six
-chapters on a board, and the story pages are the moments when the board goes
-quiet and the life speaks. A page is one screen: an illustration, a location
-and year, two to four sentences, sometimes one line of dialogue, sometimes a
-choice. Pages chain into a scene. Scenes fire when the engine sees a reason:
-a chapter opening or closing, a project completed, an action taken in the
-right year and place.
+This is a visual novel wearing a strategy game. The board is where a life is
+spent; the scenes are where it is *lived*, and they are told the way a Ren'Py
+game tells a story — a picture, a name, a line, a click. One beat per screen.
+The player taps through a conversation.
+
+That means **people talking to each other**, not a narrator describing people.
+A scene is a conversation with just enough narration to set the room and move
+the clock. If a page can be a line somebody says, it is a line somebody says.
 
 The player's route may not be the documented one. They may never go to Bern,
 never finish the theorem, sign the letter or refuse it. The story must hold
@@ -22,27 +23,104 @@ either way, and it must hold *in the fiction*. The engine's job is to pick
 the right variant; the writer's job is to make every variant feel like the
 only way this life could have gone.
 
+## The rule that matters most: someone in the room does not understand
+
+The player has no physics. Assume a clever, curious fifteen-year-old who has
+never taken a science class. Every idea in this game has to reach them, and
+the way it reaches them is that **a person in the scene asks**.
+
+Put someone in the room who does not follow — a wife, a mother, a landlady, a
+clerk, a student, a journalist, a brother, a colleague from another field —
+and let them say so. Then the scientist explains it, out loud, to a person
+they care about, in words that person knows. This is not a concession to the
+reader. It is how these ideas actually travelled, and it is the best scene
+material in the file.
+
+Bad, and typical of the old file:
+
+> Wherever Albert turns it, the needle swings back to the same stubborn north.
+> Nothing is touching it. Something enormous and invisible is holding it, and
+> the room is suddenly not the size he thought it was.
+
+Evocative, and a reader learns nothing. They do not know what a compass is
+doing, why it matters, or why the boy cares. Do this instead:
+
+> HERMANN: Hold it flat. Now turn yourself around.
+> ALBERT: The needle didn't turn.
+> HERMANN: No.
+> ALBERT: I turned. Why didn't it?
+> HERMANN: Something is pulling on it. It has been pulling the whole time.
+> ALBERT: From where?
+> HERMANN: The earth, they say.
+> ALBERT: But nothing is touching it.
+> *He turns it again, slowly, watching the needle refuse him.*
+> ALBERT: Papa. There is something in this room I can't see.
+
+Same moment, same facts, one-third the abstraction — and the reader now
+understands what a magnetic field is, without the phrase ever being used.
+
+### How to explain without jargon
+
+- **Name the thing only after describing it.** "Light comes in lumps, not in a
+  stream" first; "quanta" after, once, if at all.
+- **Use what the listener already touches.** Trams, clocks, post, rain, coins,
+  a kettle, a staircase, a dropped stone, a rowing boat.
+- **Keep the number small.** "Twice as far" beats "a factor of two". Never put
+  an equation in a line of dialogue.
+- **Let the listener push back.** "That can't be right." "Say it again."
+  "So the clock on the tower is *wrong*?" Confusion on the page is the
+  reader's confusion being answered.
+- **One idea per scene.** If a scene needs two, it is two scenes.
+
+If a term from the list below appears, a character must make it plain within
+the same scene, or it must not appear at all: *quantum*, *relativity*,
+*entropy*, *field*, *invariant*, *set*, *algorithm*, *isotope*, *diffraction*,
+*eigenvalue*, *topology*, *axiom*, *incompleteness*, *fission*, *cryptanalysis*,
+*helix*, *tensor*, *spectrum*, *partition*, *matrix*.
+
+## The shape of a page
+
+One page is one beat. Pick one:
+
+- **A spoken line.** `speaker` set to the person's name as the reader should
+  see it, `dialogue` set to what they say. One or two sentences. This is the
+  default and should be most pages.
+- **A piece of narration.** One or two sentences, present tense, close third
+  person. Use it to set a room, move the clock, or show an action. Not to
+  explain an idea — a person explains ideas.
+
+Do not stack a paragraph of narration and a line of dialogue on the same page.
+That is the old style and it reads as a novel, not a conversation.
+
+**Length:** no page over about 35 words. Most should be well under. A long
+speech is several pages, so the player clicks through it and it breathes.
+
+**Density:** at least three pages in five should be spoken lines. Scenes that
+are pure narration are allowed only for a wordless moment — a death, a
+departure, a room after everyone has gone.
+
+**Speakers:** always name them. `speaker: 'MILEVA'` for someone close,
+`speaker: 'PROFESSOR WEBER'` where the character would use the title. The
+character themselves speaks too — `speaker: 'ALBERT'`. A reader must never
+have to guess who is talking.
+
 ## The voice
 
-- Close third person, present tense. "She" and "he" by name where clarity
-  needs it, and by first name where the person would have been addressed that
-  way in the room. Formal surnames for people the character addresses formally.
-- Begin in a place, with a thing: a wet coat, a tram bell, a sheet of
-  photographic paper still curling, the smell of a coal fire in a lecture
-  hall. Then the stakes. Never begin with an abstraction.
-- Two to four sentences per page. Short sentences carry weight; let them.
-- One page in every major scene should have a *spoken line* — a real person
-  from this life saying something to the character, or the character saying
-  something aloud. Dialogue is invented wording unless the `historicalNote`
-  says otherwise. Never present an invented line as a quotation from the
-  record.
-- The character has a temperament and it shows in what they notice: Curie
-  counts, Einstein plays, Noether laughs, Ramanujan sees the finished thing
-  before the proof, Turing takes things apart, Johnson checks the arithmetic
-  twice, Gödel worries, von Neumann is already three moves ahead, Bohr
-  cannot finish a sentence without a caveat, Hilbert issues instructions,
-  Oppenheimer performs, Franklin is exact and will not be rushed.
-- End scenes on a turn, an image, or a question — not on a summary.
+- Close third person, present tense, for narration. Plain words. Short
+  sentences.
+- Dialogue sounds like speech, not like prose: contractions, interruptions,
+  half-sentences, people talking past each other. Read it aloud. If it does
+  not sound like a person, cut it.
+- Begin a scene in a place, with a thing, then get to the talking fast — by
+  the second page.
+- The character has a temperament and it shows in *how they talk*: Curie is
+  exact and says less than she knows, Einstein teases, Noether laughs and
+  talks over people, Ramanujan states the answer and is impatient with the
+  proof, Turing is blunt and literal, Johnson asks the question everyone else
+  skipped, Gödel qualifies everything, von Neumann is three moves ahead and
+  bored, Bohr never finishes a sentence, Hilbert issues instructions,
+  Oppenheimer performs, Franklin will not be rushed and says so.
+- End scenes on a line somebody says, not a summary.
 
 ## Words that must never appear in narration or dialogue
 
@@ -106,8 +184,10 @@ divergence in that variant's `historicalNote`.
    the child. This runs only in a full-length campaign.
 2. **Six chapter openings** — `kind: 'chapterOpening'`,
    `trigger: { event: 'chapterOpening', priority: 90 }`, one per `chapterId`.
-   Three or four pages: the place; a spoken line from someone in the life;
-   the question the chapter poses. Where the person historically faced a
+   Eight to fourteen pages: a line of narration for the place, then a
+   conversation — the person the chapter belongs to and someone who wants
+   something from them. The question the chapter poses is asked out loud by
+   one of them. Where the person historically faced a
    decision at the start of the chapter, the last page offers a **choice**
    with two or three options, each with `effects` (a `flag`, a `theme`, and
    small `resources` nudges, never larger than ±2). Provide a `default`
@@ -117,10 +197,13 @@ divergence in that variant's `historicalNote`.
    `trigger: { event: 'chapterClosing', priority: 80 }`. At least two
    variants: the route the record took (conditioned on the chapter's key
    `projectCompleted` or `locationIs`) and the route it did not (the
-   unconditioned default). Both written from inside the life. Two pages each.
+   unconditioned default). Both written from inside the life. Six to ten
+   pages each, mostly spoken.
 4. **One breakthrough per project** — `kind: 'breakthrough'`,
    `trigger: { event: 'projectCompleted', projectId, priority: 70–90 }`.
-   Two or three pages: the moment; what it cost; who it reaches. Where the
+   Eight to sixteen pages. The moment, then somebody who does not understand
+   it asking what it means, and being told. This is where the explaining
+   happens, so these are the most important scenes in the file. Where the
    place matters, a located variant and an elsewhere variant.
 5. **Every context card replaced** — for each card in the character's
    `contextCards`, a scene with `replacesContextCardId: <cardId>`, an
@@ -147,9 +230,9 @@ divergence in that variant's `historicalNote`.
    `narrativeFlag`), plus a default. The last page is the character's own
    voice or a single image, not a scoreboard.
 
-Aim for 28–40 scenes and 4,500–7,000 words of narration and dialogue per life.
-That is a novella's worth of pages spread across a long game; it should feel
-generous, never padded.
+Aim for 28–40 scenes per life. Pages are short now, so expect 350–550 pages
+across a life rather than 250 long ones — the same reading time, clicked
+through as a conversation instead of read as prose.
 
 ## Continuity is the fun
 
